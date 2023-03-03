@@ -1,0 +1,8 @@
+.logoApp {
+    background-image: url(../../../public/study.png);
+height: 100%;
+width: 30%;
+background-position: center;
+background-size: cover;
+
+}
