@@ -6,6 +6,8 @@ import { supabase } from "../../pages/api/supabaseClient";
 function FormLogin() {
   const [show, setShow] = useState(false);
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isSignUp, setSignUp] = useState(true);
   const [session, setSession] = useState("");
 
@@ -27,10 +29,14 @@ function FormLogin() {
         </Chakra.Button>
 
         <Chakra.FormControl isRequired>
-          <Chakra.FormLabel textColor="#F5E9CF">
-            E-mail or Username
-          </Chakra.FormLabel>
-          <Chakra.Input width="auto" backgroundColor="#F5E9CF" />
+          <Chakra.FormLabel textColor="#F5E9CF">E-mail</Chakra.FormLabel>
+          <Chakra.Input
+            width="auto"
+            backgroundColor="#F5E9CF"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </Chakra.FormControl>
 
         <Chakra.FormLabel textColor="#F5E9CF">Password</Chakra.FormLabel>
@@ -38,6 +44,9 @@ function FormLogin() {
           backgroundColor="#F5E9CF"
           textColor="black"
           size="md"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         >
           <Chakra.Input pr="4.5rem" type={show ? "text" : "password"} />
           <Chakra.InputRightElement width="4.5rem">
@@ -70,7 +79,7 @@ function FormLogin() {
           marginBottom="25px"
           marginLeft="350px"
         >
-          Login
+          Sign In
         </Chakra.Button>
 
         <Chakra.FormLabel
