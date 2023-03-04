@@ -8,7 +8,8 @@ function FormLogin () {
     const [show, setShow] = useState(false)
 
     const [isSignUp, setSignUp] = useState(true)
-    
+    const [session, setSession] = useState("")
+
     const handleClick = () => setShow(!show)
     
     
