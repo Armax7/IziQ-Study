@@ -1,6 +1,5 @@
 import * as Chakra from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-// import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { supabase } from "../../pages/api/supabaseClient";
 import UserArea from "../UserArea/UserArea";
 
@@ -109,7 +108,6 @@ function FormLogin() {
           <Chakra.Button
             mr={82}
             backgroundColor="red.400"
-            // onClick={logIn.onClose}
             onClick={hangleSignIn}
             ml="370"
             colorScheme="blue"
