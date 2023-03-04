@@ -55,7 +55,9 @@ function FormSignUp() {
     });
   }
 
-
+  async function signout() {
+    const { error } = await supabase.auth.signOut()
+  }
 
   return (
     <>
