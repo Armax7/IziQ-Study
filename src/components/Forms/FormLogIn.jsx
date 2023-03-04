@@ -77,7 +77,7 @@ function FormLogin() {
           colorScheme="blue"
           marginTop="25px"
           marginBottom="25px"
-          marginLeft="350px"
+          marginLeft="0px"
         >
           Sign In
         </Chakra.Button>
