@@ -2,6 +2,7 @@ import * as Chakra from "@chakra-ui/react";
 import { useState } from "react";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { supabase } from "../../pages/api/supabaseClient";
+import { FormLogin } from "./FormLogIn";
 
 function FormSignUp() {
   const [input, setInput] = useState("");
@@ -10,6 +11,7 @@ function FormSignUp() {
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showForm, setShowForm] = useState(false)
 
   const handleSignUp = async () => {
     try {
@@ -52,6 +54,7 @@ function FormSignUp() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
     });
+    setShowForm(true)
   }
 
   async function signout() {
