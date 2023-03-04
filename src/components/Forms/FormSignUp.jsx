@@ -10,6 +10,36 @@ function FormSignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const hangleSignUp = async () => {
+    try {
+      //esto viene de la doc de supabase
+      //tabla auth
+      let { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+
+      //tabla users_detail
+
+      // await supabase
+      //   .from("users_details")
+      //   .insert([{
+      //     name,
+      //     lastname
+      //   }]);
+
+      console.log(data.user);
+      console.log(email);
+      console.log(password);
+      // console.log(users_details);
+
+      if (error) throw error;
+      alert("Check your email to confirm Sign Up");
+    } catch (e) {
+      alert(e.message);
+    }
+  };
+
   const handleInputChange = (e) => setInput(e.target.value);
 
   const isError = input === "";
