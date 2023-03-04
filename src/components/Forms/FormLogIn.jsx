@@ -21,7 +21,7 @@ function FormLogin() {
     });
   }, []);
 
-  const hangleSignIn = async () => {
+  const handleSignIn = async () => {
     try {
       let { user, error } = await supabase.auth.signInWithPassword({
         email,
@@ -108,7 +108,7 @@ function FormLogin() {
           <Chakra.Button
             mr={82}
             backgroundColor="red.400"
-            onClick={hangleSignIn}
+            onClick={handleSignIn}
             ml="370"
             colorScheme="blue"
             marginTop="25px"
