@@ -4,6 +4,7 @@ import { supabase } from "../../pages/api/supabaseClient";
 
 export default function UserArea() {
   const [user, setUser] = useState(null);
+  
 
   useEffect(async () => {
     setUser(supabase.auth.getUser());
