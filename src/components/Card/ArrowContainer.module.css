@@ -1,0 +1,17 @@
+.arrowContainer {
+    display: flex;
+    background-color: #313131;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    align-items: center;
+    width: 600px;
+    justify-content: space-around;
+
+}
+.button{
+    width: 35px;
+    height: 80px;
+    background-color: #313131;
+    border: none;
+    cursor: pointer;
+}
