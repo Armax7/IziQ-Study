@@ -11,6 +11,23 @@ function FormLogin() {
   const [isSignUp, setSignUp] = useState(true);
   const [session, setSession] = useState("");
 
+  const hangleSignIn = async () => {
+    try {
+      let { user, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) throw error;
+      alert("User logged.");
+      console.log("hey estoy loggueado");
+      // console.log(user)
+      // console.log(session)
+    } catch (e) {
+      alert(e.message);
+    }
+  };
+
   const handleClick = () => setShow(!show);
 
   const logIn = Chakra.useDisclosure();
@@ -72,7 +89,8 @@ function FormLogin() {
         <Chakra.Button
           mr={82}
           backgroundColor="red.400"
-          onClick={logIn.onClose}
+          // onClick={logIn.onClose}
+          onClick={hangleSignIn}
           ml="370"
           colorScheme="blue"
           marginTop="25px"
