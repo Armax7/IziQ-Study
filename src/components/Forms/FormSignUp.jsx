@@ -7,6 +7,11 @@ import { FaFacebook, FaGoogle} from 'react-icons/fa'
 function FormSignUp () {
   const [input, setInput] = useState('')
 
+  const [name, setName] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const handleInputChange = (e) => setInput(e.target.value)
 
   const isError = input === ''
