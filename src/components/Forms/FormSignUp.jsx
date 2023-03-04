@@ -102,8 +102,8 @@ function FormSignUp() {
         <Chakra.FormLabel height="4" textColor="#F5E9CF">
           E-mail
         </Chakra.FormLabel>
-        <Chakra.FormControl isInvalid={isError}>
-          {!isError ? (
+        {/* <Chakra.FormControl isInvalid={isError}> */}
+          {/* {!isError ? (
             <Chakra.FormHelperText>
               Enter the email you'd like to receive the newsletter on.
             </Chakra.FormHelperText>
@@ -111,7 +111,7 @@ function FormSignUp() {
             <Chakra.FormErrorMessage>
               Email is required.
             </Chakra.FormErrorMessage>
-          )}
+          )} */}
           <Chakra.Input
             backgroundColor="#F5E9CF"
             type="email"
@@ -120,7 +120,7 @@ function FormSignUp() {
             value={email}
 
           />
-        </Chakra.FormControl>
+        {/* </Chakra.FormControl> */}
         <Chakra.FormLabel textColor="#F5E9CF">Password</Chakra.FormLabel>
         <Chakra.InputGroup
           backgroundColor="#F5E9CF"
