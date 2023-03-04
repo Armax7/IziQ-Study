@@ -1,6 +1,6 @@
 import * as Chakra from "@chakra-ui/react";
 import { useState } from "react";
-import { FaFacebook, FaGoogle } from "react-icons/fa";
+// import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { supabase } from "../../pages/api/supabaseClient";
 
 function FormLogin() {
