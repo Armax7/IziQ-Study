@@ -27,7 +27,7 @@ export default function UserArea() {
       {user && (
         <>
           <h1>User area</h1>
-          <p>{user.data}</p>
+          <p>Sesion de ...</p>
           <p>Sesion activa</p>
           <Chakra.Button
             mr={82}
