@@ -8,7 +8,7 @@ function Dropdown({
   variantProp = "Outline",
   colorSchemeProp = "whiteAlpha",
   hProp = "auto",
-  wProp = "auto",
+  wProp = "10rem",
   colorProp = "black",
   bgProp = "none",
   borderColorProp = "none",
