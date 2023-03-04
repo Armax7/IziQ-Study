@@ -2,7 +2,7 @@ import * as Chakra from "@chakra-ui/react";
 import { useState } from "react";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { supabase } from "../../pages/api/supabaseClient";
-
+import { createClient } from "@supabase/supabase-js";
 
 function FormSignUp() {
   const [input, setInput] = useState("");
@@ -49,6 +49,14 @@ function FormSignUp() {
 
   const singUp = Chakra.useDisclosure();
 
+  async function signInWithGoogle() {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+    });
+  }
+
+
+
   return (
     <>
       <Chakra.Box bg="#4D455D" w="45%" p={8} color="black" ml="480" h="560">
@@ -92,7 +100,6 @@ function FormSignUp() {
               name=""
               onChange={(e) => setLastname(e.target.value)}
               value={lastname}
-
             />
           </Chakra.FormControl>
         </Chakra.Flex>
@@ -101,7 +108,7 @@ function FormSignUp() {
           E-mail
         </Chakra.FormLabel>
         {/* <Chakra.FormControl isInvalid={isError}> */}
-          {/* {!isError ? (
+        {/* {!isError ? (
             <Chakra.FormHelperText>
               Enter the email you'd like to receive the newsletter on.
             </Chakra.FormHelperText>
@@ -110,14 +117,13 @@ function FormSignUp() {
               Email is required.
             </Chakra.FormErrorMessage>
           )} */}
-          <Chakra.Input
-            backgroundColor="#F5E9CF"
-            type="email"
-            name=""
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-
-          />
+        <Chakra.Input
+          backgroundColor="#F5E9CF"
+          type="email"
+          name=""
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+        />
         {/* </Chakra.FormControl> */}
         <Chakra.FormLabel textColor="#F5E9CF">Password</Chakra.FormLabel>
         <Chakra.InputGroup
@@ -131,7 +137,6 @@ function FormSignUp() {
             name=""
             onChange={(e) => setPassword(e.target.value)}
             value={password}
-
           />
           <Chakra.InputRightElement width="4.5rem">
             <Chakra.Button
@@ -157,7 +162,9 @@ function FormSignUp() {
           mr={82}
           backgroundColor="red.400"
           // onClick={singUp.onClose}
-          onClick={(e)=>{handleSignUp(e)}}
+          onClick={(e) => {
+            handleSignUp(e);
+          }}
           ml="370"
           colorScheme="blue"
           marginTop="25px"
