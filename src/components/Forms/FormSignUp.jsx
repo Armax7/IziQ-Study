@@ -12,7 +12,7 @@ function FormSignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const hangleSignUp = async () => {
+  const handleSignUp = async () => {
     try {
       //esto viene de la doc de supabase
       //tabla auth
@@ -159,7 +159,7 @@ function FormSignUp() {
           mr={82}
           backgroundColor="red.400"
           // onClick={singUp.onClose}
-          onClick={(e)=>{hangleSignUp(e)}}
+          onClick={(e)=>{handleSignUp(e)}}
           ml="370"
           colorScheme="blue"
           marginTop="25px"
