@@ -82,7 +82,7 @@ function FormLogin() {
           Sign In
         </Chakra.Button>
 
-        <Chakra.FormLabel
+        {/* <Chakra.FormLabel
           textAlign="center"
           textColor="#F5E9CF"
           textDecoration="underline"
@@ -111,7 +111,7 @@ function FormLogin() {
           >
             Google
           </Chakra.Button>
-        </Chakra.HStack>
+        </Chakra.HStack> */}
       </Chakra.Box>
     </>
   );
