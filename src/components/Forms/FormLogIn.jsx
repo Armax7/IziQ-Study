@@ -117,7 +117,7 @@ function FormLogin() {
             marginBottom="25px"
             marginLeft="0px"
           >
-            Sign In
+            Log In
           </Chakra.Button>      
         </Chakra.Box>
       )}
