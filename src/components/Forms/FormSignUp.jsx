@@ -2,7 +2,6 @@ import * as Chakra from "@chakra-ui/react";
 import { useState } from "react";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { supabase } from "../../pages/api/supabaseClient";
-import { createClient } from "@supabase/supabase-js";
 
 function FormSignUp() {
   const [input, setInput] = useState("");
@@ -202,6 +201,9 @@ function FormSignUp() {
             left="0px"
             colorScheme="twitter"
             leftIcon={<FaGoogle color="#E96479" />}
+            onClick={(e) => {
+              signInWithGoogle(e);
+            }}
           >
             Google
           </Chakra.Button>
