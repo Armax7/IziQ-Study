@@ -1,6 +1,8 @@
 import * as Chakra from "@chakra-ui/react";
 import { useState } from "react";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
+import { supabase } from "../../pages/api/supabaseClient";
+
 
 function FormSignUp() {
   const [input, setInput] = useState("");
@@ -40,7 +42,7 @@ function FormSignUp() {
     }
   };
 
-  const handleInputChange = (e) => setInput(e.target.value);
+  // const handleInputChange = (e) => setInput(e.target.value);
 
   const isError = input === "";
 
