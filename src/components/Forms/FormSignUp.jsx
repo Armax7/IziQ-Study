@@ -42,8 +42,6 @@ function FormSignUp() {
     }
   };
 
-  // const handleInputChange = (e) => setInput(e.target.value);
-
   const isError = input === "";
 
   const [show, setShow] = useState(false);
