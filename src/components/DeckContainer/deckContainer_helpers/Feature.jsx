@@ -1,3 +1,6 @@
+///---------------------------Mock para DeckCover-------------------
+///Esto sera remplazado por DeckCover
+
 import * as Chakra from "@chakra-ui/react";
 
 function Feature({ name, description,total_cards, ...rest }) {
@@ -13,3 +16,5 @@ function Feature({ name, description,total_cards, ...rest }) {
 
 
 export default Feature
+
+///Borrar todo una vez exista el componente DeckCover
