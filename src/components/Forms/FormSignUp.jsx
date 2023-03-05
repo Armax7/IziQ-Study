@@ -36,10 +36,16 @@ function FormSignUp() {
         throw insertError;
       }
       alert("Check your email to confirm Sign Up");
-      alert("ok");
     } catch (e) {
       alert(e.message);
     }
+  };
+
+  const cleanStates = (event) => {    
+    setName("");
+    setLastname("");
+    setEmail("");
+    setPassword("");
   };
 
   const isError = input === "";
@@ -178,7 +184,7 @@ function FormSignUp() {
             mr={82}
             backgroundColor="red.400"
             // onClick={singUp.onClose}
-            onClick={handleSignUp}
+            onClick={(e)=>{handleSignUp(e);cleanStates(e)}}
             ml="370"
             colorScheme="blue"
             marginTop="25px"
