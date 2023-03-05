@@ -1,7 +1,9 @@
 import * as Chakra from "@chakra-ui/react";
-import Feature from "./Feature";
+import Feature from "./deckContainer_helpers/Feature";
 
 function DeckContainer({decks,num_decks}) {
+    ///---------------Seccion mock para decks----------------
+    ///borrar seccion cuando se implemente decks
     const array = [
         {
             id:1,
@@ -41,14 +43,15 @@ function DeckContainer({decks,num_decks}) {
         },
         
       
-    ]// array must be changed by "decks" that came from params
-
+    ]
+    decks = array
+    ///---------------Termina seccion mock para decks----------------
   return (
     <Chakra.Stack spacing={8} direction='column' backgroundColor="#f2f2f2" margin="10px" justifyContent="space-evenly">
         <Chakra.Heading fontSize='md'marginLeft="5%"   >Decks {num_decks}</Chakra.Heading>
         <Chakra.Box display="flex" justifyContent="space-evenly">
         <Chakra.Grid templateColumns='repeat(3, 1fr)' gap={6}>
-        {array.map(deck=> <Feature key={deck.id}  name={deck.name} description={deck.description} total_cards={deck.total_cards}/> )}
+        {decks.map(deck=> <Feature key={deck.id}  name={deck.name} description={deck.description} total_cards={deck.total_cards}/> )}
         </Chakra.Grid>
         </Chakra.Box>
     </Chakra.Stack>
