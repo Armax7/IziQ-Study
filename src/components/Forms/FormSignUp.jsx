@@ -41,7 +41,9 @@ function FormSignUp() {
     }
   };
 
-  const cleanStates = (event) => {    
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    
     setName("");
     setLastname("");
     setEmail("");
@@ -183,8 +185,8 @@ function FormSignUp() {
           <Chakra.Button
             mr={82}
             backgroundColor="red.400"
-            // onClick={singUp.onClose}
-            onClick={(e)=>{handleSignUp(e);cleanStates(e)}}
+            type="submit"
+            onClick={(e)=>{handleSignUp(e);handleSubmit(e)}}
             ml="370"
             colorScheme="blue"
             marginTop="25px"
