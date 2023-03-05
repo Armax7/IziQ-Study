@@ -60,12 +60,14 @@ function DeckContainer({ decks, num_decks }) {
       <Chakra.Box display="flex" justifyContent="space-evenly">
         <Chakra.Grid templateColumns="repeat(3, 1fr)" gap={6}>
           {decks.map((deck) => (
-            <Feature
+            ///Feature es Mock de DeckCover, reemplazar una vez exista el componente
+            <Feature 
               key={deck.id}
               name={deck.name}
               description={deck.description}
               total_cards={deck.total_cards}
             />
+            ///Feature es Mock de DeckCover, reemplazar una vez exista el componente
           ))}
         </Chakra.Grid>
       </Chakra.Box>
