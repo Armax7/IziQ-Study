@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../pages/api/supabaseClient";
 import UserArea from "../UserArea/UserArea";
 
-function FormLogin() {
+function FormLogIn() {
   const [show, setShow] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -123,4 +123,4 @@ function FormLogin() {
   );
 }
 
-export default FormLogin;
+export default FormLogIn;
