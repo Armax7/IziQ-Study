@@ -55,6 +55,7 @@ function FormSignUp() {
       provider: "google",
     });
     setShowForm(true)
+    alert(`You have registered with ${JSON.stringify(data.provider)}`);
   }
 
   async function signout() {
