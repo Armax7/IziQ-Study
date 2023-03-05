@@ -70,7 +70,7 @@ function FormSignUp() {
           mr={25}
           onClick={singUp.onClose}
           ml="380"
-          v
+        
         >
           X
         </Chakra.Button>
