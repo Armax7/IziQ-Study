@@ -4,10 +4,10 @@ import { supabase } from "../../pages/api/supabaseClient";
 function LogOutButton({
   colorScheme = "blue",
   backgroundColor = "red.400",
-  marginRight = "82",
-  marginLeft = "370",
-  marginTop = "25px",
-  marginBottom = "25px",
+  marginRight = "auto",
+  marginLeft = "auto",
+  marginTop = "auto",
+  marginBottom = "auto",
 }) {
   const handleLogout = async () => {
     try {

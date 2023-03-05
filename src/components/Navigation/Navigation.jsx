@@ -25,7 +25,9 @@ function Navigation({
       <Link href="/">
         <div className={style.logoApp}></div>
       </Link>
-      <SearchBar onClick={() => alert("Missing search functionality on Navigation.jsx")} />
+      <SearchBar
+        onClick={() => alert("Missing search functionality on Navigation.jsx")}
+      />
 
       <OptionsBar logged={logged} avatarImage={avatarImage} />
     </Chakra.Flex>
