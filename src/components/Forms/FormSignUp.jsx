@@ -58,6 +58,14 @@ function FormSignUp() {
     alert(`You have registered with ${JSON.stringify(data.provider)}`);
   }
 
+  async function signInWithFacebook() {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'facebook',
+    })
+    setShowForm(true)
+    alert(`You have registered with ${JSON.stringify(data.provider)}`);
+  }
+
   async function signout() {
     const { error } = await supabase.auth.signOut()
   }
@@ -196,6 +204,7 @@ function FormSignUp() {
             ml="280"
             colorScheme="facebook"
             leftIcon={<FaFacebook color="blue" />}
+            onClick={(e)=> {signInWithFacebook(e)}}
           >
             Facebook
           </Chakra.Button>
@@ -205,9 +214,7 @@ function FormSignUp() {
             left="0px"
             colorScheme="twitter"
             leftIcon={<FaGoogle color="#E96479" />}
-            onClick={(e) => {
-              signInWithGoogle(e);
-            }}
+            onClick={(e) => {signInWithGoogle(e)}}
           >
             Google
           </Chakra.Button>
