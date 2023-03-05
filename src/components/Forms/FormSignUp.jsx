@@ -2,7 +2,7 @@ import * as Chakra from "@chakra-ui/react";
 import { useState } from "react";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { supabase } from "../../pages/api/supabaseClient";
-import FormLogIn from "./FormLogIn";
+import UserArea from "../UserArea/UserArea";
 
 function FormSignUp() {
   const [input, setInput] = useState("");
@@ -11,7 +11,7 @@ function FormSignUp() {
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showForm, setShowForm] = useState(false);
+  const [redirectHome, setRedirectHome] = useState(false);
 
   const handleSignUp = async () => {
     try {
@@ -61,7 +61,7 @@ function FormSignUp() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
     });
-    setShowForm(true);
+    setRedirectHome(true);
     alert(`You have registered with ${JSON.stringify(data.provider)}`);
   }
 
@@ -69,7 +69,7 @@ function FormSignUp() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "facebook",
     });
-    setShowForm(true);
+    setRedirectHome(true);
     alert(`You have registered with ${JSON.stringify(data.provider)}`);
   }
 
@@ -79,8 +79,8 @@ function FormSignUp() {
 
   return (
     <>
-      {showForm ? (
-        <FormLogIn />
+      {redirectHome ? (
+        <UserArea />
       ) : (
         <Chakra.Box bg="#4D455D" w="45%" p={8} color="black" ml="480" h="560">
           <Chakra.Button
