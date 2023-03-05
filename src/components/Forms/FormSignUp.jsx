@@ -2,7 +2,7 @@ import * as Chakra from "@chakra-ui/react";
 import { useState } from "react";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { supabase } from "../../pages/api/supabaseClient";
-import { FormLogin } from "./FormLogIn";
+import  FormLogIn  from "./FormLogIn";
 
 function FormSignUp() {
   const [input, setInput] = useState("");
@@ -72,6 +72,7 @@ function FormSignUp() {
 
   return (
     <>
+    {showForm ? (<FormLogIn />):(
       <Chakra.Box bg="#4D455D" w="45%" p={8} color="black" ml="480" h="560">
         <Chakra.Button
           backgroundColor="#F5E9CF"
@@ -220,6 +221,7 @@ function FormSignUp() {
           </Chakra.Button>
         </Chakra.HStack>
       </Chakra.Box>
+      )}
     </>
   );
 }
