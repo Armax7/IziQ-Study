@@ -1,12 +1,13 @@
 import * as Chakra from "@chakra-ui/react";
 import { useState } from "react";
-import { FaFacebook, FaGoogle } from "react-icons/fa";
+import { useRouter } from "next/router";
 import { supabase } from "../../pages/api/supabaseClient";
-import UserArea from "../UserArea/UserArea";
+import { FaFacebook, FaGoogle } from "react-icons/fa";
 
 function FormSignUp() {
-  const [input, setInput] = useState("");
+  const router = useRouter();
 
+  const [input, setInput] = useState("");
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -43,7 +44,7 @@ function FormSignUp() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+
     setName("");
     setLastname("");
     setEmail("");
@@ -60,6 +61,9 @@ function FormSignUp() {
   async function signInWithGoogle() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
+      options: {
+        redirectTo: "http://localhost:3000/home",
+      },
     });
     setRedirectHome(true);
     alert(`You have registered with ${JSON.stringify(data.provider)}`);
@@ -68,6 +72,9 @@ function FormSignUp() {
   async function signInWithFacebook() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "facebook",
+      options: {
+        redirectTo: "http://localhost:3000/home",
+      },
     });
     setRedirectHome(true);
     alert(`You have registered with ${JSON.stringify(data.provider)}`);
@@ -79,9 +86,7 @@ function FormSignUp() {
 
   return (
     <>
-      {redirectHome ? (
-        <UserArea />
-      ) : (
+      {
         <Chakra.Box bg="#4D455D" w="45%" p={8} color="black" ml="480" h="560">
           <Chakra.Button
             backgroundColor="#F5E9CF"
@@ -186,7 +191,10 @@ function FormSignUp() {
             mr={82}
             backgroundColor="red.400"
             type="submit"
-            onClick={(e)=>{handleSignUp(e);handleSubmit(e)}}
+            onClick={(e) => {
+              handleSignUp(e);
+              handleSubmit(e);
+            }}
             ml="370"
             colorScheme="blue"
             marginTop="25px"
@@ -233,7 +241,7 @@ function FormSignUp() {
             </Chakra.Button>
           </Chakra.HStack>
         </Chakra.Box>
-      )}
+      }
     </>
   );
 }
