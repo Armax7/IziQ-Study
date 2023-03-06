@@ -13,7 +13,6 @@
 .trash {
   width: 35px;
   margin: 15px 24px 20px 0;
-  cursor: not-allowed;
 }
 
 .line {
@@ -47,4 +46,11 @@
 
 .image_text {
   margin: 0px 30px 10px 30px;
+}
+
+.line_add {
+  box-sizing: border-box;
+  border-bottom: 5px solid #a1aaf3;
+  font-size: 20px;
+  line-height: 35px;
 }
