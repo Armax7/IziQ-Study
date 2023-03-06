@@ -63,7 +63,7 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                   <Link href="/profile">Profile</Link>
                 </Chakra.MenuItem>
                 <Chakra.MenuItem>Account Settings</Chakra.MenuItem>
-                <Chakra.Flex align={'center'} justify={'center'} >
+                <Chakra.Flex align={"center"} justify={"center"}>
                   <Components.LogOutButton />
                 </Chakra.Flex>
               </Chakra.MenuList>
