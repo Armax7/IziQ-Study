@@ -9,10 +9,6 @@ import React from "react";
 
 import * as Components from "../../../components";
 
-import * as Chakra from "@chakra-ui/react";
-
-import * as Components from "../../../components";
-
 const OptionsBar = ({ logged = false, avatarImage }) => {
   const SignIn = Chakra.useDisclosure();
   const singUp = Chakra.useDisclosure();
