@@ -1,0 +1,51 @@
+.containerSections section{
+    height: 100vh;
+    width: 100%;
+    background-color: #fffbee;;
+}
+/* Styles frist section*/
+.sectionOne {
+    display: flex;
+}
+.sectionOne_one{
+    content: '';
+    height: 80vh;
+    margin-top: auto;
+    width: 40%;
+    background-image: url(../../public/studentFirst.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.sectionOne_two{
+    display: flex;
+    background-image: url(../../public/bgCircle.png);
+    width: 60%;
+    background-repeat: no-repeat;
+    background-position: center left;
+}
+
+.containerOne_twoData {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 20%;
+    padding: 10px;
+    color: #FFFFFF;
+}
+
+.containerOne_twoData h1 {
+    font-size: 42px;
+}
+
+.containerOne_twoData h3 {
+    font-size: 20px;
+}
+
+.sectionOne_two button {
+    color: #FFFFFF;
+    border-radius: 4px;
+    border: 1px solid #000000;
+    background-color: #EB455F;
+    width: 150px;
+    height: 50px;
+    margin-top: 40px;
+}
