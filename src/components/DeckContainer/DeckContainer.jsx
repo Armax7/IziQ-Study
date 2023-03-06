@@ -2,6 +2,7 @@ import * as Chakra from "@chakra-ui/react";
 import Feature from "./deckContainer_helpers/Feature";
 import { DeckCover } from "../DeckCover/DeckCover";
 import { useEffect, useState } from "react";
+import { supabase } from "../../pages/api/supabaseClient";
 
 function DeckContainer({ decks, num_decks }) {
   const [options, setOptions] = useState([]);
