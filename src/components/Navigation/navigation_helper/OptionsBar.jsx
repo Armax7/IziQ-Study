@@ -78,6 +78,7 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
             fontWeight={400}
             variant={"link"}
             href={"#"}
+            _focus={{border:"none"}}
           >
             Sign In
           </Chakra.Button>
@@ -87,8 +88,9 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
             fontSize={"sm"}
             fontWeight={600}
             color={"white"}
-            bg={"pink.400"}
+            bg="#EB455F"
             href={"#"}
+            _focus={{border:"none"}}
             _hover={{
               bg: "pink.300",
             }}
