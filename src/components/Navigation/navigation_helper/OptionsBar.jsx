@@ -1,14 +1,19 @@
 import Link from "next/link";
 
+import * as Chakra from "@chakra-ui/react";
+
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsFillBellFill } from "react-icons/bs";
 import { CgPathTrim } from "react-icons/cg";
-
-import * as Chakra from "@chakra-ui/react";
+import React from "react";
 
 import * as Components from "../../../components";
 
 const OptionsBar = ({ logged = false, avatarImage }) => {
+  const SignIn = Chakra.useDisclosure();
+  const singUp = Chakra.useDisclosure();
+  const btnRef = React.useRef();
+
   return (
     <>
       {logged ? (
@@ -58,7 +63,7 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                   <Link href="/profile">Profile</Link>
                 </Chakra.MenuItem>
                 <Chakra.MenuItem>Account Settings</Chakra.MenuItem>
-                <Chakra.Flex align={'center'} justify={'center'} >
+                <Chakra.Flex align={"center"} justify={"center"}>
                   <Components.LogOutButton />
                 </Chakra.Flex>
               </Chakra.MenuList>
@@ -73,6 +78,8 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
           spacing={6}
         >
           <Chakra.Button
+            ref={btnRef}
+            onClick={SignIn.onOpen}
             as={"a"}
             fontSize={"sm"}
             fontWeight={400}
@@ -82,7 +89,30 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
           >
             Sign In
           </Chakra.Button>
+
+          <Chakra.Drawer
+            isOpen={SignIn.isOpen}
+            placement="top"
+            onClose={SignIn.onClose}
+            finalFocusRef={btnRef}
+            size="full"
+          >
+            <Chakra.DrawerContent>
+              <Chakra.DrawerCloseButton
+                backgroundColor="#F5E9CF"
+                color="red"
+                mr={960}
+                mt="3"
+              />
+              <Chakra.DrawerBody>
+                <Components.FormLogIn />
+              </Chakra.DrawerBody>
+            </Chakra.DrawerContent>
+          </Chakra.Drawer>
+
           <Chakra.Button
+            ref={btnRef}
+            onClick={singUp.onOpen}
             as={"a"}
             display={{ base: "none", md: "inline-flex" }}
             fontSize={"sm"}
@@ -97,6 +127,26 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
           >
             Sign Up
           </Chakra.Button>
+
+          <Chakra.Drawer
+            isOpen={singUp.isOpen}
+            placement="top"
+            onClose={singUp.onClose}
+            finalFocusRef={btnRef}
+            size="full"
+          >
+            <Chakra.DrawerContent>
+              <Chakra.DrawerCloseButton
+                backgroundColor="#F5E9CF"
+                color="red"
+                mr={960}
+                mt="3"
+              />
+              <Chakra.DrawerBody>
+                <Components.FormSignUp />
+              </Chakra.DrawerBody>
+            </Chakra.DrawerContent>
+          </Chakra.Drawer>
         </Chakra.Stack>
       )}
     </>

@@ -24,7 +24,7 @@ function Navigation({
       paddingRight="40px"
       boxSizing="border-box"
     >
-      <Link href="/">
+      <Link href={!logged ? "/" : "/home"}>
         <div className={style.logoApp}></div>
       </Link>
       <SearchBar

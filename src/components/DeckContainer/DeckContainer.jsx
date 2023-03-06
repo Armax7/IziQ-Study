@@ -1,5 +1,6 @@
 import * as Chakra from "@chakra-ui/react";
 import Feature from "./deckContainer_helpers/Feature";
+import { DeckCover } from "../DeckCover/DeckCover";
 
 function DeckContainer({ decks, num_decks }) {
   ///---------------Seccion mock para decks----------------
@@ -61,11 +62,12 @@ function DeckContainer({ decks, num_decks }) {
         <Chakra.Grid templateColumns="repeat(3, 1fr)" gap={6}>
           {decks.map((deck) => (
             ///Feature es Mock de DeckCover, reemplazar una vez exista el componente
-            <Feature 
+            <DeckCover 
               key={deck.id}
               name={deck.name}
               description={deck.description}
               total_cards={deck.total_cards}
+              status={deck.status}
             />
             ///Feature es Mock de DeckCover, reemplazar una vez exista el componente
           ))}

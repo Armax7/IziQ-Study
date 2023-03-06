@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../pages/api/supabaseClient";
 import UserArea from "../UserArea/UserArea";
 
-function FormLogin() {
+function FormLogIn() {
   const [show, setShow] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -54,15 +54,6 @@ function FormLogin() {
         <UserArea />
       ) : (
         <Chakra.Box bg="#4D455D" w="45%" p={8} color="black" ml="480" h="560">
-          <Chakra.Button
-            backgroundColor="#F5E9CF"
-            color="red"
-            mr={25}
-            onClick={logIn.onClose}
-            ml="380"
-          >
-            X
-          </Chakra.Button>
 
           <Chakra.FormControl isRequired>
             <Chakra.FormLabel textColor="#F5E9CF">E-mail</Chakra.FormLabel>
@@ -123,4 +114,4 @@ function FormLogin() {
   );
 }
 
-export default FormLogin;
+export default FormLogIn;
