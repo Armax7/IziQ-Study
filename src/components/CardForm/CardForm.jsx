@@ -12,6 +12,15 @@ const CardForm = () => {
   };
   const [formData, setFormData] = useState(initialValues);
 
+  const handleOnChange = (e) => {
+    const property = e.target.name;
+    const value = e.target.value;
+    setFormData({
+      ...formData,
+      [property]: value,
+    });
+  };
+
   return (
     <Chakra.Box
       mx="auto"
@@ -40,9 +49,10 @@ const CardForm = () => {
         <Chakra.FormControl mr="30px" pt="25px">
           <Chakra.Input
             type="text"
+            name="question"
             id="question"
             value={formData.question}
-            onChange={(e) => setFormData(e.target.value)}
+            onChange={handleOnChange}
             variant="filled"
           />
           <Chakra.FormLabel color="#797979" mt="5px" htmlFor="question">
@@ -52,9 +62,10 @@ const CardForm = () => {
         <Chakra.FormControl mr="30px" pt="25px">
           <Chakra.Input
             type="text"
+            name="answer"
             id="answer"
             value={formData.answer}
-            onChange={(e) => setFormData(e.target.value)}
+            onChange={handleOnChange}
             variant="filled"
           />
           <Chakra.FormLabel color="#797979" mt="5px" htmlFor="answer">
