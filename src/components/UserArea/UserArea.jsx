@@ -22,6 +22,11 @@ export default function UserArea() {
     }
   };
 
+  const [viewDeck, setViewDeck] = useState(false)
+  const viewAllDecks = () =>{
+    setViewDeck(true)
+  }
+
   return (
     <div>
       {user && (
