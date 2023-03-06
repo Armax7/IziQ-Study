@@ -90,15 +90,6 @@ function FormSignUp() {
     <>
       {
         <Chakra.Box bg="#4D455D" w="45%" p={8} color="black" ml="480" h="560">
-          <Chakra.Button
-            backgroundColor="#F5E9CF"
-            color="red"
-            mr={25}
-            onClick={singUp.onClose}
-            ml="380"
-          >
-            X
-          </Chakra.Button>
 
           <Chakra.Flex>
             <Chakra.FormControl isRequired>
