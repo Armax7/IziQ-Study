@@ -33,7 +33,7 @@ function DeckContainer({ decks, num_decks }) {
       let { data: decks, error } = await supabase
         .from("decks")
         .select("name")
-        .eq("category", selectedCategory);
+        .eq("category", selectedOption);
       if (error) console.log(error);
       console.log(decks);
     }
