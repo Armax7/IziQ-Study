@@ -1,6 +1,8 @@
 import * as Chakra from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { supabase } from "../../pages/api/supabaseClient";
+import { DeckContainer } from "../../components";
+
 
 export default function UserArea() {
   const [user, setUser] = useState(null);
@@ -61,6 +63,7 @@ export default function UserArea() {
           >
             View your Deck(s)
           </Chakra.Button>
+          {viewDeck && <DeckContainer />}
         </>
       )}
     </div>
