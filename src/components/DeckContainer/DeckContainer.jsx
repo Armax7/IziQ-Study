@@ -1,52 +1,44 @@
 import * as Chakra from "@chakra-ui/react";
 import Feature from "./deckContainer_helpers/Feature";
 import { DeckCover } from "../DeckCover/DeckCover";
+import { useEffect, useState } from "react";
+import { supabase } from "../../pages/api/supabaseClient";
 
 function DeckContainer({ decks, num_decks }) {
-  ///---------------Seccion mock para decks----------------
-  ///borrar seccion cuando se implemente decks
-  if (!decks) {
-    const array = [
-      {
-        id: 1,
-        name: "English",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        total_cards: 5,
-        status: "learned",
-        user_id: 2313551_5656,
-        category_id: 321,
-      },
-      {
-        id: 2,
-        name: "French",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        total_cards: 7,
-        status: "learned",
-        user_id: 8984161561_5656,
-        category_id: 321,
-      },
-      {
-        id: 3,
-        name: "Spanish",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        total_cards: 25,
-        status: "learned",
-        user_id: 55615445561_5656,
-        category_id: 321,
-      },
-      {
-        id: 4,
-        name: "Arab",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        total_cards: 25,
-        status: "learned",
-        user_id: 55615445561_5656,
-        category_id: 321,
-      },
-    ];
-    decks = array;
-  }
-  ///---------------Termina seccion mock para decks----------------
+  const [options, setOptions] = useState([]);
+  const [selectedOption, setSelectedOption] = useState("All");
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const { data } = await supabase.from("categories").select("name");
+      const options = data.map((category) => ({
+        value: category.name,
+        label: category.name,
+      }));
+      setOptions(options);
+    };
+    fetchCategories();
+  }, [options]);
+
+  const handleCategoryChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+  const viewSelectDeck = async () => {
+    if (selectedOption === "All") {
+      let { data: decks, error } = await supabase.from("decks").select("name");
+      if (error) console.log(error);
+      console.log(decks);
+    } else {
+      let { data: decks, error } = await supabase
+        .from("decks")
+        .select("name")
+        .eq("category", selectedCategory);
+      if (error) console.log(error);
+      console.log(decks);
+    }
+  };
+
   return (
     <Chakra.Stack
       spacing={8}
@@ -58,20 +50,17 @@ function DeckContainer({ decks, num_decks }) {
       <Chakra.Heading fontSize="md" marginLeft="5%">
         Decks {num_decks}
       </Chakra.Heading>
+      <Chakra.Select value={selectedOption} onChange={handleCategoryChange}>
+        <option value="all">All</option>
+        {options.map((category) => (
+          <option key={category.id} value={category.value}>
+            {category.label}
+          </option>
+        ))}
+      </Chakra.Select>
+      <Chakra.Button onClick={viewSelectDeck}>View decks</Chakra.Button>
       <Chakra.Box display="flex" justifyContent="space-evenly">
-        <Chakra.Grid templateColumns="repeat(3, 1fr)" gap={6}>
-          {decks.map((deck) => (
-            ///Feature es Mock de DeckCover, reemplazar una vez exista el componente
-            <DeckCover 
-              key={deck.id}
-              name={deck.name}
-              description={deck.description}
-              total_cards={deck.total_cards}
-              status={deck.status}
-            />
-            ///Feature es Mock de DeckCover, reemplazar una vez exista el componente
-          ))}
-        </Chakra.Grid>
+        <Chakra.Grid templateColumns="repeat(3, 1fr)" gap={6}></Chakra.Grid>
       </Chakra.Box>
     </Chakra.Stack>
   );
