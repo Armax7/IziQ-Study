@@ -22,8 +22,19 @@ const CardForm = () => {
   };
 
   return (
-    <Chakra.Box className={styles.container}>
-      <Chakra.Heading className={styles.head}>
+    <Chakra.Box
+      mx="auto"
+      w="90%"
+      bg="#FFFFFF"
+      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+      borderRadius="15px"
+      fontFamily="Poppins"
+      fontStyle="normal"
+      fontWeight="600"
+      color="#000000"
+      mb="25px"
+    >
+      <Chakra.Heading fontSize="28px" lineHeight="42px" display="inline-flex">
         <div className={styles.functions}>
           <div className={styles.move}>
             <Move />
@@ -35,25 +46,25 @@ const CardForm = () => {
       </Chakra.Heading>
       <div className={styles.line}></div>
       <div className={styles.form_line}>
-        <Chakra.FormControl className={styles.form}>
+        <Chakra.FormControl mr="30px" pt="25px">
           <Chakra.Input
             type="text"
             id="question"
             value={formData.question}
             onChange={handleOnChange}
           />
-          <Chakra.FormLabel className={styles.label} htmlFor="question">
+          <Chakra.FormLabel color="#797979" mt="5px" htmlFor="question">
             Question
           </Chakra.FormLabel>
         </Chakra.FormControl>
-        <Chakra.FormControl className={styles.form}>
+        <Chakra.FormControl mr="30px" pt="25px">
           <Chakra.Input
             type="text"
             id="answer"
             value={formData.answer}
             onChange={handleOnChange}
           />
-          <Chakra.FormLabel htmlFor="answer" className={styles.label}>
+          <Chakra.FormLabel color="#797979" mt="5px" htmlFor="answer">
             Answer
           </Chakra.FormLabel>
         </Chakra.FormControl>
