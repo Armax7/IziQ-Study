@@ -5,12 +5,15 @@ import { useEffect } from "react";
 
 function DeckContainer({ decks, num_decks }) {
   const [options, setOptions] = useState([]);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState("");
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const { data } = await supabase.from('categories').select('name');
-      const options = data.map(category => ({ value: category.name, label: category.name }));
+      const { data } = await supabase.from("categories").select("name");
+      const options = data.map((category) => ({
+        value: category.name,
+        label: category.name,
+      }));
       setOptions(options);
     };
     fetchCategories();
@@ -70,7 +73,7 @@ function DeckContainer({ decks, num_decks }) {
     >
       <Chakra.Heading fontSize="md" marginLeft="5%">
         Decks {num_decks}
-      </Chakra.Heading>
+      </Chakra.Heading> 
       <Chakra.Box display="flex" justifyContent="space-evenly">
         <Chakra.Grid templateColumns="repeat(3, 1fr)" gap={6}>
           {/* {decks.map((deck) => (
