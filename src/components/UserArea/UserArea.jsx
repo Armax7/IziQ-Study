@@ -70,7 +70,7 @@ export default function UserArea() {
           <Chakra.Button
             mr={82}
             backgroundColor="red.400"
-            onClick={handleViewDecks}
+            onClick={handleCreateNewDeck}
             ml="370"
             colorScheme="blue"
             marginTop="25px"
