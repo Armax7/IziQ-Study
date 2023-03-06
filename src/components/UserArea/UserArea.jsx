@@ -29,7 +29,7 @@ export default function UserArea() {
   };
 
   const handleCreateNewDeck = () => {
-    setCreateANewDeck(true)
+    setCreateANewDeck(!createANewDeck)
   }
 
   return (
@@ -77,8 +77,9 @@ export default function UserArea() {
             marginBottom="25px"
             marginLeft="0px"
           >
-            Create a New Deck
+            {createANewDeck ? "Create a new Deck" : "Hide form"}
           </Chakra.Button>
+          {createANewDeck && <DeckForm />}
         </>
       )}
     </div>
