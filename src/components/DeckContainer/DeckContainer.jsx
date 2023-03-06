@@ -7,6 +7,15 @@ function DeckContainer({ decks, num_decks }) {
   const [options, setOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
 
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const { data } = await supabase.from('categories').select('name');
+      const options = data.map(category => ({ value: category.name, label: category.name }));
+      setOptions(options);
+    };
+    fetchCategories();
+  }, []);
+
   ///---------------Seccion mock para decks----------------
   ///borrar seccion cuando se implemente decks
   // if (!decks) {
