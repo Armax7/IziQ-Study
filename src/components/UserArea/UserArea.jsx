@@ -58,7 +58,7 @@ export default function UserArea() {
             marginBottom="25px"
             marginLeft="0px"
           >
-            {showDeckContainer ? "Hide your Decks" : "View your Deck(s)"}
+            {showDeckContainer ? "Hide your Deck(s)" : "View your Deck(s)"}
           </Chakra.Button>
           {showDeckContainer && <DeckContainer />}
         </>
