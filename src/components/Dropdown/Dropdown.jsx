@@ -3,6 +3,8 @@ import * as Utils from "../../utils";
 
 function Dropdown({
   options,
+  optionsId = null,
+  optionsValue = null,
   value = null,
   onChange = () => {},
   placeholderProp = "Select option",
@@ -34,7 +36,7 @@ function Dropdown({
         borderColor={borderColor}
       >
         {options.map((elem, index) => (
-          <option key={index} value={`option${index}`}>
+          <option key={!optionsId ? index : optionsId} value={!optionsValue ? `option${index}` : optionsValue}>
             {Utils.isObject(elem) ? elem.name : elem}
           </option>
         ))}
