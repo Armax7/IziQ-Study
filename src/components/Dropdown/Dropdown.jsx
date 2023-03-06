@@ -4,34 +4,34 @@ import * as Utils from "../../utils";
 function Dropdown({
   optionsProp,
   value = null,
-  onChange = ()=>{},
+  onChange = () => {},
   placeholderProp = "Select option",
-  sizeProp = "md",
-  variantProp = "Outline",
-  colorSchemeProp = "whiteAlpha",
-  hProp = "auto",
-  wProp = "10rem",
-  colorProp = "black",
-  bgProp = "none",
-  borderColorProp = "none",
+  size = "md",
+  variant = "Outline",
+  colorScheme = "whiteAlpha",
+  h = "auto",
+  w = "10rem",
+  color = "black",
+  bg = "none",
+  borderColor = "none",
 }) {
   if (!Array.isArray(optionsProp)) {
     throw new TypeError("Error: options should be an array");
   }
 
-  if(value === null || value === undefined){
+  if (value === null || value === undefined) {
     return (
       <Chakra.Select
         onChange={onChange}
         placeholder={placeholderProp}
-        size={sizeProp}
-        variant={variantProp}
-        colorScheme={colorSchemeProp}
-        h={hProp}
-        w={wProp}
-        color={colorProp}
-        bg={bgProp}
-        borderColor={borderColorProp}
+        size={size}
+        variant={variant}
+        colorScheme={colorScheme}
+        h={h}
+        w={w}
+        color={color}
+        bg={bg}
+        borderColor={borderColor}
       >
         {optionsProp.map((elem, index) => (
           <option key={index} value={`option${index}`}>
@@ -40,29 +40,27 @@ function Dropdown({
         ))}
       </Chakra.Select>
     );
-  }
-  else {
+  } else {
     <Chakra.Select
-        value={value}
-        onChange={onChange}
-        placeholder={placeholderProp}
-        size={sizeProp}
-        variant={variantProp}
-        colorScheme={colorSchemeProp}
-        h={hProp}
-        w={wProp}
-        color={colorProp}
-        bg={bgProp}
-        borderColor={borderColorProp}
-      >
-        {optionsProp.map((elem, index) => (
-          <option key={index} value={`option${index}`}>
-            {Utils.isObject(elem) ? elem.name : elem}
-          </option>
-        ))}
-      </Chakra.Select>
+      value={value}
+      onChange={onChange}
+      placeholder={placeholderProp}
+      size={size}
+      variant={variant}
+      colorScheme={colorScheme}
+      h={h}
+      w={w}
+      color={color}
+      bg={bg}
+      borderColor={borderColor}
+    >
+      {optionsProp.map((elem, index) => (
+        <option key={index} value={`option${index}`}>
+          {Utils.isObject(elem) ? elem.name : elem}
+        </option>
+      ))}
+    </Chakra.Select>;
   }
-
 }
 
 export default Dropdown;
