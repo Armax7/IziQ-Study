@@ -18,7 +18,7 @@ function DeckContainer({ decks, num_decks }) {
       setOptions(options);
     };
     fetchCategories();
-  }, []);
+  }, [options]);
 
   const handleCategoryChange = (event) => {
     setSelectedOption(event.target.value);
@@ -53,8 +53,8 @@ function DeckContainer({ decks, num_decks }) {
       <Chakra.Select value={selectedOption} onChange={handleCategoryChange}>
         <option value="all">All</option>
         {options.map((category) => (
-          <option key={category.id} value={category.name}>
-            {category.name}
+          <option key={category.id} value={category.value}>
+            {category.label}
           </option>
         ))}
       </Chakra.Select>
