@@ -3,13 +3,12 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../pages/api/supabaseClient";
 import { DeckContainer } from "../../components";
 
-
 export default function UserArea() {
   const [user, setUser] = useState(null);
+  const [showDeckContainer, setShowDeckContainer] = useState(false);
 
   useEffect(async () => {
     setUser(supabase.auth.getUser());
-
     const user = await supabase.auth.getUser();
     console.log(user.data);
   }, []);
@@ -23,15 +22,9 @@ export default function UserArea() {
     }
   };
 
-  const [viewDeck, setViewDeck] = useState(false)
-  const viewAllDecks = () =>{
-    setViewDeck(true)
-  }
-
-  const [showDeckContainer, setShowDeckContainer] = useState(false)
-  const hideDecks = () =>{
-    setShowDeckContainer(false)
-  }
+  const handleViewDecks = () => {
+    setShowDeckContainer(!showDeckContainer);
+  };
 
   return (
     <div>
@@ -44,9 +37,9 @@ export default function UserArea() {
             mr={82}
             backgroundColor="red.400"
             onClick={() => {
-                handleLogout();
-                alert("Logged out successfully.");
-              }}
+              handleLogout();
+              alert("Logged out successfully.");
+            }}
             ml="370"
             colorScheme="blue"
             marginTop="25px"
@@ -58,16 +51,16 @@ export default function UserArea() {
           <Chakra.Button
             mr={82}
             backgroundColor="red.400"
-            onClick={viewAllDecks}
+            onClick={handleViewDecks}
             ml="370"
             colorScheme="blue"
             marginTop="25px"
             marginBottom="25px"
             marginLeft="0px"
           >
-            View your Deck(s)
+            {showDeckContainer ? "Hide your Decks" : "View your Deck(s)"}
           </Chakra.Button>
-          {viewDeck && <DeckContainer />}
+          {showDeckContainer && <DeckContainer />}
         </>
       )}
     </div>
