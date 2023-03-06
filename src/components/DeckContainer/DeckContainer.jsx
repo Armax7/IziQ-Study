@@ -6,7 +6,7 @@ import { supabase } from "../../pages/api/supabaseClient";
 
 function DeckContainer({ decks, num_decks }) {
   const [options, setOptions] = useState([]);
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState("All");
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -19,6 +19,10 @@ function DeckContainer({ decks, num_decks }) {
     };
     fetchCategories();
   }, []);
+
+  const handleCategoryChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
 
   return (
     <Chakra.Stack
