@@ -6,7 +6,6 @@ import { DeckContainer } from "../../components";
 
 export default function UserArea() {
   const [user, setUser] = useState(null);
-  
 
   useEffect(async () => {
     setUser(supabase.auth.getUser());
@@ -27,6 +26,11 @@ export default function UserArea() {
   const [viewDeck, setViewDeck] = useState(false)
   const viewAllDecks = () =>{
     setViewDeck(true)
+  }
+
+  const [showDeckContainer, setShowDeckContainer] = useState(false)
+  const hideDecks = () =>{
+    setShowDeckContainer(false)
   }
 
   return (
