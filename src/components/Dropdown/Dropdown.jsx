@@ -3,6 +3,8 @@ import * as Utils from "../../utils";
 
 function Dropdown({
   optionsProp,
+  value = null,
+  onChange = ()=>{},
   placeholderProp = "Select option",
   sizeProp = "md",
   variantProp = "Outline",
@@ -17,25 +19,50 @@ function Dropdown({
     throw new TypeError("Error: options should be an array");
   }
 
-  return (
+  if(value === null || value === undefined){
+    return (
+      <Chakra.Select
+        onChange={onChange}
+        placeholder={placeholderProp}
+        size={sizeProp}
+        variant={variantProp}
+        colorScheme={colorSchemeProp}
+        h={hProp}
+        w={wProp}
+        color={colorProp}
+        bg={bgProp}
+        borderColor={borderColorProp}
+      >
+        {optionsProp.map((elem, index) => (
+          <option key={index} value={`option${index}`}>
+            {Utils.isObject(elem) ? elem.name : elem}
+          </option>
+        ))}
+      </Chakra.Select>
+    );
+  }
+  else {
     <Chakra.Select
-      placeholder={placeholderProp}
-      size={sizeProp}
-      variant={variantProp}
-      colorScheme={colorSchemeProp}
-      h={hProp}
-      w={wProp}
-      color={colorProp}
-      bg={bgProp}
-      borderColor={borderColorProp}
-    >
-      {optionsProp.map((elem, index) => (
-        <option key={index} value={`option${index}`}>
-          {Utils.isObject(elem) ? elem.name : elem}
-        </option>
-      ))}
-    </Chakra.Select>
-  );
+        value={value}
+        onChange={onChange}
+        placeholder={placeholderProp}
+        size={sizeProp}
+        variant={variantProp}
+        colorScheme={colorSchemeProp}
+        h={hProp}
+        w={wProp}
+        color={colorProp}
+        bg={bgProp}
+        borderColor={borderColorProp}
+      >
+        {optionsProp.map((elem, index) => (
+          <option key={index} value={`option${index}`}>
+            {Utils.isObject(elem) ? elem.name : elem}
+          </option>
+        ))}
+      </Chakra.Select>
+  }
+
 }
 
 export default Dropdown;
