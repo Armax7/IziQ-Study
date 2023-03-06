@@ -61,6 +61,18 @@ export default function UserArea() {
             {showDeckContainer ? "Hide your Deck(s)" : "View your Deck(s)"}
           </Chakra.Button>
           {showDeckContainer && <DeckContainer />}
+          <Chakra.Button
+            mr={82}
+            backgroundColor="red.400"
+            onClick={handleViewDecks}
+            ml="370"
+            colorScheme="blue"
+            marginTop="25px"
+            marginBottom="25px"
+            marginLeft="0px"
+          >
+            Create a New Deck
+          </Chakra.Button>
         </>
       )}
     </div>
