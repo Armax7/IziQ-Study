@@ -13,7 +13,9 @@ function Navigation({
   return (
     <Chakra.Flex
       background="#FFFFFF"
-      boxShadow="0px 10px 33px 0px rgba(0, 0, 0, 0.25)"
+      boxShadow="0px 2px 6px rgba(0, 0, 0, 0.316)"
+      position= "relative"
+      z-index= "10"
       gap="3"
       h="70px"
       margin="0 auto"
