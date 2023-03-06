@@ -7,6 +7,7 @@ import DeckForm from "../Forms/DeckForm"
 export default function UserArea() {
   const [user, setUser] = useState(null);
   const [showDeckContainer, setShowDeckContainer] = useState(false);
+  const [createANewDeck, setCreateANewDeck] = useState(false)
 
   useEffect(async () => {
     setUser(supabase.auth.getUser());
@@ -26,6 +27,10 @@ export default function UserArea() {
   const handleViewDecks = () => {
     setShowDeckContainer(!showDeckContainer);
   };
+
+  const handleCreateNewDeck = () => {
+    setCreateANewDeck(true)
+  }
 
   return (
     <div>
