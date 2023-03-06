@@ -3,6 +3,8 @@ import Feature from "./deckContainer_helpers/Feature";
 import { DeckCover } from "../DeckCover/DeckCover";
 
 function DeckContainer({ decks, num_decks }) {
+  const [options, setOptions] = useState([]);
+  const [selectedOption, setSelectedOption] = useState(null);
 
   ///---------------Seccion mock para decks----------------
   ///borrar seccion cuando se implemente decks
