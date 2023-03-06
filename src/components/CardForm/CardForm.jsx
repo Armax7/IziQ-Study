@@ -70,4 +70,4 @@ const CardForm = () => {
   );
 };
 
-export { CardForm };
+export default CardForm;
