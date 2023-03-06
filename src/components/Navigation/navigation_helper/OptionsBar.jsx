@@ -1,10 +1,15 @@
 import Link from "next/link";
 
 import * as Chakra from "@chakra-ui/react";
+
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsFillBellFill } from "react-icons/bs";
 import { CgPathTrim } from "react-icons/cg";
 import React from "react";
+
+import * as Components from "../../../components";
+
+import * as Chakra from "@chakra-ui/react";
 
 import * as Components from "../../../components";
 
@@ -62,7 +67,9 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                   <Link href="/profile">Profile</Link>
                 </Chakra.MenuItem>
                 <Chakra.MenuItem>Account Settings</Chakra.MenuItem>
-                <Chakra.MenuItem>Logout</Chakra.MenuItem>
+                <Chakra.Flex align={'center'} justify={'center'} >
+                  <Components.LogOutButton />
+                </Chakra.Flex>
               </Chakra.MenuList>
             </Chakra.Menu>
           </Chakra.ButtonGroup>
