@@ -49,6 +49,18 @@ export default function UserArea() {
           >
             Log Out
           </Chakra.Button>
+          <Chakra.Button
+            mr={82}
+            backgroundColor="red.400"
+            onClick={viewAllDecks}
+            ml="370"
+            colorScheme="blue"
+            marginTop="25px"
+            marginBottom="25px"
+            marginLeft="0px"
+          >
+            View your Deck(s)
+          </Chakra.Button>
         </>
       )}
     </div>
