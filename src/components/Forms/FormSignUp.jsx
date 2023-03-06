@@ -1,4 +1,5 @@
 import * as Chakra from "@chakra-ui/react";
+
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "../../pages/api/supabaseClient";
@@ -55,6 +56,7 @@ function FormSignUp() {
 
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
+
 
   const singUp = Chakra.useDisclosure();
 
