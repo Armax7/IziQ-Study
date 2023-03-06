@@ -24,6 +24,21 @@ function DeckContainer({ decks, num_decks }) {
     setSelectedOption(event.target.value);
   };
 
+  const viewSelectDeck = async () => {
+    if (selectedOption === "All") {
+      let { data: decks, error } = await supabase.from("decks").select("name");
+      if (error) console.log(error);
+      console.log(decks);
+    } else {
+      let { data: decks, error } = await supabase
+        .from("decks")
+        .select("name")
+        .eq("category", selectedCategory);
+      if (error) console.log(error);
+      console.log(decks);
+    }
+  };
+
   return (
     <Chakra.Stack
       spacing={8}
@@ -44,8 +59,7 @@ function DeckContainer({ decks, num_decks }) {
         ))}
       </Chakra.Select>
       <Chakra.Box display="flex" justifyContent="space-evenly">
-        <Chakra.Grid templateColumns="repeat(3, 1fr)" gap={6}>        
-        </Chakra.Grid>
+        <Chakra.Grid templateColumns="repeat(3, 1fr)" gap={6}></Chakra.Grid>
       </Chakra.Box>
     </Chakra.Stack>
   );
