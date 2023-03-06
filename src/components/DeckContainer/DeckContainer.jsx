@@ -50,7 +50,7 @@ function DeckContainer({ decks, num_decks }) {
       <Chakra.Heading fontSize="md" marginLeft="5%">
         Decks {num_decks}
       </Chakra.Heading>
-      <Chakra.Select>
+      <Chakra.Select value={selectedOption} onChange={handleCategoryChange} >
         <option value="all">All</option>
         {options.map((category) => (
           <option key={category.id} value={category.name}>
@@ -58,6 +58,7 @@ function DeckContainer({ decks, num_decks }) {
           </option>
         ))}
       </Chakra.Select>
+      <Chakra.Button onClick={viewSelectDeck}>View decks</Chakra.Button>
       <Chakra.Box display="flex" justifyContent="space-evenly">
         <Chakra.Grid templateColumns="repeat(3, 1fr)" gap={6}></Chakra.Grid>
       </Chakra.Box>
