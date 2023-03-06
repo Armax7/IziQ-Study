@@ -12,7 +12,7 @@ function FormSignUp() {
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [redirectHome, setRedirectHome] = useState(false);
+  const [redirect, setRedirect] = useState(false);
 
   const handleSignUp = async () => {
     try {
@@ -65,7 +65,7 @@ function FormSignUp() {
         redirectTo: "http://localhost:3000/home",
       },
     });
-    setRedirectHome(true);
+    setRedirect(true);
     alert(`You have registered with ${JSON.stringify(data.provider)}`);
   }
 
@@ -76,7 +76,7 @@ function FormSignUp() {
         redirectTo: "http://localhost:3000/home",
       },
     });
-    setRedirectHome(true);
+    setRedirect(true);
     alert(`You have registered with ${JSON.stringify(data.provider)}`);
   }
 
