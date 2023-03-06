@@ -12,10 +12,6 @@ const CardForm = () => {
   };
   const [formData, setFormData] = useState(initialValues);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
   const handleOnChange = (e) => {
     const property = e.target.name;
     const value = e.target.value;
@@ -28,7 +24,6 @@ const CardForm = () => {
   return (
     <Chakra.Box className={styles.container}>
       <Chakra.Heading className={styles.head}>
-        <div className={styles.number}>1</div>
         <div className={styles.functions}>
           <div className={styles.move}>
             <Move />
@@ -58,8 +53,8 @@ const CardForm = () => {
             value={formData.answer}
             onChange={handleOnChange}
           />
-          <Chakra.FormLabel htmlFor="answer">
-            <div className={styles.label}></div>Answer
+          <Chakra.FormLabel htmlFor="answer" className={styles.label}>
+            Answer
           </Chakra.FormLabel>
         </Chakra.FormControl>
         <div className={styles.image_container}>
