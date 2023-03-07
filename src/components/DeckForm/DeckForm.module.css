@@ -1,0 +1,9 @@
+.containerDeckForm {
+    margin: auto auto;
+    margin-top: 3%;
+    border-radius: 10px;
+    background-color: rgb(238, 238, 238);
+    padding: 30px;
+    box-sizing: border-box;
+    width: 90%;
+}
