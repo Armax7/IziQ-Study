@@ -3,8 +3,6 @@ import * as Utils from "../../utils";
 
 function Dropdown({
   options,
-  optionsId = null,
-  optionsValue = null,
   ...props
 }) {
   if (!Array.isArray(options)) {
@@ -13,11 +11,20 @@ function Dropdown({
 
     return (
       <Chakra.Select {...props} >
-        {options.map((elem, index) => (
-          <option key={!optionsId ? index : optionsId} value={!optionsValue ? `option${index}` : optionsValue}>
-            {Utils.isObject(elem) ? elem.name : elem}
-          </option>
-        ))}
+        {options.map((elem, index) => {
+          if (Utils.isObject(elem)) {
+            return (
+              <option key={index} value={elem.value}>
+                {elem.label || elem.name}
+              </option>
+            )
+          }
+          return (
+            <option key={index} value={`option${index}`}>
+              {elem}
+            </option>
+          )
+        })}
       </Chakra.Select>
     );
 }
