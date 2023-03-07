@@ -7,16 +7,16 @@ import { supabase } from "../../pages/api/supabaseClient";
 function DeckContainer({ decks, num_decks }) {
   const [options, setOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState("All");
-  const [userID, setUserId] = useState("")
-
+  const [userID, setUserId] = useState("");
+  const [decks, setDecks] = useState([]);
 
   useEffect(() => {
     const getIdUser = async () => {
       supabase.auth.getUser();
       const user = await supabase.auth.getUser();
-      setUserId(user.data.user.id)
-    }
-    getIdUser()
+      setUserId(user.data.user.id);
+    };
+    getIdUser();
     const fetchCategories = async () => {
       const { data } = await supabase.from("categories").select("name");
       const options = data.map((category) => ({
@@ -28,7 +28,6 @@ function DeckContainer({ decks, num_decks }) {
     fetchCategories();
   }, []);
 
-  
   const handleCategoryChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -59,7 +58,7 @@ function DeckContainer({ decks, num_decks }) {
       <Chakra.Heading fontSize="md" marginLeft="5%">
         Decks {userID}
       </Chakra.Heading>
-      <Chakra.Select value={selectedOption} onChange={handleCategoryChange} >
+      <Chakra.Select value={selectedOption} onChange={handleCategoryChange}>
         <option value="all">All</option>
         {options.map((category) => (
           <option key={category.id} value={category.name}>
