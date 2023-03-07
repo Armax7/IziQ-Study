@@ -56,20 +56,17 @@ const DeckForm = ({ number = 0 }) => {
         </Chakra.FormControl>
       </div>
       <Chakra.Flex width="50%" margin="auto" flexDirection="column">
-        <Chakra.Select
-          placeholder="Select Category"
+        <Components.Dropdown
+          options={["Option 1", "Option 2", "Option 3"]}
+          placeholder={"Select Category"}
           margin="15px auto"
           borderColor="#A1AAF3"
-        >
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </Chakra.Select>
-        <Chakra.Select placeholder="Select Sub-Category" borderColor="#A1AAF3">
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </Chakra.Select>
+        />
+        <Components.Dropdown
+          options={["Option 1", "Option 2", "Option 3"]}
+          placeholder={"Select Sub-Category"}
+          borderColor="#A1AAF3"
+        />
       </Chakra.Flex>
       <Chakra.Text
         fontWeight="bold"
