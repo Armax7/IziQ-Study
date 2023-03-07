@@ -8,10 +8,6 @@ function DeckContainer({ decks }) {
   const [userID, setUserId] = useState("");
   const [decks, setDecks] = useState([]);
 
-  const handleCategoryChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
-
   return (
     <Chakra.Stack
       spacing={8}
