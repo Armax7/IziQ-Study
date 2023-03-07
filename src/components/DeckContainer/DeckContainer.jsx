@@ -9,24 +9,6 @@ function DeckContainer({ decks }) {
   const [userID, setUserId] = useState("");
   const [decks, setDecks] = useState([]);
 
-  useEffect(() => {
-    const getIdUser = async () => {
-      const user = await supabase.auth.getUser();
-      const userID = user.data.user.id;
-      setUserId(userID);
-      getUserDeck(userID);
-    };
-    getIdUser();
-    // const fetchCategories = async () => {
-    //   const { data } = await supabase.from("categories").select("name");
-    //   const options = data.map((category) => ({
-    //     value: category.name,
-    //     label: category.name,
-    //   }));
-    //   setOptions(options);
-    // };
-    // fetchCategories();
-  }, []);
 
   const getUserDeck = async (userID) => {
     const { data: decks, error } = await supabase
