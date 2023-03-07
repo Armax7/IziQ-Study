@@ -28,12 +28,6 @@ const CardForm = () => {
     setCards([...cards, cards.length]);
   };
 
-  const handleDeleteCard = (index) => {
-    const newCards = [...cards];
-    newCards.splice(index, 1);
-    setCards(newCards);
-  };
-
   return (
     <>
       {cards.map((cardIndex) => (
@@ -59,7 +53,7 @@ const CardForm = () => {
                 <div className={styles.move}>
                   <Move />
                 </div>
-                <div className={styles.trash} onClick={() => handleDeleteCard(cardIndex)}>
+                <div className={styles.trash}>
                   <Trash />
                 </div>
               </div>
