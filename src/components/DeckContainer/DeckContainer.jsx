@@ -14,10 +14,10 @@ function DeckContainer({ decks }) {
       <Chakra.Heading fontSize="md" marginLeft="5%">
         Recent Decks
       </Chakra.Heading>
-      <Chakra.Button onClick={viewSelectDeck}>View decks</Chakra.Button>
+      {/* <Chakra.Button onClick={viewSelectDeck}>View decks</Chakra.Button> */}
       <Chakra.Box display="flex" justifyContent="space-evenly">
         <Chakra.Grid templateColumns="repeat(3, 1fr)" gap={6}>
-          {decks.map((deck) => (
+          {decks?.map((deck) => (
             ///Feature es Mock de DeckCover, reemplazar una vez exista el componente
             <DeckCover
               key={deck.id}
