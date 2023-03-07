@@ -1,7 +1,7 @@
 import * as Chakra from "@chakra-ui/react";
 import styles from "./CardForm.module.css";
 import { useState } from "react";
-import { Move, Trash, Image } from "./utils";
+import { Image } from "./utils";
 
 const CardForm = () => {
   const initialValues = {
@@ -49,14 +49,6 @@ const CardForm = () => {
               lineHeight="42px"
               display="inline-flex"
             >
-              <div className={styles.functions}>
-                <div className={styles.move}>
-                  <Move />
-                </div>
-                <div className={styles.trash}>
-                  <Trash />
-                </div>
-              </div>
             </Chakra.Heading>
             <div className={styles.line}></div>
             <div className={styles.form_line}>
