@@ -12,7 +12,7 @@ function DeckContainer({ decks }) {
       justifyContent="space-evenly"
     >
       <Chakra.Heading fontSize="md" marginLeft="5%">
-        Decks {userID}
+        Recent Decks
       </Chakra.Heading>
       <Chakra.Button onClick={viewSelectDeck}>View decks</Chakra.Button>
       <Chakra.Box display="flex" justifyContent="space-evenly">
