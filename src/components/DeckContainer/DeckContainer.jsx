@@ -36,6 +36,8 @@ function DeckContainer({ decks, num_decks }) {
         "id, name, description, total_cards, status, category_id, subcategory_id"
       )
       .eq("user_id", userID)
+      .order("created_at", { ascending: false })
+      .limit(6)
 
     if (error) {
       alert(error);
@@ -87,7 +89,7 @@ function DeckContainer({ decks, num_decks }) {
       <Chakra.Button onClick={viewSelectDeck}>View decks</Chakra.Button>
       <Chakra.Box display="flex" justifyContent="space-evenly">
         <Chakra.Grid templateColumns="repeat(3, 1fr)" gap={6}>
-        {decks.map((deck) => (
+          {decks.map((deck) => (
             ///Feature es Mock de DeckCover, reemplazar una vez exista el componente
             <DeckCover
               key={deck.id}
