@@ -86,7 +86,19 @@ function DeckContainer({ decks, num_decks }) {
       </Chakra.Select> */}
       <Chakra.Button onClick={viewSelectDeck}>View decks</Chakra.Button>
       <Chakra.Box display="flex" justifyContent="space-evenly">
-        <Chakra.Grid templateColumns="repeat(3, 1fr)" gap={6}></Chakra.Grid>
+        <Chakra.Grid templateColumns="repeat(3, 1fr)" gap={6}>
+        {decks.map((deck) => (
+            ///Feature es Mock de DeckCover, reemplazar una vez exista el componente
+            <DeckCover
+              key={deck.id}
+              name={deck.name}
+              description={deck.description}
+              total_cards={deck.total_cards}
+              status={deck.status}
+            />
+            ///Feature es Mock de DeckCover, reemplazar una vez exista el componente
+          ))}
+        </Chakra.Grid>
       </Chakra.Box>
     </Chakra.Stack>
   );
