@@ -7,8 +7,10 @@ import { supabase } from "../../pages/api/supabaseClient";
 function DeckContainer({ decks, num_decks }) {
   const [options, setOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState("All");
+  const [userID, setUserId] = useState("")
 
-  useEffect(() => {
+
+  useEffect(() => {   
     const fetchCategories = async () => {
       const { data } = await supabase.from("categories").select("name");
       const options = data.map((category) => ({
@@ -20,6 +22,7 @@ function DeckContainer({ decks, num_decks }) {
     fetchCategories();
   }, []);
 
+  
   const handleCategoryChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -33,7 +36,7 @@ function DeckContainer({ decks, num_decks }) {
       let { data: decks, error } = await supabase
         .from("decks")
         .select("name")
-        .eq("category", selectedCategory);
+        .eq("category", selectedOption);
       if (error) console.log(error);
       console.log(decks);
     }
@@ -48,7 +51,7 @@ function DeckContainer({ decks, num_decks }) {
       justifyContent="space-evenly"
     >
       <Chakra.Heading fontSize="md" marginLeft="5%">
-        Decks {num_decks}
+        Decks {userID}
       </Chakra.Heading>
       <Chakra.Select value={selectedOption} onChange={handleCategoryChange} >
         <option value="all">All</option>
