@@ -1,46 +1,16 @@
 .input{
-    padding: 0px 5px 0px 8px;
-    margin-left:10px;
-    margin-right:13px;
-    display:flex;
-    align-content:center;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    flex-direction: column;
-
-    height: 27px;
-    width:310px; 
-    color: gray;
+    width:350px; 
+    flex-grow: 1;
+    color: #6E6E6E
 }
 .card{
+    min-height: 55px;
+    width: 760px;
     box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.3);
     -webkit-box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.3);
     -moz-box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.3);
-}
-.input::after {
-    content: '';
-    border-bottom: solid 1px #242424;  
-    transform: scaleX(0);  
-    transition: transform 250ms ease-in-out;
-}
-
-.input:hover::after {
-    width: 100%;
-    transform: scaleX(1);
-}
-.input:hover{
-    color: #242424;
-}
-.input:focus{
-    display:flex;
-    align-content:center;
-    justify-content: center;
-}
-.editableInput{
-    border-radius:0px;
-}
-.editableInput:focus{
-    border-radius:0px;
-    border-bottom:1px solid #242424;
-    display:flex;
-    align-content:center;
+    border-radius: 10px;
 }
