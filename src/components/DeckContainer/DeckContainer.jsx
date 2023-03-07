@@ -2,32 +2,11 @@ import * as Chakra from "@chakra-ui/react";
 import Feature from "./deckContainer_helpers/Feature";
 import { DeckCover } from "../DeckCover/DeckCover";
 
-
 function DeckContainer({ decks }) {
   const [options, setOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState("All");
   const [userID, setUserId] = useState("");
   const [decks, setDecks] = useState([]);
-
-
-  const getUserDeck = async (userID) => {
-    const { data: decks, error } = await supabase
-      .from("decks")
-      .select(
-        "id, name, description, total_cards, status, category_id, subcategory_id"
-      )
-      .eq("user_id", userID)
-      .order("created_at", { ascending: false })
-      .limit(6);
-
-    if (error) {
-      alert(error);
-      return null;
-    }
-    console.log(decks);
-    console.log(typeof decks);
-    setDecks(decks);
-  };
 
   const handleCategoryChange = (event) => {
     setSelectedOption(event.target.value);
