@@ -4,7 +4,7 @@ import { DeckCover } from "../DeckCover/DeckCover";
 import { useEffect, useState } from "react";
 import { supabase } from "../../pages/api/supabaseClient";
 
-function DeckContainer({ decks, num_decks }) {
+function DeckContainer(/*{ decks, num_decks }*/) {
   const [options, setOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState("All");
   const [userID, setUserId] = useState("");
@@ -37,7 +37,7 @@ function DeckContainer({ decks, num_decks }) {
       )
       .eq("user_id", userID)
       .order("created_at", { ascending: false })
-      .limit(6)
+      .limit(6);
 
     if (error) {
       alert(error);
