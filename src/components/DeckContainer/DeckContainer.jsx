@@ -12,21 +12,6 @@ function DeckContainer({ decks }) {
     setSelectedOption(event.target.value);
   };
 
-  const viewSelectDeck = async () => {
-    if (selectedOption === "All") {
-      let { data: decks, error } = await supabase.from("decks").select("name");
-      if (error) console.log(error);
-      console.log(decks);
-    } else {
-      let { data: decks, error } = await supabase
-        .from("decks")
-        .select("name")
-        .eq("category", selectedOption);
-      if (error) console.log(error);
-      console.log(decks);
-    }
-  };
-
   return (
     <Chakra.Stack
       spacing={8}
