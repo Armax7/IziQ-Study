@@ -3,11 +3,6 @@ import Feature from "./deckContainer_helpers/Feature";
 import { DeckCover } from "../DeckCover/DeckCover";
 
 function DeckContainer({ decks }) {
-  const [options, setOptions] = useState([]);
-  const [selectedOption, setSelectedOption] = useState("All");
-  const [userID, setUserId] = useState("");
-  const [decks, setDecks] = useState([]);
-
   return (
     <Chakra.Stack
       spacing={8}
