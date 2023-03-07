@@ -1,5 +1,6 @@
 import style from "./DeckForm.module.css";
 import * as Chakra from "@chakra-ui/react";
+import * as Components from "../../components";
 
 const DeckForm = ({ number = 0 }) => {
   return (
@@ -8,9 +9,23 @@ const DeckForm = ({ number = 0 }) => {
         <Chakra.Text fontWeight="bold" fontSize="2xl">
           Create new Study Deck
         </Chakra.Text>
-        <Chakra.Button colorScheme="blue" background="rgba(92, 102, 187, 1)">
-          Create
-        </Chakra.Button>
+        <Chakra.Flex>
+          <Chakra.Button
+            colorScheme="blue"
+            marginRight="5px"
+            background="rgba(92, 102, 187, 1)"
+            onClick={() => alert("Button Created")}
+          >
+            Create
+          </Chakra.Button>
+          <Chakra.Button
+            colorScheme="blue"
+            onClick={() => alert("Button Cancel")}
+            background="rgba(92, 102, 187, 1)"
+          >
+            Cancel
+          </Chakra.Button>
+        </Chakra.Flex>
       </Chakra.Flex>
       <div>
         <Chakra.FormControl>
@@ -73,9 +88,7 @@ const DeckForm = ({ number = 0 }) => {
           {number}
         </span>
       </Chakra.Text>
-      <div>
-        <h1>Component CardForm</h1>
-      </div>
+      <Components.CardForm />
     </form>
   );
 };
