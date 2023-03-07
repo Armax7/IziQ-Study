@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300&family=Poppins:wght@600&family=Roboto&display=swap");
+
+.container {
+  background: #f2f2f2;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  color: #000000;
+  max-width: 400px;
+  max-height: 200px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  margin: 5% 0 5% 8%;
+}
+
+.description {
+  display: flex;
+  align-items: center;
+  margin: 0 5% 0 5%;
+}
+
+.tags_container {
+  display: inline-flex;
+  margin: 3% 5% 3% 5%;
+  gap: 10px;
+}
+
+.tag {
+  background: #a1aaf3;
+}

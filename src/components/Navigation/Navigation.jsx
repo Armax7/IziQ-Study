@@ -1,34 +1,39 @@
+import SearchBar from "../SearchBar/SearchBar";
+import OptionsBar from "./navigation_helper/OptionsBar";
+import style from "./Navigation.module.css";
 import Link from "next/link";
 
-const links =[
-    {
-        label: 'Landing',
-        route: '/',
-    },
-    {
-        label: 'Home',
-        route: '/home',
-    },
-    {
-        label: 'About',
-        route: '/about',
-    },
-]
+import * as Chakra from "@chakra-ui/react";
 
-function Navigation() {
+function Navigation({
+  avatarImage = "https://bit.ly/dan-abramov",
+  logged = false,
+}) {
+  const { isOpen, onOpen, onClose } = Chakra.useDisclosure();
   return (
-    <nav>
-        <ul>
-            {
-                links.map(({label,route}) => (
-                    <li key={route} >
-                        <Link href={route} >{label}</Link>
-                    </li>
-                ))
-            }
-        </ul>
-    </nav>  
-  )
+    <Chakra.Flex
+      background="#FFFFFF"
+      boxShadow="0px 2px 6px rgba(0, 0, 0, 0.316)"
+      position= "relative"
+      z-index= "10"
+      gap="3"
+      h="70px"
+      margin="0 auto"
+      alignItems="center"
+      justifyContent="space-between"
+      paddingRight="40px"
+      boxSizing="border-box"
+    >
+      <Link href={!logged ? "/" : "/home"}>
+        <div className={style.logoApp}></div>
+      </Link>
+      <SearchBar
+        onClick={() => alert("Missing search functionality on Navigation.jsx")}
+      />
+
+      <OptionsBar logged={logged} avatarImage={avatarImage} />
+    </Chakra.Flex>
+  );
 }
 
-export default Navigation
+export default Navigation;

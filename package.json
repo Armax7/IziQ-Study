@@ -11,13 +11,14 @@
   "dependencies": {
     "@chakra-ui/react": "^1.6.8",
     "@supabase/supabase-js": "^2.10.0",
-    "next": "12.1.0",
+    "next": "^12.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.8.0",
     "react-query": "^2.20.5"
   },
   "devDependencies": {
-    "eslint": "8.35.0",
-    "eslint-config-next": "13.2.3"
+    "eslint": "^8.35.0",
+    "eslint-config-next": "^13.2.3"
   }
 }
