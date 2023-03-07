@@ -12,9 +12,10 @@ function DeckContainer({ decks, num_decks }) {
 
   useEffect(() => {
     const getIdUser = async () => {
-      supabase.auth.getUser();
       const user = await supabase.auth.getUser();
-      setUserId(user.data.user.id);
+      const userID = user.data.user.id;
+      setUserId(userID);
+      getUserDeck(userID);
     };
     getIdUser();
     // const fetchCategories = async () => {
