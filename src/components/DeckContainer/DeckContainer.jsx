@@ -29,6 +29,23 @@ function DeckContainer({ decks, num_decks }) {
     // fetchCategories();
   }, []);
 
+  const getUserDeck = async (userID) => {
+    const { data: decks, error } = await supabase
+      .from("decks")
+      .select(
+        "id, name, description, total_cards, status, category_id, subcategory_id"
+      )
+      .eq("user_id", userID)
+
+    if (error) {
+      alert(error);
+      return null;
+    }
+    console.log(decks);
+    console.log(typeof decks);
+    setDecks(decks);
+  };
+
   const handleCategoryChange = (event) => {
     setSelectedOption(event.target.value);
   };
