@@ -50,7 +50,6 @@ const CardForm = () => {
               display="inline-flex"
             >
             </Chakra.Heading>
-            <div className={styles.line}></div>
             <div className={styles.form_line}>
               <Chakra.FormControl mr="30px" pt="25px">
                 <Chakra.Input
