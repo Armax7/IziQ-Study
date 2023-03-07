@@ -1,25 +1,24 @@
 import * as Chakra from "@chakra-ui/react";
+import styles from "./CardDetails.module.css"
+import ImageIcon from "./CardDetails_helpers/ImageIcon"
 
 
-function CardDetails({id,question="r u there?",answer="yes",image,Deck_id,learned}) {
+function CardDetails({id,question="how do you say apple in spanish?",answer="manzana",image,Deck_id,learned}) {
   return (
-    <Chakra.Flex border="1px solid #2c2c2c"  boxShadow='lg' backgroundColor="white"  borderRadius="10px" height="400px" justifyContent="center" alignItems="center" width="600px">
-      <Chakra.Flex height="350px" width="100%" >
-        <Chakra.Flex flexDir="column" width="100%" justifyContent="center" alignItems="center" >
-          <Chakra.Heading as='h3' size='lg'>
-            {question}
-          </Chakra.Heading>
-          <Chakra.Image src='https://bit.ly/dan-abramov' boxSize='200px' alt='Dan Abramov' />
-        </Chakra.Flex>
-
-        <Chakra.Divider orientation='vertical' width="2px" backgroundColor="#2c2c2c" />
-        <Chakra.Flex flexDir="column" width="100%" justifyContent="center" alignItems="center">
-          <Chakra.Heading as='h3' size='lg'>
-            {answer}
-          </Chakra.Heading>
-        </Chakra.Flex>
-
-      </Chakra.Flex>
+    <Chakra.Flex   className={styles.card} backgroundColor="white" width="755px" margin="20px" borderRadius="10px" height="52px"  alignItems="center">
+      <Chakra.Editable className={styles.input}  defaultValue={question}>
+        <Chakra.EditablePreview  alignSelf="center" cursor="pointer" />
+        <Chakra.EditableInput className={styles.editableInput} _focus={{border:"none",textAlign:"center",color:"#242424"}} />
+      </Chakra.Editable>
+      <Chakra.Box height="30px" backgroundColor="#242424">
+        <Chakra.Divider orientation='vertical' backgroundColor="#242424"/>
+      </Chakra.Box>
+      <Chakra.Editable className={styles.input}   marginRight="10px"  defaultValue={answer}>
+        <Chakra.EditablePreview alignSelf="center" cursor="pointer"/>
+        <Chakra.EditableInput className={styles.editableInput} _focus={{border:"none",textAlign:"center",color:"#242424"}} />
+      </Chakra.Editable>
+      <ImageIcon/>
+      <Chakra.Button bg="#EB455F" padding="0px" _hover={{color: "#000000", backgroundColor:"#EBEBEB" }} _focus={{border:"none" }} minWidth="27px" marginLeft="10px" height="26px"  color="white">x</Chakra.Button>
     </Chakra.Flex>
   )
 }
