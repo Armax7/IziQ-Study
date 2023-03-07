@@ -16,6 +16,7 @@ function DeckContainer({ decks, num_decks }) {
       const user = await supabase.auth.getUser();
       setUserId(user.data.user.id)
     }
+    getIdUser()
     const fetchCategories = async () => {
       const { data } = await supabase.from("categories").select("name");
       const options = data.map((category) => ({
