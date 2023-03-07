@@ -1,20 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300&family=Poppins:wght@600&family=Roboto&display=swap");
 
-.functions {
-  display: inline-flex;
-}
-
-.move {
-  width: 35px;
-  margin: 15px 24px 20px 1095px;
-  cursor: not-allowed;
-}
-
-.trash {
-  width: 35px;
-  margin: 15px 24px 20px 0;
-}
-
 .line {
   box-sizing: border-box;
   border: 1px solid #d8d8d8;
