@@ -9,7 +9,7 @@ import { userId } from "./supabase_get";
  * @return {Objeto[]} Detalles del usuario
  */
 
-export async function postUserDetails() {
+export async function postUserDetails(alias,birth_date,gender,occupation) {
   try {
     const id = await userId();
     const { data, error } = await supabase
@@ -18,10 +18,10 @@ export async function postUserDetails() {
       .insert([
         {
           user_id: id,
-          alias: "user_alias",
-          birth_date: "user_birth_date",
-          gender: "user_gender",
-          occupation: "user_occupation",
+          alias,
+          birth_date,
+          gender,
+          occupation,
         },
       ]);
     if (error) throw error;
