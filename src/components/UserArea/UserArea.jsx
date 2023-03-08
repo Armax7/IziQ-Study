@@ -2,16 +2,17 @@ import * as Chakra from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { supabase } from "../../pages/api/supabaseClient";
 import { DeckContainer } from "../../components";
+import * as SupaHelpers from "../../pages/api/supabase_helpers";
 
 export default function UserArea() {
   const [user, setUser] = useState(null);
   const [showDeckContainer, setShowDeckContainer] = useState(false);
-  const [userSession, setUserSession] = useState("")
+  const [userSession, setUserSession] = useState("");
 
   useEffect(async () => {
     setUser(supabase.auth.getUser());
     const user = await supabase.auth.getUser();
-    setUserSession(user.data.user.email)
+    setUserSession(user.data.user.email);
   }, []);
 
   const handleLogout = async () => {
