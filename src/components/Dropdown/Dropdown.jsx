@@ -2,40 +2,31 @@ import * as Chakra from "@chakra-ui/react";
 import * as Utils from "../../utils";
 
 function Dropdown({
-  optionsProp,
-  placeholderProp = "Select option",
-  sizeProp = "md",
-  variantProp = "Outline",
-  colorSchemeProp = "whiteAlpha",
-  hProp = "auto",
-  wProp = "10rem",
-  colorProp = "black",
-  bgProp = "none",
-  borderColorProp = "none",
+  options,
+  ...props
 }) {
-  if (!Array.isArray(optionsProp)) {
+  if (!Array.isArray(options)) {
     throw new TypeError("Error: options should be an array");
   }
 
-  return (
-    <Chakra.Select
-      placeholder={placeholderProp}
-      size={sizeProp}
-      variant={variantProp}
-      colorScheme={colorSchemeProp}
-      h={hProp}
-      w={wProp}
-      color={colorProp}
-      bg={bgProp}
-      borderColor={borderColorProp}
-    >
-      {optionsProp.map((elem, index) => (
-        <option key={index} value={`option${index}`}>
-          {Utils.isObject(elem) ? elem.name : elem}
-        </option>
-      ))}
-    </Chakra.Select>
-  );
+    return (
+      <Chakra.Select {...props} >
+        {options.map((elem, index) => {
+          if (Utils.isObject(elem)) {
+            return (
+              <option key={index} value={elem.value}>
+                {elem.label || elem.name}
+              </option>
+            )
+          }
+          return (
+            <option key={index} value={`option${index}`}>
+              {elem}
+            </option>
+          )
+        })}
+      </Chakra.Select>
+    );
 }
 
 export default Dropdown;

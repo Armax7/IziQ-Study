@@ -2,12 +2,10 @@ import * as Chakra from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { supabase } from "../../pages/api/supabaseClient";
 import { DeckContainer } from "../../components";
-import * as SupaHelpers from "../../pages/api/supabase_helpers";
 
 export default function UserArea() {
   const [user, setUser] = useState(null);
   const [showDeckContainer, setShowDeckContainer] = useState(false);
-  const [userSession, setUserSession] = useState("");
 
   useEffect(async () => {
     const user = await SupaHelpers.get.userData();
@@ -32,8 +30,8 @@ export default function UserArea() {
     <div>
       {user && (
         <>
-          <h1>Welcome</h1>
-          <p>Sesion de {userSession}</p>
+          <h1>User area</h1>
+          <p>Sesion de ...</p>
           <p>Sesion activa</p>
           <Chakra.Button
             mr={82}
