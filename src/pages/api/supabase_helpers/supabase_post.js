@@ -33,7 +33,7 @@ export async function postDeck() {
     const id = await userId();
     const {
       data: { decks },
-      error:{error_decks},
+      error: { error_decks },
     } = await supabase
       .from("decks")
       .eq("user_id", id)
@@ -41,13 +41,20 @@ export async function postDeck() {
 
     const {
       data: { categories },
-      error:{error_categories},
+      error: { error_categories },
     } = await supabase
-      .from("categories")
-      .insert([{ name: "deck_category"}]);
+    .from("categories")
+    .insert([{ name: "deck_category" }]);
 
-    if (error_decks || error_categories ) throw error;
-    return decks,categories;
+    const {
+      data: { subcategories },
+      error: { error_subcategory },
+    } = await supabase
+      .from("subcategories")
+      .insert([{ name: "deck_subcategory"}]);
+
+    if (error_decks || error_categories || error_subcategory) throw error;
+    return {decks, categories, subcategories}
   } catch (error) {
     console.log(error);
     return {};
