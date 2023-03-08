@@ -1,5 +1,4 @@
 import * as Components from "../../components";
-import { supabase } from "../api/supabaseClient";
 import { useEffect, useState } from "react";
 import * as SupaHelpers from "../api/supabase_helpers";
 
