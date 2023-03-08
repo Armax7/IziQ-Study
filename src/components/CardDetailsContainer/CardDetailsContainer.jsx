@@ -1,14 +1,13 @@
 import * as Components from "../../components";
 import * as Chakra from "@chakra-ui/react";
-import * as Utils from "../../utils";
 
-function CardDetailsContainer({dbCards}) {
+function CardDetailsContainer({dbCards, ...props}) {
   if (!Array.isArray(dbCards)) {
     throw new TypeError("dbCards must be an array");
   }
 
   return (
-    <Chakra.Container centerContent={true}>
+    <Chakra.Container centerContent={true} {...props}>
       {dbCards.map((card, index) => (
         <Components.CardDetails
           id={card.id}
