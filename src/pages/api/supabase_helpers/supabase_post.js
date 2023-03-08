@@ -50,8 +50,8 @@ export async function postDeck() {
           name: "deck_name",
           description: "deck_description",
           user_id: id,
-          category_id: category_id,
-          subcategory_id: subcategory_id,
+          category_id: "category_id",
+          subcategory_id: "subcategory_id",
         },
       ]);
     if (error) throw error;
