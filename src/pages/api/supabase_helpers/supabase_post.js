@@ -17,7 +17,7 @@ export async function postUserDetails() {
       .eq("user_id", id)
       .insert([
         {
-          user_id:id,
+          user_id: id,
           alias: "user_alias",
           birth_date: "user_birth_date",
           gender: "user_gender",
@@ -32,7 +32,6 @@ export async function postUserDetails() {
   }
 }
 
-
 /**
  * Retrieves information from the Supabase database.
  * Returns an object that contains the data to be entered into the BD, with respect to the Deck;
@@ -43,17 +42,15 @@ export async function postUserDetails() {
 export async function postDeck() {
   try {
     const id = await userId();
-    const { data, error } = await supabase
-      .from("decks")
-      .insert([
-        {
-          name: "deck_name",
-          description: "deck_description",
-          user_id: id,
-          category_id: "category_id",
-          subcategory_id: "subcategory_id",
-        },
-      ]);
+    const { data, error } = await supabase.from("decks").insert([
+      {
+        name: "deck_name",
+        description: "deck_description",
+        user_id: id,
+        category_id: "category_id",
+        subcategory_id: "subcategory_id",
+      },
+    ]);
     if (error) throw error;
     return data;
   } catch (error) {
@@ -63,5 +60,11 @@ export async function postDeck() {
 }
 
 export async function postCard() {
-
+  try {
+    const { data, error } = await supabase
+      .from("cards")
+      .insert([{ question: "question", answer: "answer", image: "image" }]);
+      if(error) throw error
+    return data;
+  } catch (error) {}
 }
