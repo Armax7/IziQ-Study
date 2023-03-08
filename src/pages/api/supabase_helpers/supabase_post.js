@@ -66,5 +66,8 @@ export async function postCard() {
       .insert([{ question: "question", answer: "answer", image: "image" }]);
       if(error) throw error
     return data;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    alert(error.message);
+  }
 }
