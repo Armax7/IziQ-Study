@@ -15,7 +15,10 @@ export async function postUserDetails() {
       ]);
     if (error) throw error;
     return data;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    return {}
+  }
 }
 
 export async function postDeck() {}
