@@ -59,6 +59,14 @@ export async function postDeck(name,description,category_id, subcategory_id) {
   }
 }
 
+
+/**
+ * Retrieves information from the Supabase database.
+ * Returns an object that contains the data to enter the BD, with respect to the Card;
+ * Returns an error alert, on almost error;
+ *
+ * @return {Object[]} User details
+ */
 export async function postCard(question,answer,image) {
   try {
     const deck_id = await supabase.from("decks").select("deck_id")
