@@ -29,6 +29,12 @@ export async function postUserDetails() {
   }
 }
 
-export async function postDeck() {}
+export async function postDeck() {
+    try {
+        const id = await userId()
+    } catch (error) {
+        
+    }
+}
 
 export async function postCard() {}
