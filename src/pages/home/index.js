@@ -20,6 +20,9 @@ function Home() {
     setDecks(decks);
   }, [userID]);
 
+  const deckFilter = decks.filter((e) => e.user_id === userID).slice(0, 6);
+
+
   return (
     <>
       <h1>Esto es Home</h1>
