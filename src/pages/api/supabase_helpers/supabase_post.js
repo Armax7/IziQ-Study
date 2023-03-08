@@ -15,10 +15,10 @@ export async function postUserDetails() {
       .from("users_details")
       .eq("user_id", id)
       .insert([
-        { alias: "user_alias" },
-        { birth_date: "user_birth_date" },
-        { gender: "user_gender" },
-        { occupation: "user_occupation" },
+        { alias: "user_alias" ,
+         birth_date: "user_birth_date" ,
+         gender: "user_gender" ,
+         occupation: "user_occupation" },
       ]);
     if (error) throw error;
     return data;
