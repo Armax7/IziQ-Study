@@ -59,13 +59,13 @@ export async function postDeck() {
   }
 }
 
-export async function postCard() {
+export async function postCard(question,answer,image) {
   try {
     const deck_id = await supabase.from("decks").select("deck_id")
     const { data, error } = await supabase
       .from("cards")
       .eq("deck_id", deck_id)
-      .insert([{ question: "question", answer: "answer", image: "image", deck_id:deck_id }]);
+      .insert([{ question, answer, image, deck_id:deck_id }]);
       if(error) throw error
     return data;
   } catch (error) {
