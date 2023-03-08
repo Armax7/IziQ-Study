@@ -196,7 +196,7 @@ export async function userDecksBySubCategoryOrdered({
  * @param {string} deckId The ID of the deck to get cards from.
  * @return {Object[]} Array of cards <Object>
  */
-export async function deckCardsByDeckId(deckId) {
+export async function cardsByDeckId(deckId) {
   try {
     const { data: cards, error } = await supabase
       .from("cards")
