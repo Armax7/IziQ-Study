@@ -36,7 +36,13 @@ export async function postDeck() {
     const { data, error } = await supabase
       .from("decks")
       .insert([
-        { name: "deck_name", description: "deck_description", user_id: id },
+        {
+          name: "deck_name",
+          description: "deck_description",
+          user_id: id,
+          category_id: category_id,
+          subcategory_id: subcategory_id,
+        },
       ]);
     if (error) throw error;
     return data;
