@@ -13,7 +13,6 @@
 
 */
 
-
 import { supabase } from "../supabaseClient";
 
 /**
@@ -26,9 +25,7 @@ import { supabase } from "../supabaseClient";
 export async function userData() {
   try {
     const {
-      data: {
-        user,
-      },
+      data: { user },
     } = await supabase.auth.getUser();
     return user;
   } catch (error) {
@@ -75,6 +72,29 @@ export async function userEmail() {
     return email;
   } catch (error) {
     console.log(`Unable to retrieve email, there might be no user logged in.`);
+    return undefined;
+  }
+}
+
+/**
+ * Retrieves info from Supabase data base.
+ * Returns a string holding current user's name;
+ * Returns undefined if no user was found;
+ *
+ * @return {string} Name as string.
+ */
+export async function userNameFull() {
+  try {
+    const uuid = await userId();
+    const { data, error } = await supabase
+      .from("users_details")
+      .select()
+      .eq("users_uuid", uuid);
+    if (error) throw error;
+    const { name, lastname } = data.at(0);
+    return name + " " + lastname;
+  } catch (error) {
+    console.log(`Unable to retrieve name, there might be no user logged in.`);
     return undefined;
   }
 }
@@ -325,23 +345,23 @@ export async function allDecksByName(ascending = true) {
  * @returns {Object[]} An array of decks
  */
 export async function allDecksByCategoryOrdered({
-    categoryId,
-    orderBy = "name",
-    ascending = true,
-  } = {}) {
-    try {
-      const { data: decks, error } = await supabase
-        .from("decks")
-        .select()
-        .eq("category_id", categoryId)
-        .order(orderBy, { ascending });
-      if (error) throw error;
-      return decks;
-    } catch (error) {
-      console.log(error);
-      return [];
-    }
+  categoryId,
+  orderBy = "name",
+  ascending = true,
+} = {}) {
+  try {
+    const { data: decks, error } = await supabase
+      .from("decks")
+      .select()
+      .eq("category_id", categoryId)
+      .order(orderBy, { ascending });
+    if (error) throw error;
+    return decks;
+  } catch (error) {
+    console.log(error);
+    return [];
   }
+}
 
 /**
  * Retrieves info from Supabase data base.
@@ -355,20 +375,20 @@ export async function allDecksByCategoryOrdered({
  * @returns {Object[]} An array of decks
  */
 export async function allDecksBySubCategoryOrdered({
-    subCategoryId,
-    orderBy = "name",
-    ascending = true,
-  } = {}) {
-    try {
-      const { data: decks, error } = await supabase
-        .from("decks")
-        .select()
-        .eq("subcategory_id", subCategoryId)
-        .order(orderBy, { ascending });
-      if (error) throw error;
-      return decks;
-    } catch (error) {
-      console.log(error);
-      return [];
-    }
+  subCategoryId,
+  orderBy = "name",
+  ascending = true,
+} = {}) {
+  try {
+    const { data: decks, error } = await supabase
+      .from("decks")
+      .select()
+      .eq("subcategory_id", subCategoryId)
+      .order(orderBy, { ascending });
+    if (error) throw error;
+    return decks;
+  } catch (error) {
+    console.log(error);
+    return [];
   }
+}
