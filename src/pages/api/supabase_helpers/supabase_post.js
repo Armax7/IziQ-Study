@@ -30,6 +30,14 @@ export async function postUserDetails() {
   }
 }
 
+
+/**
+ * Retrieves information from the Supabase database.
+ * Returns an object that contains the data to be entered into the BD, with respect to the Deck;
+ * Returns an alert on error;
+ *
+ * @return {Object[]} User details
+ */
 export async function postDeck() {
   try {
     const id = await userId();
