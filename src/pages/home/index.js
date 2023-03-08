@@ -24,11 +24,10 @@ function Home() {
 
 
   return (
-    <>
-      <h1>Esto es Home</h1>
-    </>
-   
-  )
+    <div>
+      <Components.DeckContainer decks={deckFilter} />
+    </div>
+  );
 }
 
 export default Home
