@@ -75,7 +75,7 @@ export async function userDecks() {
     return decks;
   } catch (error) {
     console.log(error);
-    return error;
+    return [];
   }
 }
 
