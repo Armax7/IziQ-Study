@@ -17,6 +17,7 @@ export async function postUserDetails() {
       .eq("user_id", id)
       .insert([
         {
+          user_id:id,
           alias: "user_alias",
           birth_date: "user_birth_date",
           gender: "user_gender",
@@ -61,4 +62,6 @@ export async function postDeck() {
   }
 }
 
-export async function postCard() {}
+export async function postCard() {
+
+}
