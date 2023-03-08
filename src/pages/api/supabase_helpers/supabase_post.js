@@ -1,7 +1,9 @@
 import { supabase } from "../supabaseClient";
+import { userId } from "./supabase_get";
 
 export async function postUserDetails() {
   try {
+    const id = await userId()
     const { data, error } = await supabase
       .from("users_details")
       .eq("user_id", id)
