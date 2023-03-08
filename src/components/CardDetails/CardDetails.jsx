@@ -21,11 +21,14 @@ function CardDetails({
       padding="15px"
       backgroundColor="white"
       margin="20px"
+      justifyContent="space-between"
     >
+      <Chakra.Flex width="80%">
       <Chakra.Flex
         paddingRight="50px"
         flexDir="column"
         borderRight="1px solid #c2c2c2"
+        width="50%"
       >
         <Chakra.Text color="#6E6E6E" paddingLeft="20px">
           Question
@@ -34,7 +37,7 @@ function CardDetails({
           {question}
         </Chakra.Text>
       </Chakra.Flex>
-      <Chakra.Flex flexDir="column">
+      <Chakra.Flex flexDir="column" width="50%">
         <Chakra.Text color="#6E6E6E" paddingLeft="30px">
           Answer
         </Chakra.Text>
@@ -42,13 +45,14 @@ function CardDetails({
           {answer}
         </Chakra.Text>
       </Chakra.Flex>
-      <Chakra.Flex width="50%" marginLeft="51px" justifyContent="flex-end">
+      </Chakra.Flex>
+      <Chakra.Flex width="20%" justifyContent="flex-end">
         {image && (
           <Chakra.Image
             boxSize="50px"
             alignSelf="center"
             borderRadius="5px"
-            margin="0 30px"
+            margin="0 5%"
             src={image}
             alt="Card"
           />
@@ -64,7 +68,7 @@ function CardDetails({
           size="25px"
           h="25px"
         >
-          <RiPencilFill margin="0 20px" size="25px" cursor="pointer" />
+          <RiPencilFill size="25px" cursor="pointer" />
         </Chakra.Button>
         <Chakra.Button
           padding="0"
@@ -77,7 +81,7 @@ function CardDetails({
           size="25px"
           h="25px"
         >
-          <HiTrash margin="0 20px" size="25px" cursor="pointer" />
+          <HiTrash size="25px" cursor="pointer" />
         </Chakra.Button>
       </Chakra.Flex>
     </Chakra.Flex>
