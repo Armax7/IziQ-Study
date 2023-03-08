@@ -33,15 +33,13 @@ export async function postDeck() {
     const id = await userId();
     const { data, error } = await supabase
       .from("decks")
-      .eq("user_id",id)
-      .insert([
-        { name: "deck_name" },
-        { description: "desck_description" }
-        ]);   
-        return data     
+      .eq("user_id", id)
+      .insert([{ name: "deck_name" }, { description: "desck_description" }]);
+    if (error) throw error;
+    return data;
   } catch (error) {
     console.log(error);
-    return {}
+    return {};
   }
 }
 
