@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300&family=Poppins:wght@600&family=Roboto&display=swap");
+
+.line {
+  box-sizing: border-box;
+  border: 1px solid #d8d8d8;
+}
+
+.form_line {
+  display: inline-flex;
+  padding: 30px;
+  width: 100%;
+}
+
+.image_container {
+  box-sizing: border-box;
+  width: 126px;
+  height: 107px;
+  left: 1470px;
+  top: 523px;
+  border: 3px dashed #797979;
+  margin-left: 40px;
+}
+
+.image_column {
+  flex-direction: column;
+}
+
+.image_icon {
+  margin: 15px 30px 0px 30px;
+}
+
+.image_text {
+  margin: 0px 30px 10px 30px;
+}
+
+.line_add {
+  box-sizing: border-box;
+  border-bottom: 5px solid #a1aaf3;
+  font-size: 20px;
+  line-height: 35px;
+}
