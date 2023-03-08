@@ -75,7 +75,7 @@ export async function userDecks() {
     return decks;
   } catch (error) {
     console.log(error);
-    return error;
+    return [];
   }
 }
 
@@ -98,7 +98,7 @@ export async function userDecksByCreateDate(ascending = true) {
     return decks;
   } catch (error) {
     console.log(error);
-    return error;
+    return [];
   }
 }
 
@@ -121,7 +121,7 @@ export async function userDecksByName(ascending = true) {
     return decks;
   } catch (error) {
     console.log(error);
-    return error;
+    return [];
   }
 }
 
@@ -153,7 +153,7 @@ export async function userDecksByCategoryOrdered({
     return decks;
   } catch (error) {
     console.log(error);
-    return error;
+    return [];
   }
 }
 
@@ -185,7 +185,7 @@ export async function userDecksBySubCategoryOrdered({
     return decks;
   } catch (error) {
     console.log(error);
-    return error;
+    return [];
   }
 }
 
@@ -207,7 +207,7 @@ export async function deckCardsByDeckId(deckId) {
     return cards;
   } catch (error) {
     console.log(error);
-    return error;
+    return [];
   }
 }
 
@@ -224,7 +224,7 @@ export async function allDecks() {
     return decks;
   } catch (error) {
     console.log(error);
-    return error;
+    return [];
   }
 }
 
@@ -245,7 +245,7 @@ export async function decksByCreateDate(ascending = true) {
     return decks;
   } catch (error) {
     console.log(error);
-    return error;
+    return [];
   }
 }
 
@@ -267,7 +267,7 @@ export async function allDecksByName(ascending = true) {
     return decks;
   } catch (error) {
     console.log(error);
-    return error;
+    return [];
   }
 }
 
@@ -297,7 +297,7 @@ export async function allDecksByCategoryOrdered({
       return decks;
     } catch (error) {
       console.log(error);
-      return error;
+      return [];
     }
   }
 
@@ -327,6 +327,6 @@ export async function allDecksBySubCategoryOrdered({
       return decks;
     } catch (error) {
       console.log(error);
-      return error;
+      return [];
     }
   }
