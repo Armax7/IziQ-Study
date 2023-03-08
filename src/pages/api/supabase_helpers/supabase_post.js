@@ -31,12 +31,23 @@ export async function postUserDetails() {
 export async function postDeck() {
   try {
     const id = await userId();
-    const { data, error } = await supabase
+    const {
+      data: { decks },
+      error:{error_decks},
+    } = await supabase
       .from("decks")
       .eq("user_id", id)
-      .insert([{ name: "deck_name" }, { description: "desck_description" }]);
-    if (error) throw error;
-    return data;
+      .insert([{ name: "deck_name", description: "deck_description" }]);
+
+    const {
+      data: { categories },
+      error:{error_categories},
+    } = await supabase
+      .from("categories")
+      .insert([{ name: "deck_category"}]);
+
+    if (error_decks || error_categories ) throw error;
+    return decks,categories;
   } catch (error) {
     console.log(error);
     return {};
