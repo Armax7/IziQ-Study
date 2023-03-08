@@ -2,12 +2,13 @@ import { supabase } from "../supabaseClient";
 import { userId } from "./supabase_get";
 
 /**
- * Retrieves information from the Supabase database.
- * Returns an object that contains the data to be entered into the database;
- * Returns an alert, if the user did not send data;
+ * Recupera información de la base de datos de Supabase.
+ * Devuelve un objeto que contiene los datos que se ingresarán en la base de datos;
+ * Devuelve una alerta si existe error;
  *
- * @return {Object[]} User details
+ * @return {Objeto[]} Detalles del usuario
  */
+
 export async function postUserDetails() {
   try {
     const id = await userId();
