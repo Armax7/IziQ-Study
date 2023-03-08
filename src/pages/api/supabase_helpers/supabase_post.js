@@ -24,7 +24,7 @@ export async function postUserDetails() {
     return data;
   } catch (error) {
     console.log(error);
-    return {};
+    alert(error.message);
   }
 }
 
@@ -57,7 +57,7 @@ export async function postDeck() {
     return {decks, categories, subcategories}
   } catch (error) {
     console.log(error);
-    return {};
+    alert(error.message);
   }
 }
 
