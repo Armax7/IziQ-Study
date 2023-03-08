@@ -10,9 +10,9 @@ export default function UserArea() {
   const [userSession, setUserSession] = useState("");
 
   useEffect(async () => {
-    setUser(supabase.auth.getUser());
-    const user = await supabase.auth.getUser();
-    setUserSession(user.data.user.email);
+    const user = await SupaHelpers.get.userData();
+    setUser(user);
+    setUserSession(user.email);
   }, []);
 
   const handleLogout = async () => {
