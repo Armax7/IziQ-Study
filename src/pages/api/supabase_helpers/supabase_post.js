@@ -39,16 +39,16 @@ export async function postUserDetails() {
  *
  * @return {Object[]} User details
  */
-export async function postDeck() {
+export async function postDeck(name,description,category_id, subcategory_id) {
   try {
     const id = await userId();
     const { data, error } = await supabase.from("decks").insert([
       {
-        name: "deck_name",
-        description: "deck_description",
+        name,
+        description,
         user_id: id,
-        category_id: "category_id",
-        subcategory_id: "subcategory_id",
+        category_id,
+        subcategory_id,
       },
     ]);
     if (error) throw error;
