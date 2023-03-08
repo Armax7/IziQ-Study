@@ -6,11 +6,12 @@ import { DeckContainer } from "../../components";
 export default function UserArea() {
   const [user, setUser] = useState(null);
   const [showDeckContainer, setShowDeckContainer] = useState(false);
+  const [userSession, setUserSession] = useState("")
 
   useEffect(async () => {
     setUser(supabase.auth.getUser());
     const user = await supabase.auth.getUser();
-    console.log(user.data);
+    setUserSession(user.data.user.email)
   }, []);
 
   const handleLogout = async () => {
@@ -30,8 +31,8 @@ export default function UserArea() {
     <div>
       {user && (
         <>
-          <h1>User area</h1>
-          <p>Sesion de ...</p>
+          <h1>Welcome</h1>
+          <p>Sesion de {userSession}</p>
           <p>Sesion activa</p>
           <Chakra.Button
             mr={82}
