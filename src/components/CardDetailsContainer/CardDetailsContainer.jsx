@@ -7,7 +7,7 @@ function CardDetailsContainer({dbCards, ...props}) {
   }
 
   return (
-    <Chakra.Container centerContent={true} {...props}>
+    <Chakra.VStack {...props}>
       {dbCards.map((card, index) => (
         <Components.CardDetails
           id={card.id}
@@ -17,7 +17,7 @@ function CardDetailsContainer({dbCards, ...props}) {
           learned={card.learned}
         />
       ))}
-    </Chakra.Container>
+    </Chakra.VStack>
   );
 }
 
