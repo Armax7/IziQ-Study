@@ -11,14 +11,9 @@ function DeckContainer({ decks }) {
       margin="10px"
       justifyContent="space-evenly"
     >
-      <Chakra.Heading fontSize="md" marginLeft="5%">
-        Recent Decks
-      </Chakra.Heading>
-      <Chakra.Button /*</Chakra.Stack>onClick={toDecks}*/>View decks</Chakra.Button>
       <Chakra.Box display="flex" justifyContent="space-evenly">
         <Chakra.Grid templateColumns="repeat(3, 1fr)" gap={6}>
           {decks?.map((deck) => (
-            ///Feature es Mock de DeckCover, reemplazar una vez exista el componente
             <DeckCover
               key={deck.id}
               name={deck.name}
@@ -26,7 +21,6 @@ function DeckContainer({ decks }) {
               total_cards={deck.total_cards}
               status={deck.status}
             />
-            ///Feature es Mock de DeckCover, reemplazar una vez exista el componente
           ))}
         </Chakra.Grid>
       </Chakra.Box>
