@@ -78,7 +78,7 @@ export async function userEmail() {
 
 /**
  * Retrieves info from Supabase data base.
- * Returns a string holding current user's name;
+ * Returns a string holding current user's full name;
  * Returns undefined if no user was found;
  *
  * @return {string} Name as string.
@@ -95,6 +95,41 @@ export async function userNameFull() {
     return name + " " + lastname;
   } catch (error) {
     console.log(`Unable to retrieve name, there might be no user logged in.`);
+    return undefined;
+  }
+}
+
+/**
+ * Retrieves info from Supabase data base.
+ * Returns a string holding current user's subscription;
+ * Returns undefined if no user was found;
+ *
+ * @return {string} Subscription as string.
+ */
+export async function userSubscription() {
+  try {
+    const uuid = await userId();
+
+    const users_details = await supabase
+      .from("users_details")
+      .select()
+      .eq("users_uuid", uuid);
+
+    if (users_details.error) throw users_details.error;
+
+    const { subscription_id } = users_details.data.at(0);
+
+    const subscription = await supabase
+      .from("subscription")
+      .select("id,name")
+      .eq("id", subscription_id);
+
+    if (subscription.error) throw subscription.error;
+
+    return subscription.data.at(0);
+
+  } catch (error) {
+    console.log(`Unable to retrieve subscription, there might be no user logged in.`);
     return undefined;
   }
 }
