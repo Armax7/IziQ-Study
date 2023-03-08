@@ -1,6 +1,7 @@
+import * as Components from "../../components";
 import { supabase } from "../api/supabaseClient";
 import { useEffect, useState } from "react";
-import {  getAllDeck } from "../api/supabase_helper/supabase_helper";
+import { getAllDeck } from "../api/supabase_helper/supabase_helper";
 
 function Home() {
   const [userID, setUserId] = useState("");
@@ -10,7 +11,7 @@ function Home() {
     const getIdUser = async () => {
       const user = await supabase.auth.getUser();
       console.log(user);
-      const userID =  user.data.user.id;
+      const userID = user.data.user.id;
       setUserId(userID);
     };
 
@@ -22,7 +23,6 @@ function Home() {
 
   const deckFilter = decks.filter((e) => e.user_id === userID).slice(0, 6);
 
-
   return (
     <div>
       <Components.DeckContainer decks={deckFilter} />
@@ -30,4 +30,4 @@ function Home() {
   );
 }
 
-export default Home
+export default Home;
