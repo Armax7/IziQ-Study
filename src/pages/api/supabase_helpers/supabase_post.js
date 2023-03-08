@@ -9,7 +9,7 @@ import { userId } from "./supabase_get";
  * @return {Objeto[]} Detalles del usuario
  */
 
-export async function postUserDetails(alias,birth_date,gender,occupation) {
+export async function postUserDetails(alias, birth_date, gender, occupation) {
   try {
     const id = await userId();
     const { data, error } = await supabase
@@ -39,7 +39,7 @@ export async function postUserDetails(alias,birth_date,gender,occupation) {
  *
  * @return {Object[]} User details
  */
-export async function postDeck(name,description,category_id, subcategory_id) {
+export async function postDeck(name, description, category_id, subcategory_id) {
   try {
     const id = await userId();
     const { data, error } = await supabase.from("decks").insert([
@@ -59,7 +59,6 @@ export async function postDeck(name,description,category_id, subcategory_id) {
   }
 }
 
-
 /**
  * Retrieves information from the Supabase database.
  * Returns an object that contains the data to enter the BD, with respect to the Card;
@@ -67,14 +66,14 @@ export async function postDeck(name,description,category_id, subcategory_id) {
  *
  * @return {Object[]} User details
  */
-export async function postCard(question,answer,image) {
+export async function postCard(question, answer, image) {
   try {
-    const deck_id = await supabase.from("decks").select("deck_id")
+    const deck_id = await supabase.from("decks").select("deck_id");
     const { data, error } = await supabase
       .from("cards")
       .eq("deck_id", deck_id)
-      .insert([{ question, answer, image, deck_id:deck_id }]);
-      if(error) throw error
+      .insert([{ question, answer, image, deck_id: deck_id }]);
+    if (error) throw error;
     return data;
   } catch (error) {
     console.log(error);
