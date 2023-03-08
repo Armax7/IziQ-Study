@@ -1,3 +1,19 @@
+/*-------------------Recomended Use-----------------------
+ 1. This helpers are indexed on this same folder in index.js
+
+ 2. Import like this:
+        import * as SubaHelpers from "<relative_path>/supabase_helpers"
+
+ 3. This helpers are exported as 'get' so if you want tu call a function it needs tu have the next format
+        SupaHelpers.get.<function_to_call>
+    Examples:
+        - SupaHelpers.get.userId() //this will get user Id
+        - SupaHelpers.get.loggedStatus //this will check if there is an active user session
+        - SupaHelpers.get.userDecks //this will get current user's decks
+
+*/
+
+
 import { supabase } from "../supabaseClient";
 
 /**
