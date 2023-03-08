@@ -18,10 +18,31 @@ import { supabase } from "../supabaseClient";
 
 /**
  * Retrieves info from Supabase data base.
+ * Returns an object holding the current user;
+ * Returns undefined if no user was found;
+ *
+ * @return {Object} The current user; as an object.
+ */
+export async function userData() {
+  try {
+    const {
+      data: {
+        user,
+      },
+    } = await supabase.auth.getUser();
+    return user;
+  } catch (error) {
+    console.log(`Unable to retrieve user, there might be no user logged in.`);
+    return undefined;
+  }
+}
+
+/**
+ * Retrieves info from Supabase data base.
  * Returns a string holding current user's UUID;
  * Returns undefined if no user was found;
  *
- * @return {Object[]} Array of decks
+ * @return {string} UUID as string.
  */
 export async function userId() {
   try {
@@ -33,6 +54,27 @@ export async function userId() {
     return id;
   } catch (error) {
     console.log(`Unable to retrieve ID, there might be no user logged in.`);
+    return undefined;
+  }
+}
+
+/**
+ * Retrieves info from Supabase data base.
+ * Returns a string holding current user's email;
+ * Returns undefined if no user was found;
+ *
+ * @return {string} Email as string.
+ */
+export async function userEmail() {
+  try {
+    const {
+      data: {
+        user: { email },
+      },
+    } = await supabase.auth.getUser();
+    return email;
+  } catch (error) {
+    console.log(`Unable to retrieve email, there might be no user logged in.`);
     return undefined;
   }
 }
