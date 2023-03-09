@@ -3,7 +3,7 @@ import styles from "./CardForm.module.css";
 import { useState } from "react";
 import { Image } from "./utils";
 
-const CardForm = () => {
+function CardForm() {
   const initialValues = {
     question: "",
     answer: "",
@@ -118,6 +118,6 @@ const CardForm = () => {
       </Chakra.Box>
     </>
   );
-};
+}
 
 export default CardForm;
