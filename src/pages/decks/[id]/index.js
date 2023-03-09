@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import * as Chakra from "@chakra-ui/react";
 import * as Components from "../../../components";
 import * as SupaHelpers from "../../api/supabase_helpers";
 
@@ -22,8 +23,11 @@ function Decks() {
 
   return (
     <div>
-      <Components.CardContainer cards={data} />
-      <Components.CardDetailsContainer dbCards={cards} />
+      <Chakra.VStack align={'stretch'} >
+        <Components.CardContainer cards={data} />
+        <Components.CardDetailsContainer dbCards={cards} spacing={'1rem'} pb={'2rem'} />
+        <Components.CardForm onSubmit={()=>{console.log("I'm on /decks/[id]")}} />
+      </Chakra.VStack>
     </div>
   );
 }
