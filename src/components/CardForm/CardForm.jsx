@@ -3,13 +3,7 @@ import styles from "./CardForm.module.css";
 import { useState } from "react";
 import { Image } from "./utils";
 
-function CardForm({
-  onSubmit = () => {
-    alert("No onSubmit function assigned");
-  },
-  deckId,
-  ...props
-}) {
+function CardForm({ deckId, ...props }) {
   const initialValues = {
     question: "",
     answer: "",
@@ -29,7 +23,7 @@ function CardForm({
   };
 
   return (
-    <>
+    <Chakra.Box {...props}>
       <Chakra.Box
         mx="auto"
         w="90%"
@@ -115,7 +109,7 @@ function CardForm({
           <span className={styles.line_add}>+ ADD CARD</span>
         </Chakra.Button>
       </Chakra.Box>
-    </>
+    </Chakra.Box>
   );
 }
 
