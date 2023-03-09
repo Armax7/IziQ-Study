@@ -1,0 +1,103 @@
+.containerTwo {
+    width: 54%;
+}
+
+.containerUpgrade {
+    height: 60%;
+    display: flex;
+}
+
+.containerPlanButtons {
+    position: absolute;
+    width: 100%;
+    margin-top: -27%;
+}
+
+/* ANIMATIONS */
+.containerPlan {
+    opacity: 0;
+
+    animation-name: planPresentation;
+    animation-duration: 2.5s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes planPresentation {
+    0% {
+        opacity: 0;
+        transform: translateX(-75px);
+    }
+    100%{
+        opacity: 100%;
+        transform: translateX(0);
+    }
+}
+
+
+.buttonUpgrade {
+    opacity: 0;
+
+    animation-name: buttonUpg;
+    animation-duration: 2s;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes buttonUpg {
+    0% {
+        opacity: 0;
+        transform: translateY(-75px);
+    }
+    100%{
+        opacity: 100%;
+        transform: translateY(0);
+    }
+}
+
+.textChange, .backHome {
+    opacity: 0;
+
+    animation-name: textChan;
+    animation-duration: 2s;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes textChan {
+    0% {
+        opacity: 0;
+        transform: translateY(75px);
+    }
+    100%{
+        opacity: 100%;
+        transform: translateY(0);
+    }
+}
+
+
+/*==============================================* RESPONSIVE ==============================================*/
+/* @media screen and (max-width: 1024px) {
+    .containerGeneral{
+        height: 200vh;
+        display: flex;
+        flex-direction: column;
+    }
+    .containerPlan {
+        height: 100vh;
+    }
+    .chakraFlexContainer {
+        flex-direction: column;
+    }
+    .sectionOne {
+        height: 100vh;
+    }
+    .sectionTwo {
+            height: 100vh;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+
+} */

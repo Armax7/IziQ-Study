@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../../components/SubscriptionShowcase/SubscriptionShowcase.module.css";
+import style from "../../styles/currentPlan.module.css";
 import Link from "next/link";
 import * as Chakra from "@chakra-ui/react";
 import * as Component from "../../components";
@@ -29,10 +29,54 @@ function CurrentPlan() {
       className={style.chakraFlexContainer}
     >
       <Chakra.Container margin="auto 0" height="95%" marginTop="15px">
-        <Component.SubscriptionShowcase
-          suscription={suscription}
-          benefits={benefits}
-        />
+        <div className={style.containerPlan}>
+          <Component.SubscriptionShowcase
+            suscription={suscription}
+            benefits={benefits}
+          />
+          <div className={style.containerPlanButtons}>
+            {/*/////////////////////// */}
+            <Chakra.Flex
+              position="relative"
+              h="80px"
+              paddingLeft="10%"
+              boxSizing="border-box"
+              paddingTop="10px"
+            >
+              <Chakra.Button
+                background="#5C66BB"
+                colorScheme="blue"
+                fontSize="18px"
+                borderRadius="10px"
+                w="45%"
+                h="40px"
+                onClick={() => alert("Cancelar Plan 'Confirmar decisión'")}
+              >
+                Cancel Plan
+              </Chakra.Button>
+            </Chakra.Flex>
+            <Chakra.Flex
+              position="relative"
+              marginTop="-30px"
+              w="90%"
+              justifyContent="flex-end"
+            >
+              <Chakra.Button
+                background="#5C66BB"
+                colorScheme="blue"
+                fontSize="18px"
+                margin="15px 5px"
+                borderRadius="10px"
+                w="60%"
+                h="45px"
+                onClick={() => alert("Mantener Plan")}
+              >
+                Keep Plan
+              </Chakra.Button>
+            </Chakra.Flex>
+            {/*////////////////////// */}
+          </div>
+        </div>
       </Chakra.Container>
 
       <div className={style.containerTwo}>
@@ -41,6 +85,7 @@ function CurrentPlan() {
             <Link href="/home">
               <a>
                 <Chakra.Text
+                  className={style.backHome}
                   fontSize="18px"
                   color="white"
                   fontWeight="bold"
@@ -55,6 +100,7 @@ function CurrentPlan() {
         <div className={style.containerUpgrade}>
           <Chakra.Container margin="0 auto">
             <Chakra.Text
+              className={style.textChange}
               fontWeight="bold"
               fontSize="30px"
               textAlign="center"
@@ -66,6 +112,7 @@ function CurrentPlan() {
             </Chakra.Text>
             <Chakra.Flex w="100%">
               <Chakra.Button
+                className={style.buttonUpgrade}
                 margin="0 auto"
                 fontWeight="bold"
                 fontSize="26px"
@@ -77,40 +124,6 @@ function CurrentPlan() {
                 Upgrade Plan
               </Chakra.Button>
             </Chakra.Flex>
-
-            {/*/////////////////////// */}
-            <Chakra.Flex
-              h="80px"
-              justifyContent="center"
-              boxSizing="border-box"
-            >
-              <Chakra.Button
-                background="#5C66BB"
-                colorScheme="blue"
-                fontSize="18px"
-                borderRadius="10px"
-                margin="15px 5px"
-                w="35%"
-                h="45px"
-                onClick={() => alert("Cancelar Plan 'Confirmar decisión'")}
-              >
-                Cancel Plan
-              </Chakra.Button>
-              <Chakra.Button
-                background="#5C66BB"
-                colorScheme="blue"
-                fontSize="18px"
-                margin="15px 5px"
-                borderRadius="10px"
-                w="35%"
-                h="45px"
-                onClick={() => alert("Mantener Plan")}
-              >
-                Keep Plan
-              </Chakra.Button>
-            </Chakra.Flex>
-
-            {/*////////////////////// */}
           </Chakra.Container>
         </div>
       </div>
