@@ -3,7 +3,13 @@ import styles from "./CardForm.module.css";
 import { useState } from "react";
 import { Image } from "./utils";
 
-function CardForm() {
+function CardForm({
+  onSubmit = () => {
+    alert("No onSubmit function assigned");
+  },
+  deckId,
+  ...props
+}) {
   const initialValues = {
     question: "",
     answer: "",
@@ -20,13 +26,6 @@ function CardForm() {
       ...formData,
       [property]: value,
     });
-  };
-
-  const [cards, setCards] = useState([0]);
-
-  const handleAddCard = () => {
-    setCards([...cards, cards.length]);
-    console.log("Added succesfully");
   };
 
   return (
@@ -111,7 +110,7 @@ function CardForm() {
           color="#000000"
           _hover={{ backgroundColor: "transparent", color: "#000000" }}
           _focus={{ outline: "none" }}
-          onClick={handleAddCard}
+          onClick={onSubmit}
         >
           <span className={styles.line_add}>+ ADD CARD</span>
         </Chakra.Button>
