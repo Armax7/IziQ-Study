@@ -6,13 +6,13 @@ import { supabase } from "../../pages/api/supabaseClient"; //this is for tempora
 
 /// This is a temporal function to POST a card on DB
 /// Pls remove after implementing back end
-async function temporalPostCard(
+async function temporalPostCard({
   question,
   answer,
   image = null,
   learned = false,
-  deck_id
-) {
+  deck_id,
+}) {
   const { data, error } = await supabase
     .from("cards")
     .insert([{ question, answer, image, learned, deck_id }])
@@ -36,6 +36,7 @@ function CardForm({ deckId, ...props }) {
   const [formData, setFormData] = useState(initialValues);
 
   const handleOnChange = (e) => {
+    e.preventDefault();
     const property = e.target.name;
     const value = e.target.value;
     setFormData({
@@ -46,7 +47,8 @@ function CardForm({ deckId, ...props }) {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    const log = await temporalPostCard(formData);
+    const deck_id = deckId
+    const log = await temporalPostCard({...formData, deck_id});
     console.log("Added: ", log);
   };
 
