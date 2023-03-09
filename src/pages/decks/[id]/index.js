@@ -11,10 +11,6 @@ function Decks() {
   const [cards, setCards] = useState([]);
 
   useEffect(async () => {
-    const data = await SupaHelpers.get.cardsByDeckId(id);
-    if (data) {
-      setData(data);
-    }
     const cards = await SupaHelpers.get.cardsByDeckId(id);
     if (cards) {
       setCards(cards);
@@ -24,9 +20,9 @@ function Decks() {
   return (
     <div>
       <Chakra.VStack align={'stretch'} >
-        <Components.CardContainer cards={data} />
+        <Components.CardContainer cards={cards} />
         <Components.CardDetailsContainer dbCards={cards} spacing={'1rem'} pb={'2rem'} />
-        <Components.CardForm onSubmit={()=>{console.log("I'm on /decks/[id]")}} />
+        <Components.CardForm deckId={id}  />
       </Chakra.VStack>
     </div>
   );
