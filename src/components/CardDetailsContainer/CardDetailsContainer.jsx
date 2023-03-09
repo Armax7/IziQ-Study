@@ -15,6 +15,7 @@ function CardDetailsContainer({dbCards, ...props}) {
           answer={card.answer}
           deck_id={card.deck_id}
           learned={card.learned}
+          image={card.image}
         />
       ))}
     </Chakra.VStack>
