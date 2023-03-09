@@ -21,51 +21,43 @@ const SubscriptionShowcase = ({
 }) => {
   return (
     <div className={style.containerGeneral}>
-      <Chakra.Flex
-        background="#878CFF"
-        height="100%"
-        width="100%"
-        justifyContent="center"
-        className={style.chakraFlexContainer}
-      >
-        <div className={style.containerPlan}>
-          <div>
-            <Chakra.Flex flexDirection="column">
-              <Chakra.Container textAlign="center">
-                <Chakra.Text
-                  fontSize="28px"
-                  fontWeight="bold"
-                  paddingTop="15px"
-                  paddingBottom="15px"
-                >
-                  {suscription}
-                </Chakra.Text>
-                <div className={style.br}></div>
-              </Chakra.Container>
-              <Chakra.Container>
-                <Chakra.Flex flexDirection="column">
-                  {benefits?.map((beneficio) => (
-                    <Chakra.Flex marginBottom="14px">
-                      <Chakra.Container width="min-content">
-                        <Chakra.Text fontSize="26px" cursor="default">
-                          ✔
-                        </Chakra.Text>
-                      </Chakra.Container>
-                      <Chakra.Text
-                        fontSize="16px"
-                        fontWeight="bold"
-                        cursor="default"
-                      >
-                        {beneficio.name}
+      <div className={style.containerPlan}>
+        <div>
+          <Chakra.Flex flexDirection="column">
+            <Chakra.Container textAlign="center">
+              <Chakra.Text
+                fontSize="28px"
+                fontWeight="bold"
+                paddingTop="15px"
+                paddingBottom="15px"
+              >
+                {suscription}
+              </Chakra.Text>
+              <div className={style.br}></div>
+            </Chakra.Container>
+            <Chakra.Container>
+              <Chakra.Flex flexDirection="column">
+                {benefits?.map((beneficio) => (
+                  <Chakra.Flex marginBottom="14px">
+                    <Chakra.Container width="min-content">
+                      <Chakra.Text fontSize="26px" cursor="default">
+                        ✔
                       </Chakra.Text>
-                    </Chakra.Flex>
-                  ))}
-                </Chakra.Flex>
-              </Chakra.Container>
-            </Chakra.Flex>
-          </div>
+                    </Chakra.Container>
+                    <Chakra.Text
+                      fontSize="16px"
+                      fontWeight="bold"
+                      cursor="default"
+                    >
+                      {beneficio.name}
+                    </Chakra.Text>
+                  </Chakra.Flex>
+                ))}
+              </Chakra.Flex>
+            </Chakra.Container>
+          </Chakra.Flex>
         </div>
-      </Chakra.Flex>
+      </div>
     </div>
   );
 };
