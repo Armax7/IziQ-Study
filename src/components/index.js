@@ -10,3 +10,4 @@ export { default as LogOutButton } from "./LogOutButton/LogOutButton";
 export { default as DeckForm } from "./DeckForm/DeckForm";
 export { default as CardDetails } from "./CardDetails/CardDetails";
 export { default as CardDetailsContainer } from "./CardDetailsContainer/CardDetailsContainer";
+export { default as SubscriptionShowcase } from "./SubscriptionShowcase/SubscriptionShowcase";
