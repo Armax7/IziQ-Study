@@ -39,10 +39,25 @@ export async function getCategoriesById(id) {
   return categories;
 }
 
-export async function postCategory({name}) {
+export async function postCategory({ name }) {
   const { data, error } = await supabase
     .from("categories")
     .insert([{ name }])
+    .select();
+
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+
+  return data;
+}
+
+export async function updateCategory({ id, name }) {
+  const { data, error } = await supabase
+    .from("categories")
+    .update({ name })
+    .eq("id", id)
     .select();
 
   if (error) {
