@@ -1,4 +1,4 @@
-import { getAllUsersDetails, getUserDetailById,updateUserById  } from "./controllers";
+import { getAllUsersDetails, getUserDetailById,updateUserById, getUserDetailByName } from "./controllers";
 
 export async function getAllFromUserDetailHandler(req, res) {
   try {
