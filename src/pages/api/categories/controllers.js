@@ -35,6 +35,20 @@ export async function getCategoriesById(id) {
     console.log(error);
     return error;
   }
-  console.log(categories)
+  console.log(categories);
   return categories;
+}
+
+export async function postCategory({name}) {
+  const { data, error } = await supabase
+    .from("categories")
+    .insert([{ name }])
+    .select();
+
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+
+  return data;
 }
