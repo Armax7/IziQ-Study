@@ -7,7 +7,7 @@ export async function getCategoriesFromSb() {
 
   if (error) {
     console.log(error);
-    return error;
+    throw error;
   }
   return categories;
 }
@@ -20,7 +20,7 @@ export async function getCategoriesByName(name) {
 
   if (error) {
     console.log(error);
-    return error;
+    throw error;
   }
   return categories;
 }
@@ -33,7 +33,7 @@ export async function getCategoriesById(id) {
 
   if (error) {
     console.log(error);
-    return error;
+    throw error;
   }
   console.log(categories);
   return categories;
