@@ -1,4 +1,4 @@
-import { getAllFromCardsHandler } from "./handlers";
+import { getAllFromCardsHandler, createCardsHandler, updateCardsHandler, deleteCardsHandler } from "./handlers";
 
 export default function handlerCards(req, res) {
   const { method } = req;
@@ -8,13 +8,13 @@ export default function handlerCards(req, res) {
       getAllFromCardsHandler(req, res);
       break;
     case "POST":
-      createCards(req, res);
+      createCardsHandler(req, res);
       break;
     case "PUT":
-      updateCards(req, res);
+      updateCardsHandler(req, res);
       break;
     case "DELETE":
-      deleteCards(req, res);
+      deleteCardsHandler(req, res);
       break;
     default:
       res.status(400).json({ message: "Invalid request method" });
