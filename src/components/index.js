@@ -8,3 +8,6 @@ export { default as SearchBar } from "./SearchBar/SearchBar";
 export { default as DeckContainer } from "./DeckContainer/DeckContainer";
 export { default as LogOutButton } from "./LogOutButton/LogOutButton";
 export { default as DeckForm } from "./DeckForm/DeckForm";
+export { default as CardDetails } from "./CardDetails/CardDetails";
+export { default as CardDetailsContainer } from "./CardDetailsContainer/CardDetailsContainer";
+export { default as SubscriptionShowcase } from "./SubscriptionShowcase/SubscriptionShowcase";
