@@ -1,11 +1,14 @@
 import { getUserDetailByName } from "../controllers";
+import { getUserDetailByNameHandler } from "../handlers";
 
 export default async function handler(req, res) {
-    const name = req.query.name;
-    try {
-      const userDetail = await getUserDetailByName(name);
-      res.send(userDetail);
-    } catch (error) {
-      res.status(404).send(error.message);
-    }
-  };
+  const { method } = req;
+
+  switch (method) {
+    case "GET":
+      getUserDetailByNameHandler(req, res);
+      break;
+    default:
+      res.status(400).json({ message: "Invalid request method" });
+  }
+}
