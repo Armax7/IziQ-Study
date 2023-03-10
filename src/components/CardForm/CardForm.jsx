@@ -46,8 +46,8 @@ function CardForm({ deckId, ...props }) {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    const response = await temporalPostCard(formData); //Temporal POST function, erase when back end ready
-    console.log("Added: ", response);
+    const log = await temporalPostCard(formData);
+    console.log("Added: ", log);
   };
 
   return (
