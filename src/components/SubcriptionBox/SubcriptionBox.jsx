@@ -26,7 +26,7 @@ const SubcriptionBox = () => {
           <Chakra.Text fontWeight="extrabold" fontSize="32px" mb={2} ml={1}>
             {subscription.name}
           </Chakra.Text>
-          <Chakra.Text color="#797979" fontSize="18px" fontWeight="semibold" ml={20}>
+          <Chakra.Text color="#797979" fontSize="18px" fontWeight="semibold" ml="auto">
             1 usuario
           </Chakra.Text>
         </Chakra.Flex>
