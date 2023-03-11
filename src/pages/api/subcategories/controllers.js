@@ -25,3 +25,16 @@ export async function getSubCategoriesByName(name) {
   }
   return subcategories;
 }
+
+export async function getSubCategoriesById(id) {
+  const { data: subcategories, error } = await supabase
+    .from("subcategories")
+    .select("id,name,category_id")
+    .eq("id", id);
+
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+  return subcategories;
+}
