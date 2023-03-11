@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { ChakraProvider } from "@chakra-ui/react";
+import appTheme from "../styles/theme";
 import * as Components from "../components";
 
 export default function App({ Component, pageProps }) {
@@ -11,7 +12,7 @@ export default function App({ Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ChakraProvider>
+      <ChakraProvider theme={appTheme}>
         <Components.Navigation />
         <Component {...pageProps} />
       </ChakraProvider>

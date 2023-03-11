@@ -13,15 +13,33 @@
 
 */
 
-
 import { supabase } from "../supabaseClient";
+
+/**
+ * Retrieves info from Supabase data base.
+ * Returns an object holding the current user;
+ * Returns undefined if no user was found;
+ *
+ * @return {Object} The current user; as an object.
+ */
+export async function userData() {
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    return user;
+  } catch (error) {
+    console.log(`Unable to retrieve user, there might be no user logged in.`);
+    return undefined;
+  }
+}
 
 /**
  * Retrieves info from Supabase data base.
  * Returns a string holding current user's UUID;
  * Returns undefined if no user was found;
  *
- * @return {Object[]} Array of decks
+ * @return {string} UUID as string.
  */
 export async function userId() {
   try {
@@ -33,6 +51,85 @@ export async function userId() {
     return id;
   } catch (error) {
     console.log(`Unable to retrieve ID, there might be no user logged in.`);
+    return undefined;
+  }
+}
+
+/**
+ * Retrieves info from Supabase data base.
+ * Returns a string holding current user's email;
+ * Returns undefined if no user was found;
+ *
+ * @return {string} Email as string.
+ */
+export async function userEmail() {
+  try {
+    const {
+      data: {
+        user: { email },
+      },
+    } = await supabase.auth.getUser();
+    return email;
+  } catch (error) {
+    console.log(`Unable to retrieve email, there might be no user logged in.`);
+    return undefined;
+  }
+}
+
+/**
+ * Retrieves info from Supabase data base.
+ * Returns a string holding current user's full name;
+ * Returns undefined if no user was found;
+ *
+ * @return {string} Name as string.
+ */
+export async function userNameFull() {
+  try {
+    const uuid = await userId();
+    const { data, error } = await supabase
+      .from("users_details")
+      .select()
+      .eq("users_uuid", uuid);
+    if (error) throw error;
+    const { name, lastname } = data.at(0);
+    return name + " " + lastname;
+  } catch (error) {
+    console.log(`Unable to retrieve name, there might be no user logged in.`);
+    return undefined;
+  }
+}
+
+/**
+ * Retrieves info from Supabase data base.
+ * Returns a string holding current user's subscription;
+ * Returns undefined if no user was found;
+ *
+ * @return {string} Subscription as string.
+ */
+export async function userSubscription() {
+  try {
+    const uuid = await userId();
+
+    const users_details = await supabase
+      .from("users_details")
+      .select()
+      .eq("users_uuid", uuid);
+
+    if (users_details.error) throw users_details.error;
+
+    const { subscription_id } = users_details.data.at(0);
+
+    const subscription = await supabase
+      .from("subscription")
+      .select("id,name")
+      .eq("id", subscription_id);
+
+    if (subscription.error) throw subscription.error;
+
+    return subscription.data.at(0);
+
+  } catch (error) {
+    console.log(`Unable to retrieve subscription, there might be no user logged in.`);
     return undefined;
   }
 }
@@ -196,7 +293,7 @@ export async function userDecksBySubCategoryOrdered({
  * @param {string} deckId The ID of the deck to get cards from.
  * @return {Object[]} Array of cards <Object>
  */
-export async function deckCardsByDeckId(deckId) {
+export async function cardsByDeckId(deckId) {
   try {
     const { data: cards, error } = await supabase
       .from("cards")
@@ -283,23 +380,23 @@ export async function allDecksByName(ascending = true) {
  * @returns {Object[]} An array of decks
  */
 export async function allDecksByCategoryOrdered({
-    categoryId,
-    orderBy = "name",
-    ascending = true,
-  } = {}) {
-    try {
-      const { data: decks, error } = await supabase
-        .from("decks")
-        .select()
-        .eq("category_id", categoryId)
-        .order(orderBy, { ascending });
-      if (error) throw error;
-      return decks;
-    } catch (error) {
-      console.log(error);
-      return [];
-    }
+  categoryId,
+  orderBy = "name",
+  ascending = true,
+} = {}) {
+  try {
+    const { data: decks, error } = await supabase
+      .from("decks")
+      .select()
+      .eq("category_id", categoryId)
+      .order(orderBy, { ascending });
+    if (error) throw error;
+    return decks;
+  } catch (error) {
+    console.log(error);
+    return [];
   }
+}
 
 /**
  * Retrieves info from Supabase data base.
@@ -313,20 +410,20 @@ export async function allDecksByCategoryOrdered({
  * @returns {Object[]} An array of decks
  */
 export async function allDecksBySubCategoryOrdered({
-    subCategoryId,
-    orderBy = "name",
-    ascending = true,
-  } = {}) {
-    try {
-      const { data: decks, error } = await supabase
-        .from("decks")
-        .select()
-        .eq("subcategory_id", subCategoryId)
-        .order(orderBy, { ascending });
-      if (error) throw error;
-      return decks;
-    } catch (error) {
-      console.log(error);
-      return [];
-    }
+  subCategoryId,
+  orderBy = "name",
+  ascending = true,
+} = {}) {
+  try {
+    const { data: decks, error } = await supabase
+      .from("decks")
+      .select()
+      .eq("subcategory_id", subCategoryId)
+      .order(orderBy, { ascending });
+    if (error) throw error;
+    return decks;
+  } catch (error) {
+    console.log(error);
+    return [];
   }
+}
