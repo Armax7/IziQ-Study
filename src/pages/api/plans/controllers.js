@@ -11,3 +11,17 @@ export async function getPlansFromSb() {
   }
   return plan;
 }
+
+export async function postPlan({ name, value }) {
+  const { data, error } = await supabase
+    .from("plans")
+    .insert([{ name, value }])
+    .select();
+
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+
+  return data;
+}
