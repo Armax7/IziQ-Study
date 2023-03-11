@@ -67,3 +67,17 @@ export async function updateCategory({ id, name }) {
 
   return data;
 }
+
+export async function deleteCategory({ id }) {
+  const { data, error } = await supabase
+    .from("categories")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+
+  return data;
+}

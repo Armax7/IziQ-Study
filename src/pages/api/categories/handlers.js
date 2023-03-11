@@ -37,4 +37,13 @@ export async function handlePut(req, res) {
   }
 }
 
-export async function handleDelete(req, res) {}
+export async function handleDelete(req, res) {
+  const body = req.body;
+
+  try {
+    const response = await Controllers.deleteCategory(body);
+    res.status(204).json({message: 'Deleted'});
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}

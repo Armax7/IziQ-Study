@@ -12,9 +12,11 @@ export default async function handlerCategories(req, res) {
       await Handlers.handlePost(req, res);
     case Methods.PUT:
       await Handlers.handlePut(req, res);
+    case Methods.DELETE:
+      await Handlers.handleDelete(req, res);
     default:
       res.status(400).json({
-        message: "400 Bad Request: you can only use GET",
+        message: "400 Bad Request: Methods does not exist",
       });
   }
 }
