@@ -2,7 +2,7 @@ import * as Chakra from "@chakra-ui/react";
 import { Arrow } from "./utils";
 import Link from "next/link";
 
-const BottonHome = () => {
+const ButtonHome = () => {
   return (
     <Link href="/home" passHref>
       <Chakra.Box
@@ -23,4 +23,4 @@ const BottonHome = () => {
   );
 };
 
-export { BottonHome };
+export { ButtonHome };

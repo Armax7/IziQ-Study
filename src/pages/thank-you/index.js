@@ -2,7 +2,7 @@ import React from "react";
 import * as Chakra from "@chakra-ui/react";
 import Link from "next/link";
 import { ThankYou } from "../../components/ThankYou/ThankYou";
-import { BottonHome } from "../../components/ThankYou/BottonHome";
+import { ButtonHome } from "../../components/ButtonHome/ButtonHome";
 
 function ThankYouPage() {
   return (
@@ -16,7 +16,7 @@ function ThankYouPage() {
       <Chakra.Box mt="115px">
         <ThankYou />
       </Chakra.Box>
-      <BottonHome />
+      <ButtonHome />
     </Chakra.Container>
   );
 }
