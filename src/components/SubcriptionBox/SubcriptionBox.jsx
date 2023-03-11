@@ -106,4 +106,4 @@ const SubcriptionBox = ({name, pricePerMonth, pricePerYear, description}) => {
   );
 };
 
-export { SubcriptionBox };
+export default SubcriptionBox ;
