@@ -51,3 +51,17 @@ export async function getSubCategoriesByCategoryId(category_id) {
   }
   return subcategories;
 }
+
+export async function postSubCategory({ name, category_id }) {
+  const { data, error } = await supabase
+    .from("subcategories")
+    .insert([{ name, category_id }])
+    .select();
+
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+
+  return data;
+}
