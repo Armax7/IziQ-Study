@@ -50,10 +50,7 @@ const ThankYou = () => {
         >
           ¡Gracias por su compra!
         </Chakra.Text>
-
-        {/* Agregar ruta para ver los beneficios del plan comprado */}
-        
-        <Link href="/" passHref>
+        <Link href="/current-plan" passHref>
           <Chakra.Button
             as="a"
             bg="#5C66BB"
