@@ -1,25 +1,21 @@
-import {
-  getAllDecksHandler,
-  createDecksHandler,
-  updateDecksHandler,
-  deleteDecksHandler,
-} from "./handlers";
+import * as Handlers from "./handlers";
+import * as Methods from "../methods";
 
 export default function handlerDecks(req, res) {
   const { method } = req;
 
   switch (method) {
-    case "GET":
-      getAllDecksHandler(req, res);
+    case Methods.GET:
+      Handlers.getAllDecksHandler(req, res);
       break;
-    case "POST":
-      createDecksHandler(req, res);
+    case Methods.POST:
+      Handlers.createDecksHandler(req, res);
       break;
-    case "PUT":
-      updateDecksHandler(req, res);
+    case Methods.PUT:
+      Handlers.updateDecksHandler(req, res);
       break;
-    case "DELETE":
-      deleteDecksHandler(req, res);
+    case Methods.DELETE:
+      Handlers.deleteDecksHandler(req, res);
       break;
     default:
       res.status(400).json({ message: "Invalid request method" });
