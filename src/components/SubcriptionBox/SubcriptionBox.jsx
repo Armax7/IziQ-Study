@@ -1,13 +1,8 @@
 import * as Chakra from "@chakra-ui/react";
 import { Check } from "./utils";
 import styles from "./SubcriptionBox.module.css";
-import subscriptions from "./mock";
 
-const SubcriptionBox = () => {
-
-  // Uso de Mock id [0, 1, 2]
-  
-  const subscription = subscriptions[2];
+const SubcriptionBox = ({name, pricePerMonth, pricePerYear, description}) => {
 
   return (
     <Chakra.Box
@@ -20,14 +15,14 @@ const SubcriptionBox = () => {
       bg="#FFFFFF"
       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25);"
     >
-      {subscription.name === "Gratis" ? (
+      {name === "Gratis" ? (
         <Chakra.Text fontWeight="bold" fontSize="35px" mb={2} ml={1}>
-          {subscription.name}
+          {name}
         </Chakra.Text>
       ) : (
         <Chakra.Flex>
           <Chakra.Text fontWeight="extrabold" fontSize="32px" mb={2} ml={1}>
-            {subscription.name}
+            {name}
           </Chakra.Text>
           <Chakra.Text color="#797979" fontSize="18px" fontWeight="semibold" ml="auto">
             1 usuario
@@ -36,9 +31,9 @@ const SubcriptionBox = () => {
       )}
 
       <Chakra.Text fontSize="20px" fontWeight="bold" mt={3} mb={-.5} ml={1} color="#797979">
-        {subscription.pricePerMonth ? (
+        {pricePerMonth ? (
           <>
-            {subscription.pricePerMonth}
+            {pricePerMonth}
             <span className={styles.per}> por mes</span>
           </>
         ) : (
@@ -47,9 +42,9 @@ const SubcriptionBox = () => {
       </Chakra.Text>
       <Chakra.Flex></Chakra.Flex>
       <Chakra.Text fontSize="20px" fontWeight="bold" mb={4} ml={1} color="#797979">
-        {subscription.pricePerYear ? (
+        {pricePerYear ? (
           <>
-            {subscription.pricePerYear}
+            {pricePerYear}
             <span className={styles.per}> por año</span>
           </>
         ) : (
@@ -66,7 +61,7 @@ const SubcriptionBox = () => {
           <Check />
         </Chakra.Box>
         <Chakra.Text fontSize="15px" fontWeight="medium" mb={4}>
-          {subscription.descriptionLimited}
+          {description[0]}
         </Chakra.Text>
       </Chakra.Flex>
       <Chakra.Flex mt={1}>
@@ -78,10 +73,10 @@ const SubcriptionBox = () => {
           <Check />
         </Chakra.Box>
         <Chakra.Text fontSize="15px" fontWeight="medium" mb={4}>
-          {subscription.descriptionFull}
+          {description[1]}
         </Chakra.Text>
       </Chakra.Flex>
-      {subscription.name !== "Gratis" && (
+      {name !== "Gratis" && (
         <>
           <Chakra.Button
             bg="#5C66BB"
