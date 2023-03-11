@@ -1,12 +1,8 @@
-import {
-  getAllCards,
-  getCardByDeckID,
-  getCardByNameQuestion,
-} from "./controllers";
+import * as Controllers from "./controllers";
 
 export async function getAllFromCardsHandler(req, res) {
   try {
-    const cards = await getAllCards();
+    const cards = await Controllers.getAllCards();
     res.status(200).json(cards);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -16,7 +12,7 @@ export async function getAllFromCardsHandler(req, res) {
 export async function getCardByNameQuestionHandler(req, res) {
   const { name } = req.query;
   try {
-    const cardQuestion = await getCardByNameQuestion(name);
+    const cardQuestion = await Controllers.getCardByNameQuestion(name);
     res.status(200).json(cardQuestion);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -26,7 +22,7 @@ export async function getCardByNameQuestionHandler(req, res) {
 export async function getCardByDeckIdHandler(req, res) {
   const { uuid } = req.query;
   try {
-    const getCardDeck = await getCardByDeckID(uuid);
+    const getCardDeck = await Controllers.getCardByDeckID(uuid);
     res.send(getCardDeck);
   } catch (error) {
     res.status(404).send(error.message);
