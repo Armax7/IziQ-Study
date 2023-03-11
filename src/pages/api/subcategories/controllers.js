@@ -80,3 +80,17 @@ export async function updateSubCategory({ id, name, category_id }) {
 
   return data;
 }
+
+export async function deleteSubCategory({ id }) {
+  const { data, error } = await supabase
+    .from("subcategories")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+
+  return data;
+}

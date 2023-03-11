@@ -56,11 +56,9 @@ export async function handlePost(req, res) {
 
   try {
     const response = await Controllers.postSubCategory(body);
-    return res
-      .status(201)
-      .json({
-        message: `Submited on subcategories: ${JSON.stringify(response)}`,
-      });
+    return res.status(201).json({
+      message: `Submited on subcategories: ${JSON.stringify(response)}`,
+    });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -76,6 +74,17 @@ export async function handlePut(req, res) {
         response.at(0).id
       )} updated with ${JSON.stringify(response)}`,
     });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}
+
+export async function handleDelete(req, res) {
+  const body = req.body;
+
+  try {
+    const response = await Controllers.deleteSubCategory(body);
+    return res.status(204).end();
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }

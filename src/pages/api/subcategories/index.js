@@ -11,8 +11,8 @@ export default async function handlerCategories(req, res) {
       return await Handlers.handlePost(req, res);
     case Methods.PUT:
       return await Handlers.handlePut(req, res);
-    // case Methods.DELETE:
-    //   await Handlers.handleDelete(req, res);
+    case Methods.DELETE:
+      return await Handlers.handleDelete(req, res);
     default:
       return res.status(400).json({
         message: "400 Bad Request: invalid method",
