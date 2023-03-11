@@ -1,15 +1,15 @@
 import * as Chakra from "@chakra-ui/react";
-import { Check, Arrow } from "./utils";
+import { Check } from "./utils";
 import Link from "next/link";
+import { Planes } from "./Mock";
 
 const ThankYou = () => {
+
+  // Luego reemplazar con los datos recibidos
+  const plan = Planes[0]
+
   return (
     <Chakra.Container
-      maxW="1920px"
-      w="100wh"
-      minH="calc(100vh - 70px)"
-      bg="#F6F7FB"
-      overflow="hidden"
     >
       <Chakra.Flex
         display="flex"
@@ -19,7 +19,7 @@ const ThankYou = () => {
         m={{ base: "40% 0", lg: "8% 0 0 0" }}
       >
         <Chakra.Box
-          w={{ base: "17%", lg: "7%" }}
+          w={{ base: "27%", lg: "17%" }}
           h={{ base: "auto", lg: "83px" }}
           mr={{ base: 0, lg: "13px" }}
           mb={{ base: "13px", lg: 0 }}
@@ -31,10 +31,12 @@ const ThankYou = () => {
           fontStyle="normal"
           fontWeight="bold"
           fontSize={{ base: "32px", md: "64px" }}
+          textAlign="center"
+          whiteSpace="nowrap"
           color="#2B3467"
-          margin={{ base: 0, lg: "13px 0 0 0" }}
+          mt={2}
         >
-          Ahora eres Premium
+          Ahora eres {plan.name}
         </Chakra.Heading>
         <Chakra.Text
           color="#1E1E1E"
@@ -43,7 +45,7 @@ const ThankYou = () => {
           fontWeight="medium"
           fontSize={{ base: "16px", md: "24px" }}
           lineHeight={{ base: "36px", md: "48px" }}
-          textAlign={{ base: "center", md: "left" }}
+          textAlign="center"
           mb="35px"
         >
           ¡Gracias por su compra!
@@ -69,27 +71,6 @@ const ThankYou = () => {
           </Chakra.Button>
         </Link>
       </Chakra.Flex>
-
-      <Link href="/" passHref>
-        <Chakra.Box
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          mt={5}
-          m={{ base: "40% 10px", lg: "10% 0 0 -2%" }}
-        >
-          <Chakra.Box w="2%">
-            <Arrow />
-          </Chakra.Box>
-          <Chakra.Text
-            as="a"
-            fontWeight="bold"
-            cursor="pointer"
-          >
-            Volver al Inicio
-          </Chakra.Text>
-        </Chakra.Box>
-      </Link>
     </Chakra.Container>
   );
 };
