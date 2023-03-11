@@ -65,3 +65,18 @@ export async function postSubCategory({ name, category_id }) {
 
   return data;
 }
+
+export async function updateSubCategory({ id, name, category_id }) {
+  const { data, error } = await supabase
+    .from("subcategories")
+    .update({ name, category_id })
+    .eq("id", id)
+    .select();
+
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+
+  return data;
+}

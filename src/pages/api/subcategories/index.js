@@ -9,8 +9,8 @@ export default async function handlerCategories(req, res) {
       return await Handlers.handleGet(req, res);
     case Methods.POST:
       return await Handlers.handlePost(req, res);
-    // case Methods.PUT:
-    //   await Handlers.handlePut(req, res);
+    case Methods.PUT:
+      return await Handlers.handlePut(req, res);
     // case Methods.DELETE:
     //   await Handlers.handleDelete(req, res);
     default:
