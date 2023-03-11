@@ -25,3 +25,18 @@ export async function postPlan({ name, value }) {
 
   return data;
 }
+
+export async function updatePlan({ id, name, value }) {
+  const { data, error } = await supabase
+    .from("plans")
+    .update({ name, value })
+    .eq("id", id)
+    .select();
+
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+
+  return data;
+}
