@@ -4,7 +4,10 @@ import styles from "./SubcriptionBox.module.css";
 import subscriptions from "./mock";
 
 const SubcriptionBox = () => {
-  const subscription = subscriptions[1];
+
+  // Uso de Mock id [0, 1, 2]
+  
+  const subscription = subscriptions[2];
 
   return (
     <Chakra.Box
