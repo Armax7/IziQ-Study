@@ -1,4 +1,3 @@
-import * as Controllers from "./controllers";
 import * as Handlers from "./handlers";
 import * as Methods from "../methods";
 
@@ -16,7 +15,7 @@ export default async function handlerCategories(req, res) {
       await Handlers.handleDelete(req, res);
     default:
       res.status(400).json({
-        message: "400 Bad Request: Methods does not exist",
+        message: "400 Bad Request: invalid method",
       });
   }
 }

@@ -1,20 +1,15 @@
 import * as Methods from "../../methods";
-import * as Controllers from "../controllers";
+import * as Handlers from "../handlers";
 
 export default async function handlerById(req, res) {
   const method = req.method;
-  const { name } = req.query;
 
   switch (method) {
     case Methods.GET:
-      const response = await Controllers.getCategoriesByName(name);
-      if (JSON.stringify(response) === "[]") {
-        res.status(404).json([{ error: "Name not found" }]);
-      }
-      res.status(200).json(response);
+      await Handlers.handleGetByName(req, res);
     default:
       res.status(400).json({
-        message: "400 Bad Request: you can only use GET",
+        message: "400 Bad Request: invalid method",
       });
   }
 }

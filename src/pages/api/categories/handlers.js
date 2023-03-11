@@ -9,6 +9,34 @@ export async function handleGet(req, res) {
   }
 }
 
+export async function handleGetByName(req, res) {
+  const { name } = req.query;
+
+  try {
+    const response = await Controllers.getCategoriesByName(name);
+    if (JSON.stringify(response) === "[]") {
+      res.status(404).json([{ error: "Name not found" }]);
+    }
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+export async function handleGetById(req, res) {
+  const { id } = req.query;
+
+  try {
+    const response = await Controllers.getCategoriesById(id);
+    if (JSON.stringify(response) === "[]") {
+      res.status(404).json([{ error: "ID not found" }]);
+    }
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
 export async function handlePost(req, res) {
   const body = req.body;
 
@@ -42,7 +70,7 @@ export async function handleDelete(req, res) {
 
   try {
     const response = await Controllers.deleteCategory(body);
-    res.status(204).json({message: 'Deleted'});
+    res.status(204).json({ message: "Deleted" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
