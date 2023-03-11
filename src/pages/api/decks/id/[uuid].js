@@ -6,7 +6,7 @@ export default async function handler(req, res) {
 
   switch (method) {
     case Methods.GET:
-      Handlers.getCardByNameQuestionHandler(req, res);
+      Handlers.getDeckByUserIdHandler(req, res);
       break;
     default:
       res.status(400).json({ message: "Invalid request method" });
