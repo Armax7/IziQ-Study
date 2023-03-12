@@ -1,40 +1,103 @@
 import { supabase } from "../supabaseClient";
 
 export const getAllCards = async () => {
-  const getAllCards = await supabase.from("cards").select("*");
-  return getAllCards.data;
+  let { data: cards, error } = await supabase.from("cards").select();
+
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+
+  return cards;
 };
 
-export const getCardByDeckID = async (id) => {
+export const getCardById = async (id) => {
   const { data: getCardById, error } = await supabase
     .from("cards")
-    .select("*")
-    .match({ deck_id: id });
+    .select()
+    .eq("id", id);
+
   if (error) {
-    throw new Error(error);
+    console.log(error);
+    throw error;
   }
-  if (!getCardById) {
-    throw Error(`No se encontro la card con Deck ${id}`);
-  }
+
   return getCardById;
+};
+
+export const getCardByDeckId = async (deckId) => {
+  const { data: getCardByDeckId, error } = await supabase
+    .from("cards")
+    .select()
+    .eq("deck_id", deckId);
+
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+
+  return getCardByDeckId;
 };
 
 export const getCardByNameQuestion = async (name) => {
   const { data: getCardByQuestion, error } = await supabase
     .from("cards")
-    .select("*")
+    .select()
     .ilike("question", `${name}%`);
+
   if (error) {
-    throw new Error(error.message);
+    console.log(error);
+    throw error;
   }
-  if (getCardByQuestion.length === 0) {
-    throw new Error(`No se encuentran coincidencias con el Name ${name}`);
-  }
+
   return getCardByQuestion;
 };
 
-export async function createCards(req, res) {}
+export async function postCard({
+  question,
+  answer,
+  deck_id,
+  image = null,
+  learned = false,
+}) {
+  const { data, error } = await supabase
+    .from("cards")
+    .insert([{ question, answer, image, learned, deck_id }])
+    .select();
 
-export async function updateCards(req, res) {}
+  if (error) {
+    console.log(error);
+    throw error;
+  }
 
-export async function deleteCards(req, res) {}
+  return data;
+}
+
+export async function updateCard({ id, question, answer, image, learned }) {
+  const { data, error } = await supabase
+    .from("cards")
+    .update({ question, answer, image, learned })
+    .eq("id", id)
+    .select();
+
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+
+  return data;
+}
+
+export async function deleteCard({id}) {
+  const { data, error } = await supabase
+  .from("cards")
+  .delete()
+  .eq("id", id);
+
+if (error) {
+  console.log(error);
+  throw error;
+}
+
+return data;
+}
