@@ -36,3 +36,14 @@ export async function handlePut(req, res) {
     return res.status(500).json({ error: error.message });
   }
 }
+
+export async function handleDelete(req, res) {
+  const body = req.body;
+
+  try {
+    const response = await Controllers.deletePlan(body);
+    return res.status(204).end();
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}

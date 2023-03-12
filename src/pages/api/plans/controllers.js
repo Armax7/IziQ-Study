@@ -40,3 +40,14 @@ export async function updatePlan({ id, name, value }) {
 
   return data;
 }
+
+export async function deletePlan({ id }) {
+  const { data, error } = await supabase.from("plans").delete().eq("id", id);
+
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+
+  return data;
+}
