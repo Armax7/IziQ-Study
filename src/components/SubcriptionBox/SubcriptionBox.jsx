@@ -2,8 +2,7 @@ import * as Chakra from "@chakra-ui/react";
 import { Check } from "./utils";
 import styles from "./SubcriptionBox.module.css";
 
-const SubcriptionBox = ({name, description}) => {
-
+const SubcriptionBox = ({ name, description }) => {
   return (
     <Chakra.Box
       borderRadius="15px"
@@ -24,13 +23,25 @@ const SubcriptionBox = ({name, description}) => {
           <Chakra.Text fontWeight="extrabold" fontSize="32px" mb={2} ml={1}>
             {name}
           </Chakra.Text>
-          <Chakra.Text color="#797979" fontSize="18px" fontWeight="semibold" ml="auto">
+          <Chakra.Text
+            color="#797979"
+            fontSize="18px"
+            fontWeight="semibold"
+            ml="auto"
+          >
             1 usuario
           </Chakra.Text>
         </Chakra.Flex>
       )}
 
-      <Chakra.Text fontSize="20px" fontWeight="bold" mt={3} mb={-.5} ml={1} color="#797979">
+      <Chakra.Text
+        fontSize="20px"
+        fontWeight="bold"
+        mt={3}
+        mb={-0.5}
+        ml={1}
+        color="#797979"
+      >
         {name.price_per_month ? (
           <>
             {name.price_per_month}
@@ -41,7 +52,13 @@ const SubcriptionBox = ({name, description}) => {
         )}
       </Chakra.Text>
       <Chakra.Flex></Chakra.Flex>
-      <Chakra.Text fontSize="20px" fontWeight="bold" mb={4} ml={1} color="#797979">
+      <Chakra.Text
+        fontSize="20px"
+        fontWeight="bold"
+        mb={4}
+        ml={1}
+        color="#797979"
+      >
         {name.price_per_year ? (
           <>
             {name.price_per_year}
@@ -51,30 +68,32 @@ const SubcriptionBox = ({name, description}) => {
           "\u200B"
         )}
       </Chakra.Text>
-      <Chakra.Divider my="4" borderWidth="1.9px" borderRadius="4px" mb={6} mt={6}/>
+      <Chakra.Divider
+        my="4"
+        borderWidth="1.9px"
+        borderRadius="4px"
+        mb={6}
+        mt={6}
+      />
       <Chakra.Flex>
-        <Chakra.Box 
-          mt={1}
-          mr={2}
-          style={{ maxWidth: "30px", minWidth: "20px" }}
-        >
-          <Check />
-        </Chakra.Box>
-        <Chakra.Text fontSize="15px" fontWeight="medium" mb={4}>
-          {description}
-        </Chakra.Text>
-      </Chakra.Flex>
-      <Chakra.Flex mt={1}>
-        <Chakra.Box
-          mt={1}
-          mr={2}
-          style={{ maxWidth: "30px", minWidth: "20px" }}
-        >
-          <Check />
-        </Chakra.Box>
-        <Chakra.Text fontSize="15px" fontWeight="medium" mb={4}>
-          {description}
-        </Chakra.Text>
+        {description.map((description, index) => [
+          <Chakra.Box
+            key={`${index}-box`}
+            mt={1}
+            mr={2}
+            style={{ maxWidth: "30px", minWidth: "20px" }}
+          >
+            <Check />
+          </Chakra.Box>,
+          <Chakra.Text
+            key={`${index}-text`}
+            fontSize="15px"
+            fontWeight="medium"
+            mb={4}
+          >
+            {description}
+          </Chakra.Text>,
+        ])}
       </Chakra.Flex>
       {name !== "Gratis" && (
         <>
@@ -93,11 +112,11 @@ const SubcriptionBox = ({name, description}) => {
             Obtener plan
           </Chakra.Button>
           <Chakra.Text fontSize="12px" mt={5} ml={2} color="#8C8C8C">
-
-          {/* Añadir ruta de Términos y Condiciones */}
+            {/* Añadir ruta de Términos y Condiciones */}
 
             <Chakra.Link href="#">
-              Se aplican <span className={styles.term_cond}>Términos y Condiciones</span>
+              Se aplican{" "}
+              <span className={styles.term_cond}>Términos y Condiciones</span>
             </Chakra.Link>
           </Chakra.Text>
         </>
@@ -106,4 +125,4 @@ const SubcriptionBox = ({name, description}) => {
   );
 };
 
-export default SubcriptionBox ;
+export default SubcriptionBox;
