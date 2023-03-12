@@ -2,7 +2,8 @@ import * as Chakra from "@chakra-ui/react";
 import { Check } from "./utils";
 import styles from "./SubcriptionBox.module.css";
 
-const SubcriptionBox = ({ name, description }) => {
+const SubcriptionBox = ({subscription, description}) => {
+
   return (
     <Chakra.Box
       borderRadius="15px"
@@ -14,14 +15,14 @@ const SubcriptionBox = ({ name, description }) => {
       bg="#FFFFFF"
       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25);"
     >
-      {name === "Gratis" ? (
+      {subscription === "Gratis" ? (
         <Chakra.Text fontWeight="bold" fontSize="35px" mb={2} ml={1}>
-          {name}
+          {subscription.name}
         </Chakra.Text>
       ) : (
         <Chakra.Flex>
           <Chakra.Text fontWeight="extrabold" fontSize="32px" mb={2} ml={1}>
-            {name}
+            {subscription.name}
           </Chakra.Text>
           <Chakra.Text
             color="#797979"
@@ -42,10 +43,10 @@ const SubcriptionBox = ({ name, description }) => {
         ml={1}
         color="#797979"
       >
-        {name.price_per_month ? (
+        {subscription.price_per_month ? (
           <>
-            {name.price_per_month}
-            <span className={styles.per}> por mes</span>
+            {subscription.price_per_month}
+            <span className={styles.per}> USD por mes</span>
           </>
         ) : (
           "\u200B"
@@ -59,10 +60,10 @@ const SubcriptionBox = ({ name, description }) => {
         ml={1}
         color="#797979"
       >
-        {name.price_per_year ? (
+        {subscription.price_per_year ? (
           <>
-            {name.price_per_year}
-            <span className={styles.per}> por año</span>
+            {subscription.price_per_year}
+            <span className={styles.per}> USD por año</span>
           </>
         ) : (
           "\u200B"
@@ -95,7 +96,7 @@ const SubcriptionBox = ({ name, description }) => {
           </Chakra.Text>,
         ])}
       </Chakra.Flex>
-      {name !== "Gratis" && (
+      {subscription.name !== "Free" && (
         <>
           <Chakra.Button
             bg="#5C66BB"
@@ -112,6 +113,7 @@ const SubcriptionBox = ({ name, description }) => {
             Obtener plan
           </Chakra.Button>
           <Chakra.Text fontSize="12px" mt={5} ml={2} color="#8C8C8C">
+          
             {/* Añadir ruta de Términos y Condiciones */}
 
             <Chakra.Link href="#">
