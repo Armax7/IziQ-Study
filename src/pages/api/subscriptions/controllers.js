@@ -3,7 +3,7 @@ import { supabase } from "../supabaseClient";
 export async function getSubscriptionsFromSb() {
   const { data: subscriptions, error } = await supabase
     .from("subscriptions")
-    .select();
+    .select("id,name,price_per_month,price_per_year");
 
   if (error) {
     console.log(error);
@@ -12,3 +12,16 @@ export async function getSubscriptionsFromSb() {
 
   return subscriptions;
 }
+
+export async function getSubscriptionById(id) {
+    const { data: subscriptions, error } = await supabase
+      .from("subscriptions")
+      .select("id,name,price_per_month,price_per_year")
+      .eq("id", id);
+  
+    if (error) {
+      console.log(error);
+      throw error;
+    }
+    return subscriptions;
+  }
