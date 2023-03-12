@@ -126,9 +126,8 @@ const SubcriptionBox = ({
           <Chakra.Text fontSize="12px" mt={5} ml={2} color="#8C8C8C">
             {/* Añadir ruta de Términos y Condiciones */}
 
-            <Chakra.Link href="#">
-              Se aplican&nbsp;
-              <span className={styles.term_cond}>Términos y Condiciones</span>
+            <Chakra.Link href="#" _hover={{ textDecoration: "none" }}>
+              Se aplican <span className={styles.term_cond}>Términos y Condiciones</span>
             </Chakra.Link>
           </Chakra.Text>
         </>
