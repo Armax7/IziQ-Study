@@ -6,7 +6,7 @@ export default async function handlerById(req, res) {
 
   switch (method) {
     case Methods.GET:
-      await Handlers.handleGetById(req, res);
+      return await Handlers.handleGetById(req, res);
     default:
       res.status(400).json({
         message: "400 Bad Request: invalid method",
