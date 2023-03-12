@@ -43,3 +43,23 @@ export async function postSubscription({
 
   return data;
 }
+
+export async function updateSubscription({
+  id,
+  name,
+  price_per_month,
+  price_per_year,
+}) {
+  const { data, error } = await supabase
+    .from("subscriptions")
+    .update({ name, price_per_month, price_per_year })
+    .eq("id", id)
+    .select();
+
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+
+  return data;
+}
