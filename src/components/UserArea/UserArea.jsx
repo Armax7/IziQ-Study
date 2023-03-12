@@ -8,9 +8,9 @@ export default function UserArea() {
   const [showDeckContainer, setShowDeckContainer] = useState(false);
 
   useEffect(async () => {
-    setUser(supabase.auth.getUser());
-    const user = await supabase.auth.getUser();
-    console.log(user.data);
+    const user = await SupaHelpers.get.userData();
+    setUser(user);
+    setUserSession(user.email);
   }, []);
 
   const handleLogout = async () => {
