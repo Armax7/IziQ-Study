@@ -63,3 +63,17 @@ export async function updateSubscription({
 
   return data;
 }
+
+export async function deleteSubscription({ id }) {
+  const { data, error } = await supabase
+    .from("subscriptions")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+
+  return data;
+}
