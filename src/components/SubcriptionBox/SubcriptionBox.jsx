@@ -137,4 +137,4 @@ const SubcriptionBox = ({
   );
 };
 
-export { SubcriptionBox };
+export default SubcriptionBox ;
