@@ -15,14 +15,18 @@ function Decks() {
     if (cards) {
       setCards(cards);
     }
-  }, [id]);
+  }, [id, cards]);
 
   return (
     <div>
-      <Chakra.VStack align={'stretch'} >
+      <Chakra.VStack align={"stretch"}>
         <Components.CardContainer cards={cards} />
-        <Components.CardDetailsContainer dbCards={cards} spacing={'1rem'} pb={'2rem'} />
-        <Components.CardForm deckId={id}  />
+        <Components.CardDetailsContainer
+          dbCards={cards}
+          spacing={"1rem"}
+          pb={"2rem"}
+        />
+        <Components.CardForm deckId={id} />
       </Chakra.VStack>
     </div>
   );
