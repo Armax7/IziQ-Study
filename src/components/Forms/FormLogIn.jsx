@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { supabase } from "../../pages/api/supabaseClient";
 import UserArea from "../UserArea/UserArea";
+import styles from "./FormLogin.module.css";
 
 function FormLogIn() {
   const [show, setShow] = useState(false);
@@ -99,6 +100,8 @@ function FormLogIn() {
           backgroundColor="red.400"
           onClick={handleSignIn}
           ml="370"
+          padding="0"
+          w="100px"
           colorScheme="blue"
           marginTop="25px"
           marginBottom="25px"
@@ -107,7 +110,7 @@ function FormLogIn() {
           {!isLoggedIn ? (
             <Link href="">Log In</Link>
           ) : (
-            <a styles={{ width: "100%", height: "100%" }} href="/home">
+            <a className={styles.linkA} href="/home">
               Log In
             </a>
           )}
