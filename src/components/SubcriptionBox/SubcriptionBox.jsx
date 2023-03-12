@@ -2,8 +2,17 @@ import * as Chakra from "@chakra-ui/react";
 import { Check } from "./utils";
 import styles from "./SubcriptionBox.module.css";
 
-const SubcriptionBox = ({subscription, description}) => {
-
+const SubcriptionBox = ({
+  subscription = {
+    name: "Premium",
+    price_per_month: "$6.99",
+    price_per_year: "$69.99",
+  },
+  description = [
+    "Accede a nuestros cursos y recursos completos.",
+    "Accede a todos nuestros cursos, recursos y sesiones de coaching personalizadas.",
+  ],
+}) => {
   return (
     <Chakra.Box
       borderRadius="15px"
@@ -76,8 +85,9 @@ const SubcriptionBox = ({subscription, description}) => {
         mb={6}
         mt={6}
       />
-      <Chakra.Flex>
-        {description.map((description, index) => [
+
+      {description.map((description, index) => [
+        <Chakra.Flex>
           <Chakra.Box
             key={`${index}-box`}
             mt={1}
@@ -85,7 +95,7 @@ const SubcriptionBox = ({subscription, description}) => {
             style={{ maxWidth: "30px", minWidth: "20px" }}
           >
             <Check />
-          </Chakra.Box>,
+          </Chakra.Box>
           <Chakra.Text
             key={`${index}-text`}
             fontSize="15px"
@@ -93,9 +103,10 @@ const SubcriptionBox = ({subscription, description}) => {
             mb={4}
           >
             {description}
-          </Chakra.Text>,
-        ])}
-      </Chakra.Flex>
+          </Chakra.Text>
+        </Chakra.Flex>,
+      ])}
+
       {subscription.name !== "Free" && (
         <>
           <Chakra.Button
@@ -113,11 +124,10 @@ const SubcriptionBox = ({subscription, description}) => {
             Obtener plan
           </Chakra.Button>
           <Chakra.Text fontSize="12px" mt={5} ml={2} color="#8C8C8C">
-          
             {/* Añadir ruta de Términos y Condiciones */}
 
             <Chakra.Link href="#">
-              Se aplican{" "}
+              Se aplican
               <span className={styles.term_cond}>Términos y Condiciones</span>
             </Chakra.Link>
           </Chakra.Text>
@@ -127,4 +137,4 @@ const SubcriptionBox = ({subscription, description}) => {
   );
 };
 
-export default SubcriptionBox;
+export { SubcriptionBox };
