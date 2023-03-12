@@ -2,7 +2,7 @@ import * as Chakra from "@chakra-ui/react";
 import { Check } from "./utils";
 import styles from "./SubcriptionBox.module.css";
 
-const SubcriptionBox = ({name, pricePerMonth, pricePerYear, description}) => {
+const SubcriptionBox = ({name, description}) => {
 
   return (
     <Chakra.Box
@@ -31,9 +31,9 @@ const SubcriptionBox = ({name, pricePerMonth, pricePerYear, description}) => {
       )}
 
       <Chakra.Text fontSize="20px" fontWeight="bold" mt={3} mb={-.5} ml={1} color="#797979">
-        {pricePerMonth ? (
+        {name.price_per_month ? (
           <>
-            {pricePerMonth}
+            {name.price_per_month}
             <span className={styles.per}> por mes</span>
           </>
         ) : (
@@ -42,9 +42,9 @@ const SubcriptionBox = ({name, pricePerMonth, pricePerYear, description}) => {
       </Chakra.Text>
       <Chakra.Flex></Chakra.Flex>
       <Chakra.Text fontSize="20px" fontWeight="bold" mb={4} ml={1} color="#797979">
-        {pricePerYear ? (
+        {name.price_per_year ? (
           <>
-            {pricePerYear}
+            {name.price_per_year}
             <span className={styles.per}> por año</span>
           </>
         ) : (
@@ -61,7 +61,7 @@ const SubcriptionBox = ({name, pricePerMonth, pricePerYear, description}) => {
           <Check />
         </Chakra.Box>
         <Chakra.Text fontSize="15px" fontWeight="medium" mb={4}>
-          {description[0]}
+          {description}
         </Chakra.Text>
       </Chakra.Flex>
       <Chakra.Flex mt={1}>
@@ -73,7 +73,7 @@ const SubcriptionBox = ({name, pricePerMonth, pricePerYear, description}) => {
           <Check />
         </Chakra.Box>
         <Chakra.Text fontSize="15px" fontWeight="medium" mb={4}>
-          {description[1]}
+          {description}
         </Chakra.Text>
       </Chakra.Flex>
       {name !== "Gratis" && (
