@@ -2,8 +2,30 @@ import * as Chakra from "@chakra-ui/react";
 import styles from "./CardForm.module.css";
 import { useState } from "react";
 import { Image } from "./utils";
+import { supabase } from "../../pages/api/supabaseClient"; //this is for temporal POST card
 
-const CardForm = () => {
+/// This is a temporal function to POST a card on DB
+/// Pls remove after implementing back end
+async function temporalPostCard({
+  question,
+  answer,
+  image = null,
+  learned = false,
+  deck_id,
+}) {
+  const { data, error } = await supabase
+    .from("cards")
+    .insert([{ question, answer, image, learned, deck_id }])
+    .select();
+  if (error) {
+    console.log(error);
+    return error;
+  }
+  return data;
+}
+/// Temporal function ends, erase up to here.
+
+function CardForm({ deckId, ...props }) {
   const initialValues = {
     question: "",
     answer: "",
@@ -14,6 +36,7 @@ const CardForm = () => {
   const [formData, setFormData] = useState(initialValues);
 
   const handleOnChange = (e) => {
+    e.preventDefault();
     const property = e.target.name;
     const value = e.target.value;
     setFormData({
@@ -22,15 +45,15 @@ const CardForm = () => {
     });
   };
 
-  const [cards, setCards] = useState([0]);
-
-  const handleAddCard = () => {
-    setCards([...cards, cards.length]);
-    console.log("Added succesfully");
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    const deck_id = deckId
+    const log = await temporalPostCard({...formData, deck_id});
+    console.log("Added: ", log);
   };
 
   return (
-    <>
+    <Chakra.Box {...props}>
       <Chakra.Box
         mx="auto"
         w="90%"
@@ -111,13 +134,13 @@ const CardForm = () => {
           color="#000000"
           _hover={{ backgroundColor: "transparent", color: "#000000" }}
           _focus={{ outline: "none" }}
-          onClick={handleAddCard}
+          onClick={handleOnSubmit}
         >
           <span className={styles.line_add}>+ ADD CARD</span>
         </Chakra.Button>
       </Chakra.Box>
-    </>
+    </Chakra.Box>
   );
-};
+}
 
 export default CardForm;
