@@ -20,7 +20,7 @@ function FormLogIn() {
       console.log(event, session);
       setSession(session);
     });
-  }, []);
+  }, [isLoggedIn]);
 
   const handleSignIn = async () => {
     try {
@@ -32,6 +32,7 @@ function FormLogIn() {
       alert("User logged.");
       console.log("hey estoy loggueado");
       setIsLoggedIn(true);
+
       // console.log(user)
       // console.log(session)
     } catch (e) {
@@ -103,7 +104,13 @@ function FormLogIn() {
           marginBottom="25px"
           marginLeft="0px"
         >
-          {<a href={isLoggedIn == true ? "/home" : "/"}>Log In</a>}
+          {!isLoggedIn ? (
+            <Link href="">Log In</Link>
+          ) : (
+            <a styles={{ width: "100%", height: "100%" }} href="/home">
+              Log In
+            </a>
+          )}
         </Chakra.Button>
       </Chakra.Box>
     </>
