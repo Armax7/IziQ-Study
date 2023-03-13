@@ -12,3 +12,4 @@ export { default as CardDetails } from "./CardDetails/CardDetails";
 export { default as SubcriptionBox } from "./SubcriptionBox/SubcriptionBox";
 export { default as CardDetailsContainer } from "./CardDetailsContainer/CardDetailsContainer";
 export { default as SubscriptionShowcase } from "./SubscriptionShowcase/SubscriptionShowcase";
+export { default as SubscriptionBoxContainer } from "./SubscriptionBoxContainer/SubscriptionBoxContainer";

@@ -32,4 +32,4 @@ const SubscriptionBoxContainer = ({ subscriptions, description }) => {
   );
 };
 
-export { SubscriptionBoxContainer };
+export default SubscriptionBoxContainer ;
