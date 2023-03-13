@@ -55,7 +55,7 @@ export async function handlePost(req, res) {
   const body = req.body;
 
   try {
-    const response = await Controllers.postCategory(body);
+    const response = await Controllers.postCard(body);
     res
       .status(201)
       .json({ message: `Submited on categories: ${JSON.stringify(response)}` });

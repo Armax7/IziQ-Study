@@ -53,7 +53,25 @@ export const getCardByNameQuestion = async (name) => {
   return getCardByQuestion;
 };
 
-export async function createCards(req, res) {}
+export async function postCard({
+  question,
+  answer,
+  deck_id,
+  image = null,
+  learned = false,
+}) {
+  const { data, error } = await supabase
+    .from("cards")
+    .insert([{ question, answer, image, learned, deck_id }])
+    .select();
+
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+
+  return data;
+}
 
 export async function updateCards(req, res) {}
 
