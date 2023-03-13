@@ -73,6 +73,19 @@ export async function postCard({
   return data;
 }
 
-export async function updateCards(req, res) {}
+export async function updateCard({ id, question, answer, image, learned }) {
+  const { data, error } = await supabase
+    .from("cards")
+    .update({ question, answer, image, learned })
+    .eq("id", id)
+    .select();
+
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+
+  return data;
+}
 
 export async function deleteCards(req, res) {}

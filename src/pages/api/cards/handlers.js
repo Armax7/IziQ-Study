@@ -58,7 +58,7 @@ export async function handlePost(req, res) {
     const response = await Controllers.postCard(body);
     res
       .status(201)
-      .json({ message: `Submited on categories: ${JSON.stringify(response)}` });
+      .json({ message: `Submited on card: ${JSON.stringify(response)}` });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -68,9 +68,9 @@ export async function handlePut(req, res) {
   const body = req.body;
 
   try {
-    const response = await Controllers.updateCategory(body);
+    const response = await Controllers.updateCard(body);
     return res.status(200).json({
-      message: `Category with ID: ${JSON.stringify(
+      message: `Card with ID: ${JSON.stringify(
         response.at(0).id
       )} updated with ${JSON.stringify(response)}`,
     });
