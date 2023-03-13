@@ -1,8 +1,8 @@
 import * as Chakra from "@chakra-ui/react";
 import { Check } from "./utils";
 import styles from "./SubcriptionBox.module.css";
-
-const SubcriptionBox = ({ subscription, description }) => {
+import {checkout} from "./subscriptionBox_helper/checkout";
+const SubcriptionBox = ({ subscription,description,id="price_1MkVSUFcHuX0pfzL21JHgbME"}) => {
   return (
     <Chakra.Box
       borderRadius="15px"
@@ -110,6 +110,16 @@ const SubcriptionBox = ({ subscription, description }) => {
             w="105%"
             borderRadius="50px"
             color="#FFFFFF"
+            onClick={(()=>{
+              checkout({
+                  lineItems:[
+                      {
+                          price:id,
+                          quantity:1
+                      }
+                  ]
+              })
+          })}
           >
             Obtener plan
           </Chakra.Button>
