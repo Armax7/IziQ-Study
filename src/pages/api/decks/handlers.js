@@ -30,11 +30,21 @@ export async function getDeckByUserIdHandler(req, res) {
 }
 
 export async function createDecksHandler(req, res) {
-  const body = req.body
+  const body = req.body;
   try {
-      const postDeck = await Controllers.postNewDeck(body)
-      res.status(200).json(postDeck)
+    const postDeck = await Controllers.postNewDeck(body);
+    res.status(200).json(postDeck);
   } catch (error) {
-    res.status(404).json({error: error.message});
+    res.status(404).json({ error: error.message });
+  }
+}
+
+export async function updateDecksHandler(req, res) {
+  const body = req.body;
+  try {
+    const updateDeck = await Controllers.modificatedDeck(body);
+    res.status(200).json(updateDeck);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
   }
 }
