@@ -42,7 +42,7 @@ export const postNewDeck = async ({
   total_cards = 0,
   rating = 0,
 }) => {
-  const { data:postDeck, error } = await supabase
+  const { data: postDeck, error } = await supabase
     .from("decks")
     .insert([
       {
@@ -61,4 +61,35 @@ export const postNewDeck = async ({
     throw error;
   }
   return postDeck;
+};
+
+export const modificatedDeck = async ({
+  id,
+  name,
+  description,
+  total_cards,
+  status,
+  category_id,
+  subcategory_id,
+  rating,
+}) => {
+  const { data: updateDeck, error } = await supabase
+    .from("decks")
+    .update([
+      {
+        name,
+        description,
+        total_cards,
+        status,
+        category_id,
+        subcategory_id,
+        rating,
+      },
+    ])
+    .eq("id", id)
+    .select("*")  
+  if (error) {
+    throw error;
+  }
+  return updateDeck;
 };
