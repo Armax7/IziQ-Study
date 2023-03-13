@@ -1,18 +1,8 @@
 import * as Chakra from "@chakra-ui/react";
 import { Check } from "./utils";
 import styles from "./SubcriptionBox.module.css";
-
-const SubcriptionBox = ({
-  subscription = {
-    name: "Premium",
-    price_per_month: "$6.99",
-    price_per_year: "$69.99",
-  },
-  description = [
-    "Accede a nuestros cursos y recursos completos.",
-    "Accede a todos nuestros cursos, recursos y sesiones de coaching personalizadas.",
-  ],
-}) => {
+import {checkout} from "./subscriptionBox_helper/checkout";
+const SubcriptionBox = ({ subscription,description,id="price_1MkVSUFcHuX0pfzL21JHgbME"}) => {
   return (
     <Chakra.Box
       borderRadius="15px"
@@ -100,7 +90,7 @@ const SubcriptionBox = ({
             key={`${index}-text`}
             fontSize="15px"
             fontWeight="medium"
-            mb={4}
+            mb={1}
           >
             {description}
           </Chakra.Text>
@@ -120,6 +110,16 @@ const SubcriptionBox = ({
             w="105%"
             borderRadius="50px"
             color="#FFFFFF"
+            onClick={(()=>{
+              checkout({
+                  lineItems:[
+                      {
+                          price:id,
+                          quantity:1
+                      }
+                  ]
+              })
+          })}
           >
             Obtener plan
           </Chakra.Button>
