@@ -1,30 +1,91 @@
 import * as Controllers from "./controllers";
 
-export async function getAllFromCardsHandler(req, res) {
+export async function handleGet(req, res) {
   try {
-    const cards = await Controllers.getAllCards();
-    res.status(200).json(cards);
+    const response = await Controllers.getAllCards();
+    return res.status(200).json(response);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 }
 
-export async function getCardByNameQuestionHandler(req, res) {
+export async function handleGetByName(req, res) {
   const { name } = req.query;
+
   try {
-    const cardQuestion = await Controllers.getCardByNameQuestion(name);
-    res.status(200).json(cardQuestion);
+    const response = await Controllers.getCardByNameQuestion(name);
+    if (JSON.stringify(response) === "[]") {
+      return res.status(404).json([{ error: "Name not found" }]);
+    }
+    return res.status(200).json(response);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 }
 
-export async function getCardByDeckIdHandler(req, res) {
-  const { uuid } = req.query;
+export async function handleGetById(req, res) {
+  const { id } = req.query;
+
   try {
-    const getCardDeck = await Controllers.getCardByDeckID(uuid);
-    res.send(getCardDeck);
+    const response = await Controllers.getCardById(id);
+    if (JSON.stringify(response) === "[]") {
+      return res.status(404).json([{ error: "Card with ID not found" }]);
+    }
+    return res.status(200).json(response);
   } catch (error) {
-    res.status(404).send(error.message);
+    return res.status(500).json({ error: error.message });
+  }
+}
+
+export async function handleGetByDeckId(req, res) {
+  const { deckId } = req.query;
+
+  try {
+    const response = await Controllers.getCardByDeckId(deckId);
+    if (JSON.stringify(response) === "[]") {
+      return res.status(404).json([{ error: "Deck UUID not found" }]);
+    }
+    return res.status(200).json(response);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}
+
+export async function handlePost(req, res) {
+  const body = req.body;
+
+  try {
+    const response = await Controllers.postCategory(body);
+    res
+      .status(201)
+      .json({ message: `Submited on categories: ${JSON.stringify(response)}` });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}
+
+export async function handlePut(req, res) {
+  const body = req.body;
+
+  try {
+    const response = await Controllers.updateCategory(body);
+    return res.status(200).json({
+      message: `Category with ID: ${JSON.stringify(
+        response.at(0).id
+      )} updated with ${JSON.stringify(response)}`,
+    });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}
+
+export async function handleDelete(req, res) {
+  const body = req.body;
+
+  try {
+    const response = await Controllers.deleteCategory(body);
+    return res.status(204).json({ message: "Deleted" });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
   }
 }
