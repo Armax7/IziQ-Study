@@ -83,8 +83,8 @@ export async function handleDelete(req, res) {
   const body = req.body;
 
   try {
-    const response = await Controllers.deleteCategory(body);
-    return res.status(204).json({ message: "Deleted" });
+    const response = await Controllers.deleteCard(body);
+    return res.status(204).end();
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }

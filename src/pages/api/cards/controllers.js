@@ -88,4 +88,16 @@ export async function updateCard({ id, question, answer, image, learned }) {
   return data;
 }
 
-export async function deleteCards(req, res) {}
+export async function deleteCard({id}) {
+  const { data, error } = await supabase
+  .from("cards")
+  .delete()
+  .eq("id", id);
+
+if (error) {
+  console.log(error);
+  throw error;
+}
+
+return data;
+}
