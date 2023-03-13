@@ -28,3 +28,13 @@ export async function getDeckByUserIdHandler(req, res) {
     res.status(404).send(error.message);
   }
 }
+
+export async function createDecksHandler(req, res) {
+  const body = req.body
+  try {
+      const postDeck = await Controllers.postNewDeck(body)
+      res.status(200).json(postDeck)
+  } catch (error) {
+    res.status(404).json({error: error.message});
+  }
+}
