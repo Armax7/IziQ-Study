@@ -42,7 +42,7 @@ export const postNewDeck = async ({
   total_cards = 0,
   rating = 0,
 }) => {
-  const { data, error } = await supabase
+  const { data:postDeck, error } = await supabase
     .from("decks")
     .insert([
       {
@@ -57,10 +57,8 @@ export const postNewDeck = async ({
       },
     ])
     .select("*");
-
   if (error) {
     throw error;
   }
-
-  return data;
+  return postDeck;
 };
