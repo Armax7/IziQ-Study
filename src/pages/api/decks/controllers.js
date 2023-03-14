@@ -11,6 +11,20 @@ export const getAllDecks = async () => {
   return decks;
 };
 
+export const getDeckById = async (uuid) => {
+  const { data: deckById, error } = await supabase
+    .from("decks")
+    .select()
+    .eq("id", uuid);
+
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+
+  return deckById;
+};
+
 export const getDeckByUserId = async (userId) => {
   const { data: getDeckByUserID, error } = await supabase
     .from("decks")

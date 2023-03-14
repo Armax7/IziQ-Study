@@ -19,6 +19,16 @@ export async function handleGetByName(req, res) {
   }
 }
 
+export async function handleGetById(req, res) {
+  const { uuid } = req.query;
+  try {
+    const userDecks = await Controllers.getDeckById(uuid);
+    return res.status(200).json(userDecks);
+  } catch (error) {
+    return res.status(404).json(error.message);
+  }
+}
+
 export async function handleGetByUserId(req, res) {
   const { uuid } = req.query;
   try {
