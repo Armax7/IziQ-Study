@@ -1,0 +1,27 @@
+.br {
+    content: "";
+    width: 90%;
+    height: 6px;
+    background: grey;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.checkSpan {
+    height: 100%;
+}
+
+.containerGeneral {
+    height: 100vh;
+    width: 100%;
+}
+
+.containerPlan {
+    margin: auto 0;
+    width: 450px;
+    background-color: white;
+    border-radius: 15px;
+    height: 85vh;
+    box-sizing: border-box;
+}
+

@@ -5,14 +5,24 @@ import * as Chakra from "@chakra-ui/react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsFillBellFill } from "react-icons/bs";
 import { CgPathTrim } from "react-icons/cg";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import * as Components from "../../../components";
+import * as SupaHelpers from "../../../pages/api/supabase_helpers";
 
 const OptionsBar = ({ logged = false, avatarImage }) => {
   const SignIn = Chakra.useDisclosure();
   const singUp = Chakra.useDisclosure();
   const btnRef = React.useRef();
+
+  //Creo un estado local en el cual se guarda datos del usuario (en este caso el nombre)
+  const [userData, setUserData] = useState("");
+  useEffect(async () => {
+    //Accedemos a ese dato por medio de un metodo en supaHelpers
+    let user = await SupaHelpers.get.userNameFull();
+    console.log("this is user ", user); // Console.log para ver el resutado primero por terminal
+    setUserData(user); //Seteamos el valor obtenido
+  }, []);
 
   return (
     <>
@@ -55,7 +65,7 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                 </Chakra.Center>
                 <br />
                 <Chakra.Center>
-                  <p>Username</p>
+                  <p>{userData.length ? userData : "Username"}</p>
                 </Chakra.Center>
                 <br />
                 <Chakra.MenuDivider />
@@ -84,8 +94,7 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
             fontSize={"sm"}
             fontWeight={400}
             variant={"link"}
-            href={"#"}
-            _focus={{border:"none"}}
+            _focus={{ border: "none" }}
           >
             Sign In
           </Chakra.Button>
@@ -120,7 +129,7 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
             color={"white"}
             bg="#EB455F"
             href={"#"}
-            _focus={{border:"none"}}
+            _focus={{ border: "none" }}
             _hover={{
               bg: "pink.300",
             }}
