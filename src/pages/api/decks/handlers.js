@@ -48,3 +48,15 @@ export async function updateDecksHandler(req, res) {
     res.status(404).json({ error: error.message });
   }
 }
+
+export async function deleteDecksHandler(req, res) {
+  const body = req.body;
+  console.log("BODY",body);
+
+  try {
+    const response = await Controllers.removeDeckById(JSON.parse(body));
+    return res.status(200).end();
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}  
