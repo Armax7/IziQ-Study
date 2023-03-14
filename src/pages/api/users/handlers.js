@@ -1,6 +1,6 @@
 import * as Controllers from "./controllers";
 
-export async function getAllFromUserDetailHandler(req, res) {
+export async function handleGet(req, res) {
   try {
     const user = await Controllers.getAllUsersDetails();
     res.status(200).json(user);
@@ -9,7 +9,7 @@ export async function getAllFromUserDetailHandler(req, res) {
   }
 }
 
-export async function getUserDetailByNameHandler(req, res) {
+export async function handleGetByName(req, res) {
   const { name } = req.query;
   try {
     const user = await Controllers.getUserDetailByName(name);
@@ -19,7 +19,7 @@ export async function getUserDetailByNameHandler(req, res) {
   }
 }
 
-export async function getUserDetailByIdHandler(req, res){
+export async function handleGetByUserUuid(req, res){
   const {uuid} = req.query
   try {
     const userDetail = await Controllers.getUserDetailById(uuid);
@@ -29,7 +29,7 @@ export async function getUserDetailByIdHandler(req, res){
   }
 }
 
-export async function updateUserDetailHandler(req, res) {
+export async function handlePut(req, res) {
   const body = req.body
   try {
     const updateUser = await Controllers.modificatedUser(body)
@@ -39,7 +39,7 @@ export async function updateUserDetailHandler(req, res) {
   }
 }
 
-export async function deleteUserDetailHandler(req, res) {
+export async function handleDelete(req, res) {
   const body = req.body
   try {
     const response = await Controllers.removeUserById(body)
@@ -49,6 +49,6 @@ export async function deleteUserDetailHandler(req, res) {
   }
 }
 
-export async function createUserDetailHandler(req, res) {}
+export async function handlePost(req, res) {}
 
 

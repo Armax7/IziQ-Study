@@ -1,23 +1,21 @@
 import * as Handlers from "./handlers";
 import * as Methods from "../methods";
 
-export default function handler(req, res) {
-  const { method } = req;
+export default async function handlerCategories(req, res) {
+  const method = req.method;
 
   switch (method) {
     case Methods.GET:
-      Handlers.getAllFromUserDetailHandler(req, res);
-      break;
+      return await Handlers.handleGet(req, res);
     case Methods.POST:
-      Handlers.createUserDetailHandler(req, res);
-      break;
+      return await Handlers.handlePost(req, res);
     case Methods.PUT:
-      Handlers.updateUserDetailHandler(req, res);
-      break;
+      return await Handlers.handlePut(req, res);
     case Methods.DELETE:
-      Handlers.deleteUserDetailHandler(req, res);
-      break;
+      return await Handlers.handleDelete(req, res);
     default:
-      res.status(400).json({ message: "Invalid request method" });
+      return res.status(400).json({
+        message: "400 Bad Request: invalid method",
+      });
   }
 }
