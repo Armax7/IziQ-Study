@@ -55,7 +55,7 @@ export async function deleteDecksHandler(req, res) {
 
   try {
     const response = await Controllers.removeDeckById(JSON.parse(body));
-    return res.status(200).end();
+    return res.status(200).json({ message: "Deck successfully removed" });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
