@@ -6,16 +6,16 @@ export default function handler(req, res) {
 
   switch (method) {
     case Methods.GET:
-      getAllFromUserDetailHandler(req, res);
+      Handlers.getAllFromUserDetailHandler(req, res);
       break;
     case Methods.POST:
-      createUserDetail(req, res);
+      Handlers.createUserDetail(req, res);
       break;
     case Methods.PUT:
-      updateUserDetail(req, res);
+      Handlers.updateUserDetail(req, res);
       break;
     case Methods.DELETE:
-      deleteUserDetail(req, res);
+      Handlers.deleteUserDetail(req, res);
       break;
     default:
       res.status(400).json({ message: "Invalid request method" });
