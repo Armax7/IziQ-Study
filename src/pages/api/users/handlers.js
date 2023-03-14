@@ -29,9 +29,17 @@ export async function getUserDetailByIdHandler(req, res){
   }
 }
 
+export async function updateUserDetailHandler(req, res) {
+  const body = req.body
+  try {
+    const updateUser = await Controllers.modificatedUser(body)
+    res.status(200).json(updateUser)
+  } catch (error) {
+    res.status(500).json({ error: error.message });    
+  }
+}
 
 export async function createUserDetailHandler(req, res) {}
 
-export async function updateUserDetailHandler(req, res) {}
 
 export async function deleteUserDetailHandler(req, res) {}
