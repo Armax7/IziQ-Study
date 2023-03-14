@@ -9,13 +9,13 @@ export default function handler(req, res) {
       Handlers.getAllFromUserDetailHandler(req, res);
       break;
     case Methods.POST:
-      Handlers.createUserDetail(req, res);
+      Handlers.createUserDetailHandler(req, res);
       break;
     case Methods.PUT:
-      Handlers.updateUserDetail(req, res);
+      Handlers.updateUserDetailHandler(req, res);
       break;
     case Methods.DELETE:
-      Handlers.deleteUserDetail(req, res);
+      Handlers.deleteUserDetailHandler(req, res);
       break;
     default:
       res.status(400).json({ message: "Invalid request method" });
