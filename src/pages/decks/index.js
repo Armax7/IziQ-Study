@@ -14,7 +14,7 @@ const Decks = () => {
   const [allSubCategories, setAllSubCategories] = useState([]);
 
   const [subcategories, setSubCategories] = useState([]);
-  
+
   useEffect(async () => {
     const userID = await SupaHelpers.get.userId();
     setUserId(userID);
@@ -73,11 +73,8 @@ const Decks = () => {
     <div>
       <Chakra.Box
         borderRadius="10px"
-        
-        
         fontWeight="normal"
         fontSize="25px"
-
         textTransform="uppercase"
         textAlign="center"
       >
@@ -113,10 +110,7 @@ const Decks = () => {
           padding="2em 0.1em 2em 1em"
         />
 
-        
-          <Components.DeckContainer decks={decks} />
-        
-
+        <Components.DeckContainer decks={decks} />
       </Chakra.Box>
     </div>
   );
