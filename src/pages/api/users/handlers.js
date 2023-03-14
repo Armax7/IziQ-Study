@@ -32,23 +32,21 @@ export async function handleGetByUserUuid(req, res){
 export async function handlePut(req, res) {
   const body = req.body
   try {
-    const updateUser = await Controllers.modificatedUser(body)
+    const updateUser = await Controllers.updateUserDetails(body)
     res.status(200).json(updateUser)
   } catch (error) {
     res.status(500).json({ error: error.message });    
   }
 }
 
-export async function handleDelete(req, res) {
+export async function handlePost(req, res) {
   const body = req.body
   try {
-    const response = await Controllers.removeUserById(body)
-    return res.status(200).json({message:"User successfully removed"})
+    const userDetails = await Controllers.postUserDetails(body)
+    res.status(200).json(userDetails)
   } catch (error) {
-    return res.status(500).json({ error: error.message });    
+    res.status(500).json({ error: error.message });    
   }
 }
-
-export async function handlePost(req, res) {}
 
 
