@@ -1,7 +1,9 @@
 import * as Chakra from "@chakra-ui/react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { supabase } from "../../pages/api/supabaseClient";
 import UserArea from "../UserArea/UserArea";
+import styles from "./FormLogin.module.css";
 
 function FormLogIn() {
   const [show, setShow] = useState(false);
@@ -19,7 +21,7 @@ function FormLogIn() {
       console.log(event, session);
       setSession(session);
     });
-  }, []);
+  }, [isLoggedIn]);
 
   const handleSignIn = async () => {
     try {
@@ -31,6 +33,7 @@ function FormLogIn() {
       alert("User logged.");
       console.log("hey estoy loggueado");
       setIsLoggedIn(true);
+
       // console.log(user)
       // console.log(session)
     } catch (e) {
@@ -50,66 +53,69 @@ function FormLogIn() {
 
   return (
     <>
-      {isLoggedIn ? (
-        <UserArea />
-      ) : (
-        <Chakra.Box bg="#4D455D" w="45%" p={8} color="black" ml="480" h="560">
-
-          <Chakra.FormControl isRequired>
-            <Chakra.FormLabel textColor="#F5E9CF">E-mail</Chakra.FormLabel>
-            <Chakra.Input
-              width="auto"
-              backgroundColor="#F5E9CF"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Chakra.FormControl>
-
-          <Chakra.FormLabel textColor="#F5E9CF">Password</Chakra.FormLabel>
-          <Chakra.InputGroup
+      <Chakra.Box bg="#4D455D" w="45%" p={8} color="black" ml="480" h="560">
+        <Chakra.FormControl isRequired>
+          <Chakra.FormLabel textColor="#F5E9CF">E-mail</Chakra.FormLabel>
+          <Chakra.Input
+            width="auto"
             backgroundColor="#F5E9CF"
-            textColor="black"
-            size="md"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          >
-            <Chakra.Input pr="4.5rem" type={show ? "text" : "password"} />
-            <Chakra.InputRightElement width="4.5rem">
-              <Chakra.Button
-                w="1.rem"
-                size="sm"
-                onClick={handleClick}
-                backgroundColor="#E96479"
-                color="black"
-                colorScheme="blue"
-              >
-                {show ? "Hide" : "Show"}
-              </Chakra.Button>
-            </Chakra.InputRightElement>
-          </Chakra.InputGroup>
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </Chakra.FormControl>
 
-          <Chakra.FormControl isRequired>
-            <Chakra.FormHelperText color textColor="blue.400">
-              Did you forget your password ?.
-            </Chakra.FormHelperText>
-          </Chakra.FormControl>
+        <Chakra.FormLabel textColor="#F5E9CF">Password</Chakra.FormLabel>
+        <Chakra.InputGroup
+          backgroundColor="#F5E9CF"
+          textColor="black"
+          size="md"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        >
+          <Chakra.Input pr="4.5rem" type={show ? "text" : "password"} />
+          <Chakra.InputRightElement width="4.5rem">
+            <Chakra.Button
+              w="1.rem"
+              size="sm"
+              onClick={handleClick}
+              backgroundColor="#E96479"
+              color="black"
+              colorScheme="blue"
+            >
+              {show ? "Hide" : "Show"}
+            </Chakra.Button>
+          </Chakra.InputRightElement>
+        </Chakra.InputGroup>
 
-          <Chakra.Button
-            mr={82}
-            backgroundColor="red.400"
-            onClick={handleSignIn}
-            ml="370"
-            colorScheme="blue"
-            marginTop="25px"
-            marginBottom="25px"
-            marginLeft="0px"
-          >
-            Log In
-          </Chakra.Button>      
-        </Chakra.Box>
-      )}
+        <Chakra.FormControl isRequired>
+          <Chakra.FormHelperText color textColor="blue.400">
+            Did you forget your password ?.
+          </Chakra.FormHelperText>
+        </Chakra.FormControl>
+
+        <Chakra.Button
+          mr={82}
+          backgroundColor="red.400"
+          onClick={handleSignIn}
+          ml="370"
+          padding="0"
+          w="100px"
+          colorScheme="blue"
+          marginTop="25px"
+          marginBottom="25px"
+          marginLeft="0px"
+        >
+          {!isLoggedIn ? (
+            <Link href="">Log In</Link>
+          ) : (
+            <a className={styles.linkA} href="/home">
+              Log In
+            </a>
+          )}
+        </Chakra.Button>
+      </Chakra.Box>
     </>
   );
 }
