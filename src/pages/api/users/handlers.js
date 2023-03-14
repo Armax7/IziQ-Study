@@ -30,8 +30,8 @@ export async function getUserDetailByIdHandler(req, res){
 }
 
 
-export async function createUserDetail(req, res) {}
+export async function createUserDetailHandler(req, res) {}
 
-export async function updateUserDetail(req, res) {}
+export async function updateUserDetailHandler(req, res) {}
 
-export async function deleteUserDetail(req, res) {}
+export async function deleteUserDetailHandler(req, res) {}
