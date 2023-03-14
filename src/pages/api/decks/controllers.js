@@ -1,35 +1,41 @@
 import { supabase } from "../supabaseClient";
 
 export const getAllDecks = async () => {
-  const getDecks = await supabase.from("decks").select("*");
-  return getDecks.data;
+  const { data: decks, error } = await supabase.from("decks").select();
+
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+
+  return decks;
 };
 
-export const getDeckByUserId = async (id) => {
+export const getDeckByUserId = async (userId) => {
   const { data: getDeckByUserID, error } = await supabase
     .from("decks")
-    .select("*")
-    .match({ user_id: id });
+    .select()
+    .eq("user_id", userId);
+
   if (error) {
-    throw new Error(error.message);
+    console.log(error);
+    throw error;
   }
-  if (!getDeckByUserID) {
-    throw Error(`No se encontró el user con ID ${id}`);
-  }
+
   return getDeckByUserID;
 };
 
 export const getDecksByName = async (name) => {
   const { data: getDecksByName, error } = await supabase
     .from("decks")
-    .select("*")
+    .select()
     .ilike("name", `%${name}%`);
+
   if (error) {
-    throw new Error(error.message);
+    console.log(error);
+    throw error;
   }
-  if (getDecksByName.length === 0) {
-    throw new Error(`No se encuentran coincidencias con el Name ${name}`);
-  }
+
   return getDecksByName;
 };
 
@@ -56,14 +62,14 @@ export const postNewDeck = async ({
         rating,
       },
     ])
-    .select("*");
+    .select();
   if (error) {
     throw error;
   }
   return postDeck;
 };
 
-export const modificatedDeck = async ({
+export const updateDeck = async ({
   id,
   name,
   description,
@@ -75,31 +81,25 @@ export const modificatedDeck = async ({
 }) => {
   const { data: updateDeck, error } = await supabase
     .from("decks")
-    .update([
-      {
-        name,
-        description,
-        total_cards,
-        status,
-        category_id,
-        subcategory_id,
-        rating,
-      },
-    ])
+    .update({
+      name,
+      description,
+      total_cards,
+      status,
+      category_id,
+      subcategory_id,
+      rating,
+    })
     .eq("id", id)
-    .select("*")  
+    .select();
   if (error) {
     throw error;
   }
   return updateDeck;
 };
 
-
-export async function removeDeckById({ id }) {
-  const { data, error } = await supabase
-    .from("decks")
-    .delete()
-    .eq("id", id);
+export async function deleteDeck({ id }) {
+  const { data, error } = await supabase.from("decks").delete().eq("id", id);
 
   if (error) {
     console.log(error);

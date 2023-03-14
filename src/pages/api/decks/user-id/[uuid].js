@@ -6,9 +6,10 @@ export default async function handler(req, res) {
 
   switch (method) {
     case Methods.GET:
-      Handlers.getDeckByUserIdHandler(req, res);
-      break;
+      return await Handlers.handleGetByUserId(req, res);
     default:
-      res.status(400).json({ message: "Invalid request method" });
+      return res.status(400).json({
+        message: "400 Bad Request: invalid method",
+      });
   }
 }
