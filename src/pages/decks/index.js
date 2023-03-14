@@ -73,12 +73,13 @@ const Decks = () => {
     <div>
       <Chakra.Box
         borderRadius="10px"
+        fontFamily = "Poppins"
         fontWeight="normal"
         fontSize="25px"
         textTransform="uppercase"
         textAlign="center"
       >
-        <h1> Filter your deck</h1>
+        <h1 font="Poppins"> Filter your deck</h1>
 
         <label> select category :</label>
         <Components.Dropdown
