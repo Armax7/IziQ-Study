@@ -39,7 +39,16 @@ export async function updateUserDetailHandler(req, res) {
   }
 }
 
+export async function deleteUserDetailHandler(req, res) {
+  const body = req.body
+  try {
+    const response = await Controllers.removeUserById(body)
+    return res.status(200).json({message:"User successfully removed"})
+  } catch (error) {
+    return res.status(500).json({ error: error.message });    
+  }
+}
+
 export async function createUserDetailHandler(req, res) {}
 
 
-export async function deleteUserDetailHandler(req, res) {}
