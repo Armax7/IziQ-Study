@@ -36,3 +36,38 @@ export const getUserDetailByName = async (name) => {
   }
   return getUserByName;
 };
+
+export const modificatedUser = async ({
+  users_uuid,
+  name,
+  lastname,
+  alias,
+  birth_date,
+  gender,
+  status,
+  occupation,
+  subscription_id,
+  plan_id,
+}) => {
+  const { data: updateUser, error } = await supabase
+    .from("users_details")
+    .update([
+      {
+        name,
+        lastname,
+        alias,
+        birth_date,
+        gender,
+        status,
+        occupation,
+        subscription_id,
+        plan_id,
+      },
+    ])
+    .eq("users_uuid",users_uuid)
+    .select("*")
+  if(error){
+    throw error
+  }
+  return updateUser
+};
