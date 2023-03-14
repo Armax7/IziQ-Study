@@ -1,19 +1,20 @@
-import { getAllFromUserDetailHandler } from "./handlers";
+import * as Handlers from "./handlers";
+import * as Methods from "../methods";
 
 export default function handler(req, res) {
   const { method } = req;
 
   switch (method) {
-    case "GET":
+    case Methods.GET:
       getAllFromUserDetailHandler(req, res);
       break;
-    case "POST":
+    case Methods.POST:
       createUserDetail(req, res);
       break;
-    case "PUT":
+    case Methods.PUT:
       updateUserDetail(req, res);
       break;
-    case "DELETE":
+    case Methods.DELETE:
       deleteUserDetail(req, res);
       break;
     default:
