@@ -71,3 +71,16 @@ export const modificatedUser = async ({
   }
   return updateUser
 };
+
+export async function removeUserById({id}){
+  const {data, error} = await supabase
+  .from("users_details")
+  .delete()
+  .eq("id",id)
+
+  if(error){
+    console.log(error);
+    throw error
+  }
+  return data
+}
