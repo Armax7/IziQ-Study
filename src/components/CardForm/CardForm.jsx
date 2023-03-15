@@ -25,11 +25,11 @@ async function temporalPostCard({
 }
 /// Temporal function ends, erase up to here.
 
-function CardForm({ deckId, ...props }) {
+function CardForm({ deckId, onSubmitFn = (data) => alert("Missing onSubmitFn function"), ...props }) {
   const initialValues = {
-    question: "",
-    answer: "",
-    image: "",
+    question: null,
+    answer: null,
+    image: null,
     learned: false,
   };
 
@@ -48,7 +48,7 @@ function CardForm({ deckId, ...props }) {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     const deck_id = deckId
-    const log = await temporalPostCard({...formData, deck_id});
+    const log = await onSubmitFn({...formData, deck_id});
     console.log("Added: ", log);
   };
 
