@@ -2,28 +2,6 @@ import * as Chakra from "@chakra-ui/react";
 import styles from "./CardForm.module.css";
 import { useState } from "react";
 import { Image } from "./utils";
-import { supabase } from "../../pages/api/supabaseClient"; //this is for temporal POST card
-
-/// This is a temporal function to POST a card on DB
-/// Pls remove after implementing back end
-async function temporalPostCard({
-  question,
-  answer,
-  image = null,
-  learned = false,
-  deck_id,
-}) {
-  const { data, error } = await supabase
-    .from("cards")
-    .insert([{ question, answer, image, learned, deck_id }])
-    .select();
-  if (error) {
-    console.log(error);
-    return error;
-  }
-  return data;
-}
-/// Temporal function ends, erase up to here.
 
 function CardForm({ deckId, onSubmitFn = (data) => alert("Missing onSubmitFn function"), ...props }) {
   const initialValues = {
