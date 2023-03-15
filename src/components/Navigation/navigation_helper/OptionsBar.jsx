@@ -29,16 +29,37 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
       {logged ? (
         <div>
           <Chakra.ButtonGroup gap="3">
-            <Chakra.IconButton
-              borderRadius="50%"
-              aria-label="Search database"
-              icon={<GiHamburgerMenu />}
-            />
-            <Chakra.IconButton
-              borderRadius="50%"
-              aria-label="Search database"
-              icon={<CgPathTrim />}
-            />
+            <Chakra.Menu>
+              <Chakra.MenuButton
+                as={Chakra.IconButton}
+                aria-label="Menu-Pages"
+                borderRadius="50%"
+                background="#F2F2F2"
+                icon={<GiHamburgerMenu />}
+                variant="outline"
+              />
+              <Chakra.MenuList>
+                <Chakra.MenuItem>Pagina Principal</Chakra.MenuItem>
+                <Chakra.MenuItem>Suscripciones</Chakra.MenuItem>
+                <Chakra.MenuItem>Suscripcion Actual</Chakra.MenuItem>
+                <Chakra.MenuItem>About</Chakra.MenuItem>
+              </Chakra.MenuList>
+            </Chakra.Menu>
+
+            <Chakra.Menu>
+              <Chakra.MenuButton
+                as={Chakra.IconButton}
+                aria-label="Search database"
+                borderRadius="50%"
+                background="#F2F2F2"
+                icon={<CgPathTrim />}
+                variant="outline"
+              />
+              <Chakra.MenuList>
+                <Chakra.MenuItem>Mis Mazos</Chakra.MenuItem>
+              </Chakra.MenuList>
+            </Chakra.Menu>
+
             <Chakra.IconButton
               borderRadius="50%"
               aria-label="Search database"
