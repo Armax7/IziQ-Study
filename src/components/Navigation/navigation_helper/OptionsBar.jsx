@@ -29,16 +29,46 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
       {logged ? (
         <div>
           <Chakra.ButtonGroup gap="3">
-            <Chakra.IconButton
-              borderRadius="50%"
-              aria-label="Search database"
-              icon={<GiHamburgerMenu />}
-            />
-            <Chakra.IconButton
-              borderRadius="50%"
-              aria-label="Search database"
-              icon={<CgPathTrim />}
-            />
+            <Chakra.Menu>
+              <Chakra.MenuButton
+                as={Chakra.IconButton}
+                aria-label="Menu-Pages"
+                borderRadius="50%"
+                background="#F2F2F2"
+                icon={<GiHamburgerMenu />}
+                variant="outline"
+              />
+              <Chakra.MenuList>
+                <Link href="/home">
+                  <Chakra.MenuItem>Pagina Principal</Chakra.MenuItem>
+                </Link>
+                <Link href="/subscriptions">
+                  <Chakra.MenuItem>Suscripciones</Chakra.MenuItem>
+                </Link>
+                <Link href="/current-plan">
+                  <Chakra.MenuItem>Mi Suscripcion Actual</Chakra.MenuItem>
+                </Link>
+                <Link href="/about">
+                  <Chakra.MenuItem>About</Chakra.MenuItem>
+                </Link>
+              </Chakra.MenuList>
+            </Chakra.Menu>
+
+            <Chakra.Menu>
+              <Chakra.MenuButton
+                as={Chakra.IconButton}
+                aria-label="Search database"
+                borderRadius="50%"
+                background="#F2F2F2"
+                icon={<CgPathTrim />}
+                variant="outline"
+              />
+              <Chakra.MenuList>
+                <Link href="/decks">
+                  <Chakra.MenuItem>Mis Mazos</Chakra.MenuItem>
+                </Link>
+              </Chakra.MenuList>
+            </Chakra.Menu>
             <Chakra.IconButton
               borderRadius="50%"
               aria-label="Search database"
