@@ -1,7 +1,11 @@
 import Head from "next/head";
 import { useState } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  QueryClient,
+  QueryClientProvider,
+  Hydrate,
+} from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import appTheme from "../styles/theme";
 import * as Components from "../components";
@@ -19,8 +23,10 @@ export default function App({ Component, pageProps }) {
       </Head>
       <ChakraProvider theme={appTheme}>
         <QueryClientProvider client={queryClient}>
-          <Components.Navigation />
-          <Component {...pageProps} />
+          <Hydrate state={pageProps.dehydratedState}>
+            <Components.Navigation />
+            <Component {...pageProps} />
+          </Hydrate>
         </QueryClientProvider>
       </ChakraProvider>
     </>
