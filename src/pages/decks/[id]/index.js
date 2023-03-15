@@ -1,14 +1,15 @@
 import axios from "axios";
 import { useRouter } from "next/router";
-import { QueryClient, dehydrate, useQuery } from "@tanstack/react-query";
+import * as ReactQuery from "@tanstack/react-query";
 import * as Chakra from "@chakra-ui/react";
 import * as Components from "../../../components";
 import * as CardsControllers from "../../api/cards/controllers";
-
 const HOST = process.env.NEXT_PUBLIC_HOST;
+
 export const QUERY_KEY = "cardsByDeckId";
 
 function Decks() {
+  const queryClient = ReactQuery.useQueryClient();
   const router = useRouter();
   const { id } = router.query;
 
@@ -17,9 +18,20 @@ function Decks() {
     isError,
     data: cards,
     error,
-  } = useQuery(
+  } = ReactQuery.useQuery(
     [QUERY_KEY],
     async () => await CardsControllers.getCardByDeckId(id)
+  );
+
+  const mutationPost = ReactQuery.useMutation(
+    (cardData) => {
+      return axios.post(`http://${HOST}/api/cards`, cardData);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(QUERY_KEY);
+      },
+    }
   );
 
   if (isError) {
@@ -32,6 +44,14 @@ function Decks() {
     );
   }
 
+  if (mutationPost.error) {
+    <Chakra.Alert status="error" onClick={() => mutationPost.reset()}>
+      <Chakra.AlertIcon />
+      <Chakra.AlertTitle>Error: </Chakra.AlertTitle>
+      <Chakra.AlertDescription>{mutationPost.error}</Chakra.AlertDescription>
+    </Chakra.Alert>;
+  }
+
   return (
     <div>
       <Chakra.VStack align={"stretch"}>
@@ -41,7 +61,7 @@ function Decks() {
           spacing={"1rem"}
           pb={"2rem"}
         />
-        <Components.CardForm deckId={id} />
+        <Components.CardForm deckId={id} onSubmitFn={mutationPost.mutate} />
       </Chakra.VStack>
     </div>
   );
@@ -49,7 +69,7 @@ function Decks() {
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
-  const queryClient = new QueryClient();
+  const queryClient = new ReactQuery.QueryClient();
 
   await queryClient.prefetchQuery([QUERY_KEY], async () => {
     const response = await axios
@@ -61,7 +81,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      dehydratedState: dehydrate(queryClient),
+      dehydratedState: ReactQuery.dehydrate(queryClient),
     },
   };
 }
