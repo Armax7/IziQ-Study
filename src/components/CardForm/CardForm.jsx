@@ -1,9 +1,13 @@
 import * as Chakra from "@chakra-ui/react";
 import styles from "./CardForm.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Image } from "./utils";
 
-function CardForm({ deckId, onSubmitFn = (data) => alert("Missing onSubmitFn function"), ...props }) {
+function CardForm({
+  deckId,
+  onSubmitFn = (data) => alert("Missing onSubmitFn function"),
+  ...props
+}) {
   const initialValues = {
     question: null,
     answer: null,
@@ -14,7 +18,6 @@ function CardForm({ deckId, onSubmitFn = (data) => alert("Missing onSubmitFn fun
   const [formData, setFormData] = useState(initialValues);
 
   const handleOnChange = (e) => {
-    e.preventDefault();
     const property = e.target.name;
     const value = e.target.value;
     setFormData({
@@ -25,13 +28,18 @@ function CardForm({ deckId, onSubmitFn = (data) => alert("Missing onSubmitFn fun
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    const deck_id = deckId
-    const log = await onSubmitFn({...formData, deck_id});
-    console.log("Added: ", log);
+    const deck_id = deckId;
+    await onSubmitFn({ ...formData, deck_id });
+    setFormData({
+      question: "",
+      answer: "",
+      image: null,
+      learned: false,
+    });
   };
 
   return (
-    <Chakra.Box {...props}>
+    <form onSubmit={handleOnSubmit} {...props}>
       <Chakra.Box
         mx="auto"
         w="90%"
@@ -101,6 +109,7 @@ function CardForm({ deckId, onSubmitFn = (data) => alert("Missing onSubmitFn fun
         mb="25px"
       >
         <Chakra.Button
+          type="submit"
           mx="auto"
           w="100%"
           h="65px"
@@ -112,12 +121,11 @@ function CardForm({ deckId, onSubmitFn = (data) => alert("Missing onSubmitFn fun
           color="#000000"
           _hover={{ backgroundColor: "transparent", color: "#000000" }}
           _focus={{ outline: "none" }}
-          onClick={handleOnSubmit}
         >
           <span className={styles.line_add}>+ ADD CARD</span>
         </Chakra.Button>
       </Chakra.Box>
-    </Chakra.Box>
+    </form>
   );
 }
 
