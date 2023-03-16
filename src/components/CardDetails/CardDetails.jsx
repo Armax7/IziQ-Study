@@ -27,6 +27,11 @@ function CardDetails({
     return onSubmitFn(event);
   }
 
+  async function handleDelete(event) {
+    event.preventDefault();
+    await onDeleteFn({ id });
+  }
+
   return (
     <Chakra.Accordion
       index={accordionIndex}
@@ -95,7 +100,7 @@ function CardDetails({
             <Chakra.Button
               padding="0"
               margin="0px 8px"
-              onClick={onDeleteFn}
+              onClick={handleDelete}
               name="Delete button"
               _focus={{ border: "none" }}
               _hover={{ backgroundColor: "transparent" }}
