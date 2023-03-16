@@ -1,4 +1,8 @@
+import axios from "axios";
 import { supabase } from "../supabaseClient";
+import * as SupaHelper from "../supabase_helpers";
+
+const HOST = process.env.NEXT_PUBLIC_HOST;
 
 export const getAllCards = async () => {
   let { data: cards, error } = await supabase.from("cards").select();
@@ -37,6 +41,13 @@ export const getCardsByDeckId = async (deckId) => {
     throw error;
   }
 
+  try {
+    const total_cards = await SupaHelper.get.countCardsInDeck(deckId);
+    await axios.put(`http://${HOST}/api/decks`, { id: deckId, total_cards });
+  } catch (error) {
+    throw error;
+  }
+
   return getCardByDeckId;
 };
 
@@ -71,6 +82,13 @@ export async function postCard({
     throw error;
   }
 
+  try {
+    const total_cards = await SupaHelper.get.countCardsInDeck(deck_id);
+    await axios.put(`http://${HOST}/api/decks`, { id: deck_id, total_cards });
+  } catch (error) {
+    throw error;
+  }
+
   return data;
 }
 
@@ -89,16 +107,28 @@ export async function updateCard({ id, question, answer, image, learned }) {
   return data;
 }
 
-export async function deleteCard({id}) {
+export async function deleteCard({ id }) {
   const { data, error } = await supabase
-  .from("cards")
-  .delete()
-  .eq("id", id);
+    .from("cards")
+    .select()
+    .eq("id", id);
 
-if (error) {
-  console.log(error);
-  throw error;
-}
+  const { error: deleteError } = await supabase
+    .from("cards")
+    .delete()
+    .eq("id", id);
 
-return data;
+  if (error || deleteError) {
+    console.log(error || deleteError);
+    throw error || deleteError;
+  }
+
+  const deck_id = data.at(0).deck_id;
+
+  try {
+    const total_cards = await SupaHelper.get.countCardsInDeck(deck_id);
+    await axios.put(`http://${HOST}/api/decks`, {id: deck_id, total_cards})
+  } catch (error) {
+    throw error;
+  }
 }
