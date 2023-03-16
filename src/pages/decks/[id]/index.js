@@ -18,10 +18,13 @@ function Decks() {
     isError,
     data: cards,
     error,
-  } = ReactQuery.useQuery(
-    [QK_DECK],
-    async () => await CardsControllers.getCardByDeckId(deck_id)
-  );
+  } = ReactQuery.useQuery([QK_DECK], async () => {
+    const response = await axios
+      .get(`http://${HOST}/api/cards/deck-id/${deck_id}`)
+      .then((res) => res.data);
+
+    return response;
+  });
 
   const mutationPost = ReactQuery.useMutation(
     (cardData) => {
