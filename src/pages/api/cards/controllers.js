@@ -29,7 +29,8 @@ export const getCardByDeckId = async (deckId) => {
   const { data: getCardByDeckId, error } = await supabase
     .from("cards")
     .select()
-    .eq("deck_id", deckId);
+    .eq("deck_id", deckId)
+    .order("created_at");
 
   if (error) {
     console.log(error);
