@@ -26,7 +26,7 @@ function DeckContainer({ decks, ...props }) {
                   name={deck.name}
                   description={deck.description}
                   total_cards={deck.total_cards}
-                  status={deck.status}
+                  rating={deck.rating}
                 />
               </a>
             </Link>
