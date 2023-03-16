@@ -6,6 +6,7 @@ import { Image } from "./utils";
 function CardForm({
   deckId,
   onSubmitFn = (data) => alert("Missing onSubmitFn function"),
+  submitBtnTxt = "+ ADD CARD",
   ...props
 }) {
   const initialValues = {
@@ -122,7 +123,7 @@ function CardForm({
           _hover={{ backgroundColor: "transparent", color: "#000000" }}
           _focus={{ outline: "none" }}
         >
-          <span className={styles.line_add}>+ ADD CARD</span>
+          <span className={styles.line_add}>{submitBtnTxt}</span>
         </Chakra.Button>
       </Chakra.Box>
     </form>
