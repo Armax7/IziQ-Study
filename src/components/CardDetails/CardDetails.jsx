@@ -2,10 +2,7 @@ import styles from "./CardDetails.module.css";
 import { HiTrash } from "react-icons/hi";
 import { RiPencilFill } from "react-icons/ri";
 import * as Chakra from "@chakra-ui/react";
-import * as ReactQuery from "@tanstack/react-query";
 import * as Components from "../../components";
-
-const QK_EDIT_MODE = "edit-mode";
 
 function CardDetails({
   onSubmitFn = () => alert("Submit button pressed without onSubmitFn"),
