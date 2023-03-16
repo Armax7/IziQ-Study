@@ -3,7 +3,7 @@ import Link from "next/link";
 import * as Chakra from "@chakra-ui/react";
 
 import { GiHamburgerMenu } from "react-icons/gi";
-import { BsFillBellFill } from "react-icons/bs";
+import { BsFillBellFill, BsFillBookmarksFill } from "react-icons/bs";
 import { CgPathTrim } from "react-icons/cg";
 import React, { useEffect, useState } from "react";
 
@@ -26,49 +26,53 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
 
   return (
     <>
-      {logged ? (
+      {logged == true ? (
         <div>
           <Chakra.ButtonGroup gap="3">
-            <Chakra.Menu>
-              <Chakra.MenuButton
-                as={Chakra.IconButton}
-                aria-label="Menu-Pages"
-                borderRadius="50%"
-                background="#F2F2F2"
-                icon={<GiHamburgerMenu />}
-                variant="outline"
-              />
-              <Chakra.MenuList>
-                <Link href="/home">
-                  <Chakra.MenuItem>Pagina Principal</Chakra.MenuItem>
-                </Link>
-                <Link href="/subscriptions">
-                  <Chakra.MenuItem>Suscripciones</Chakra.MenuItem>
-                </Link>
-                <Link href="/current-plan">
-                  <Chakra.MenuItem>Mi Suscripcion Actual</Chakra.MenuItem>
-                </Link>
-                <Link href="/about">
-                  <Chakra.MenuItem>About</Chakra.MenuItem>
-                </Link>
-              </Chakra.MenuList>
-            </Chakra.Menu>
+            <Chakra.Box>
+              <Chakra.Menu>
+                <Chakra.MenuButton
+                  as={Chakra.IconButton}
+                  aria-label="Menu-Pages"
+                  borderRadius="50%"
+                  background="#F2F2F2"
+                  icon={<GiHamburgerMenu />}
+                  variant="outline"
+                />
+                <Chakra.MenuList>
+                  <Link href="/home">
+                    <Chakra.MenuItem>Pagina Principal</Chakra.MenuItem>
+                  </Link>
+                  <Link href="/subscriptions">
+                    <Chakra.MenuItem>Suscripciones</Chakra.MenuItem>
+                  </Link>
+                  <Link href="/current-plan">
+                    <Chakra.MenuItem>Mi Suscripcion Actual</Chakra.MenuItem>
+                  </Link>
+                  <Link href="/about">
+                    <Chakra.MenuItem>About</Chakra.MenuItem>
+                  </Link>
+                </Chakra.MenuList>
+              </Chakra.Menu>
+            </Chakra.Box>
 
-            <Chakra.Menu>
-              <Chakra.MenuButton
-                as={Chakra.IconButton}
-                aria-label="Search database"
-                borderRadius="50%"
-                background="#F2F2F2"
-                icon={<CgPathTrim />}
-                variant="outline"
-              />
-              <Chakra.MenuList>
-                <Link href="/decks">
-                  <Chakra.MenuItem>Mis Mazos</Chakra.MenuItem>
-                </Link>
-              </Chakra.MenuList>
-            </Chakra.Menu>
+            <Chakra.Box>
+              <Chakra.Menu>
+                <Chakra.MenuButton
+                  as={Chakra.IconButton}
+                  aria-label="Search database"
+                  borderRadius="50%"
+                  background="#F2F2F2"
+                  icon={<BsFillBookmarksFill />}
+                  variant="outline"
+                />
+                <Chakra.MenuList>
+                  <Link href="/decks">
+                    <Chakra.MenuItem>Mis Mazos</Chakra.MenuItem>
+                  </Link>
+                </Chakra.MenuList>
+              </Chakra.Menu>
+            </Chakra.Box>
             <Chakra.IconButton
               borderRadius="50%"
               aria-label="Search database"
@@ -76,38 +80,40 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
             />
 
             {/* ============= Menu Profile =============*/}
-            <Chakra.Menu>
-              <Chakra.MenuButton
-                as={Chakra.Button}
-                rounded={"full"}
-                variant={"link"}
-                cursor={"pointer"}
-                minW={0}
-                w="40px"
-                h="40px"
-              >
-                <Chakra.Avatar w="40px" h="40px" src={avatarImage} />
-              </Chakra.MenuButton>
-              <Chakra.MenuList alignItems={"center"}>
-                <br />
-                <Chakra.Center>
-                  <Chakra.Avatar size={"2xl"} src={avatarImage} />
-                </Chakra.Center>
-                <br />
-                <Chakra.Center>
-                  <p>{userData.length ? userData : "Username"}</p>
-                </Chakra.Center>
-                <br />
-                <Chakra.MenuDivider />
-                <Chakra.MenuItem>
-                  <Link href="/profile">Profile</Link>
-                </Chakra.MenuItem>
-                <Chakra.MenuItem>Account Settings</Chakra.MenuItem>
-                <Chakra.Flex align={"center"} justify={"center"}>
-                  <Components.LogOutButton />
-                </Chakra.Flex>
-              </Chakra.MenuList>
-            </Chakra.Menu>
+            <Chakra.Box>
+              <Chakra.Menu>
+                <Chakra.MenuButton
+                  as={Chakra.Button}
+                  rounded={"full"}
+                  variant={"link"}
+                  cursor={"pointer"}
+                  minW={0}
+                  w="40px"
+                  h="40px"
+                >
+                  <Chakra.Avatar w="40px" h="40px" src={avatarImage} />
+                </Chakra.MenuButton>
+                <Chakra.MenuList alignItems={"center"}>
+                  <br />
+                  <Chakra.Center>
+                    <Chakra.Avatar size={"2xl"} src={avatarImage} />
+                  </Chakra.Center>
+                  <br />
+                  <Chakra.Center>
+                    <p>{userData ? userData : "Username"}</p>
+                  </Chakra.Center>
+                  <br />
+                  <Chakra.MenuDivider />
+                  <Chakra.MenuItem>
+                    <Link href="/profile">Profile</Link>
+                  </Chakra.MenuItem>
+                  <Chakra.MenuItem>Account Settings</Chakra.MenuItem>
+                  <Chakra.Flex align={"center"} justify={"center"}>
+                    <Components.LogOutButton />
+                  </Chakra.Flex>
+                </Chakra.MenuList>
+              </Chakra.Menu>
+            </Chakra.Box>
           </Chakra.ButtonGroup>
         </div>
       ) : (
