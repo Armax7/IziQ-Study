@@ -3,7 +3,7 @@ import Link from "next/link";
 import * as Chakra from "@chakra-ui/react";
 
 import { GiHamburgerMenu } from "react-icons/gi";
-import { BsFillBellFill } from "react-icons/bs";
+import { BsFillBellFill, BsFillBookmarksFill } from "react-icons/bs";
 import { CgPathTrim } from "react-icons/cg";
 import React, { useEffect, useState } from "react";
 
@@ -26,13 +26,12 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
 
   return (
     <>
-      {logged ? (
+      {logged == true ? (
         <div>
           <Chakra.ButtonGroup gap="3">
             <Chakra.Box>
-              <Chakra.Menu style={{ margin: 0 }}>
+              <Chakra.Menu>
                 <Chakra.MenuButton
-                  style={{ margin: 0 }}
                   as={Chakra.IconButton}
                   aria-label="Menu-Pages"
                   borderRadius="50%"
@@ -41,10 +40,18 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                   variant="outline"
                 />
                 <Chakra.MenuList>
-                  <Chakra.MenuItem>Pagina Principal</Chakra.MenuItem>
-                  <Chakra.MenuItem>Suscripciones</Chakra.MenuItem>
-                  <Chakra.MenuItem>Suscripcion Actual</Chakra.MenuItem>
-                  <Chakra.MenuItem>About</Chakra.MenuItem>
+                  <Link href="/home">
+                    <Chakra.MenuItem>Pagina Principal</Chakra.MenuItem>
+                  </Link>
+                  <Link href="/subscriptions">
+                    <Chakra.MenuItem>Suscripciones</Chakra.MenuItem>
+                  </Link>
+                  <Link href="/current-plan">
+                    <Chakra.MenuItem>Mi Suscripcion Actual</Chakra.MenuItem>
+                  </Link>
+                  <Link href="/about">
+                    <Chakra.MenuItem>About</Chakra.MenuItem>
+                  </Link>
                 </Chakra.MenuList>
               </Chakra.Menu>
             </Chakra.Box>
@@ -56,15 +63,16 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                   aria-label="Search database"
                   borderRadius="50%"
                   background="#F2F2F2"
-                  icon={<CgPathTrim />}
+                  icon={<BsFillBookmarksFill />}
                   variant="outline"
                 />
                 <Chakra.MenuList>
-                  <Chakra.MenuItem>Mis Mazos</Chakra.MenuItem>
+                  <Link href="/decks">
+                    <Chakra.MenuItem>Mis Mazos</Chakra.MenuItem>
+                  </Link>
                 </Chakra.MenuList>
               </Chakra.Menu>
             </Chakra.Box>
-
             <Chakra.IconButton
               borderRadius="50%"
               aria-label="Search database"
@@ -92,7 +100,7 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                   </Chakra.Center>
                   <br />
                   <Chakra.Center>
-                    <p>{userData.length ? userData : "Username"}</p>
+                    <p>{userData ? userData : "Username"}</p>
                   </Chakra.Center>
                   <br />
                   <Chakra.MenuDivider />
