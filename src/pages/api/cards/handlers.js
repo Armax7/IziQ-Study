@@ -42,9 +42,6 @@ export async function handleGetByDeckId(req, res) {
 
   try {
     const response = await Controllers.getCardsByDeckId(deckId);
-    if (JSON.stringify(response) === "[]") {
-      return res.status(404).json([{ error: "Deck UUID not found" }]);
-    }
     return res.status(200).json(response);
   } catch (error) {
     return res.status(500).json({ error: error.message });
