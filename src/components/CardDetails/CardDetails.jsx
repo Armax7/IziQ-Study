@@ -1,6 +1,7 @@
 import styles from "./CardDetails.module.css";
 import { HiTrash } from "react-icons/hi";
 import { RiPencilFill } from "react-icons/ri";
+import { useState } from "react";
 import * as Chakra from "@chakra-ui/react";
 import * as Components from "../../components";
 
@@ -15,9 +16,20 @@ function CardDetails({
   learned,
   ...props
 }) {
+  const [accordionIndex, setAccordionIndex] = useState(-1);
+
+  function handleOnClickEdit(event) {
+    accordionIndex < 0 ? setAccordionIndex(0) : setAccordionIndex(-1);
+  }
+
+  function handleOnSubmit(event) {
+    setAccordionIndex(-1);
+    return onSubmitFn(event);
+  }
 
   return (
     <Chakra.Accordion
+      index={accordionIndex}
       className={styles.card}
       allowToggle
       flex="0 0 auto"
@@ -68,6 +80,7 @@ function CardDetails({
           />
           <Chakra.Flex width="10%" justifyContent="flex-end">
             <Chakra.AccordionButton
+              onClick={handleOnClickEdit}
               padding="0"
               margin="0 8px"
               name="Edit button"
@@ -97,7 +110,8 @@ function CardDetails({
         <Chakra.AccordionPanel>
           <Components.CardForm
             deckId={deck_id}
-            onSubmitFn={onSubmitFn}
+            cardId={id}
+            onSubmitFn={handleOnSubmit}
             submitBtnTxt={"Save"}
           />
         </Chakra.AccordionPanel>
