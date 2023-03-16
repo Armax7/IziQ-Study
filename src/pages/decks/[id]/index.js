@@ -31,6 +31,19 @@ function Decks() {
       onSuccess: () => {
         queryClient.invalidateQueries(QUERY_KEY);
       },
+      onError: () => handleMutationError(mutationPost),
+    }
+  );
+
+  const mutationEdit = ReactQuery.useMutation(
+    (cardData) => {
+      return axios.put(`http://${HOST}/api/cards`, cardData);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(QUERY_KEY);
+      },
+      onError: () => handleMutationError(mutationEdit),
     }
   );
 
@@ -44,20 +57,13 @@ function Decks() {
     );
   }
 
-  if (mutationPost.error) {
-    <Chakra.Alert status="error" onClick={() => mutationPost.reset()}>
-      <Chakra.AlertIcon />
-      <Chakra.AlertTitle>Error: </Chakra.AlertTitle>
-      <Chakra.AlertDescription>{mutationPost.error}</Chakra.AlertDescription>
-    </Chakra.Alert>;
-  }
-
   return (
     <div>
       <Chakra.VStack align={"stretch"}>
         <Components.CardContainer cards={cards} />
         <Components.CardDetailsContainer
           dbCards={cards}
+          itemOnSubmitFn={mutationEdit.mutate}
           spacing={"1rem"}
           pb={"2rem"}
         />
@@ -84,6 +90,16 @@ export async function getServerSideProps(context) {
       dehydratedState: ReactQuery.dehydrate(queryClient),
     },
   };
+}
+
+function handleMutationError(mutation) {
+  return (
+    <Chakra.Alert status="error" onClick={() => mutation.reset()}>
+      <Chakra.AlertIcon />
+      <Chakra.AlertTitle>Error: </Chakra.AlertTitle>
+      <Chakra.AlertDescription>{mutation.error}</Chakra.AlertDescription>
+    </Chakra.Alert>
+  );
 }
 
 export default Decks;
