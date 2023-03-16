@@ -1,10 +1,12 @@
 import * as Components from "../../components";
 import { useEffect, useState } from "react";
 import * as SupaHelpers from "../api/supabase_helpers";
-import { supabase } from "../api/supabaseClient";
 import * as Chakra from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
+import { supabase } from "../api/supabaseClient";
 
 const Decks = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [userID, setUserId] = useState("");
   const [decks, setDecks] = useState([]);
 
@@ -70,8 +72,7 @@ const Decks = () => {
   }
 
   return (
-    <div>
-      <Chakra.Box
+<Chakra.Box
         borderRadius="10px"
         fontFamily = "Poppins"
         fontWeight="normal"
@@ -79,6 +80,11 @@ const Decks = () => {
         textTransform="uppercase"
         textAlign="center"
       >
+      <Chakra.Button colorScheme="teal" onClick={onOpen}>
+        Crear Mazo
+      </Chakra.Button>
+      
+            
         <h1 font="Poppins"> Filter your deck</h1>
 
         <label> select category :</label>
@@ -111,9 +117,27 @@ const Decks = () => {
           padding="2em 0.1em 2em 1em"
         />
 
-        <Components.DeckContainer decks={decks} />
+      <Components.DeckContainer decks={decks} />
+
+      <Chakra.Drawer
+        isOpen={isOpen}
+        placement="top"
+        onClose={onClose}
+        size="full"
+      >
+        <Chakra.DrawerContent>
+          <Chakra.DrawerCloseButton
+            backgroundColor="#F5E9CF"
+            color="red"
+            mr={960}
+            mt="3"
+          />
+          <Chakra.DrawerBody>
+            <Components.DeckForm />
+          </Chakra.DrawerBody>
+        </Chakra.DrawerContent>
+      </Chakra.Drawer>
       </Chakra.Box>
-    </div>
   );
 };
 
