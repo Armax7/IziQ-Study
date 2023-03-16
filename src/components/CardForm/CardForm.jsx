@@ -5,6 +5,7 @@ import { Image } from "./utils";
 
 function CardForm({
   deckId,
+  cardId = null,
   onSubmitFn = (data) => alert("Missing onSubmitFn function"),
   submitBtnTxt = "+ ADD CARD",
   ...props
@@ -30,7 +31,7 @@ function CardForm({
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     const deck_id = deckId;
-    await onSubmitFn({ ...formData, deck_id });
+    await onSubmitFn({ ...formData, deck_id, id: cardId });
     setFormData({
       question: "",
       answer: "",
