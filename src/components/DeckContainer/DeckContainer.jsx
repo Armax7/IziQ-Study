@@ -10,10 +10,11 @@ function DeckContainer({ decks, ...props }) {
       backgroundColor="#f2f2f2"
       margin="10px"
       justifyContent="space-evenly"
-      borderRadius={'3rem'}
-      w={'90%'}
-      m='auto'
-      mt={'1rem'}
+      borderRadius={"3rem"}
+      w={"90%"}
+      m="auto"
+      mt={"1rem"}
+      {...props}
     >
       <Chakra.Box display="flex" justifyContent="space-evenly">
         <Chakra.Grid templateColumns="repeat(3, 1fr)" gap={6}>
