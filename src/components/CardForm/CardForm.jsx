@@ -10,9 +10,9 @@ function CardForm({
   ...props
 }) {
   const initialValues = {
-    question: null,
-    answer: null,
-    image: null,
+    question: "",
+    answer: "",
+    image: "",
     learned: false,
   };
 
