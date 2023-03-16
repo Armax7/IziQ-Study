@@ -6,9 +6,10 @@ export default async function handler(req, res) {
 
   switch (method) {
     case Methods.GET:
-      Handlers.getCardByNameQuestionHandler(req, res);
-      break;
+      return await Handlers.handleGetByName(req, res);
     default:
-      res.status(400).json({ message: "Invalid request method" });
+      res.status(400).json({
+        message: "400 Bad Request: invalid method",
+      });
   }
 }
