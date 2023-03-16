@@ -41,7 +41,7 @@ export async function handleGetByDeckId(req, res) {
   const { deckId } = req.query;
 
   try {
-    const response = await Controllers.getCardByDeckId(deckId);
+    const response = await Controllers.getCardsByDeckId(deckId);
     if (JSON.stringify(response) === "[]") {
       return res.status(404).json([{ error: "Deck UUID not found" }]);
     }

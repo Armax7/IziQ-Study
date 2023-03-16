@@ -25,7 +25,7 @@ export const getCardById = async (id) => {
   return getCardById;
 };
 
-export const getCardByDeckId = async (deckId) => {
+export const getCardsByDeckId = async (deckId) => {
   const { data: getCardByDeckId, error } = await supabase
     .from("cards")
     .select()
