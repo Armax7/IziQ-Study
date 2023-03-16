@@ -3,18 +3,15 @@ import Feature from "./deckContainer_helpers/Feature";
 import { DeckCover } from "../DeckCover/DeckCover";
 import { useRouter } from "next/router";
 import Link from 'next/link';
-import * as Components from "../../components";
-import { useDisclosure } from "@chakra-ui/react";
+
 
 
 function DeckContainer({decks}) {
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
 
 
 
   return (
-    
     <Chakra.Stack
       spacing={8}
       direction="column"
@@ -44,37 +41,8 @@ function DeckContainer({decks}) {
           
           
         </Chakra.Grid>
-       
-        <Chakra.Button colorScheme='teal' onClick={onOpen}>
-        Open
-      </Chakra.Button>
-       
-        <Chakra.Drawer
-            isOpen={isOpen}
-            placement="top"
-            onClose={onClose}
-            
-            size="full"
-          >
-            <Chakra.DrawerContent>
-              <Chakra.DrawerCloseButton
-                backgroundColor="#F5E9CF"
-                color="red"
-                mr={960}
-                mt="3"
-              />
-              <Chakra.DrawerBody>
-              <Components.DeckForm />
-              </Chakra.DrawerBody>
-            </Chakra.DrawerContent>
-          </Chakra.Drawer>
-        
-        
-
-
       </Chakra.Box>
     </Chakra.Stack>
-    
   );
   
 }
