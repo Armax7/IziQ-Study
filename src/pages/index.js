@@ -1,6 +1,19 @@
+import { useEffect, useState } from "react";
 import style from "../styles/index.module.css";
 
+import * as SupaHelpers from "../pages/api/supabase_helpers";
+import { useRouter } from "next/router";
+
 export default function Landing() {
+  const router = useRouter();
+  const [loggStatus, setLoggStatus] = useState(false);
+
+  useEffect(async () => {
+    const statusLogged = await SupaHelpers.get.loggedStatus();
+    setLoggStatus(statusLogged);
+    if (loggStatus) await router.push("/home");
+  }, [loggStatus]);
+
   return (
     <div className={style.containerSections}>
       <section className={style.sectionOne}>
