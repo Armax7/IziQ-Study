@@ -1,6 +1,7 @@
 import { supabase } from "../../pages/api/supabaseClient";
 import { useEffect, useState } from "react";
 import * as SupaHelpers from "../../pages/api/supabase_helpers";
+import styles from "./ProfileBuckets.module.css";
 
 const ProfileBuckets = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -29,8 +30,8 @@ const ProfileBuckets = () => {
   };
 
   return (
-    <div>
-      <label for="file">Choose an image</label>
+    <div className={styles.container}>
+      <label htmlFor="file" className={styles.fileInput}>Choose an image</label>
       <input
         type="file"
         id="file_input"
@@ -39,17 +40,18 @@ const ProfileBuckets = () => {
         onChange={(e) => {
           setSelectedFile(e.target.files[0]);
         }}
+        className={styles.fileInput} 
       />
       {selectedFile && (
-        <>
+        <div className={styles.selectedFile}>
           <img
             src={URL.createObjectURL(selectedFile)}
             alt="Archivo seleccionado"
-            width={"80px"}
+            className={styles.selectedFileImg} 
           />
-          <button onClick={handleUpload}> Upload </button>
-          <button onClick={handleDeleteClick}> Delete </button>
-        </>
+          <button onClick={handleUpload} className={styles.selectedFileButton}> Upload </button>
+          <button onClick={handleDeleteClick} className={styles.selectedFileButton}> Delete </button>
+        </div>
       )}
     </div>
   );
