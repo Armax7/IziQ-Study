@@ -70,6 +70,9 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                   <Link href="/decks">
                     <Chakra.MenuItem>Mis Mazos</Chakra.MenuItem>
                   </Link>
+                  <Link href={"/community"}>
+                    <Chakra.MenuItem>Mazos de la Comunidad</Chakra.MenuItem>
+                  </Link>
                 </Chakra.MenuList>
               </Chakra.Menu>
             </Chakra.Box>
