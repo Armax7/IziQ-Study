@@ -22,11 +22,7 @@ function Community() {
         <Chakra.Flex className={style.containerTag}>Top Rated</Chakra.Flex>
         <Components.DeckContainer
           decks={topSixDecks}
-          w={"80%"}
-          mt={0}
           borderRadius={"0 3rem 3rem"}
-          py={"1vw"}
-          px={"1vw"}
         />
       </Chakra.Box>
     </Chakra.Box>
