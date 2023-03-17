@@ -1,3 +1,4 @@
+import style from "../../styles/community.module.css";
 import axios from "axios";
 import * as Chakra from "@chakra-ui/react";
 import * as ReactQuery from "@tanstack/react-query";
@@ -17,7 +18,17 @@ function Community() {
 
   return (
     <Chakra.Box>
-      <Components.DeckContainer decks={topSixDecks} />
+      <Chakra.Box className={style.itemBox}>
+        <Chakra.Flex className={style.containerTag}>Top Rated</Chakra.Flex>
+        <Components.DeckContainer
+          decks={topSixDecks}
+          w={"80%"}
+          mt={0}
+          borderRadius={"0 3rem 3rem"}
+          py={"1vw"}
+          px={"1vw"}
+        />
+      </Chakra.Box>
     </Chakra.Box>
   );
 }
