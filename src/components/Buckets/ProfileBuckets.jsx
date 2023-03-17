@@ -17,7 +17,7 @@ const ProfileBuckets = () => {
       .upload(`${userID}/profile/` + selectedFile?.name, selectedFile);
 
     if (data) {
-      alert("Archivo subido correctamente");
+      alert("Se subio el archivo correctamente");
     } else if (error) {
       console.log(error);
       alert(error.message);
