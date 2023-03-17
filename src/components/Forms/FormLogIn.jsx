@@ -4,8 +4,11 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../pages/api/supabaseClient";
 import UserArea from "../UserArea/UserArea";
 import styles from "./FormLogin.module.css";
+import { useRouter } from "next/router";
 
 function FormLogIn() {
+  const router = useRouter();
+
   const [show, setShow] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -33,6 +36,8 @@ function FormLogIn() {
       alert("User logged.");
       console.log("hey estoy loggueado");
       setIsLoggedIn(true);
+      await router.push("/home", undefined, { shallow: true });
+      router.reload();
 
       // console.log(user)
       // console.log(session)
@@ -107,13 +112,7 @@ function FormLogIn() {
           marginBottom="25px"
           marginLeft="0px"
         >
-          {!isLoggedIn ? (
-            <Link href="">Log In</Link>
-          ) : (
-            <a className={styles.linkA} href="/home">
-              Log In
-            </a>
-          )}
+          Log In
         </Chakra.Button>
       </Chakra.Box>
     </>
