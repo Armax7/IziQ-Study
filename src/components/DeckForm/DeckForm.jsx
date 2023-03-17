@@ -1,8 +1,38 @@
 import style from "./DeckForm.module.css";
 import * as Chakra from "@chakra-ui/react";
+import * as ReactQuery from "@tanstack/react-query";
 import * as Components from "../../components";
+import * as SupaHelpers from "../../pages/api/supabase_helpers";
 
-const DeckForm = ({ number = 0 }) => {
+const QK_USER_ID = "user-id";
+
+const DeckForm = () => {
+  const queryClient = ReactQuery.useQueryClient();
+
+  const {
+    isLoading,
+    isError,
+    data: userId,
+    error,
+  } = ReactQuery.useQuery([QK_USER_ID], async () => {
+    const response = SupaHelpers.get.userId();
+    return response;
+  });
+
+  if (isLoading) {
+    return <Chakra.Spinner size={"xl"} />;
+  }
+
+  if (isError) {
+    return (
+      <Chakra.Alert status="error">
+        <Chakra.AlertIcon />
+        <Chakra.AlertTitle>Error: </Chakra.AlertTitle>
+        <Chakra.AlertDescription>{error}</Chakra.AlertDescription>
+      </Chakra.Alert>
+    );
+  }
+
   return (
     <form className={style.containerDeckForm}>
       <Chakra.Flex justifyContent="space-between">
@@ -68,26 +98,23 @@ const DeckForm = ({ number = 0 }) => {
           borderColor="#A1AAF3"
         />
       </Chakra.Flex>
-      <Chakra.Text
-        fontWeight="bold"
-        fontSize="17px"
-        marginTop="20px"
-        marginBottom="20px"
-      >
-        Total Cards{" "}
-        <span
-          style={{
-            padding: "5px 10px 5px 10px",
-            borderRadius: "50%",
-            background: "#A1AAF3",
-          }}
-        >
-          {number}
-        </span>
-      </Chakra.Text>
-      <Components.CardForm />
     </form>
   );
 };
+
+export async function getServerSideProps() {
+  const queryClient = new ReactQuery.QueryClient();
+
+  await queryClient.prefetchQuery([QK_USER_ID], async () => {
+    const response = SupaHelpers.get.userId();
+    return response;
+  });
+
+  return {
+    props: {
+      dehydratedState: ReactQuery.dehydrate(queryClient),
+    },
+  };
+}
 
 export default DeckForm;
