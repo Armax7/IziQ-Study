@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, Text, Button, Center, Spacer } from "@chakra-ui/react";
 
 const MultipleChoice = ({
@@ -7,10 +7,17 @@ const MultipleChoice = ({
   answer,
   isLastQuestion,
   onNextQuestion,
+  onFinishQuiz,
 }) => {
   const [isAnswered, setIsAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
+
+  useEffect(() => {
+    setIsAnswered(false);
+    setIsCorrect(false);
+    setSelectedOption(null);
+  }, [question]);
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
@@ -20,11 +27,11 @@ const MultipleChoice = ({
   };
 
   const handleNextClick = () => {
-    setSelectedOption(null);
     setIsAnswered(false);
     setIsCorrect(false);
+    setSelectedOption(null);
     if (isLastQuestion) {
-      // Mostrar mensaje de finalización
+      onFinishQuiz();
     } else {
       onNextQuestion();
     }
@@ -72,8 +79,14 @@ const MultipleChoice = ({
             </Box>
           )}
           <Spacer mt={2} />
-          <Button onClick={handleNextClick} w="full" bgColor="#5C66BB" _hover={{ bgColor: "#A1AAF3" }} color="#FFFFFF">
-            Siguiente pregunta
+          <Button
+            onClick={handleNextClick}
+            w="full"
+            bgColor="#5C66BB"
+            _hover={{ bgColor: "#A1AAF3" }}
+            color="#FFFFFF"
+          >
+            {isLastQuestion ? "Finalizar quiz" : "Siguiente pregunta"}
           </Button>
         </Box>
       )}
