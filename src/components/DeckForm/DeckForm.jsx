@@ -11,9 +11,14 @@ const HOST = process.env.NEXT_PUBLIC_HOST;
 const QK_USER_ID = "user-id";
 const QK_CATEGORIES = "categories";
 const QK_SUBCATEGORIES = "subcategories";
-const QK_SUBMITTED = "";
 
-const DeckForm = ({onSubmitFn, onCancelFn, ...props}) => {
+const DeckForm = ({
+  onCreateFn = (data) =>
+    alert(`No onCreateFn found \n\n received data: \n${JSON.stringify(data)}`),
+  onCancelFn = () => alert("No onCancelFn found"),
+  className: classNameProp = style.containerDeckForm,
+  ...props
+}) => {
   const [deckFormData, setDeckFormData] = useState({
     name: "",
     description: "",
@@ -83,29 +88,40 @@ const DeckForm = ({onSubmitFn, onCancelFn, ...props}) => {
   }
 
   async function handleOnSubmit(event) {
-    event.preventDefault();
     setSubmitted(true);
-    console.log(deckFormData);
+    await onCreateFn(deckFormData);
+  }
+
+  async function handleOnCancel(event) {
+    setDeckFormData({
+      ...deckFormData,
+      name: "",
+      description: "",
+      category_id: "",
+      subcategory_id: "",
+    });
+    setSubmitted(false);
+    await onCancelFn();
   }
 
   return (
-    <form className={style.containerDeckForm} {...props}>
+    <form className={classNameProp} onSubmit={handleOnSubmit} {...props}>
       <Chakra.Flex justifyContent="space-between">
         <Chakra.Text fontWeight="bold" fontSize="2xl">
           Create new Study Deck
         </Chakra.Text>
         <Chakra.Flex>
           <Chakra.Button
+            type="submit"
             colorScheme="blue"
             marginRight="5px"
             background="rgba(92, 102, 187, 1)"
-            onClick={handleOnSubmit}
           >
             Create
           </Chakra.Button>
           <Chakra.Button
             colorScheme="blue"
-            onClick={() => alert("Button Cancel")}
+            onClick={handleOnCancel}
             background="rgba(92, 102, 187, 1)"
           >
             Cancel
@@ -221,7 +237,7 @@ export async function getServerSideProps() {
 }
 
 async function getUserID() {
-  const response = SupaHelpers.get.userId();
+  const response = await SupaHelpers.get.userId();
   return response;
 }
 
