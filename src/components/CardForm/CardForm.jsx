@@ -3,6 +3,7 @@ import styles from "./CardForm.module.css";
 import { useState } from "react";
 import { Image } from "./utils";
 import { supabase } from "../../pages/api/supabaseClient"; //this is for temporal POST card
+import * as Components from "../../components"
 
 /// This is a temporal function to POST a card on DB
 /// Pls remove after implementing back end
@@ -34,6 +35,7 @@ function CardForm({ deckId, ...props }) {
   };
 
   const [formData, setFormData] = useState(initialValues);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOnChange = (e) => {
     e.preventDefault();
@@ -47,8 +49,8 @@ function CardForm({ deckId, ...props }) {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    const deck_id = deckId
-    const log = await temporalPostCard({...formData, deck_id});
+    const deck_id = deckId;
+    const log = await temporalPostCard({ ...formData, deck_id });
     console.log("Added: ", log);
   };
 
@@ -99,11 +101,27 @@ function CardForm({ deckId, ...props }) {
             </Chakra.FormLabel>
           </Chakra.FormControl>
           <div className={styles.image_container}>
-            <div className={styles.image_column}>
+            <div
+              className={styles.image_column}
+              onClick={() => setIsModalOpen(true)}
+            >
               <div className={styles.image_icon}>
                 <Image />
               </div>
               <div className={styles.image_text}>Image</div>
+              <Chakra.Modal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+              >
+                <Chakra.ModalOverlay />
+                <Chakra.ModalContent>
+                  <Chakra.ModalHeader>Seleccionar imagen</Chakra.ModalHeader>
+                  <Chakra.ModalCloseButton />
+                  <Chakra.ModalBody>
+                    <Components.CardsBuckets />
+                  </Chakra.ModalBody>
+                </Chakra.ModalContent>
+              </Chakra.Modal>
             </div>
           </div>
         </div>
