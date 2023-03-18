@@ -1,6 +1,6 @@
 import * as Controllers from "./controllers";
 
-export async function getAllFromUserDetailHandler(req, res) {
+export async function handleGet(req, res) {
   try {
     const user = await Controllers.getAllUsersDetails();
     res.status(200).json(user);
@@ -9,7 +9,7 @@ export async function getAllFromUserDetailHandler(req, res) {
   }
 }
 
-export async function getUserDetailByNameHandler(req, res) {
+export async function handleGetByName(req, res) {
   const { name } = req.query;
   try {
     const user = await Controllers.getUserDetailByName(name);
@@ -19,7 +19,7 @@ export async function getUserDetailByNameHandler(req, res) {
   }
 }
 
-export async function getUserDetailByIdHandler(req, res){
+export async function handleGetByUserUuid(req, res){
   const {uuid} = req.query
   try {
     const userDetail = await Controllers.getUserDetailById(uuid);
@@ -29,26 +29,24 @@ export async function getUserDetailByIdHandler(req, res){
   }
 }
 
-export async function updateUserDetailHandler(req, res) {
+export async function handlePut(req, res) {
   const body = req.body
   try {
-    const updateUser = await Controllers.modificatedUser(body)
+    const updateUser = await Controllers.updateUserDetails(body)
     res.status(200).json(updateUser)
   } catch (error) {
     res.status(500).json({ error: error.message });    
   }
 }
 
-export async function deleteUserDetailHandler(req, res) {
+export async function handlePost(req, res) {
   const body = req.body
   try {
-    const response = await Controllers.removeUserById(body)
-    return res.status(200).json({message:"User successfully removed"})
+    const userDetails = await Controllers.postUserDetails(body)
+    res.status(200).json(userDetails)
   } catch (error) {
-    return res.status(500).json({ error: error.message });    
+    res.status(500).json({ error: error.message });    
   }
 }
-
-export async function createUserDetailHandler(req, res) {}
 
 

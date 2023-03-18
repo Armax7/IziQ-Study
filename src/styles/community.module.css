@@ -1,0 +1,21 @@
+.itemBox{
+    padding-top: 1rem;
+}
+
+.containerTag {
+  max-width: max-content;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  background-color: #c9ccfe;
+  color: Black;
+  margin-left: 10%;
+  font-family: "Poppins";
+  font-style: "normal";
+  font-weight: bolder;
+  font-size: 2rem;
+  border-radius: 1rem 1rem 0 0;
+}
+
+.deckContainer {
+    width: 50%;
+}

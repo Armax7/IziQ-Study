@@ -37,7 +37,7 @@ export const getUserDetailByName = async (name) => {
   return getUserByName;
 };
 
-export const modificatedUser = async ({
+export const updateUserDetails = async ({
   users_uuid,
   name,
   lastname,
@@ -51,8 +51,42 @@ export const modificatedUser = async ({
 }) => {
   const { data: updateUser, error } = await supabase
     .from("users_details")
-    .update([
+    .update({
+      name,
+      lastname,
+      alias,
+      birth_date,
+      gender,
+      status,
+      occupation,
+      subscription_id,
+      plan_id,
+    })
+    .eq("users_uuid", users_uuid)
+    .select();
+  if (error) {
+    throw error;
+  }
+  return updateUser;
+};
+
+export async function postUserDetails({
+  users_uuid,
+  name,
+  lastname,
+  alias,
+  birth_date,
+  gender,
+  status,
+  occupation,
+  subscription_id,
+  plan_id,
+}) {
+  const { data, error } = await supabase
+    .from("users_details")
+    .insert([
       {
+        users_uuid,
         name,
         lastname,
         alias,
@@ -64,23 +98,12 @@ export const modificatedUser = async ({
         plan_id,
       },
     ])
-    .eq("users_uuid",users_uuid)
-    .select("*")
-  if(error){
-    throw error
-  }
-  return updateUser
-};
+    .select();
 
-export async function removeUserById({id}){
-  const {data, error} = await supabase
-  .from("users_details")
-  .delete()
-  .eq("id",id)
-
-  if(error){
+  if (error) {
     console.log(error);
-    throw error
+    throw error;
   }
-  return data
+
+  return data;
 }

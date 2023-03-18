@@ -6,19 +6,19 @@ import Link from "next/link";
 import * as Chakra from "@chakra-ui/react";
 import * as SupaHelpers from "../../pages/api/supabase_helpers";
 import { useEffect, useState } from "react";
-
+import { supabase } from "../../pages/api/supabaseClient";
 //loreqaba@finews.biz
 //Loreqaba
 
 function Navigation({ avatarImage = "https://bit.ly/dan-abramov" }) {
   const { isOpen, onOpen, onClose } = Chakra.useDisclosure();
+
   const [logged, setLogged] = useState(false);
   useEffect(async () => {
     let status = await SupaHelpers.get.loggedStatus();
-    console.log("este es status", status);
     setLogged(status);
   }, [logged]);
-  console.log("Logueado?", logged);
+
   return (
     <Chakra.Flex
       background="#FFFFFF"
