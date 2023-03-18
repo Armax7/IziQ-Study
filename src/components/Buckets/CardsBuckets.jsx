@@ -34,9 +34,6 @@ const ProfileBuckets = () => {
 
   return (
     <div className={styles.container}>
-      <label htmlFor="file" className={styles.fileInput}>
-        Choose an image
-      </label>
       <input
         type="file"
         id="file_input"
