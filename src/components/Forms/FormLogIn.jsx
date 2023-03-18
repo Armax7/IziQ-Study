@@ -58,7 +58,7 @@ function FormLogIn() {
 
   return (
     <>
-      <Chakra.Box bg="#4D455D" w="45%" p={8} color="black" ml="480" h="560">
+      <Chakra.Box bg="blue.800" color="black">
         <Chakra.FormControl isRequired>
           <Chakra.FormLabel textColor="#F5E9CF">E-mail</Chakra.FormLabel>
           <Chakra.Input
@@ -69,7 +69,6 @@ function FormLogIn() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </Chakra.FormControl>
-
         <Chakra.FormLabel textColor="#F5E9CF">Password</Chakra.FormLabel>
         <Chakra.InputGroup
           backgroundColor="#F5E9CF"
@@ -93,20 +92,16 @@ function FormLogIn() {
             </Chakra.Button>
           </Chakra.InputRightElement>
         </Chakra.InputGroup>
-
         <Chakra.FormControl isRequired>
           <Chakra.FormHelperText color textColor="blue.400">
             Did you forget your password ?.
           </Chakra.FormHelperText>
         </Chakra.FormControl>
-
         <Chakra.Button
           mr={82}
           backgroundColor="red.400"
           onClick={handleSignIn}
           ml="370"
-          padding="0"
-          w="100px"
           colorScheme="blue"
           marginTop="25px"
           marginBottom="25px"
