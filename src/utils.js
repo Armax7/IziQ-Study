@@ -7,22 +7,24 @@ export function isObject(object) {
   );
 }
 
-export function sortAscCompareFn (a, b) {
+export function sortAscCompareFn(a, b) {
   if (a < b) {
-      return -1;
-  }
-  else if (a > b) {
-      return 1;
+    return -1;
+  } else if (a > b) {
+    return 1;
   }
   return 0;
 }
 
 export function sortDescCompareFn(a, b) {
   if (a > b) {
-      return -1;
-  }
-  else if (a < b) {
-      return 1;
+    return -1;
+  } else if (a < b) {
+    return 1;
   }
   return 0;
+}
+
+export function isSpace(str) {
+  return !str.replace(/\s/g, "").length;
 }
