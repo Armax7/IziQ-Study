@@ -39,8 +39,6 @@ const DeckForm = () => {
     queryFn: () => getSubcategoriesByCategoryId(deckFormData.category_id),
   });
 
-  console.log(deckFormData.category_id);
-
   if (userId.isLoading || categories.isLoading) {
     return <Chakra.Spinner size={"xl"} />;
   }
@@ -50,13 +48,26 @@ const DeckForm = () => {
       return {
         ...deckFormData,
         category_id: event.target.value,
+        subcategory_id: "",
       };
     });
+
     await queryClient.fetchQuery({
       queryKey: [QK_SUBCATEGORIES],
       queryFn: () => getSubcategoriesByCategoryId(event.target.value),
     });
   }
+
+  function handleSubcategoryOnChange(event) {
+    setDeckFormData(() => {
+      return {
+        ...deckFormData,
+        subcategory_id: event.target.value,
+      };
+    });
+  }
+
+  console.log(deckFormData);
 
   return (
     <form className={style.containerDeckForm}>
@@ -121,6 +132,8 @@ const DeckForm = () => {
         <Components.Dropdown
           isDisabled={!deckFormData.category_id || subcategories.isLoading}
           options={!deckFormData.category_id ? [] : subcategories.data}
+          value={deckFormData.subcategory_id}
+          onChange={handleSubcategoryOnChange}
           placeholder={"Select Sub-Category"}
           borderColor="#A1AAF3"
         />
@@ -160,7 +173,6 @@ async function getCategories() {
 }
 
 async function getSubcategoriesByCategoryId(categoryId) {
-  console.log(categoryId);
   if (!categoryId) {
     const response = await axios
       .get(`http://${HOST}/api/subcategories/`)
