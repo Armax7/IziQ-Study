@@ -1,36 +1,61 @@
 import style from "./DeckForm.module.css";
+import axios from "axios";
+import { useState } from "react";
 import * as Chakra from "@chakra-ui/react";
 import * as ReactQuery from "@tanstack/react-query";
 import * as Components from "../../components";
 import * as SupaHelpers from "../../pages/api/supabase_helpers";
 
+const HOST = process.env.NEXT_PUBLIC_HOST;
 const QK_USER_ID = "user-id";
+const QK_CATEGORIES = "categories";
+const QK_SUBCATEGORIES = "subcategories";
 
 const DeckForm = () => {
-  const queryClient = ReactQuery.useQueryClient();
-
-  const {
-    isLoading,
-    isError,
-    data: userId,
-    error,
-  } = ReactQuery.useQuery([QK_USER_ID], async () => {
-    const response = SupaHelpers.get.userId();
-    return response;
+  const [deckFormData, setDeckFormData] = useState({
+    description: "",
+    status: "active",
+    category_id: "",
+    subcategory_id: "",
+    rating: 0,
   });
 
-  if (isLoading) {
+  const queryClient = ReactQuery.useQueryClient();
+
+  const userId = ReactQuery.useQuery({
+    queryKey: [QK_USER_ID],
+    queryFn: getUserID,
+    onSuccess: (data) => {
+      setDeckFormData({ ...deckFormData, user_id: data });
+    },
+  });
+  const categories = ReactQuery.useQuery({
+    queryKey: [QK_CATEGORIES],
+    queryFn: getCategories,
+  });
+
+  const subcategories = ReactQuery.useQuery({
+    queryKey: [QK_SUBCATEGORIES],
+    queryFn: () => getSubcategoriesByCategoryId(deckFormData.category_id),
+  });
+
+  console.log(deckFormData.category_id);
+
+  if (userId.isLoading || categories.isLoading) {
     return <Chakra.Spinner size={"xl"} />;
   }
 
-  if (isError) {
-    return (
-      <Chakra.Alert status="error">
-        <Chakra.AlertIcon />
-        <Chakra.AlertTitle>Error: </Chakra.AlertTitle>
-        <Chakra.AlertDescription>{error}</Chakra.AlertDescription>
-      </Chakra.Alert>
-    );
+  async function handleCategoryOnChange(event) {
+    setDeckFormData(() => {
+      return {
+        ...deckFormData,
+        category_id: event.target.value,
+      };
+    });
+    await queryClient.fetchQuery({
+      queryKey: [QK_SUBCATEGORIES],
+      queryFn: () => getSubcategoriesByCategoryId(event.target.value),
+    });
   }
 
   return (
@@ -87,13 +112,15 @@ const DeckForm = () => {
       </div>
       <Chakra.Flex width="50%" margin="auto" flexDirection="column">
         <Components.Dropdown
-          options={["Option 1", "Option 2", "Option 3"]}
+          options={categories.data}
+          onChange={handleCategoryOnChange}
           placeholder={"Select Category"}
           margin="15px auto"
           borderColor="#A1AAF3"
         />
         <Components.Dropdown
-          options={["Option 1", "Option 2", "Option 3"]}
+          isDisabled={!deckFormData.category_id || subcategories.isLoading}
+          options={!deckFormData.category_id ? [] : subcategories.data}
           placeholder={"Select Sub-Category"}
           borderColor="#A1AAF3"
         />
@@ -105,16 +132,48 @@ const DeckForm = () => {
 export async function getServerSideProps() {
   const queryClient = new ReactQuery.QueryClient();
 
-  await queryClient.prefetchQuery([QK_USER_ID], async () => {
-    const response = SupaHelpers.get.userId();
-    return response;
-  });
+  await queryClient.prefetchQuery([QK_USER_ID], getUserID);
+  await queryClient.prefetchQuery([QK_CATEGORIES], getCategories);
+
+  await queryClient.prefetchQuery([QK_SUBCATEGORIES], () =>
+    getSubcategoriesByCategoryId()
+  );
 
   return {
     props: {
       dehydratedState: ReactQuery.dehydrate(queryClient),
     },
   };
+}
+
+async function getUserID() {
+  const response = SupaHelpers.get.userId();
+  return response;
+}
+
+async function getCategories() {
+  const response = await axios
+    .get(`http://${HOST}/api/categories`)
+    .then((res) => res.data);
+
+  return response;
+}
+
+async function getSubcategoriesByCategoryId(categoryId) {
+  console.log(categoryId);
+  if (!categoryId) {
+    const response = await axios
+      .get(`http://${HOST}/api/subcategories/`)
+      .then((res) => res.data);
+
+    return response;
+  } else {
+    const response = await axios
+      .get(`http://${HOST}/api/subcategories/category/${categoryId}`)
+      .then((res) => res.data);
+
+    return response;
+  }
 }
 
 export default DeckForm;
