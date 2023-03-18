@@ -1,32 +1,16 @@
 import * as Chakra from "@chakra-ui/react";
 import styles from "./CardForm.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Image } from "./utils";
-import { supabase } from "../../pages/api/supabaseClient"; //this is for temporal POST card
 import * as Components from "../../components"
 
-/// This is a temporal function to POST a card on DB
-/// Pls remove after implementing back end
-async function temporalPostCard({
-  question,
-  answer,
-  image = null,
-  learned = false,
-  deck_id,
+function CardForm({
+  deckId,
+  cardId = null,
+  onSubmitFn = (data) => alert("Missing onSubmitFn function"),
+  submitBtnTxt = "+ ADD CARD",
+  ...props
 }) {
-  const { data, error } = await supabase
-    .from("cards")
-    .insert([{ question, answer, image, learned, deck_id }])
-    .select();
-  if (error) {
-    console.log(error);
-    return error;
-  }
-  return data;
-}
-/// Temporal function ends, erase up to here.
-
-function CardForm({ deckId, ...props }) {
   const initialValues = {
     question: "",
     answer: "",
@@ -38,7 +22,6 @@ function CardForm({ deckId, ...props }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOnChange = (e) => {
-    e.preventDefault();
     const property = e.target.name;
     const value = e.target.value;
     setFormData({
@@ -50,12 +33,17 @@ function CardForm({ deckId, ...props }) {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     const deck_id = deckId;
-    const log = await temporalPostCard({ ...formData, deck_id });
-    console.log("Added: ", log);
+    await onSubmitFn({ ...formData, deck_id, id: cardId });
+    setFormData({
+      question: "",
+      answer: "",
+      image: null,
+      learned: false,
+    });t
   };
 
   return (
-    <Chakra.Box {...props}>
+    <form onSubmit={handleOnSubmit} {...props}>
       <Chakra.Box
         mx="auto"
         w="90%"
@@ -141,6 +129,7 @@ function CardForm({ deckId, ...props }) {
         mb="25px"
       >
         <Chakra.Button
+          type="submit"
           mx="auto"
           w="100%"
           h="65px"
@@ -152,12 +141,11 @@ function CardForm({ deckId, ...props }) {
           color="#000000"
           _hover={{ backgroundColor: "transparent", color: "#000000" }}
           _focus={{ outline: "none" }}
-          onClick={handleOnSubmit}
         >
-          <span className={styles.line_add}>+ ADD CARD</span>
+          <span className={styles.line_add}>{submitBtnTxt}</span>
         </Chakra.Button>
       </Chakra.Box>
-    </Chakra.Box>
+    </form>
   );
 }
 
