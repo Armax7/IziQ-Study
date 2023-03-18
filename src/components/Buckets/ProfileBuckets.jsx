@@ -31,7 +31,9 @@ const ProfileBuckets = () => {
 
   return (
     <div className={styles.container}>
-      <label htmlFor="file" className={styles.fileInput}>Choose an image</label>
+      <label htmlFor="file" className={styles.fileInput}>
+        Choose an image
+      </label>
       <input
         type="file"
         id="file_input"
@@ -40,17 +42,26 @@ const ProfileBuckets = () => {
         onChange={(e) => {
           setSelectedFile(e.target.files[0]);
         }}
-        className={styles.fileInput} 
+        className={styles.fileInput}
       />
       {selectedFile && (
         <div className={styles.selectedFile}>
           <img
             src={URL.createObjectURL(selectedFile)}
             alt="Archivo seleccionado"
-            className={styles.selectedFileImg} 
+            className={styles.selectedFileImg}
           />
-          <button onClick={handleUpload} className={styles.selectedFileButton}> Upload </button>
-          <button onClick={handleDeleteClick} className={styles.selectedFileButton}> Delete </button>
+          <button onClick={handleUpload} className={styles.selectedFileButton}>
+            {" "}
+            Upload{" "}
+          </button>
+          <button
+            onClick={handleDeleteClick}
+            className={styles.selectedFileButton}
+          >
+            {" "}
+            Delete{" "}
+          </button>
         </div>
       )}
     </div>
