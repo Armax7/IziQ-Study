@@ -18,7 +18,7 @@ const ProfileBuckets = () => {
   const handleUpload = async () => {
     const { data, error } = await supabase.storage
       .from("images-client")
-      .upload(`${userID}/decks/${deckID}/`+ selectedFile?.name, selectedFile);
+      .upload(`${userID}/decks/${deckID}/` + selectedFile?.name, selectedFile);
 
     if (data) {
       alert("Se subio el archivo correctamente");
