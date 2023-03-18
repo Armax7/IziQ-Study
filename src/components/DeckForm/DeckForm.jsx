@@ -1,24 +1,29 @@
 import style from "./DeckForm.module.css";
 import axios from "axios";
 import { useState } from "react";
+import * as Utils from "../../utils";
 import * as Chakra from "@chakra-ui/react";
-import * as ReactQuery from "@tanstack/react-query";
 import * as Components from "../../components";
+import * as ReactQuery from "@tanstack/react-query";
 import * as SupaHelpers from "../../pages/api/supabase_helpers";
 
 const HOST = process.env.NEXT_PUBLIC_HOST;
 const QK_USER_ID = "user-id";
 const QK_CATEGORIES = "categories";
 const QK_SUBCATEGORIES = "subcategories";
+const QK_SUBMITTED = "";
 
-const DeckForm = () => {
+const DeckForm = ({onSubmitFn, onCancelFn, ...props}) => {
   const [deckFormData, setDeckFormData] = useState({
+    name: "",
     description: "",
     status: "active",
     category_id: "",
     subcategory_id: "",
     rating: 0,
   });
+
+  const [submitted, setSubmitted] = useState(false);
 
   const queryClient = ReactQuery.useQueryClient();
 
@@ -67,10 +72,24 @@ const DeckForm = () => {
     });
   }
 
-  console.log(deckFormData);
+  function handleInputOnChange(event) {
+    event.preventDefault();
+    setDeckFormData(() => {
+      return {
+        ...deckFormData,
+        [event.target.name]: event.target.value,
+      };
+    });
+  }
+
+  async function handleOnSubmit(event) {
+    event.preventDefault();
+    setSubmitted(true);
+    console.log(deckFormData);
+  }
 
   return (
-    <form className={style.containerDeckForm}>
+    <form className={style.containerDeckForm} {...props}>
       <Chakra.Flex justifyContent="space-between">
         <Chakra.Text fontWeight="bold" fontSize="2xl">
           Create new Study Deck
@@ -80,7 +99,7 @@ const DeckForm = () => {
             colorScheme="blue"
             marginRight="5px"
             background="rgba(92, 102, 187, 1)"
-            onClick={() => alert("Button Created")}
+            onClick={handleOnSubmit}
           >
             Create
           </Chakra.Button>
@@ -94,8 +113,14 @@ const DeckForm = () => {
         </Chakra.Flex>
       </Chakra.Flex>
       <div>
-        <Chakra.FormControl>
+        <Chakra.FormControl
+          isRequired
+          isInvalid={Utils.isSpace(deckFormData.name) && submitted}
+        >
           <Chakra.Input
+            name="name"
+            value={deckFormData.name}
+            onChange={handleInputOnChange}
             variant="flushed"
             placeholder='Enter a title, "Learn English'
             type="text"
@@ -103,12 +128,20 @@ const DeckForm = () => {
             borderBottom="2px solid #1E1E1E"
             w="40%"
           />
-          <Chakra.FormLabel color="rgba(121, 121, 121, 1)">
-            Title
-          </Chakra.FormLabel>
+          <Chakra.Flex>
+            <Chakra.FormLabel color="rgba(121, 121, 121, 1)">
+              Título
+            </Chakra.FormLabel>
+            <Chakra.FormErrorMessage>
+              El mazo requiere un título
+            </Chakra.FormErrorMessage>
+          </Chakra.Flex>
         </Chakra.FormControl>
         <Chakra.FormControl>
           <Chakra.Input
+            name="description"
+            value={deckFormData.description}
+            onChange={handleInputOnChange}
             variant="flushed"
             placeholder="Add a description..."
             type="text"
@@ -122,21 +155,49 @@ const DeckForm = () => {
         </Chakra.FormControl>
       </div>
       <Chakra.Flex width="50%" margin="auto" flexDirection="column">
-        <Components.Dropdown
-          options={categories.data}
-          onChange={handleCategoryOnChange}
-          placeholder={"Select Category"}
-          margin="15px auto"
-          borderColor="#A1AAF3"
-        />
-        <Components.Dropdown
-          isDisabled={!deckFormData.category_id || subcategories.isLoading}
-          options={!deckFormData.category_id ? [] : subcategories.data}
-          value={deckFormData.subcategory_id}
-          onChange={handleSubcategoryOnChange}
-          placeholder={"Select Sub-Category"}
-          borderColor="#A1AAF3"
-        />
+        <Chakra.FormControl
+          isRequired
+          isInvalid={!deckFormData.category_id && submitted}
+        >
+          <Chakra.Flex>
+            <Chakra.FormLabel color="rgba(121, 121, 121, 1)">
+              Select Category:
+            </Chakra.FormLabel>
+            <Chakra.FormErrorMessage>
+              El mazo requiere un una categoría
+            </Chakra.FormErrorMessage>
+          </Chakra.Flex>
+          <Components.Dropdown
+            isRequired
+            options={categories.data}
+            onChange={handleCategoryOnChange}
+            placeholder={"Select Category"}
+            margin="15px auto"
+            borderColor="#A1AAF3"
+          />
+        </Chakra.FormControl>
+        <Chakra.FormControl
+          isRequired
+          isInvalid={!deckFormData.subcategory_id && submitted}
+        >
+          <Chakra.Flex>
+            <Chakra.FormLabel color="rgba(121, 121, 121, 1)">
+              Select Sub-Category:
+            </Chakra.FormLabel>
+            <Chakra.FormErrorMessage>
+              El mazo requiere una sub-categoría
+            </Chakra.FormErrorMessage>
+          </Chakra.Flex>
+          <Components.Dropdown
+            isRequired
+            isDisabled={!deckFormData.category_id || subcategories.isLoading}
+            options={!deckFormData.category_id ? [] : subcategories.data}
+            value={deckFormData.subcategory_id}
+            onChange={handleSubcategoryOnChange}
+            placeholder={"Select Sub-Category"}
+            borderColor="#A1AAF3"
+          />
+        </Chakra.FormControl>
       </Chakra.Flex>
     </form>
   );
