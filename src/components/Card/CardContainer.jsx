@@ -2,8 +2,9 @@ import Card from "./Card";
 import styles from "./Card.module.css";
 import ArrowContainer from "./ArrowContainer";
 import { useState } from "react";
+import DeckDetails from "./DeckDetails";
 
-function CardContainer({ cards }) {
+function CardContainer({ cards,deckDetails,deck_id,user_id }) {
   const [currentCard, setCurrentCard] = useState(0);
   const card = cards[currentCard];
   const maxIndex = cards.length;
@@ -24,6 +25,11 @@ function CardContainer({ cards }) {
         maxIndex={maxIndex}
         setCurrentCard={setCurrentCard}
         currentCard={currentCard}
+      />
+      <DeckDetails
+        deckDetails={deckDetails}
+        deck_id={deck_id}
+        user_id={user_id}
       />
     </div>
   );
