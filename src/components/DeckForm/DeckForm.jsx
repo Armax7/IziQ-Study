@@ -15,7 +15,7 @@ const QK_SUBCATEGORIES = "subcategories";
 const DeckForm = ({
   onCreateFn = (data) =>
     alert(`No onCreateFn found \n\n received data: \n${JSON.stringify(data)}`),
-  onCancelFn = () => alert("No onCancelFn found"),
+  onCloseFn = () => alert("No onCancelFn found"),
   className: classNameProp = style.containerDeckForm,
   ...props
 }) => {
@@ -88,8 +88,10 @@ const DeckForm = ({
   }
 
   async function handleOnSubmit(event) {
+    event.preventDefault()
     setSubmitted(true);
     await onCreateFn(deckFormData);
+    await onCloseFn();
   }
 
   async function handleOnCancel(event) {
@@ -101,7 +103,7 @@ const DeckForm = ({
       subcategory_id: "",
     });
     setSubmitted(false);
-    await onCancelFn();
+    await onCloseFn();
   }
 
   return (
