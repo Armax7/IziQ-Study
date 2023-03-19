@@ -13,3 +13,4 @@ export { default as SubcriptionBox } from "./SubcriptionBox/SubcriptionBox";
 export { default as CardDetailsContainer } from "./CardDetailsContainer/CardDetailsContainer";
 export { default as SubscriptionShowcase } from "./SubscriptionShowcase/SubscriptionShowcase";
 export { default as SubscriptionBoxContainer } from "./SubscriptionBoxContainer/SubscriptionBoxContainer";
+export { default as Stars } from "./Rating/Stars";
