@@ -4,6 +4,8 @@ import * as ReactQuery from "@tanstack/react-query";
 import * as Chakra from "@chakra-ui/react";
 import * as Components from "../../../components";
 import * as CardsControllers from "../../api/cards/controllers";
+import { useEffect, useState } from "react";
+import { supabase } from "../../api/supabaseClient";
 const HOST = process.env.NEXT_PUBLIC_HOST;
 
 export const QK_DECK = "cardsByDeckId";
@@ -12,6 +14,15 @@ function Decks() {
   const queryClient = ReactQuery.useQueryClient();
   const router = useRouter();
   const { id: deck_id } = router.query;
+  const [deckDetails,setDeckDetails] = useState()
+
+  useEffect(async()=>{
+    const rating = await supabase // ----> implement React Query
+      .from('decks')
+      .select('*')
+      .eq('id', deck_id)
+      setDeckDetails(rating.data[0])
+  },[])
 
   const {
     isLoading,
@@ -75,7 +86,12 @@ function Decks() {
   return (
     <div>
       <Chakra.VStack align={"stretch"}>
-        <Components.CardContainer cards={cards} />
+        <Components.CardContainer
+          cards={cards}
+          deckDetails={deckDetails}
+          deck_id={deck_id}
+          //user_id={user_id}     --->   add user_id in order to know how is rating the deck
+          />
         <Components.CardDetailsContainer
           dbCards={cards}
           itemOnSubmitFn={mutationEdit.mutate}
