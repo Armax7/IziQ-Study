@@ -1,10 +1,9 @@
 .flipCard {
     background-color: transparent;
-    width: 600px;
+    width: 80%;
     height: 400px;
     perspective: 3000px; 
     background-color: transparent;
-    
   }
   
   .flipCardInner {
@@ -29,6 +28,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 10px 0 0 0;
   }
   
   .flipCardFront {
@@ -38,7 +38,7 @@
   }
   
   .flipCardFront img {
-    margin: 50px;
+    margin: 30px;
     width: auto;
     height: 220px;
   }
@@ -50,9 +50,15 @@
     transform: rotateY(180deg);
   }
 .CardContainer{
-  padding: 2rem 0 0 0;
+  padding: 2rem 0 ;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;  
+  align-self: center;
+  border-radius: 20px;
+  width: 67%;
+  background-color: #f2f2f2;
+  height: 600px;
+  margin: 55px 0px 35px 0 ;
 }
