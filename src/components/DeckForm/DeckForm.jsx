@@ -15,7 +15,7 @@ const QK_SUBCATEGORIES = "subcategories";
 const DeckForm = ({
   onCreateFn = (data) =>
     alert(`No onCreateFn found \n\n received data: \n${JSON.stringify(data)}`),
-  onCloseFn = () => alert("No onCancelFn found"),
+  onCloseFn = () => {},
   className: classNameProp = style.containerDeckForm,
   ...props
 }) => {
