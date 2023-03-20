@@ -26,7 +26,8 @@ function DeckDetails({deck_id}) {
   },[])
 
   return (
-    <Chakra.Flex flexDir="column" width="80%" color="#313131" margin="20px 0">
+    <Chakra.Flex justifyContent="center">
+    <Chakra.Flex flexDir="column" width="80%" color="#313131" margin="10px 0">
         <Chakra.Flex justifyContent="space-between" alignItems="center">
             <Chakra.Heading margin="0 5px" >{deckDetails?.name}</Chakra.Heading>
             <Chakra.Text color="gray">{deckDetails?.description}</Chakra.Text>
@@ -38,6 +39,7 @@ function DeckDetails({deck_id}) {
             <Stars rating={deckDetails?.rating} deck_id={deck_id}/>
             <Chakra.Text color="gray" >({numberOfReviews} reviews)</Chakra.Text>
         </Chakra.Flex>
+    </Chakra.Flex>
     </Chakra.Flex>
   )
 }

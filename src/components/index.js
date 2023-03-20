@@ -14,3 +14,4 @@ export { default as CardDetailsContainer } from "./CardDetailsContainer/CardDeta
 export { default as SubscriptionShowcase } from "./SubscriptionShowcase/SubscriptionShowcase";
 export { default as SubscriptionBoxContainer } from "./SubscriptionBoxContainer/SubscriptionBoxContainer";
 export { default as Stars } from "./Rating/Stars";
+export { default as DeckDetails } from "./DeckDetails/DeckDetails";
