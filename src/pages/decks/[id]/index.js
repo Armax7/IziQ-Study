@@ -4,6 +4,7 @@ import * as ReactQuery from "@tanstack/react-query";
 import * as Chakra from "@chakra-ui/react";
 import * as Components from "../../../components";
 import * as CardsControllers from "../../api/cards/controllers";
+import Quiz from "../../../components/MultipleChoise/Quitz";
 const HOST = process.env.NEXT_PUBLIC_HOST;
 
 export const QK_DECK = "cardsByDeckId";
@@ -80,6 +81,7 @@ function Decks() {
           spacing={"1rem"}
           pb={"2rem"}
         />
+        <Quiz cards={cards} />
         <Components.CardForm
           deckId={deck_id}
           onSubmitFn={mutationPost.mutate}

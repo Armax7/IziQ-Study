@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
-import { Box, Text, Button, Center, Spacer } from "@chakra-ui/react";
+import * as Chakra from "@chakra-ui/react";
 
 const MultipleChoice = ({
   question,
   options,
   answer,
+  image,
   isLastQuestion,
   onNextQuestion,
   onFinishQuiz,
+  onScoreUpdate,
 }) => {
   const [isAnswered, setIsAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
@@ -24,6 +26,9 @@ const MultipleChoice = ({
     const isCorrectAnswer = option === answer;
     setIsCorrect(isCorrectAnswer);
     setIsAnswered(true);
+    if (isCorrectAnswer) {
+      onScoreUpdate(true);
+    }
   };
 
   const handleNextClick = () => {
@@ -37,60 +42,87 @@ const MultipleChoice = ({
     }
   };
 
+  const textColor = isCorrect ? "green" : isAnswered ? "red" : "inherit";
+  const optionsCopy = [...options];
+  optionsCopy.sort((a, b) => a.localeCompare(b));
+
   return (
-    <Box borderWidth="1px" borderRadius="md" p={4} bgColor="#FFFFFF">
-      <Box mb={4}>
-        <Text fontSize="lg" fontWeight="bold" textAlign="center">
+    <Chakra.Box
+      borderWidth="1px"
+      borderRadius="md"
+      p={4}
+      bgColor="#FFFFFF"
+      w="750px"
+      h="480px"
+      mx="auto"
+    >
+      <Chakra.Box mb={4}>
+        <Chakra.Text fontSize="25px" fontWeight="bold" textAlign="center">
           {question}
-        </Text>
-      </Box>
-      {options.map((option) => (
-        <Box key={option} mb={2}>
-          <Button
-            w="full"
-            colorScheme={
-              selectedOption === option ? (isCorrect ? "green" : "red") : "blue"
-            }
-            onClick={() => handleOptionClick(option)}
-            disabled={isAnswered}
-            color="#FFFFFF"
-            _hover={{ bgColor: "#A1AAF3" }}
-          >
-            {option}
-          </Button>
-        </Box>
-      ))}
-      {isAnswered && (
-        <Box mt={4}>
-          <Center>
-            <Box
-              px={4}
-              py={2}
-              borderRadius="md"
-              color="white"
-              bg={isCorrect ? "green.500" : "red.500"}
+        </Chakra.Text>
+        <Chakra.Box mb={4}>
+            {image && (
+              <Chakra.Image
+                src={image}
+                alt={question}
+                maxW="150px"
+                mt={2}
+                mx="auto"
+              />
+            )}
+          </Chakra.Box>
+      </Chakra.Box>
+      <Chakra.Box mt={3} mb={3} textAlign="center">
+        <Chakra.Text fontSize="md" color={textColor}>
+          {isAnswered
+            ? isCorrect
+              ? "¡Felicidades, has acertado!"
+              : "¡No hay problema, todavía estás aprendiendo!"
+            : "Selecciona la definición correcta"}
+        </Chakra.Text>
+      </Chakra.Box>
+      <Chakra.Grid templateColumns="repeat(2, 1fr)" gap={2}>
+        {optionsCopy.map((option, index) => (
+          <Chakra.GridItem key={index} mb={2}>
+            <Chakra.Button
+              w="full"
+              h="48px"
+              colorScheme={
+                selectedOption === option
+                  ? isCorrect
+                    ? "green"
+                    : "red"
+                  : "blue"
+              }
+              onClick={() => handleOptionClick(option)}
+              disabled={isAnswered}
+              color="#FFFFFF"
+              overflow="hidden"
+              _hover={{ bgColor: "#A1AAF3" }}
+              isTruncated
             >
-              <Text>{isCorrect ? "¡Correcto!" : "Incorrecto"}</Text>
-            </Box>
-          </Center>
-          {isCorrect && (
-            <Box mt={3} mb={3} textAlign="center">
-              <Text fontSize="md">¡Felicidades, has acertado!</Text>
-            </Box>
-          )}
-          <Spacer mt={2} />
-          <Button
+              {option}
+            </Chakra.Button>
+          </Chakra.GridItem>
+        ))}
+      </Chakra.Grid>
+      {isAnswered && (
+        <Chakra.Box mt={5}>
+          <Chakra.Button
             onClick={handleNextClick}
             w="full"
+            h="50px"
             bgColor="#5C66BB"
             _hover={{ bgColor: "#A1AAF3" }}
             color="#FFFFFF"
+            fontSize="20px"
+            fontWeight="bold"
           >
             {isLastQuestion ? "Finalizar quiz" : "Siguiente pregunta"}
-          </Button>
-        </Box>
+          </Chakra.Button>
+        </Chakra.Box>
       )}
-    </Box>
+    </Chakra.Box>
   );
 };
 

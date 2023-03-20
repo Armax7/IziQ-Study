@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Text, Image } from "@chakra-ui/react";
+import * as Chakra from "@chakra-ui/react";
 import MultipleChoice from "./MultipleChoise";
 
 const Quiz = ({ cards }) => {
@@ -12,7 +12,7 @@ const Quiz = ({ cards }) => {
     if (currentQuestionIndex < cards.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      console.log('Quiz is finished');
+      console.log("Quiz is finished");
       setIsQuizFinished(true);
     }
   };
@@ -33,6 +33,12 @@ const Quiz = ({ cards }) => {
     setIsQuizFinished(true);
   };
 
+  const handleScoreUpdate = (isCorrect) => {
+    if (isCorrect) {
+      setScore((score) => score + 1);
+    }
+  };
+
   const currentQuestion = cards[currentQuestionIndex];
   const otherQuestions = cards.filter((_, i) => i !== currentQuestionIndex);
   const randomQuestions = shuffle(otherQuestions).slice(0, 3);
@@ -41,38 +47,50 @@ const Quiz = ({ cards }) => {
     ...randomQuestions.map((q) => q.answer),
   ];
 
+  const restartQuiz = () => {
+    setScore(0);
+    setCurrentQuestionIndex(0);
+    setAnsweredQuestions([]);
+    setIsQuizFinished(false);
+  };  
+
   return (
-    <Box>
+    <Chakra.Box>
       {isQuizFinished ? (
-        <Box mt={8} mb={8} textAlign="center">
-          <Text fontSize="2xl" fontWeight="bold">¡Felicidades, has terminado el quiz!</Text>
-          <Text fontSize="xl" fontWeight="bold">Tu puntaje final es {score} de {cards.length}.</Text>
-        </Box>
+        <Chakra.Box
+          textAlign="center"
+          borderWidth="1px"
+          borderRadius="md"
+          p={4}
+          bgColor="#FFFFFF"
+          w="750px"
+          h="480px"
+          mx="auto"
+        >
+          <Chakra.Text fontSize="4xl" fontWeight="bold" mt={10} mb={6}>
+            ¡Felicidades, has terminado el quiz!
+          </Chakra.Text>
+          <Chakra.Text fontSize="3xl" fontWeight="bold" mb={6}>
+            Tu puntaje final es {score} de {cards.length}.
+          </Chakra.Text>
+          <Chakra.Button colorScheme="purple" size="lg" onClick={() => restartQuiz()}>Reiniciar Quiz</Chakra.Button>
+        </Chakra.Box>
       ) : (
-        <Box>
-          <Box mb={4}>
-            {currentQuestion.image && (
-              <Image
-                src={currentQuestion.image}
-                alt={currentQuestion.question}
-                maxW="150px"
-                mt={2}
-                mx="auto"
-              />
-            )}
-          </Box>
+        <Chakra.Box>
           <MultipleChoice
             question={currentQuestion.question}
             options={shuffle(options)}
             answer={currentQuestion.answer}
+            image={currentQuestion.image}
             onNextQuestion={handleNextQuestion}
             isLastQuestion={currentQuestionIndex === cards.length - 1}
             onAnswer={handleAnswer}
             onFinishQuiz={handleFinishQuiz}
+            onScoreUpdate={handleScoreUpdate}
           />
-        </Box>
+        </Chakra.Box>
       )}
-    </Box>
+    </Chakra.Box>
   );
 };
 
