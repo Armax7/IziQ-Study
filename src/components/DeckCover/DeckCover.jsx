@@ -1,8 +1,15 @@
 import * as Chakra from "@chakra-ui/react";
 import styles from "./DeckCover.module.css";
-import Stars from "../Rating/Stars"
+import Stars from "../Rating/Stars";
 
-const DeckCover = ({ name, description, total_cards, status, rating, ...props }) => {
+const DeckCover = ({
+  name,
+  description,
+  total_cards,
+  status,
+  rating,
+  ...props
+}) => {
   return (
     <Chakra.Box className={styles.container} {...props}>
       <Chakra.Heading className={styles.head} fontSize="xl">
@@ -22,7 +29,7 @@ const DeckCover = ({ name, description, total_cards, status, rating, ...props })
         >
           {total_cards} Cards
         </Chakra.Tag>
-        <Stars rating={rating} readOnly={true}/>
+        <Stars rating={rating} readOnly={true} />
       </div>
     </Chakra.Box>
   );
