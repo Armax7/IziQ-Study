@@ -2,6 +2,7 @@ import { supabase } from "../../pages/api/supabaseClient";
 import { useEffect, useState } from "react";
 import * as SupaHelpers from "../../pages/api/supabase_helpers";
 import styles from "./ProfileBuckets.module.css";
+import axios from "axios";
 
 export const PATH = {
   path: "",
@@ -23,6 +24,12 @@ const ProfileBuckets = () => {
 
     if (data) {
       console.log("este es data ", data);
+      await axios.put("http://localhost:3000/api/users", {
+        users_uuid: userID,
+        image: data.path,
+      });
+      console.log("userID", userID);
+      console.log("data.path", data.path);
       PATH.path = data.path;
       alert("Se subio el archivo correctamente");
     } else if (error) {
