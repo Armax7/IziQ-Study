@@ -51,7 +51,7 @@ const Decks = () => {
 
   const queryClient = ReactQuery.useQueryClient();
 
-  const deckFormMutation = ReactQuery.useMutation( postDeck );
+  const deckFormMutation = ReactQuery.useMutation(postDeck);
 
   function filterDecksByCategory(e) {
     console.log("e.target.value", e.target.value);
@@ -87,44 +87,66 @@ const Decks = () => {
       fontFamily="Poppins"
       fontWeight="normal"
       fontSize="25px"
-      textTransform="uppercase"
       textAlign="center"
     >
-      <Chakra.Button colorScheme="teal" onClick={onOpen}>
-        Crear Mazo
-      </Chakra.Button>
+      <Chakra.Box padding="5">
+        <Chakra.Button
+          bg="rgb(51, 51, 51)"
+          color="white"
+          boxShadow="lg"
+          onClick={onOpen}
+        >
+          Crear Mazo
+        </Chakra.Button>
+      </Chakra.Box>
 
-      <h1 font="Poppins"> Filter your deck</h1>
+      <Chakra.Box
+        as="h1"
+        textAlign="center"
+        fontSize="3xl"
+        fontWeight="bold"
+        color="white"
+        textShadow="2px 2px 4px rgba(0, 0, 0, 0.3)"
+      >
+        ✨ Filtra tus Mazos 📁 ✨
+      </Chakra.Box>
 
-      <label> select category :</label>
-      <Components.Dropdown
-        options={[...categories]}
-        onChange={filterDecksByCategory}
-        color="black"
-        size="lg"
-        width="10%"
-        bgColor="white"
-        borderRadius="10px"
-        display="inline-block"
-        font="inherit"
-        lineHeight="center"
-        padding="2em 0.1em 2em 1em"
-      />
-
-      <label title=""> select subcategory :</label>
-      <Components.Dropdown
-        options={[...subcategories]}
-        onChange={filterDecksBySubCategory}
-        color="black"
-        size="lg"
-        width="10%"
-        bgColor="white"
-        borderRadius="10px"
-        display="inline-block"
-        font="inherit"
-        lineHeight="center"
-        padding="2em 0.1em 2em 1em"
-      />
+      <Chakra.Box
+        as="strong"
+        textShadow="2px 2px 4px rgba(0, 0, 0, 0.3)"
+      >
+        Categoría:
+        <Components.Dropdown
+          options={[...categories]}
+          onChange={filterDecksByCategory}
+          color="black"
+          size="lg"
+          width="16%"
+          bgColor="white"
+          borderRadius="10px"
+          display="inline-block"
+          font="inherit"
+          lineHeight="center"
+          borderColor="black"
+          padding="0.5em 0.1em 0em 0.5em"
+          marginRight="20px"
+        />
+        Subcategoría:
+        <Components.Dropdown
+          options={[...subcategories]}
+          onChange={filterDecksBySubCategory}
+          color="black"
+          size="lg"
+          width="16%"
+          bgColor="white"
+          borderRadius="10px"
+          display="inline-block"
+          font="inherit"
+          lineHeight="center"
+          borderColor="black"
+          padding="0.5em 0.1em 0em 0.5em"
+        />
+      </Chakra.Box>
 
       <Components.DeckContainer decks={decks} />
 
