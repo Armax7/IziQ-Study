@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 import * as SupaHelpers from "../../pages/api/supabase_helpers";
 import styles from "./ProfileBuckets.module.css";
 
+export const PATH = {
+  path: "",
+};
+
 const ProfileBuckets = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [userID, setUserID] = useState("");
@@ -18,6 +22,8 @@ const ProfileBuckets = () => {
       .upload(`${userID}/profile/` + selectedFile?.name, selectedFile);
 
     if (data) {
+      console.log("este es data ", data);
+      PATH.path = data.path;
       alert("Se subio el archivo correctamente");
     } else if (error) {
       console.log(error);
