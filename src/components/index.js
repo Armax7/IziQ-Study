@@ -19,3 +19,4 @@ export { default as ProfileBuckets } from "./Buckets/ProfileBuckets";
 export { default as CardsBuckets } from "./Buckets/CardsBuckets";
 export { default as FormDrawerData } from "./FormDrawerData/FormDrawerData";
 export { default as MemoryCardGame } from "./MemoryCardGame/MemoryCardGame";
+export { default as LoadingScreen } from "./LoadingScreen/LoadingScreen";
