@@ -191,11 +191,7 @@ export default function Dashboard() {
             <MyChartStripe data={dataStripe} />
           </div>
         ) : null}
-
-        <Chakra.Flex flexDir="column">
-          <Chakra.Flex overflow="auto"></Chakra.Flex>
-          <Chakra.Flex align="center"></Chakra.Flex>
-        </Chakra.Flex>
+        
       </Chakra.Flex>
 
       {/* Column 3 */}
