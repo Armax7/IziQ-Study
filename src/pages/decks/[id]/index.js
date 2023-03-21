@@ -81,7 +81,8 @@ function Decks() {
           spacing={"1rem"}
           pb={"2rem"}
         />
-        <Quiz cards={cards} />
+        <Chakra.Button onClick={() => router.push(`/decks/${deck_id}/quiz-game`)}>Take Quiz</Chakra.Button>
+
         <Components.CardForm
           deckId={deck_id}
           onSubmitFn={mutationPost.mutate}
