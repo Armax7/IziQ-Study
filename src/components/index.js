@@ -15,3 +15,7 @@ export { default as SubscriptionShowcase } from "./SubscriptionShowcase/Subscrip
 export { default as SubscriptionBoxContainer } from "./SubscriptionBoxContainer/SubscriptionBoxContainer";
 export { default as Stars } from "./Rating/Stars";
 export { default as DeckDetails } from "./DeckDetails/DeckDetails";
+export { default as ProfileBuckets } from "./Buckets/ProfileBuckets";
+export { default as CardsBuckets } from "./Buckets/CardsBuckets";
+export { default as FormDrawerData } from "./FormDrawerData/FormDrawerData";
+export { default as MemoryCardGame } from "./MemoryCardGame/MemoryCardGame";

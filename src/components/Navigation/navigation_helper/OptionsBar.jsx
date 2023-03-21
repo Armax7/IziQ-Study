@@ -70,6 +70,9 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                   <Link href="/decks">
                     <Chakra.MenuItem>Mis Mazos</Chakra.MenuItem>
                   </Link>
+                  <Link href={"/community"}>
+                    <Chakra.MenuItem>Mazos de la Comunidad</Chakra.MenuItem>
+                  </Link>
                 </Chakra.MenuList>
               </Chakra.Menu>
             </Chakra.Box>
@@ -134,22 +137,30 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
           >
             Sign In
           </Chakra.Button>
-
           <Chakra.Drawer
             isOpen={SignIn.isOpen}
-            placement="top"
+            placement="right"
             onClose={SignIn.onClose}
             finalFocusRef={btnRef}
-            size="full"
+            size="sm"
           >
-            <Chakra.DrawerContent>
+            <Chakra.DrawerContent
+              bgColor="blue.800"
+              backgroundPosition="bottom"
+              bgRepeat="no-repeat"
+              bgSize="contain"
+            >
               <Chakra.DrawerCloseButton
                 backgroundColor="#F5E9CF"
                 color="red"
-                mr={960}
-                mt="3"
+                justifyItems="center"
               />
-              <Chakra.DrawerBody>
+
+              <Chakra.DrawerBody
+                bgRepeat="no-repeat"
+                bgPosition="bottom"
+                bgImage="https://media2.giphy.com/media/NFA61GS9qKZ68/giphy.gif?cid=ecf05e47xn3ry5qvntn307ou1nsjwfz32kxi7ymcgbprf7jw&rid=giphy.gif&ct=g"
+              >
                 <Components.FormLogIn />
               </Chakra.DrawerBody>
             </Chakra.DrawerContent>
@@ -175,19 +186,20 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
 
           <Chakra.Drawer
             isOpen={singUp.isOpen}
-            placement="top"
+            placement="right"
             onClose={singUp.onClose}
             finalFocusRef={btnRef}
-            size="full"
+            size="md"
           >
-            <Chakra.DrawerContent>
-              <Chakra.DrawerCloseButton
-                backgroundColor="#F5E9CF"
-                color="red"
-                mr={960}
-                mt="3"
-              />
-              <Chakra.DrawerBody>
+            <Chakra.DrawerContent bg="blue.800">
+              <Chakra.DrawerCloseButton backgroundColor="#F5E9CF" color="red" />
+
+              <Chakra.DrawerBody
+                bgRepeat="no-repeat"
+                bgPosition="bottom"
+                bgSize="contain"
+                bgImage="https://media0.giphy.com/media/WoWm8YzFQJg5i/giphy.gif?cid=ecf05e47vbmb4kob20y613bgho10pj1kpbo0yup2taljq7ir&rid=giphy.gif&ct=g"
+              >
                 <Components.FormSignUp />
               </Chakra.DrawerBody>
             </Chakra.DrawerContent>
