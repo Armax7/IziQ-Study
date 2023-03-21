@@ -1,30 +1,63 @@
 import React, { useState } from "react";
 import * as Chakra from "@chakra-ui/react";
 import * as Icons from "react-icons/fi";
-import Link from "next/link";
 import MyChartStripe from "../components/MyChart/MyChartStripe";
 import MyChartSupabase from "../components/MyChart/MyChartSupabase";
 import MyChartUsersCreate from "../components/MyChart/MyChartUsersCreate";
+import MyChartBD from "../components/MyChart/MyChartDB";
+import MyChartOccupactions from "../components/MyChart/MyChartOccupations";
+import MyChartSize from "../components/MyChart/MyChartSize";
 
 const dataStripe = {
-  labels: ["Noviembrer","Diciembre","Enero", "Febrero", "Marzo", "April"],
+  labels: ["Noviembrer", "Diciembre", "Enero", "Febrero", "Marzo", "April"],
   datasetLabel: "Sales",
   datasetData: [12, 10, 3, 5, 2, 0],
   datasetBackgroundColor: "rgba(25, 9, 12, 0.7)",
 };
 
 const dataSupabase = {
-  labels: ['Email', 'Google', 'Facebook'],
+  labels: ["Email", "Google", "Facebook"],
   datasetLabel: "Autenticacion de usuarios",
   values: [12, 19, 3],
 };
 
 const dataUsersCreate = {
-  labels:[1,2,3,4,5,6,7,8,9,10],
+  labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
   datasetLabel: "Usuarios autenticados ultimos 10 dias",
+  datasetData: [5, 2, 0, 7, 5, 0, 3, 0, 0, 1],
+};
 
-  datasetData:[5,2,0,7,5,0,3,0,0,1]
-}
+const dataDB = {
+  labels: [
+    "cards",
+    "categories",
+    "decks",
+    "profile",
+    "reviews",
+    "subcategories",
+    "users_details",
+  ],
+  datasetLabel: "Tamaño de Base de Datos en kB",
+  datasetData: [64, 32, 64, 32, 64, 40, 32, 32, 80],
+};
+
+const dataSize = {
+  labels: ["Uso", "Disponible"],
+  datasetLabel: "Tamaño de Base de Datos en MB",
+  datasetData: [78, 512],
+};
+
+const dataOccupations = {
+  labels: [
+    "Estidiante",
+    "Maestro",
+    "Profesionista",
+    "Sin especificar",
+    "Ninguna anterior",
+  ],
+  datasetLabel: "Tamaño de Base de Datos en kB",
+  datasetData: [20, 14, 18, 10, 9],
+};
 
 export default function Dashboard() {
   const [display, changeDisplay] = useState("hide");
@@ -66,58 +99,38 @@ export default function Dashboard() {
               justifyContent="center"
             >
               <Chakra.Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
-                <Link href={"/dashboard"}>
-                  <a>
-                    <Chakra.Text>
-                      <Chakra.Icon
-                        as={Icons.FiHome}
-                        fontSize="2xl"
-                        className="active-icon"
-                      />
-                      Home
-                    </Chakra.Text>
-                  </a>
-                </Link>
+                <Chakra.Text>
+                  <Chakra.Icon
+                    as={Icons.FiHome}
+                    fontSize="2xl"
+                    className="active-icon"
+                  />
+                  Home
+                </Chakra.Text>
               </Chakra.Flex>
               <Chakra.Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
-                <Link href={"/statistics-supabase"}>
-                  <a>
-                    <Chakra.Text>
-                      <Chakra.Icon as={Icons.FiDatabase} fontSize="2xl" />
-                      Base de Datos
-                    </Chakra.Text>
-                  </a>
-                </Link>
+                <Chakra.Text>
+                  <Chakra.Icon as={Icons.FiDatabase} fontSize="2xl" />
+                  Base de Datos
+                </Chakra.Text>
               </Chakra.Flex>
               <Chakra.Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
-                <Link href={"/statistics-stripe"}>
-                  <a>
-                    <Chakra.Text>
-                      <Chakra.Icon as={Icons.FiCreditCard} fontSize="2xl" />
-                      Stripe
-                    </Chakra.Text>
-                  </a>
-                </Link>
+                <Chakra.Text>
+                  <Chakra.Icon as={Icons.FiCreditCard} fontSize="2xl" />
+                  Stripe
+                </Chakra.Text>
               </Chakra.Flex>
               <Chakra.Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
-                <Link href={"/comments"}>
-                  <a>
-                    <Chakra.Text>
-                      <Chakra.Icon as={Icons.FiMessageCircle} fontSize="2xl" />
-                      Comentarios
-                    </Chakra.Text>
-                  </a>
-                </Link>
+                <Chakra.Text>
+                  <Chakra.Icon as={Icons.FiMessageCircle} fontSize="2xl" />
+                  Comentarios
+                </Chakra.Text>
               </Chakra.Flex>
               <Chakra.Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
-                <Link href={"/reports"}>
-                  <a>
-                    <Chakra.Text>
-                      <Chakra.Icon as={Icons.FiFlag} fontSize="2xl" />
-                      Reportes
-                    </Chakra.Text>
-                  </a>
-                </Link>
+                <Chakra.Text>
+                  <Chakra.Icon as={Icons.FiFlag} fontSize="2xl" />
+                  Reportes
+                </Chakra.Text>
               </Chakra.Flex>
             </Chakra.Flex>
           </Chakra.Flex>
@@ -153,7 +166,9 @@ export default function Dashboard() {
         <Chakra.Flex>
           <Chakra.Heading fontWeight="normal">Gráfico</Chakra.Heading>
         </Chakra.Flex>
-        <MyChartUsersCreate data={dataUsersCreate} />
+        <MyChartSize data={dataSize} />
+
+        
 
         <Chakra.Flex flexDir="column">
           <Chakra.Flex overflow="auto"></Chakra.Flex>
@@ -260,15 +275,15 @@ export default function Dashboard() {
           <Chakra.Flex>
             <Chakra.List spacing={2}>
               <Chakra.ListItem>
-                <Chakra.ListIcon as={Icons.FaCheck} color="green.500" />
+                <Chakra.ListIcon as={Icons.FiList} color="green.500" />
                 Primer deck
               </Chakra.ListItem>
               <Chakra.ListItem>
-                <Chakra.ListIcon as={Icons.FaCheck} color="green.500" />
+                <Chakra.ListIcon as={Icons.FiList} color="green.500" />
                 Segundo deck
               </Chakra.ListItem>
               <Chakra.ListItem>
-                <Chakra.ListIcon as={Icons.FaCheck} color="green.500" />
+                <Chakra.ListIcon as={Icons.FiList} color="green.500" />
                 Tercer deck
               </Chakra.ListItem>
             </Chakra.List>
