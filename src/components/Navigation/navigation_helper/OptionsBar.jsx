@@ -10,6 +10,8 @@ import React, { useEffect, useState } from "react";
 import * as Components from "../../../components";
 import * as SupaHelpers from "../../../pages/api/supabase_helpers";
 
+import { PATH } from "../../Buckets/ProfileBuckets";
+
 const OptionsBar = ({ logged = false, avatarImage }) => {
   const SignIn = Chakra.useDisclosure();
   const singUp = Chakra.useDisclosure();
@@ -17,7 +19,13 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
 
   //Creo un estado local en el cual se guarda datos del usuario (en este caso el nombre)
   const [userData, setUserData] = useState("");
+  const [path, setPath] = useState("");
   useEffect(async () => {
+    if (PATH.path) {
+      setPath(PATH.path);
+    } else {
+      setPath("");
+    }
     //Accedemos a ese dato por medio de un metodo en supaHelpers
     let user = await SupaHelpers.get.userNameFull();
     console.log("this is user ", user); // Console.log para ver el resutado primero por terminal
@@ -94,12 +102,19 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                   w="40px"
                   h="40px"
                 >
-                  <Chakra.Avatar w="40px" h="40px" src={avatarImage} />
+                  <Chakra.Avatar
+                    w="40px"
+                    h="40px"
+                    src={`https://mckdtyupusnhcabyhyja.supabase.co/storage/v1/object/public/images-client/${path}`}
+                  />
                 </Chakra.MenuButton>
                 <Chakra.MenuList alignItems={"center"}>
                   <br />
                   <Chakra.Center>
-                    <Chakra.Avatar size={"2xl"} src={avatarImage} />
+                    <Chakra.Avatar
+                      size={"2xl"}
+                      src={`https://mckdtyupusnhcabyhyja.supabase.co/storage/v1/object/public/images-client/${path}`}
+                    />
                   </Chakra.Center>
                   <br />
                   <Chakra.Center>
