@@ -9,8 +9,7 @@ import React, { useEffect, useState } from "react";
 
 import * as Components from "../../../components";
 import * as SupaHelpers from "../../../pages/api/supabase_helpers";
-
-import { PATH } from "../../Buckets/ProfileBuckets";
+import axios from "axios";
 
 const OptionsBar = ({ logged = false, avatarImage }) => {
   const SignIn = Chakra.useDisclosure();
@@ -20,17 +19,19 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
   //Creo un estado local en el cual se guarda datos del usuario (en este caso el nombre)
   const [userData, setUserData] = useState("");
   const [path, setPath] = useState("");
+  const [myUuid, setMyUuid] = useState("");
+  const [allData, setAllData] = useState({});
+
   useEffect(async () => {
-    if (PATH.path) {
-      setPath(PATH.path);
-    } else {
-      setPath("");
-    }
+    let uuid = await SupaHelpers.get.userId();
+    setMyUuid(uuid);
+    let allUsers = (await axios.get("http://localhost:3000/api/users")).data;
+    let userData = (await allUsers?.filter((u) => u.users_uuid == uuid))[0];
     //Accedemos a ese dato por medio de un metodo en supaHelpers
     let user = await SupaHelpers.get.userNameFull();
-    console.log("this is user ", user); // Console.log para ver el resutado primero por terminal
     setUserData(user); //Seteamos el valor obtenido
-  }, []);
+    setAllData(userData);
+  }, [allData]);
 
   return (
     <>
@@ -105,7 +106,7 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                   <Chakra.Avatar
                     w="40px"
                     h="40px"
-                    src={`https://mckdtyupusnhcabyhyja.supabase.co/storage/v1/object/public/images-client/${path}`}
+                    src={`https://mckdtyupusnhcabyhyja.supabase.co/storage/v1/object/public/images-client/${allData?.image}`}
                   />
                 </Chakra.MenuButton>
                 <Chakra.MenuList alignItems={"center"}>
@@ -113,7 +114,7 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                   <Chakra.Center>
                     <Chakra.Avatar
                       size={"2xl"}
-                      src={`https://mckdtyupusnhcabyhyja.supabase.co/storage/v1/object/public/images-client/${path}`}
+                      src={`https://mckdtyupusnhcabyhyja.supabase.co/storage/v1/object/public/images-client/${allData?.image}`}
                     />
                   </Chakra.Center>
                   <br />
