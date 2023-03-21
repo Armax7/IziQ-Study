@@ -2,25 +2,30 @@
 
 .container {
   background: #f2f2f2;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 15px;
-  font-family: "Poppins";
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  border-radius: 10px;
+   margin: 20px 20px 5px 20px;
+  font-family:  "Poppins";
   font-style: normal;
   font-weight: 600;
   color: #000000;
-  max-width: 400px;
+  max-width: 500px;
   max-height: 200px;
 }
 
 .head {
   display: flex;
   align-items: center;
-  margin: 5% 0 5% 8%;
+  margin: 0 5% 0 5%;
+  padding-top: 8px;
+  color: #360568;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .description {
   display: flex;
   align-items: center;
+  padding-top: 2px;
   margin: 0 5% 0 5%;
 }
 
@@ -31,5 +36,5 @@
 }
 
 .tag {
-  background: #a1aaf3;
+  background: #f72585;
 }
