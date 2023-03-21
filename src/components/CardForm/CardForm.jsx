@@ -39,7 +39,7 @@ function CardForm({
       answer: "",
       image: null,
       learned: false,
-    });t
+    });
   };
 
   return (

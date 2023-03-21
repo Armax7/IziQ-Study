@@ -116,6 +116,7 @@ function Decks() {
         </Chakra.Box>
         <Components.CardDetailsContainer
           dbCards={cards}
+          isDeckOwned={currentUserId === ownerId}
           itemOnSubmitFn={mutationEdit.mutate}
           itemOnDeleteFn={mutationDelete.mutate}
           spacing={"1rem"}

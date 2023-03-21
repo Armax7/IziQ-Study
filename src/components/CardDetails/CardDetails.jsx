@@ -14,6 +14,7 @@ function CardDetails({
   image = null,
   deck_id,
   learned,
+  isCardOwned = false,
   ...props
 }) {
   const [accordionIndex, setAccordionIndex] = useState(-1);
@@ -85,6 +86,7 @@ function CardDetails({
           />
           <Chakra.Flex width="10%" justifyContent="flex-end">
             <Chakra.AccordionButton
+              visibility={isCardOwned ? "visible" : "hidden"}
               onClick={handleOnClickEdit}
               padding="0"
               margin="0 8px"
@@ -98,6 +100,7 @@ function CardDetails({
               <RiPencilFill size="25px" cursor="pointer" />
             </Chakra.AccordionButton>
             <Chakra.Button
+              visibility={isCardOwned ? "visible" : "hidden"}
               padding="0"
               margin="0px 8px"
               onClick={handleDelete}
