@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import * as Chakra from "@chakra-ui/react";
+import styles from "../../styles/MultipleChoise.module.css";
 
 const MultipleChoice = ({
   question,
@@ -61,16 +62,16 @@ const MultipleChoice = ({
           {question}
         </Chakra.Text>
         <Chakra.Box mb={4}>
-            {image && (
-              <Chakra.Image
-                src={image}
-                alt={question}
-                maxW="150px"
-                mt={2}
-                mx="auto"
-              />
-            )}
-          </Chakra.Box>
+          {image && (
+            <Chakra.Image
+              src={image}
+              alt={question}
+              maxW="150px"
+              mt={2}
+              mx="auto"
+            />
+          )}
+        </Chakra.Box>
       </Chakra.Box>
       <Chakra.Box mt={3} mb={3} textAlign="center">
         <Chakra.Text fontSize="md" color={textColor}>
@@ -87,6 +88,7 @@ const MultipleChoice = ({
             <Chakra.Button
               w="full"
               h="48px"
+              focusBorderColor="transparent"
               colorScheme={
                 selectedOption === option
                   ? isCorrect
@@ -95,10 +97,14 @@ const MultipleChoice = ({
                   : "blue"
               }
               onClick={() => handleOptionClick(option)}
-              disabled={isAnswered}
+              className={isAnswered ? styles.disabled : ""}
               color="#FFFFFF"
               overflow="hidden"
               _hover={{ bgColor: "#A1AAF3" }}
+              border="none"
+              boxShadow="none"
+              outline="none"
+              _focus={{ boxShadow: "none" }}
               isTruncated
             >
               {option}
