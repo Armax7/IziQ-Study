@@ -1,6 +1,7 @@
 import * as Components from "../../components";
 import { useEffect, useState } from "react";
 import * as SupaHelpers from "../api/supabase_helpers";
+import * as Chakra from "@chakra-ui/react";
 
 function Home() {
   const [userID, setUserId] = useState("");
@@ -18,7 +19,20 @@ function Home() {
 
   return (
     <div>
-      <Components.DeckContainer decks={slicedDeck} />
+      {decks.length > 0 && (
+        <Chakra.Box
+          as="h1"
+          textAlign="center"
+          fontSize="3xl"
+          fontWeight="bold"
+          color="white"
+          textShadow="2px 2px 4px rgba(0, 0, 0, 0.3)"
+          paddingTop="15px"
+        >
+          ✨ Lista de Mazos 📋 ✨
+          <Components.DeckContainer decks={slicedDeck} />
+        </Chakra.Box>
+      )}
     </div>
   );
 }
