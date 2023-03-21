@@ -2,6 +2,29 @@ import React, { useState } from "react";
 import * as Chakra from "@chakra-ui/react";
 import * as Icons from "react-icons/fi";
 import Link from "next/link";
+import MyChartStripe from "../components/MyChart/MyChartStripe";
+import MyChartSupabase from "../components/MyChart/MyChartSupabase";
+import MyChartUsersCreate from "../components/MyChart/MyChartUsersCreate";
+
+const dataStripe = {
+  labels: ["Noviembrer","Diciembre","Enero", "Febrero", "Marzo", "April"],
+  datasetLabel: "Sales",
+  datasetData: [12, 10, 3, 5, 2, 0],
+  datasetBackgroundColor: "rgba(25, 9, 12, 0.7)",
+};
+
+const dataSupabase = {
+  labels: ['Email', 'Google', 'Facebook'],
+  datasetLabel: "Autenticacion de usuarios",
+  values: [12, 19, 3],
+};
+
+const dataUsersCreate = {
+  labels:[1,2,3,4,5,6,7,8,9,10],
+  datasetLabel: "Usuarios autenticados ultimos 10 dias",
+
+  datasetData:[5,2,0,7,5,0,3,0,0,1]
+}
 
 export default function Dashboard() {
   const [display, changeDisplay] = useState("hide");
@@ -18,7 +41,7 @@ export default function Dashboard() {
         w={["100%", "100%", "10%", "15%", "15%"]}
         flexDir="column"
         alignItems="center"
-        backgroundColor="#020202"
+        backgroundColor="#020254"
         color="#fff"
       >
         <Chakra.Flex
@@ -112,6 +135,7 @@ export default function Dashboard() {
         flexDir="column"
         overflow="auto"
         minH="100vh"
+        backgroundColor="#fff6"
       >
         <Chakra.Heading fontWeight="normal" mb={4} letterSpacing="tight">
           Bienvenido{" "}
@@ -123,12 +147,13 @@ export default function Dashboard() {
           Mis Ingresos
         </Chakra.Text>
         <Chakra.Text fontWeight="bold" fontSize="2xl">
-          $5,750.20
+          $1,750.00 USD
         </Chakra.Text>
-
+        <br />
         <Chakra.Flex>
-          <Chakra.Heading fontWeight="normal">Users</Chakra.Heading>
+          <Chakra.Heading fontWeight="normal">Gráfico</Chakra.Heading>
         </Chakra.Flex>
+        <MyChartUsersCreate data={dataUsersCreate} />
 
         <Chakra.Flex flexDir="column">
           <Chakra.Flex overflow="auto"></Chakra.Flex>
@@ -158,7 +183,7 @@ export default function Dashboard() {
       {/* Column 3 */}
       <Chakra.Flex
         w={["100%", "100%", "30%"]}
-        bgColor="#F5F5F5"
+        bgColor="#F5B559"
         p="3%"
         flexDir="column"
         overflow="auto"
