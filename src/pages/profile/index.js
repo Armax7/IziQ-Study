@@ -6,7 +6,6 @@ import * as Components from "../../components";
 import axios from "axios";
 
 import * as Component from "../../components";
-import { PATH } from "../../components/Buckets/ProfileBuckets";
 
 import style from "./profile.module.css";
 
@@ -26,11 +25,6 @@ const Profile = () => {
     let uuid = await SupaHelpers.get.userId();
     setMyUuid(uuid);
 
-    if (PATH.path) {
-      setPath(PATH.path);
-    } else {
-      setPath("");
-    }
     let info = await getAllData();
     let user = (await info?.filter((u) => u.users_uuid == uuid))[0];
 
@@ -57,7 +51,7 @@ const Profile = () => {
           marginTop="15%"
         >
           <Chakra.Image
-            src={`https://mckdtyupusnhcabyhyja.supabase.co/storage/v1/object/public/images-client/${path}`}
+            src={`https://mckdtyupusnhcabyhyja.supabase.co/storage/v1/object/public/images-client/${allData?.image}`}
             alt="Dan Abramov"
             borderRadius="full"
             width="230px"
