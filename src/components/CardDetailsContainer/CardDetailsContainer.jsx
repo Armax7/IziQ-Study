@@ -5,6 +5,7 @@ function CardDetailsContainer({
   dbCards,
   itemOnSubmitFn,
   itemOnDeleteFn,
+  isDeckOwned,
   ...props
 }) {
   if (!Array.isArray(dbCards)) {
@@ -24,6 +25,7 @@ function CardDetailsContainer({
           image={card.image}
           onDeleteFn={itemOnDeleteFn}
           onSubmitFn={itemOnSubmitFn}
+          isCardOwned={isDeckOwned}
         />
       ))}
     </Chakra.VStack>
