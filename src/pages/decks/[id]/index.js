@@ -75,7 +75,21 @@ function Decks() {
   return (
     <div>
       <Chakra.VStack align={"stretch"}>
-        <Components.CardContainer cards={cards} />
+        <Chakra.Box
+          alignSelf="center"
+          borderRadius="20px"
+          width="67%"
+          bgColor="#f2f2f2"
+          h="650px"
+          margin="40px 0 35px 0"
+        >          
+          <Components.CardContainer
+            cards={cards}
+          />
+          <Components.DeckDetails
+            deck_id={deck_id}
+          />
+        </Chakra.Box>
         <Components.CardDetailsContainer
           dbCards={cards}
           itemOnSubmitFn={mutationEdit.mutate}
