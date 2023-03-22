@@ -7,7 +7,8 @@ import MyChartSize from "../components/MyChart/MyChartSize";
 import MyChartStripe from "../components/MyChart/MyChartStripe";
 import MyChartSupabase from "../components/MyChart/MyChartSupabase";
 import MyChartUsersCreate from "../components/MyChart/MyChartUsersCreate";
-import MyTableStripe from "../components/MyChart/MyTableStripe"
+import MyTableStripe from "../components/MyChart/MyTableStripe";
+import MyComments from "../components/MyChart/MyComments";
 import * as Components from "../components";
 
 const dataStripe = {
@@ -66,23 +67,26 @@ const autors = ["Lore Qaba", "Susana Perez", "Hafi Galo"];
 const decks = ["Japonés Mock", "Inglés Frutas Mock", "Pokemon Mock"];
 
 export default function Dashboard() {
-  const [showChartHome, setShowChartHome] = useState(false)
-  const [showChartBase, setShowChartBase] = useState(false)
-  const [showChartStripe, setShowChartStripe] = useState(false)
+  const [showChartHome, setShowChartHome] = useState(false);
+  const [showChartBase, setShowChartBase] = useState(false);
+  const [showChartStripe, setShowChartStripe] = useState(false);
+  const [showComments, setShowComments] = useState(false);
 
   const handleChartHome = () => {
-    setShowChartHome(true)
-  }
+    setShowChartHome(true);
+  };
 
   const handleChartSupabase = () => {
-    setShowChartBase(true)
-  }
+    setShowChartBase(true);
+  };
 
   const handleChartStripe = () => {
-    setShowChartStripe(true)
-  }
+    setShowChartStripe(true);
+  };
 
- 
+  const handleViewComments = () => {
+    setShowComments(true);
+  };
 
   return (
     <Chakra.Flex
@@ -112,7 +116,7 @@ export default function Dashboard() {
               alignSelf="center"
               letterSpacing="tight"
             >
-              Dashboard
+              IziQ-Study
             </Chakra.Heading>
             <Chakra.Flex
               flexDir={["row", "row", "column", "column", "column"]}
@@ -150,7 +154,7 @@ export default function Dashboard() {
               </Chakra.Flex>
               <br />
               <Chakra.Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
-                <Chakra.Text cursor="pointer">
+                <Chakra.Text cursor="pointer" onClick={handleViewComments}>
                   <Chakra.Icon as={Icons.FiMessageCircle} fontSize="2xl" />
                   Comentarios
                 </Chakra.Text>
@@ -214,74 +218,74 @@ export default function Dashboard() {
         <Chakra.Divider orientation="horizontal" />
         <br />
         <Chakra.Flex>
-          <Chakra.Heading fontWeight="normal">Gráficos</Chakra.Heading>
+          <Chakra.Heading fontWeight="normal">My Dashboard</Chakra.Heading>
         </Chakra.Flex>
         <br />
 
         {showChartHome ? (
-          <>        {/* fila 1 */}
-        <Chakra.Grid
-          h="200px"
-          templateRows="repeat(2, 1fr)"
-          templateColumns="repeat(2, 4fr)"
-          gap={12}
-        >
-          <Chakra.GridItem rowSpan={2} colSpan={1} bg="#E6E6E6">
-            <Chakra.Box w={"99%"} h={"80%"}>
-              <MyChartStripe data={dataStripe} />
-            </Chakra.Box>
-          </Chakra.GridItem>
+          <>
+            {" "}
+            {/* fila 1 */}
+            <Chakra.Grid
+              h="200px"
+              templateRows="repeat(2, 1fr)"
+              templateColumns="repeat(2, 4fr)"
+              gap={12}
+            >
+              <Chakra.GridItem rowSpan={2} colSpan={1} bg="#E6E6E6">
+                <Chakra.Box w={"99%"} h={"80%"}>
+                  <MyChartStripe data={dataStripe} />
+                </Chakra.Box>
+              </Chakra.GridItem>
 
-          <Chakra.GridItem rowSpan={2} colSpan={1} bg="#E6E6E6">
-            <Chakra.Box w={"67%"} h={"30%"} ml={"12"}>
-              <MyChartSupabase data={dataSupabase} />
-            </Chakra.Box>
-          </Chakra.GridItem>
-        </Chakra.Grid>
-        {/* fila 2 */}
-        <br />
-        <Chakra.Grid
-          h="200px"
-          templateRows="repeat(1, 1fr)"
-          templateColumns="repeat(2, 4fr)"
-          gap={12}
-        >
-          <Chakra.GridItem rowSpan={2} colSpan={1} bg="#E6E6E6">
-            
-            <Chakra.Box w={"97%"} h={"90%"} >
-              <MyChartUsersCreate data={dataUsersCreate} />
-            </Chakra.Box>
-          </Chakra.GridItem>
+              <Chakra.GridItem rowSpan={2} colSpan={1} bg="#E6E6E6">
+                <Chakra.Box w={"67%"} h={"30%"} ml={"12"}>
+                  <MyChartSupabase data={dataSupabase} />
+                </Chakra.Box>
+              </Chakra.GridItem>
+            </Chakra.Grid>
+            {/* fila 2 */}
+            <br />
+            <Chakra.Grid
+              h="200px"
+              templateRows="repeat(1, 1fr)"
+              templateColumns="repeat(2, 4fr)"
+              gap={12}
+            >
+              <Chakra.GridItem rowSpan={2} colSpan={1} bg="#E6E6E6">
+                <Chakra.Box w={"97%"} h={"90%"}>
+                  <MyChartUsersCreate data={dataUsersCreate} />
+                </Chakra.Box>
+              </Chakra.GridItem>
 
-          <Chakra.GridItem rowSpan={2} colSpan={1} bg="#E6E6E6">
-            <Chakra.Box w={"67%"} h={"60%"} ml={"12"}>
-              <MyChartSize data={dataSize} />
-            </Chakra.Box>
-          </Chakra.GridItem>
-        </Chakra.Grid>
-        {/* fila 3 */}
-        <br />
-        <Chakra.Grid
-          h="200px"
-          templateRows="repeat(2, 1fr)"
-          templateColumns="repeat(2, 4fr)"
-          gap={12}
-        >
-          <Chakra.GridItem rowSpan={2} colSpan={1} bg="#E6E6E6">
-            <Chakra.Box w={"65%"} h={"50%"} ml={"12"}>
-              <MyChartBD data={dataDB} />
-            </Chakra.Box>
-          </Chakra.GridItem>
+              <Chakra.GridItem rowSpan={2} colSpan={1} bg="#E6E6E6">
+                <Chakra.Box w={"67%"} h={"60%"} ml={"12"}>
+                  <MyChartSize data={dataSize} />
+                </Chakra.Box>
+              </Chakra.GridItem>
+            </Chakra.Grid>
+            {/* fila 3 */}
+            <br />
+            <Chakra.Grid
+              h="200px"
+              templateRows="repeat(2, 1fr)"
+              templateColumns="repeat(2, 4fr)"
+              gap={12}
+            >
+              <Chakra.GridItem rowSpan={2} colSpan={1} bg="#E6E6E6">
+                <Chakra.Box w={"65%"} h={"50%"} ml={"12"}>
+                  <MyChartBD data={dataDB} />
+                </Chakra.Box>
+              </Chakra.GridItem>
 
-          <Chakra.GridItem rowSpan={2} colSpan={1} bg="#E6E6E6">
-            <Chakra.Box w={"70%"} ml={"10"}>
-              <MyChartOccupactions data={dataOccupations} />
-            </Chakra.Box>
-          </Chakra.GridItem>
-        </Chakra.Grid>
-        </>
-
-        ): showChartBase ? (
+              <Chakra.GridItem rowSpan={2} colSpan={1} bg="#E6E6E6">
+                <Chakra.Box w={"70%"} ml={"10"}>
+                  <MyChartOccupactions data={dataOccupations} />
+                </Chakra.Box>
+              </Chakra.GridItem>
+            </Chakra.Grid>
+          </>
+        ) : showChartBase ? (
           <div>
             <MyChartSize data={dataSize} />
             <br />
@@ -309,7 +313,11 @@ export default function Dashboard() {
             <br />
             <MyTableStripe />
           </div>
-        ) : null   }
+        ) : showComments ? (
+          <>
+            <MyComments />
+          </>
+        ) : null}
       </Chakra.Flex>
 
       {/* Column 3 */}
