@@ -25,7 +25,7 @@ function LogOutButton({
       bg={backgroundColor}
       onClick={() => {
         handleLogout();
-        alert("Logged out successfully.");
+        // alert("Logged out successfully.");
       }}
       mr={marginRight}
       ml={marginLeft}
