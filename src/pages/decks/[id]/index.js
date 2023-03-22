@@ -98,9 +98,7 @@ function Decks() {
   }
 
   if (deck_isLoading || userId_isLoading || ownerId_isLoading) {
-    return (
-      <Components.LoadingScreen />
-    );
+    return <Components.LoadingScreen />;
   }
 
   return (
@@ -116,11 +114,9 @@ function Decks() {
         >
           <Components.CardContainer cards={cards} />
           <Components.DeckDetails deck_id={deck_id} />
-        </Chakra.Box
+        </Chakra.Box>
         <Chakra.Flex justifyContent="center">
-            <Chakra.Text>
-              Minigames para poder practicar jugando
-            </Chakra.Text>
+          <Chakra.Text>Minigames para poder practicar jugando</Chakra.Text>
         </Chakra.Flex>
         <Chakra.Box
           display="flex"
@@ -153,9 +149,7 @@ function Decks() {
           </Link>
         </Chakra.Box>
         <Chakra.Flex justifyContent="center">
-            <Chakra.Text>
-              Necesitas un minimo de 4 cartas para jugar
-            </Chakra.Text>
+          <Chakra.Text>Necesitas un minimo de 4 cartas para jugar</Chakra.Text>
         </Chakra.Flex>
         <Components.CardDetailsContainer
           dbCards={cards}
