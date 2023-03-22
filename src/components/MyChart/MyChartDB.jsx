@@ -6,11 +6,15 @@ export function MyChartStripe({ data }) {
 
   useEffect(() => {
     const myChartRef = chartRef.current.getContext("2d");
-    if (window.myChart !== undefined) {
-      window.myChart.destroy();
+    // if (window.myChart !== undefined) {
+    //   window.myChart.destroy();
+    // }
+    const chartId = "myChartStripe";
+    if (chartId in window) {
+      window[chartId].destroy();
     }
 
-    window.myChart = new Chart(myChartRef, {
+    window[chartId] = new Chart(myChartRef, {
       type: "doughnut",
       data: {
         labels: data.labels,
@@ -27,7 +31,7 @@ export function MyChartStripe({ data }) {
         plugins: {
           title: {
             display: true,
-            text: "Uso de BD en Supabase",
+            text: "Uso de BD en Supabase (kB)",
             position: "top",
             font: {
               size: 18,
