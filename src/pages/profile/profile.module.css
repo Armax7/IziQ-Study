@@ -1,0 +1,10 @@
+.stylesImg {
+    transition: 1s;
+}
+
+.stylesImg:hover {
+    transition: 1s;
+    width: 255px;
+    height: 255px;
+    cursor: pointer;
+}
