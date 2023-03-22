@@ -23,6 +23,10 @@ const Decks = () => {
 
   const [subcategories, setSubCategories] = useState([]);
 
+  const [filterDecks, setFilterDecks] = useState([]);
+
+  const [filter, setFilter] = useState([]);
+
   useEffect(async () => {
     const userID = await SupaHelpers.get.userId();
     setUserId(userID);
@@ -54,8 +58,6 @@ const Decks = () => {
   const deckFormMutation = ReactQuery.useMutation(postDeck);
 
   function filterDecksByCategory(e) {
-    console.log("e.target.value", e.target.value);
-
     const localSubcategories = allSubCategories.filter((sc) => {
       return sc.category_id == e.target.value;
     });
@@ -65,14 +67,20 @@ const Decks = () => {
     setDecks(allUserDecks);
     if (e.target.value) {
       let cambios = allUserDecks.filter((c) => c.category_id == e.target.value);
-
+      setFilterDecks(cambios);
       setDecks(cambios);
     }
   }
 
   function filterDecksBySubCategory(e) {
-    setDecks(allUserDecks);
-    if (e.target.value) {
+    if (!e.target.value) {
+      setDecks(filterDecks);
+    }
+
+    if (e.target.value !== "") {
+      setDecks(filterDecks);
+      // setear decks que muestre los decks por subcategoria
+
       let cambios2 = allUserDecks.filter(
         (c) => c.subcategory_id == e.target.value
       );
@@ -80,6 +88,29 @@ const Decks = () => {
       setDecks(cambios2);
     }
   }
+
+  const handleChange = (e) => {
+   
+
+    
+
+    let sortedDecks = [...decks];
+
+
+    if (e.target.value === "recent") {
+      sortedDecks = sortedDecks.sort(
+        (a, b) => new Date(b.created_at) - new Date(a.created_at)
+      );
+      setDecks(sortedDecks);
+    } else if (e.target.value === "oldest") {
+      sortedDecks = sortedDecks.sort(
+        (a, b) => new Date(a.created_at) - new Date(b.created_at)
+      );
+      setDecks(sortedDecks);
+    } else {
+      setDecks(decks);
+    }
+  };
 
   return (
     <Chakra.Box
@@ -111,10 +142,25 @@ const Decks = () => {
         ✨ Filtra tus Mazos 📁 ✨
       </Chakra.Box>
 
-      <Chakra.Box
-        as="strong"
-        textShadow="2px 2px 4px rgba(0, 0, 0, 0.3)"
+      <label> Mazos Recientes:</label>
+
+      <Chakra.Select
+        onChange={handleChange}
+        color="black"
+        size="lg"
+        width="10%"
+        bgColor="white"
+        borderRadius="10px"
+        display="inline-block"
+        font="inherit"
+        lineHeight="center"
+        padding="2em 0.1em 2em 1em"
       >
+        <option value="recent">Recent</option>
+        <option value="oldest">Oldest</option>
+      </Chakra.Select>
+
+      <Chakra.Box as="strong" textShadow="2px 2px 4px rgba(0, 0, 0, 0.3)">
         Categoría:
         <Components.Dropdown
           options={[...categories]}
