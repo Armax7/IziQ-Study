@@ -37,6 +37,7 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                 borderRadius="50%"
                 fontSize="2px"
                 aria-label="Search database"
+                _hover={{color:"#1a202c", bgColor:"#f2f2f2"}}
                 icon={<BsBox2HeartFill size="20px" />}
               />
           </Link>
