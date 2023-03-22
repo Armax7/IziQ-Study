@@ -15,7 +15,7 @@ function LogOutButton({
       if (error) throw error;
     } catch (e) {
       console.log(e.message);
-      alert(e.message);
+      // alert(e.message);
     }
   };
 
@@ -25,7 +25,7 @@ function LogOutButton({
       bg={backgroundColor}
       onClick={() => {
         handleLogout();
-        alert("Logged out successfully.");
+        // alert("Logged out successfully.");
       }}
       mr={marginRight}
       ml={marginLeft}
