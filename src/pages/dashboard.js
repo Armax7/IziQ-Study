@@ -74,18 +74,30 @@ export default function Dashboard() {
 
   const handleChartHome = () => {
     setShowChartHome(true);
+    setShowChartBase(false)
+    setShowChartStripe(false)
+    setShowComments(false)
   };
 
   const handleChartSupabase = () => {
     setShowChartBase(true);
+    setShowChartHome(false)
+    setShowChartStripe(false)
+    setShowComments(false)
   };
 
   const handleChartStripe = () => {
     setShowChartStripe(true);
+    setShowChartHome(false)
+    setShowChartBase(false)
+    setShowComments(false)
   };
 
   const handleViewComments = () => {
     setShowComments(true);
+    setShowChartHome(false)
+    setShowChartBase(false)
+    setShowChartStripe(false)
   };
 
   return (
@@ -222,7 +234,7 @@ export default function Dashboard() {
         </Chakra.Flex>
         <br />
 
-        {showChartHome ? (
+        {showChartHome && (
           <>
             {" "}
             {/* fila 1 */}
@@ -285,7 +297,8 @@ export default function Dashboard() {
               </Chakra.GridItem>
             </Chakra.Grid>
           </>
-        ) : showChartBase ? (
+        )}
+        {showChartBase && (
           <div>
             <MyChartSize data={dataSize} />
             <br />
@@ -305,7 +318,8 @@ export default function Dashboard() {
             <br />
             <MyChartOccupactions data={dataOccupations} />
           </div>
-        ) : showChartStripe ? (
+        )}
+        {showChartStripe && (
           <div>
             <MyChartStripe data={dataStripe} />
             <br />
@@ -313,11 +327,12 @@ export default function Dashboard() {
             <br />
             <MyTableStripe />
           </div>
-        ) : showComments ? (
+        )}
+        {showComments && (
           <>
             <MyComments />
           </>
-        ) : null}
+        )}
       </Chakra.Flex>
 
       {/* Column 3 */}
