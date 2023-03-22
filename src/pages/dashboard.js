@@ -166,7 +166,7 @@ export default function Dashboard() {
           <Chakra.Menu>
 
           <Chakra.Flex flexDir="column" alignItems="center" mb={100} mt={8}>
-            <Chakra.MenuButton><Chakra.Avatar my={3} src="avatar-1.jpg" /></Chakra.MenuButton>
+            <Chakra.MenuButton><Chakra.Avatar my={3} src="https://mckdtyupusnhcabyhyja.supabase.co/storage/v1/object/public/images-client/IziQ-Study/Admin/IziQ-Study.png" /></Chakra.MenuButton>
             <Chakra.Text textAlign="center">Admin</Chakra.Text>
             <Chakra.MenuList>
               <Chakra.MenuItem>Perfil</Chakra.MenuItem>
