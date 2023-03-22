@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import * as Chakra from "@chakra-ui/react";
 import * as Icons from "react-icons/fi";
-import MyChartStripe from "../components/MyChart/MyChartStripe";
-import MyChartSupabase from "../components/MyChart/MyChartSupabase";
-import MyChartUsersCreate from "../components/MyChart/MyChartUsersCreate";
 import MyChartBD from "../components/MyChart/MyChartDB";
 import MyChartOccupactions from "../components/MyChart/MyChartOccupations";
 import MyChartSize from "../components/MyChart/MyChartSize";
-import * as Components from "../components"
+import MyChartStripe from "../components/MyChart/MyChartStripe";
+import MyChartSupabase from "../components/MyChart/MyChartSupabase";
+import MyChartUsersCreate from "../components/MyChart/MyChartUsersCreate";
+import * as Components from "../components";
 
 const dataStripe = {
   labels: ["Noviembrer", "Diciembre", "Enero", "Febrero", "Marzo", "April"],
@@ -38,7 +38,7 @@ const dataDB = {
     "subcategories",
     "users_details",
   ],
-  datasetLabel: "Tamaño de Base de Datos en kB",
+  datasetLabel: "Tamaño de Base de Datos",
   datasetData: [64, 32, 64, 32, 64, 40, 32, 32, 80],
 };
 
@@ -164,17 +164,22 @@ export default function Dashboard() {
           </Chakra.Flex>
           <br />
           <Chakra.Menu>
-
-          <Chakra.Flex flexDir="column" alignItems="center" mb={100} mt={8}>
-            <Chakra.MenuButton><Chakra.Avatar my={3} src="https://mckdtyupusnhcabyhyja.supabase.co/storage/v1/object/public/images-client/IziQ-Study/Admin/IziQ-Study.png" /></Chakra.MenuButton>
-            <Chakra.Text textAlign="center">Admin</Chakra.Text>
-            <Chakra.MenuList>
-              <Chakra.MenuItem>Perfil</Chakra.MenuItem>
-              <Chakra.MenuItem>Configuración</Chakra.MenuItem>
-              <Chakra.MenuItem><Components.LogOutButton/></Chakra.MenuItem>
-
-            </Chakra.MenuList>
-          </Chakra.Flex>
+            <Chakra.Flex flexDir="column" alignItems="center" mb={100} mt={8}>
+              <Chakra.MenuButton>
+                <Chakra.Avatar
+                  my={3}
+                  src="https://mckdtyupusnhcabyhyja.supabase.co/storage/v1/object/public/images-client/IziQ-Study/Admin/IziQ-Study.png"
+                />
+              </Chakra.MenuButton>
+              <Chakra.Text textAlign="center">Admin</Chakra.Text>
+              <Chakra.MenuList>
+                <Chakra.MenuItem>Perfil</Chakra.MenuItem>
+                <Chakra.MenuItem>Configuración</Chakra.MenuItem>
+                <Chakra.MenuItem>
+                  <Components.LogOutButton />
+                </Chakra.MenuItem>
+              </Chakra.MenuList>
+            </Chakra.Flex>
           </Chakra.Menu>
         </Chakra.Flex>
       </Chakra.Flex>
@@ -204,12 +209,68 @@ export default function Dashboard() {
         <Chakra.Flex>
           <Chakra.Heading fontWeight="normal">Gráficos</Chakra.Heading>
         </Chakra.Flex>
+        <br />
+        {/* fila 1 */}
+        <Chakra.Grid
+          h="200px"
+          templateRows="repeat(2, 1fr)"
+          templateColumns="repeat(2, 4fr)"
+          gap={12}
+        >
+          <Chakra.GridItem rowSpan={2} colSpan={1} bg="white">
+            <Chakra.Box w={"99%"} h={"80%"}>
+              <MyChartStripe data={dataStripe} />
+            </Chakra.Box>
+          </Chakra.GridItem>
 
-        {showAll ? (
-          <div>
-            <h1>Aqui tiene que traer todos los graficos</h1>
-          </div>
-        ) : showSupabase ? (
+          <Chakra.GridItem rowSpan={2} colSpan={1} bg="white">
+            <Chakra.Box w={"67%"} h={"30%"}>
+              <MyChartSupabase data={dataSupabase} />
+            </Chakra.Box>
+          </Chakra.GridItem>
+        </Chakra.Grid>
+        {/* fila 2 */}
+        <br />
+        <Chakra.Grid
+          h="200px"
+          templateRows="repeat(1, 1fr)"
+          templateColumns="repeat(2, 4fr)"
+          gap={12}
+        >
+          <Chakra.GridItem rowSpan={2} colSpan={1} bg="white">
+            <Chakra.Box w={"97%"} h={"90%"}>
+              <MyChartUsersCreate data={dataUsersCreate} />
+            </Chakra.Box>
+          </Chakra.GridItem>
+
+          <Chakra.GridItem rowSpan={2} colSpan={1} bg="white">
+            <Chakra.Box w={"67%"} h={"60%"}>
+              <MyChartSize data={dataSize} />
+            </Chakra.Box>
+          </Chakra.GridItem>
+        </Chakra.Grid>
+        {/* fila 3 */}
+        <br />
+        <Chakra.Grid
+          h="200px"
+          templateRows="repeat(2, 1fr)"
+          templateColumns="repeat(2, 4fr)"
+          gap={12}
+        >
+          <Chakra.GridItem rowSpan={2} colSpan={1} bg="white">
+            <Chakra.Box w={"65%"} h={"50%"}>
+              <MyChartBD data={dataDB} />
+            </Chakra.Box>
+          </Chakra.GridItem>
+
+          <Chakra.GridItem rowSpan={2} colSpan={1} bg="white">
+            <Chakra.Box w={"70%"} >
+              <MyChartOccupactions data={dataOccupations} />
+            </Chakra.Box>
+          </Chakra.GridItem>
+        </Chakra.Grid>
+
+        {showSupabase ? (
           <div>
             <MyChartSize data={dataSize} />
           </div>
