@@ -9,7 +9,7 @@ export function MyChartStripe({ data }) {
     // if (window.myChart !== undefined) {
     //   window.myChart.destroy();
     // }
-    const chartId = "myChartStripe";
+    const chartId = "myChartDB";
     if (chartId in window) {
       window[chartId].destroy();
     }
