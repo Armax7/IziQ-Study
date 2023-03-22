@@ -1,16 +1,20 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 
-export function MyChartStripe({ data }) {
+export function MyChartOccupations({ data }) {
   const chartRef = useRef(null);
 
   useEffect(() => {
     const myChartRef = chartRef.current.getContext('2d');
-    if (window.myChart !== undefined) {
-        window.myChart.destroy();
-      }
+    // if (window.myChart !== undefined) {
+    //     window.myChart.destroy();
+    //   }
+    const chartId = "myChartOccupations";
+    if (chartId in window) {
+      window[chartId].destroy();
+    }
 
-    window.myChart = new Chart(myChartRef, {
+   window[chartId] = new Chart(myChartRef, {
       type: 'radar',
       data: {
         labels: data.labels,
@@ -23,16 +27,26 @@ export function MyChartStripe({ data }) {
         ],
       },
       options: {
-        responsive: true,
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true,
-              },
+        plugins: {
+          title: {
+            display: true,
+            text: "Ocupaciones de usuarios",
+            position: "top",
+            font: {
+              size: 18,
+              weight: "bold",
             },
-          ],
+          },
         },
+        animations:{
+            tension: {
+                duration: 1000,
+                easing:"easeInExpo",
+                from: 1,
+                to: 0,
+                loop: true
+              }
+        }
       },
     });
   }, [data]);
@@ -45,4 +59,4 @@ export function MyChartStripe({ data }) {
 }
 
 
-export default MyChartStripe
+export default MyChartOccupations
