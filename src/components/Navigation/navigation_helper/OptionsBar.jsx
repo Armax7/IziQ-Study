@@ -3,12 +3,13 @@ import Link from "next/link";
 import * as Chakra from "@chakra-ui/react";
 
 import { GiHamburgerMenu } from "react-icons/gi";
-import { BsFillBellFill } from "react-icons/bs";
-import { CgPathTrim } from "react-icons/cg";
+import { BsFillBellFill, BsFillBookmarksFill } from "react-icons/bs";
 import React, { useEffect, useState } from "react";
+import { BsBox2HeartFill } from "react-icons/bs"
 
 import * as Components from "../../../components";
 import * as SupaHelpers from "../../../pages/api/supabase_helpers";
+import axios from "axios";
 
 const OptionsBar = ({ logged = false, avatarImage }) => {
   const SignIn = Chakra.useDisclosure();
@@ -17,22 +18,39 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
 
   //Creo un estado local en el cual se guarda datos del usuario (en este caso el nombre)
   const [userData, setUserData] = useState("");
+  const [myUuid, setMyUuid] = useState("");
+  const [allData, setAllData] = useState({});
+
   useEffect(async () => {
+    let uuid = await SupaHelpers.get.userId();
+    setMyUuid(uuid);
+    let allUsers = (await axios.get("http://localhost:3000/api/users")).data;
+    let userData = (await allUsers?.filter((u) => u.users_uuid == uuid))[0];
     //Accedemos a ese dato por medio de un metodo en supaHelpers
     let user = await SupaHelpers.get.userNameFull();
-    console.log("this is user ", user); // Console.log para ver el resutado primero por terminal
     setUserData(user); //Seteamos el valor obtenido
-  }, []);
+    setAllData(userData);
+  }, [allData]);
 
   return (
     <>
-      {logged ? (
+      {logged == true ? (
         <div>
           <Chakra.ButtonGroup gap="3">
+          <Link href="https://buy.stripe.com/test_cN2eWX0CC1bP3VSaEI">
+            <Chakra.IconButton
+                bgColor="#eb455f"
+                color="#f2f2f2"
+                borderRadius="50%"
+                fontSize="2px"
+                aria-label="Search database"
+                _hover={{color:"#1a202c", bgColor:"#f2f2f2"}}
+                icon={<BsBox2HeartFill size="20px" />}
+              />
+          </Link>
             <Chakra.Box>
-              <Chakra.Menu style={{ margin: 0 }}>
+              <Chakra.Menu>
                 <Chakra.MenuButton
-                  style={{ margin: 0 }}
                   as={Chakra.IconButton}
                   aria-label="Menu-Pages"
                   borderRadius="50%"
@@ -41,10 +59,18 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                   variant="outline"
                 />
                 <Chakra.MenuList>
-                  <Chakra.MenuItem>Pagina Principal</Chakra.MenuItem>
-                  <Chakra.MenuItem>Suscripciones</Chakra.MenuItem>
-                  <Chakra.MenuItem>Suscripcion Actual</Chakra.MenuItem>
-                  <Chakra.MenuItem>About</Chakra.MenuItem>
+                  <Link href="/home">
+                    <Chakra.MenuItem>Pagina Principal</Chakra.MenuItem>
+                  </Link>
+                  <Link href="/subscriptions">
+                    <Chakra.MenuItem>Suscripciones</Chakra.MenuItem>
+                  </Link>
+                  <Link href="/current-plan">
+                    <Chakra.MenuItem>Mi Suscripcion Actual</Chakra.MenuItem>
+                  </Link>
+                  <Link href="/about">
+                    <Chakra.MenuItem>About</Chakra.MenuItem>
+                  </Link>
                 </Chakra.MenuList>
               </Chakra.Menu>
             </Chakra.Box>
@@ -56,15 +82,19 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                   aria-label="Search database"
                   borderRadius="50%"
                   background="#F2F2F2"
-                  icon={<CgPathTrim />}
+                  icon={<BsFillBookmarksFill />}
                   variant="outline"
                 />
                 <Chakra.MenuList>
-                  <Chakra.MenuItem>Mis Mazos</Chakra.MenuItem>
+                  <Link href="/decks">
+                    <Chakra.MenuItem>Mis Mazos</Chakra.MenuItem>
+                  </Link>
+                  <Link href={"/community"}>
+                    <Chakra.MenuItem>Mazos de la Comunidad</Chakra.MenuItem>
+                  </Link>
                 </Chakra.MenuList>
               </Chakra.Menu>
             </Chakra.Box>
-
             <Chakra.IconButton
               borderRadius="50%"
               aria-label="Search database"
@@ -83,16 +113,23 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                   w="40px"
                   h="40px"
                 >
-                  <Chakra.Avatar w="40px" h="40px" src={avatarImage} />
+                  <Chakra.Avatar
+                    w="40px"
+                    h="40px"
+                    src={`https://mckdtyupusnhcabyhyja.supabase.co/storage/v1/object/public/images-client/${allData?.image}`}
+                  />
                 </Chakra.MenuButton>
                 <Chakra.MenuList alignItems={"center"}>
                   <br />
                   <Chakra.Center>
-                    <Chakra.Avatar size={"2xl"} src={avatarImage} />
+                    <Chakra.Avatar
+                      size={"2xl"}
+                      src={`https://mckdtyupusnhcabyhyja.supabase.co/storage/v1/object/public/images-client/${allData?.image}`}
+                    />
                   </Chakra.Center>
                   <br />
                   <Chakra.Center>
-                    <p>{userData.length ? userData : "Username"}</p>
+                    <p>{userData ? userData : "Username"}</p>
                   </Chakra.Center>
                   <br />
                   <Chakra.MenuDivider />
@@ -126,22 +163,30 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
           >
             Sign In
           </Chakra.Button>
-
           <Chakra.Drawer
             isOpen={SignIn.isOpen}
-            placement="top"
+            placement="right"
             onClose={SignIn.onClose}
             finalFocusRef={btnRef}
-            size="full"
+            size="sm"
           >
-            <Chakra.DrawerContent>
+            <Chakra.DrawerContent
+              bgColor="blue.800"
+              backgroundPosition="bottom"
+              bgRepeat="no-repeat"
+              bgSize="contain"
+            >
               <Chakra.DrawerCloseButton
                 backgroundColor="#F5E9CF"
                 color="red"
-                mr={960}
-                mt="3"
+                justifyItems="center"
               />
-              <Chakra.DrawerBody>
+
+              <Chakra.DrawerBody
+                bgRepeat="no-repeat"
+                bgPosition="bottom"
+                bgImage="https://media2.giphy.com/media/NFA61GS9qKZ68/giphy.gif?cid=ecf05e47xn3ry5qvntn307ou1nsjwfz32kxi7ymcgbprf7jw&rid=giphy.gif&ct=g"
+              >
                 <Components.FormLogIn />
               </Chakra.DrawerBody>
             </Chakra.DrawerContent>
@@ -167,19 +212,20 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
 
           <Chakra.Drawer
             isOpen={singUp.isOpen}
-            placement="top"
+            placement="right"
             onClose={singUp.onClose}
             finalFocusRef={btnRef}
-            size="full"
+            size="md"
           >
-            <Chakra.DrawerContent>
-              <Chakra.DrawerCloseButton
-                backgroundColor="#F5E9CF"
-                color="red"
-                mr={960}
-                mt="3"
-              />
-              <Chakra.DrawerBody>
+            <Chakra.DrawerContent bg="blue.800">
+              <Chakra.DrawerCloseButton backgroundColor="#F5E9CF" color="red" />
+
+              <Chakra.DrawerBody
+                bgRepeat="no-repeat"
+                bgPosition="bottom"
+                bgSize="contain"
+                bgImage="https://media0.giphy.com/media/WoWm8YzFQJg5i/giphy.gif?cid=ecf05e47vbmb4kob20y613bgho10pj1kpbo0yup2taljq7ir&rid=giphy.gif&ct=g"
+              >
                 <Components.FormSignUp />
               </Chakra.DrawerBody>
             </Chakra.DrawerContent>

@@ -2,6 +2,7 @@ import * as Chakra from "@chakra-ui/react";
 import styles from "./CardForm.module.css";
 import { useEffect, useState } from "react";
 import { Image } from "./utils";
+import * as Components from "../../components"
 
 function CardForm({
   deckId,
@@ -18,6 +19,7 @@ function CardForm({
   };
 
   const [formData, setFormData] = useState(initialValues);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOnChange = (e) => {
     const property = e.target.name;
@@ -70,7 +72,7 @@ function CardForm({
               variant="filled"
             />
             <Chakra.FormLabel color="#797979" mt="5px" htmlFor="question">
-              Question
+              Pregunta
             </Chakra.FormLabel>
           </Chakra.FormControl>
           <Chakra.FormControl mr="30px" pt="25px">
@@ -83,15 +85,31 @@ function CardForm({
               variant="filled"
             />
             <Chakra.FormLabel color="#797979" mt="5px" htmlFor="answer">
-              Answer
+              Respuesta
             </Chakra.FormLabel>
           </Chakra.FormControl>
           <div className={styles.image_container}>
-            <div className={styles.image_column}>
+            <div
+              className={styles.image_column}
+              onClick={() => setIsModalOpen(true)}
+            >
               <div className={styles.image_icon}>
                 <Image />
               </div>
               <div className={styles.image_text}>Image</div>
+              <Chakra.Modal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+              >
+                <Chakra.ModalOverlay />
+                <Chakra.ModalContent>
+                  <Chakra.ModalHeader>Seleccionar imagen</Chakra.ModalHeader>
+                  <Chakra.ModalCloseButton />
+                  <Chakra.ModalBody>
+                    <Components.CardsBuckets />
+                  </Chakra.ModalBody>
+                </Chakra.ModalContent>
+              </Chakra.Modal>
             </div>
           </div>
         </div>

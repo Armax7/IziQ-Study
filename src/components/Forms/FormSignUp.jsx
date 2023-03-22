@@ -57,7 +57,6 @@ function FormSignUp() {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
-
   const singUp = Chakra.useDisclosure();
 
   async function signInWithGoogle() {
@@ -89,11 +88,10 @@ function FormSignUp() {
   return (
     <>
       {
-        <Chakra.Box bg="#4D455D" w="45%" p={8} color="black" ml="480" h="560">
-
-          <Chakra.Flex>
+        <Chakra.Box>
+          <Chakra.Flex bg="blue.800">
             <Chakra.FormControl isRequired>
-              <Chakra.FormLabel textColor="#F5E9CF">
+              <Chakra.FormLabel textColor="#F5E9CF" margin="8">
                 First name
               </Chakra.FormLabel>
               <Chakra.Input
@@ -111,6 +109,7 @@ function FormSignUp() {
                 paddingLeft="25px"
                 textindent="500px"
                 textColor="#F5E9CF"
+                margin="8"
               >
                 Last name
               </Chakra.FormLabel>
@@ -126,19 +125,19 @@ function FormSignUp() {
             </Chakra.FormControl>
           </Chakra.Flex>
 
-          <Chakra.FormLabel height="4" textColor="#F5E9CF">
+          <Chakra.FormLabel height="4" margin="4" textColor="#F5E9CF">
             E-mail
           </Chakra.FormLabel>
           {/* <Chakra.FormControl isInvalid={isError}> */}
           {/* {!isError ? (
-            <Chakra.FormHelperText>
-              Enter the email you'd like to receive the newsletter on.
-            </Chakra.FormHelperText>
-          ) : (
-            <Chakra.FormErrorMessage>
-              Email is required.
-            </Chakra.FormErrorMessage>
-          )} */}
+                    <Chakra.FormHelperText>
+                      Enter the email you'd like to receive the newsletter on.
+                    </Chakra.FormHelperText>
+                  ) : (
+                    <Chakra.FormErrorMessage>
+                      Email is required.
+                    </Chakra.FormErrorMessage>
+                  )} */}
           <Chakra.Input
             backgroundColor="#F5E9CF"
             type="email"
@@ -152,6 +151,7 @@ function FormSignUp() {
             backgroundColor="#F5E9CF"
             textColor="black"
             size="md"
+            borderRadius="full"
           >
             <Chakra.Input
               pr="4.5rem"
@@ -188,18 +188,17 @@ function FormSignUp() {
               handleSignUp(e);
               handleSubmit(e);
             }}
-            ml="370"
             colorScheme="blue"
             marginTop="25px"
             marginBottom="25px"
-            marginLeft="0px"
+            marginRight="auto"
           >
             Sign Up
           </Chakra.Button>
 
           <Chakra.FormLabel
             textAlign="center"
-            textColor="#F5E9CF"
+            textColor="blue.200"
             textDecoration="underline"
           >
             Or register with
@@ -209,9 +208,7 @@ function FormSignUp() {
             <Chakra.Button
               backgroundColor="#F5E9CF"
               color="black"
-              left="0px"
-              mr={5}
-              ml="280"
+              marginRight="auto"
               colorScheme="facebook"
               leftIcon={<FaFacebook color="blue" />}
               onClick={(e) => {
@@ -223,7 +220,8 @@ function FormSignUp() {
             <Chakra.Button
               backgroundColor="#F5E9CF"
               color="black"
-              left="0px"
+              marginLeft="auto"
+              marginRight="auto"
               colorScheme="twitter"
               leftIcon={<FaGoogle color="#E96479" />}
               onClick={(e) => {
