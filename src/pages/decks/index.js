@@ -13,24 +13,37 @@ const QK_DECKS = "decks";
 
 const Decks = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [userID, setUserId] = useState("");
+  // const [userID, setUserId] = useState("");
   const [decks, setDecks] = useState([]);
 
   const [categories, setCategories] = useState([]);
-  const [allUserDecks, setAllUserDecks] = useState([]);
+  // const [allUserDecks, setAllUserDecks] = useState([]);
 
   const [allSubCategories, setAllSubCategories] = useState([]);
 
   const [subcategories, setSubCategories] = useState([]);
 
+  const queryClient = ReactQuery.useQueryClient();
+
+  const { data: userID } = ReactQuery.useQuery([QK_USER_ID], getUserID);
+
+  const {
+    isLoading: decks_isLoading,
+    isError: decks_isError,
+    data: allUserDecks,
+    error: decks_error,
+  } = ReactQuery.useQuery([QK_DECKS], () => getUserDecks(userID), {
+    enabled: !!userID,
+  });
+
   useEffect(async () => {
-    const userID = await SupaHelpers.get.userId();
-    setUserId(userID);
+    // const userID = await SupaHelpers.get.userId();
+    // setUserId(userID);
 
     const decks = await SupaHelpers.get.userDecks();
 
     setDecks(decks);
-    setAllUserDecks(decks);
+    // setAllUserDecks(decks);
 
     const { data: categories, error } = await supabase
       .from("categories")
@@ -47,11 +60,18 @@ const Decks = () => {
       console.log(error);
     }
     setAllSubCategories(subcategories);
-  }, [userID]);
+  }, [allUserDecks]);
 
-  const queryClient = ReactQuery.useQueryClient();
-
-  const deckFormMutation = ReactQuery.useMutation(postDeck);
+  const deckFormMutation = ReactQuery.useMutation(postDeck, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(QK_DECKS);
+    },
+  });
+  const deckDeleteMutation = ReactQuery.useMutation(deleteDeck, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(QK_DECKS);
+    },
+  });
 
   function filterDecksByCategory(e) {
     console.log("e.target.value", e.target.value);
@@ -79,6 +99,10 @@ const Decks = () => {
 
       setDecks(cambios2);
     }
+  }
+
+  function handleOnDelete(event) {
+    return deckDeleteMutation.mutate(event);
   }
 
   return (
@@ -111,10 +135,7 @@ const Decks = () => {
         ✨ Filtra tus Mazos 📁 ✨
       </Chakra.Box>
 
-      <Chakra.Box
-        as="strong"
-        textShadow="2px 2px 4px rgba(0, 0, 0, 0.3)"
-      >
+      <Chakra.Box as="strong" textShadow="2px 2px 4px rgba(0, 0, 0, 0.3)">
         Categoría:
         <Components.Dropdown
           options={[...categories]}
@@ -148,7 +169,15 @@ const Decks = () => {
         />
       </Chakra.Box>
 
-      <Components.DeckContainer decks={decks} />
+      {decks_isLoading ? (
+        <Components.LoadingScreen />
+      ) : (
+        <Components.DeckContainer
+          decks={decks}
+          onDeleteDeck={handleOnDelete}
+          isOwnedDecks={true}
+        />
+      )}
 
       <Chakra.Drawer
         isOpen={isOpen}
@@ -179,7 +208,6 @@ export async function getStaticProps() {
   const queryClient = new ReactQuery.QueryClient();
 
   await queryClient.prefetchQuery([QK_USER_ID], getUserID);
-  await queryClient.prefetchQuery([QK_DECKS], getUserDecks);
 
   return {
     props: {
@@ -203,6 +231,10 @@ async function getUserDecks(userId) {
 
 async function postDeck(data) {
   return await axios.post(`http://${HOST}/api/decks`, data);
+}
+
+async function deleteDeck(deckData) {
+  return await axios.put(`http://${HOST}/api/decks`, deckData);
 }
 
 export default Decks;
