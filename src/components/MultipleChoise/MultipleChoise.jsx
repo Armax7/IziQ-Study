@@ -15,6 +15,7 @@ const MultipleChoice = ({
   const [isAnswered, setIsAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [round, setRound] = useState(1);
 
   useEffect(() => {
     setIsAnswered(false);
@@ -36,8 +37,10 @@ const MultipleChoice = ({
     setIsAnswered(false);
     setIsCorrect(false);
     setSelectedOption(null);
+    setRound(round + 1);
     if (isLastQuestion) {
       onFinishQuiz();
+      setRound((round = 1));
     } else {
       onNextQuestion();
     }
@@ -53,28 +56,45 @@ const MultipleChoice = ({
       borderRadius="md"
       p={4}
       bgColor="#FFFFFF"
-      w="750px"
+      w="840px"
       h="480px"
       mx="auto"
+      position="relative"
+      boxShadow="lg"
     >
       <Chakra.Box mb={4}>
-        <Chakra.Text fontSize="25px" fontWeight="bold" textAlign="center">
-          {question}
-        </Chakra.Text>
+        {image ? (
+          <Chakra.Text fontSize="40px" fontWeight="bold" textAlign="center">
+            {question}
+          </Chakra.Text>
+        ) : (
+          <Chakra.Text
+            fontSize={{ base: "30px", md: "40px" }}
+            maxFontSize={{ base: "30px", md: "40px" }}
+            fontWeight="bold"
+            textAlign="center"
+            mt={20}
+            mb="145px"
+            whiteSpace="nowrap"
+            maxW="100%"
+          >
+            {question}
+          </Chakra.Text>
+        )}
         <Chakra.Box mb={4}>
           {image && (
             <Chakra.Image
               src={image}
               alt={question}
-              maxW="150px"
-              mt={2}
+              maxW="200px"
+              mt={4}
               mx="auto"
             />
           )}
         </Chakra.Box>
       </Chakra.Box>
-      <Chakra.Box mt={3} mb={3} textAlign="center">
-        <Chakra.Text fontSize="md" color={textColor}>
+      <Chakra.Box mt={3} mb={5} textAlign="center">
+        <Chakra.Text fontSize="lg" fontWeight={500} color={textColor}>
           {isAnswered
             ? isCorrect
               ? "¡Felicidades, has acertado!"
@@ -82,9 +102,9 @@ const MultipleChoice = ({
             : "Selecciona la definición correcta"}
         </Chakra.Text>
       </Chakra.Box>
-      <Chakra.Grid templateColumns="repeat(2, 1fr)" gap={2}>
+      <Chakra.Grid templateColumns="repeat(2, 1fr)" gap={2} mt={1}>
         {optionsCopy.map((option, index) => (
-          <Chakra.GridItem key={index} mb={2}>
+          <Chakra.GridItem key={index}>
             <Chakra.Button
               w="full"
               h="48px"
@@ -106,6 +126,7 @@ const MultipleChoice = ({
               outline="none"
               _focus={{ boxShadow: "none" }}
               isTruncated
+              fontWeight="bold"
             >
               {option}
             </Chakra.Button>
@@ -113,20 +134,30 @@ const MultipleChoice = ({
         ))}
       </Chakra.Grid>
       {isAnswered && (
-        <Chakra.Box mt={5}>
-          <Chakra.Button
-            onClick={handleNextClick}
-            w="full"
-            h="50px"
-            bgColor="#5C66BB"
-            _hover={{ bgColor: "#A1AAF3" }}
-            color="#FFFFFF"
-            fontSize="20px"
-            fontWeight="bold"
+        <Chakra.Slide direction="bottom" in={isAnswered} style={{ zIndex: 10 }}>
+          <Chakra.Flex
+            justify="center"
+            align="center"
+            bgColor="#313131"
+            h="70px"
+            gap="440px"
           >
-            {isLastQuestion ? "Finalizar quiz" : "Siguiente pregunta"}
-          </Chakra.Button>
-        </Chakra.Box>
+            <Chakra.Text fontSize="lg" fontWeight="bold" color="#FFFFFF">
+              Completaste la ronda N° {round}
+            </Chakra.Text>
+            <Chakra.Button
+              onClick={handleNextClick}
+              bgColor="#5C66BB"
+              _hover={{ bgColor: "#A1AAF3" }}
+              color="#FFFFFF"
+              h="45px"
+              fontSize="md"
+              fontWeight="bold"
+            >
+              {isLastQuestion ? "Finalizar el quiz" : "Siguiente pregunta"}
+            </Chakra.Button>
+          </Chakra.Flex>
+        </Chakra.Slide>
       )}
     </Chakra.Box>
   );

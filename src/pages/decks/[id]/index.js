@@ -4,7 +4,8 @@ import * as ReactQuery from "@tanstack/react-query";
 import * as Chakra from "@chakra-ui/react";
 import * as Components from "../../../components";
 import * as CardsControllers from "../../api/cards/controllers";
-import Quiz from "../../../components/MultipleChoise/Quitz";
+import Link from "next/link";
+import { useState } from "react";
 const HOST = process.env.NEXT_PUBLIC_HOST;
 
 export const QK_DECK = "cardsByDeckId";
@@ -70,10 +71,59 @@ function Decks() {
     );
   }
 
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
+
+  const handleClick = (event) => {
+    if (cards.length < 4) {
+      event.preventDefault();
+      setShowErrorMessage(true);
+    }
+  };
+
   return (
     <div>
       <Chakra.VStack align={"stretch"}>
         <Components.CardContainer cards={cards} />
+        <Chakra.Flex justifyContent="center">
+            <Chakra.Text>
+              Minigames para poder practicar jugando
+            </Chakra.Text>
+        </Chakra.Flex>
+        <Chakra.Box
+          display="flex"
+          gap="20px"
+          justifyContent="center"
+          paddingBottom="20px"
+        >
+          <Link href={`/decks/${deck_id}/quiz-game`} passHref>
+            <Chakra.Button
+              boxShadow="lg"
+              bgColor="#313131"
+              _hover={{ bgColor: "#666666" }}
+              color="#FFFFFF"
+              _focus={{ boxShadow: "none" }}
+              disabled={cards.length < 4}
+            >
+              Multiple Choice
+            </Chakra.Button>
+          </Link>
+          <Link href={`/decks/${deck_id}/memory-card-game`} passHref>
+            <Chakra.Button
+              boxShadow="lg"
+              bgColor="#313131"
+              _hover={{ bgColor: "#666666" }}
+              color="#FFFFFF"
+              disabled={cards.length < 4}
+            >
+              Memory Game
+            </Chakra.Button>
+          </Link>
+        </Chakra.Box>
+        <Chakra.Flex justifyContent="center">
+            <Chakra.Text>
+              Necesitas un minimo de 4 cartas para jugar
+            </Chakra.Text>
+        </Chakra.Flex>
         <Components.CardDetailsContainer
           dbCards={cards}
           itemOnSubmitFn={mutationEdit.mutate}
@@ -81,8 +131,6 @@ function Decks() {
           spacing={"1rem"}
           pb={"2rem"}
         />
-        <Chakra.Button onClick={() => router.push(`/decks/${deck_id}/quiz-game`)}>Take Quiz</Chakra.Button>
-
         <Components.CardForm
           deckId={deck_id}
           onSubmitFn={mutationPost.mutate}
