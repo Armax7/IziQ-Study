@@ -37,6 +37,7 @@ function DeckContainer({
           <a>
             <DeckCover
               key={deck.id}
+              id={deck.id}
               name={deck.name}
               description={deck.description}
               total_cards={deck.total_cards}
