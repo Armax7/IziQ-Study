@@ -1,30 +1,19 @@
-import Quiz from "../../../../components/MultipleChoise/Quitz";
-import { useRouter } from "next/router";
-import * as Chakra from "@chakra-ui/react";
-import * as React from "react";
-import * as ReactQuery from "@tanstack/react-query";
-import * as CardsControllers from "../../../api/cards/controllers";
-import Link from "next/link";
 import axios from "axios";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import * as React from "react";
+import * as Chakra from "@chakra-ui/react";
+import * as ReactQuery from "@tanstack/react-query";
+import Quiz from "../../../../components/MultipleChoise/Quitz";
+import * as Components from "../../../../components";
 
 const HOST = process.env.NEXT_PUBLIC_HOST;
+const QK_DECK = "cards-by-deck-id";
 
-export default function QuizPage() {
+function QuizPage() {
   const queryClient = ReactQuery.useQueryClient();
   const router = useRouter();
   const { id: deck_id } = router.query;
-
-  React.useEffect(() => {
-    const prefetchCards = async () => {
-      await queryClient.prefetchQuery(["cardsByDeckId", deck_id], async () => {
-        const response = await axios
-          .get(`http://${HOST}/api/cards/deck-id/${deck_id}`)
-          .then((res) => res.data);
-        return response;
-      });
-    };
-    prefetchCards();
-  }, [deck_id, queryClient]);
 
   const {
     isLoading,
@@ -32,12 +21,12 @@ export default function QuizPage() {
     data: cards,
     error,
   } = ReactQuery.useQuery(
-    ["cardsByDeckId", deck_id],
-    async () => await CardsControllers.getCardByDeckId(deck_id)
+    [QK_DECK],
+    async () => await getCardsByDeckId(deck_id)
   );
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Components.LoadingScreen />;
   }
 
   if (isError) {
@@ -59,7 +48,7 @@ export default function QuizPage() {
       position="relative"
       maxW="container.xl"
     >
-      <Link href={`/decks/${deck_id}`} passHref>
+      <Link href={`/decks/${deck_id}`}>
         <Chakra.Button
           bgColor="#313131"
           _hover={{ bgColor: "#666666" }}
@@ -75,10 +64,13 @@ export default function QuizPage() {
               fill="currentColor"
               d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"
             />
-          </Chakra.Icon>Back
+          </Chakra.Icon>
+          Back
         </Chakra.Button>
       </Link>
-      <Chakra.Box mt={5}><Quiz cards={cards} /></Chakra.Box>
+      <Chakra.Box mt={5}>
+        <Quiz cards={cards} />
+      </Chakra.Box>
     </Chakra.Container>
   );
 }
@@ -87,13 +79,10 @@ export async function getServerSideProps(context) {
   const { id: deck_id } = context.query;
   const queryClient = new ReactQuery.QueryClient();
 
-  await queryClient.prefetchQuery(["cardsByDeckId", deck_id], async () => {
-    const response = await axios
-      .get(`http://${HOST}/api/cards/deck-id/${deck_id}`)
-      .then((res) => res.data);
-
-    return response;
-  });
+  await queryClient.prefetchQuery(
+    [QK_DECK],
+    async () => await getCardsByDeckId(deck_id)
+  );
 
   return {
     props: {
@@ -101,3 +90,13 @@ export async function getServerSideProps(context) {
     },
   };
 }
+
+async function getCardsByDeckId(deck_id) {
+  const response = await axios
+    .get(`http://${HOST}/api/cards/deck-id/${deck_id}`)
+    .then((res) => res.data);
+
+  return response;
+}
+
+export default QuizPage;
