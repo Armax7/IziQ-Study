@@ -22,7 +22,9 @@ export function MyChartStripe({ data }) {
           {
             label: data.datasetLabel,
             data: data.datasetData,
-            backgroundColor: data.datasetBackgroundColor,
+            backgroundColor: [
+              '#8f1212',              
+            ],
           },
         ],
       },

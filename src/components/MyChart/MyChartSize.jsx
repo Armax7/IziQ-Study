@@ -22,7 +22,10 @@ export function MyChartSize({ data }) {
           {
             label: data.datasetLabel,
             data: data.datasetData,
-            backgroundColor: data.datasetBackgroundColor,
+            backgroundColor: [
+              '#207345',
+              '#991f37',
+            ],
           },
         ],
       },

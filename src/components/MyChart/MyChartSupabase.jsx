@@ -22,7 +22,7 @@ const MyChartSupabase = ({ data }) => {
           {
             data: data.values,
             backgroundColor: [
-              '#36A2EB',
+              '#2f7db1',
               '#3CB371',
               '#DC143C',
             ],
