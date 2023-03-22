@@ -264,7 +264,7 @@ export default function Dashboard() {
           </Chakra.GridItem>
 
           <Chakra.GridItem rowSpan={2} colSpan={1} bg="white">
-            <Chakra.Box w={"70%"} >
+            <Chakra.Box w={"70%"}>
               <MyChartOccupactions data={dataOccupations} />
             </Chakra.Box>
           </Chakra.GridItem>
