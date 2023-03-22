@@ -6,11 +6,15 @@ const MyChartSupabase = ({ data }) => {
 
   useEffect(() => {
     const myChartRef = chartRef.current.getContext('2d');
-    if (window.myChart !== undefined) {
-        window.myChart.destroy();
-      }
+    // if (window.myChart !== undefined) {
+    //     window.myChart.destroy();
+    //   }
+    const chartId = "myChartSupabase";
+    if (chartId in window) {
+      window[chartId].destroy();
+    }
 
-      window.myChart = new Chart(myChartRef, {
+    window[chartId] = new Chart(myChartRef, {
       type: 'pie',
       data: {
         labels: data.labels,
@@ -24,6 +28,28 @@ const MyChartSupabase = ({ data }) => {
             ],
           },
         ],
+      },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: "Providers de los usuarios",
+            position: "top",
+            font: {
+              size: 18,
+              weight: "bold",
+            },
+          },
+        },
+        animations:{
+            tension: {
+                duration: 1000,
+                easing:"easeInExpo",
+                from: 1,
+                to: 0,
+                loop: true
+              }
+        }
       },
     });
   }, [data]);
