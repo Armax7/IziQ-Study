@@ -131,10 +131,24 @@ function MemoryCardGame() {
     return () => clearTimeout(timer);
   }, [timeLeft, isBlocked]);
 
+   function handleBackClick() {
+     router.back();
+   }
+   
   return (
     <div>
       {cards.length > 0 && (
         <>
+                  <Chakra.Button
+            margin="30px 0 0 20px"
+            fontSize="4xl"
+            width="80px"
+            boxShadow="0px 0px 5px 0px rgba(0,0,0,0.75)"
+            onClick={handleBackClick}
+          >
+            {" "}
+            🔙{" "}
+          </Chakra.Button>
           <Chakra.Box
             background="linear-gradient(to bottom, #360568, #582987)"
             padding="5px 0 30px 0"
