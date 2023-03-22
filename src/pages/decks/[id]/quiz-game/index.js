@@ -5,7 +5,7 @@ import * as React from "react";
 import * as Chakra from "@chakra-ui/react";
 import * as ReactQuery from "@tanstack/react-query";
 import Quiz from "../../../../components/MultipleChoise/Quitz";
-import * as CardsControllers from "../../../api/cards/controllers";
+import * as Components from "../../../../components";
 
 const HOST = process.env.NEXT_PUBLIC_HOST;
 const QK_DECK = "cards-by-deck-id";
@@ -22,11 +22,11 @@ function QuizPage() {
     error,
   } = ReactQuery.useQuery(
     [QK_DECK],
-    async () => await CardsControllers.getCardByDeckId(deck_id)
+    async () => await getCardsByDeckId(deck_id)
   );
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Components.LoadingScreen />;
   }
 
   if (isError) {
@@ -79,19 +79,24 @@ export async function getServerSideProps(context) {
   const { id: deck_id } = context.query;
   const queryClient = new ReactQuery.QueryClient();
 
-  await queryClient.prefetchQuery([QK_DECK], async () => {
-    const response = await axios
-      .get(`http://${HOST}/api/cards/deck-id/${deck_id}`)
-      .then((res) => res.data);
-
-    return response;
-  });
+  await queryClient.prefetchQuery(
+    [QK_DECK],
+    async () => await getCardsByDeckId(deck_id)
+  );
 
   return {
     props: {
       dehydratedState: ReactQuery.dehydrate(queryClient),
     },
   };
+}
+
+async function getCardsByDeckId(deck_id) {
+  const response = await axios
+    .get(`http://${HOST}/api/cards/deck-id/${deck_id}`)
+    .then((res) => res.data);
+
+  return response;
 }
 
 export default QuizPage;
