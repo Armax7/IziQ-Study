@@ -10,7 +10,7 @@ import * as CardsControllers from "../../../api/cards/controllers";
 const HOST = process.env.NEXT_PUBLIC_HOST;
 const QK_DECK = "cards-by-deck-id";
 
-export default function QuizPage() {
+function QuizPage() {
   const queryClient = ReactQuery.useQueryClient();
   const router = useRouter();
   const { id: deck_id } = router.query;
@@ -93,3 +93,5 @@ export async function getServerSideProps(context) {
     },
   };
 }
+
+export default QuizPage;
