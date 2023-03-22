@@ -4,7 +4,6 @@ import * as Chakra from "@chakra-ui/react";
 
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsFillBellFill, BsFillBookmarksFill } from "react-icons/bs";
-import { CgPathTrim } from "react-icons/cg";
 import React, { useEffect, useState } from "react";
 
 import * as Components from "../../../components";
@@ -18,7 +17,6 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
 
   //Creo un estado local en el cual se guarda datos del usuario (en este caso el nombre)
   const [userData, setUserData] = useState("");
-  const [path, setPath] = useState("");
   const [myUuid, setMyUuid] = useState("");
   const [allData, setAllData] = useState({});
 
