@@ -10,7 +10,7 @@ const DeckCover = ({
   status,
   rating,
   onDelete = () => {},
-  isOwnedDeck = true,
+  isOwnedDeck = false,
   ...props
 }) => {
   return (
