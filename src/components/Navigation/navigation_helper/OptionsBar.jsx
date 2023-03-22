@@ -5,6 +5,7 @@ import * as Chakra from "@chakra-ui/react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsFillBellFill, BsFillBookmarksFill } from "react-icons/bs";
 import React, { useEffect, useState } from "react";
+import { BsBox2HeartFill } from "react-icons/bs"
 
 import * as Components from "../../../components";
 import * as SupaHelpers from "../../../pages/api/supabase_helpers";
@@ -36,6 +37,17 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
       {logged == true ? (
         <div>
           <Chakra.ButtonGroup gap="3">
+          <Link href="https://buy.stripe.com/test_cN2eWX0CC1bP3VSaEI">
+            <Chakra.IconButton
+                bgColor="#eb455f"
+                color="#f2f2f2"
+                borderRadius="50%"
+                fontSize="2px"
+                aria-label="Search database"
+                _hover={{color:"#1a202c", bgColor:"#f2f2f2"}}
+                icon={<BsBox2HeartFill size="20px" />}
+              />
+          </Link>
             <Chakra.Box>
               <Chakra.Menu>
                 <Chakra.MenuButton
