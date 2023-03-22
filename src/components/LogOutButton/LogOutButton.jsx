@@ -15,7 +15,7 @@ function LogOutButton({
       if (error) throw error;
     } catch (e) {
       console.log(e.message);
-      alert(e.message);
+      // alert(e.message);
     }
   };
 
