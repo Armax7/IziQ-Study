@@ -8,6 +8,7 @@ import Quiz from "../../../../components/MultipleChoise/Quitz";
 import * as CardsControllers from "../../../api/cards/controllers";
 
 const HOST = process.env.NEXT_PUBLIC_HOST;
+const QK_DECK = "cards-by-deck-id";
 
 export default function QuizPage() {
   const queryClient = ReactQuery.useQueryClient();
@@ -16,7 +17,7 @@ export default function QuizPage() {
 
   React.useEffect(() => {
     const prefetchCards = async () => {
-      await queryClient.prefetchQuery(["cardsByDeckId", deck_id], async () => {
+      await queryClient.prefetchQuery([QK_DECK], async () => {
         const response = await axios
           .get(`http://${HOST}/api/cards/deck-id/${deck_id}`)
           .then((res) => res.data);
@@ -32,7 +33,7 @@ export default function QuizPage() {
     data: cards,
     error,
   } = ReactQuery.useQuery(
-    ["cardsByDeckId", deck_id],
+    [QK_DECK],
     async () => await CardsControllers.getCardByDeckId(deck_id)
   );
 
@@ -90,7 +91,7 @@ export async function getServerSideProps(context) {
   const { id: deck_id } = context.query;
   const queryClient = new ReactQuery.QueryClient();
 
-  await queryClient.prefetchQuery(["cardsByDeckId", deck_id], async () => {
+  await queryClient.prefetchQuery([QK_DECK], async () => {
     const response = await axios
       .get(`http://${HOST}/api/cards/deck-id/${deck_id}`)
       .then((res) => res.data);
