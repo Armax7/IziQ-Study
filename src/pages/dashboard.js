@@ -93,7 +93,7 @@ export default function Dashboard() {
         w={["100%", "100%", "10%", "15%", "15%"]}
         flexDir="column"
         alignItems="center"
-        backgroundColor="#020254"
+        backgroundColor="#2D3436"
         color="#fff"
       >
         <Chakra.Flex
@@ -172,9 +172,9 @@ export default function Dashboard() {
                 />
               </Chakra.MenuButton>
               <Chakra.Text textAlign="center">Admin</Chakra.Text>
-              <Chakra.MenuList backgroundColor={"darkblue"}>
-                <Chakra.MenuItem color={"red"}>Perfil</Chakra.MenuItem>
-                <Chakra.MenuItem color={"red"}>Configuración</Chakra.MenuItem>
+              <Chakra.MenuList backgroundColor={"#657479"}>
+                <Chakra.MenuItem color={"#0A0B0C"}>Perfil</Chakra.MenuItem>
+                <Chakra.MenuItem color={"#0A0B0C"}>Configuración</Chakra.MenuItem>
                 <Chakra.MenuItem>
                   <Components.LogOutButton />
                 </Chakra.MenuItem>
@@ -191,7 +191,7 @@ export default function Dashboard() {
         flexDir="column"
         overflow="auto"
         minH="100vh"
-        backgroundColor="#fff6"
+        backgroundColor="#96B1B4"
       >
         <Chakra.Heading fontWeight="normal" mb={4} letterSpacing="tight">
           Bienvenido{" "}
@@ -284,7 +284,7 @@ export default function Dashboard() {
       {/* Column 3 */}
       <Chakra.Flex
         w={["100%", "100%", "30%"]}
-        bgColor="#F5B559"
+        bgColor="#4B585A"
         p="3%"
         flexDir="column"
         overflow="auto"
