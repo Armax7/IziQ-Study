@@ -7,6 +7,7 @@ import MyChartUsersCreate from "../components/MyChart/MyChartUsersCreate";
 import MyChartBD from "../components/MyChart/MyChartDB";
 import MyChartOccupactions from "../components/MyChart/MyChartOccupations";
 import MyChartSize from "../components/MyChart/MyChartSize";
+import * as Components from "../components"
 
 const dataStripe = {
   labels: ["Noviembrer", "Diciembre", "Enero", "Febrero", "Marzo", "April"],
@@ -59,12 +60,12 @@ const dataOccupations = {
   datasetData: [20, 14, 18, 10, 9],
 };
 
-const autors = ["Lore Qaba", "Susana Perez", "Hafi Galo"]
+const autors = ["Lore Qaba", "Susana Perez", "Hafi Galo"];
 
-const decks = ["Japonés Mock", "Inglés Frutas Mock", "Pokemon Mock"]
+const decks = ["Japonés Mock", "Inglés Frutas Mock", "Pokemon Mock"];
 
 export default function Dashboard() {
-  const [display, changeDisplay] = useState("hide");
+  const [showAll, setShowAll] = useState(false);
   const [showSupabase, setShowSupabase] = useState(false);
   const [showStripe, setShowStripe] = useState(false);
 
@@ -74,6 +75,10 @@ export default function Dashboard() {
 
   const handleClickStripe = () => {
     setShowStripe(true);
+  };
+
+  const handleClickAll = () => {
+    setShowAll(true);
   };
 
   return (
@@ -113,45 +118,64 @@ export default function Dashboard() {
               justifyContent="center"
             >
               <Chakra.Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
-                <Chakra.Text cursor="pointer">
+                <Chakra.Text
+                  cursor="pointer"
+                  onClick={handleClickAll}
+                  textAlign="center"
+                >
                   <Chakra.Icon
                     as={Icons.FiHome}
-                    fontSize="2xl"
+                    fontSize="2x2"
                     className="active-icon"
                   />
                   Home
                 </Chakra.Text>
               </Chakra.Flex>
+              <br />
               <Chakra.Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
                 <Chakra.Text cursor="pointer" onClick={handleClickSupabase}>
                   <Chakra.Icon as={Icons.FiDatabase} fontSize="2xl" />
                   Base de Datos
                 </Chakra.Text>
               </Chakra.Flex>
+              <br />
               <Chakra.Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
                 <Chakra.Text cursor="pointer" onClick={handleClickStripe}>
                   <Chakra.Icon as={Icons.FiCreditCard} fontSize="2xl" />
                   Stripe
                 </Chakra.Text>
               </Chakra.Flex>
+              <br />
               <Chakra.Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
                 <Chakra.Text cursor="pointer">
                   <Chakra.Icon as={Icons.FiMessageCircle} fontSize="2xl" />
                   Comentarios
                 </Chakra.Text>
               </Chakra.Flex>
+              <br />
               <Chakra.Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
                 <Chakra.Text cursor="pointer">
                   <Chakra.Icon as={Icons.FiFlag} fontSize="2xl" />
                   Reportes
                 </Chakra.Text>
+                <br />
               </Chakra.Flex>
             </Chakra.Flex>
           </Chakra.Flex>
-          <Chakra.Flex flexDir="column" alignItems="center" mb={100} mt={5}>
-            <Chakra.Avatar my={2} src="avatar-1.jpg" />
+          <br />
+          <Chakra.Menu>
+
+          <Chakra.Flex flexDir="column" alignItems="center" mb={100} mt={8}>
+            <Chakra.MenuButton><Chakra.Avatar my={3} src="avatar-1.jpg" /></Chakra.MenuButton>
             <Chakra.Text textAlign="center">Admin</Chakra.Text>
+            <Chakra.MenuList>
+              <Chakra.MenuItem>Perfil</Chakra.MenuItem>
+              <Chakra.MenuItem>Configuración</Chakra.MenuItem>
+              <Chakra.MenuItem><Components.LogOutButton/></Chakra.MenuItem>
+
+            </Chakra.MenuList>
           </Chakra.Flex>
+          </Chakra.Menu>
         </Chakra.Flex>
       </Chakra.Flex>
 
@@ -181,17 +205,19 @@ export default function Dashboard() {
           <Chakra.Heading fontWeight="normal">Gráficos</Chakra.Heading>
         </Chakra.Flex>
 
-        {showSupabase ? (
+        {showAll ? (
+          <div>
+            <h1>Aqui tiene que traer todos los graficos</h1>
+          </div>
+        ) : showSupabase ? (
           <div>
             <MyChartSize data={dataSize} />
           </div>
-        ) : null}
-        {showStripe ? (
+        ) : showStripe ? (
           <div>
             <MyChartStripe data={dataStripe} />
           </div>
         ) : null}
-        
       </Chakra.Flex>
 
       {/* Column 3 */}
