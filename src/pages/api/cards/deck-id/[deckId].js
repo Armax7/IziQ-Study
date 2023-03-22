@@ -6,9 +6,10 @@ export default async function hndler(req, res) {
 
   switch (method) {
     case Methods.GET:
-      Handlers.getCardByDeckIdHandler(req, res);
-      break;
+      return await Handlers.handleGetByDeckId(req, res);
     default:
-      res.status(400).json({ message: "Invalid request method" });
+      res.status(400).json({
+        message: "400 Bad Request: invalid method",
+      });
   }
 }

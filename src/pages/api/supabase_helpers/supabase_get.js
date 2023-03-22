@@ -127,9 +127,10 @@ export async function userSubscription() {
     if (subscription.error) throw subscription.error;
 
     return subscription.data.at(0);
-
   } catch (error) {
-    console.log(`Unable to retrieve subscription, there might be no user logged in.`);
+    console.log(
+      `Unable to retrieve subscription, there might be no user logged in.`
+    );
     return undefined;
   }
 }
@@ -425,5 +426,22 @@ export async function allDecksBySubCategoryOrdered({
   } catch (error) {
     console.log(error);
     return [];
+  }
+}
+
+export async function countCardsInDeck(deck_id) {
+  try {
+    const { data, error } = await supabase
+      .from("cards")
+      .select()
+      .eq("deck_id", deck_id);
+
+    if (error) throw error;
+
+    const count = data.length;
+    return count;
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 }
