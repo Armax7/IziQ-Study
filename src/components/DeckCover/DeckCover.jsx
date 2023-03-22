@@ -9,6 +9,7 @@ const DeckCover = ({
   total_cards,
   status,
   rating,
+  onDelete = () => {},
   isOwnedDeck = true,
   ...props
 }) => {
@@ -24,7 +25,10 @@ const DeckCover = ({
           </Chakra.Text>
         </Chakra.Box>
         <Chakra.Flex>
-          <Components.DeleteButton onClick={(e)=>alert(`${e} clicked`)} />
+          <Components.DeleteButton
+            visibility={isOwnedDeck ? "visible" : "hidden"}
+            onClick={onDelete}
+          />
         </Chakra.Flex>
       </Chakra.Flex>
       <div className={styles.tags_container}>
