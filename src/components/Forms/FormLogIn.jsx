@@ -35,7 +35,7 @@ function FormLogIn() {
         password,
       });
       if (error) throw error;
-      alert("User logged.");
+      // alert("User logged.");
       console.log("hey estoy loggueado");
       setIsLoggedIn(true);
       await router.push("/home", undefined, { shallow: true });
