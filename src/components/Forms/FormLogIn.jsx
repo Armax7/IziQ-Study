@@ -34,12 +34,18 @@ function FormLogIn() {
         email,
         password,
       });
+      
       if (error) throw error;
-      // alert("User logged.");
+      if(email === "iziq.study@gmail.com" && password ==="admin123"){
+        await router.push("./dashboard", undefined, {shallow:true})
+        alert("Welcome Admin")
+      }else{
+        alert("Welcome");
       console.log("hey estoy loggueado");
       setIsLoggedIn(true);
       await router.push("/home", undefined, { shallow: true });
       router.reload();
+      }      
 
       // console.log(user)
       // console.log(session)
