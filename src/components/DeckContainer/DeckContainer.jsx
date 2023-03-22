@@ -4,6 +4,8 @@ import Link from "next/link";
 
 function DeckContainer({
   decks,
+  isOwnedDecks,
+  onDeleteDeck = () => {},
   columns = [2, null, 3],
   spacing = "0em",
   //px = "1vw",
@@ -39,6 +41,8 @@ function DeckContainer({
               description={deck.description}
               total_cards={deck.total_cards}
               rating={deck.rating}
+              onDelete={onDeleteDeck}
+              isOwnedDeck={isOwnedDecks}
             />
           </a>
         </Link>
