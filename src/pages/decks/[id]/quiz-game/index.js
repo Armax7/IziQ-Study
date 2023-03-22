@@ -48,7 +48,7 @@ function QuizPage() {
       position="relative"
       maxW="container.xl"
     >
-      <Link href={`/decks/${deck_id}`} passHref>
+      <Link href={`/decks/${deck_id}`}>
         <Chakra.Button
           bgColor="#313131"
           _hover={{ bgColor: "#666666" }}
