@@ -172,9 +172,9 @@ export default function Dashboard() {
                 />
               </Chakra.MenuButton>
               <Chakra.Text textAlign="center">Admin</Chakra.Text>
-              <Chakra.MenuList>
-                <Chakra.MenuItem>Perfil</Chakra.MenuItem>
-                <Chakra.MenuItem>Configuración</Chakra.MenuItem>
+              <Chakra.MenuList backgroundColor={"darkblue"}>
+                <Chakra.MenuItem color={"red"}>Perfil</Chakra.MenuItem>
+                <Chakra.MenuItem color={"red"}>Configuración</Chakra.MenuItem>
                 <Chakra.MenuItem>
                   <Components.LogOutButton />
                 </Chakra.MenuItem>
