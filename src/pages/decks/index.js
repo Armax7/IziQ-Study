@@ -13,11 +13,9 @@ const QK_DECKS = "decks";
 
 const Decks = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const [userID, setUserId] = useState("");
   const [decks, setDecks] = useState([]);
 
   const [categories, setCategories] = useState([]);
-  // const [allUserDecks, setAllUserDecks] = useState([]);
 
   const [allSubCategories, setAllSubCategories] = useState([]);
 
@@ -37,13 +35,9 @@ const Decks = () => {
   });
 
   useEffect(async () => {
-    // const userID = await SupaHelpers.get.userId();
-    // setUserId(userID);
-
     const decks = await SupaHelpers.get.userDecks();
 
     setDecks(decks);
-    // setAllUserDecks(decks);
 
     const { data: categories, error } = await supabase
       .from("categories")
