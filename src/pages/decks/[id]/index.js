@@ -5,7 +5,6 @@ import * as Chakra from "@chakra-ui/react";
 import * as Components from "../../../components";
 import * as CardsControllers from "../../api/cards/controllers";
 import Link from "next/link";
-import { useState } from "react";
 const HOST = process.env.NEXT_PUBLIC_HOST;
 
 export const QK_DECK = "cardsByDeckId";
@@ -70,15 +69,6 @@ function Decks() {
       </Chakra.Alert>
     );
   }
-
-  const [showErrorMessage, setShowErrorMessage] = useState(false);
-
-  const handleClick = (event) => {
-    if (cards.length < 4) {
-      event.preventDefault();
-      setShowErrorMessage(true);
-    }
-  };
 
   return (
     <div>
