@@ -21,3 +21,4 @@ export { default as FormDrawerData } from "./FormDrawerData/FormDrawerData";
 export { default as MemoryCardGame } from "./MemoryCardGame/MemoryCardGame";
 export { default as LoadingScreen } from "./LoadingScreen/LoadingScreen";
 export { default as DeleteButton } from "./DeleteButton/DeleteButton";
+export { default as BackButton } from "./BackButton/BackButton";
