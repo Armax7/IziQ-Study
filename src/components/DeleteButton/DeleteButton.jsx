@@ -4,7 +4,7 @@ import { HiTrash } from "react-icons/hi";
 function DeleteButton({ onClick: onClickProp = () => {}, ...props }) {
   return (
     <Chakra.Button onClick={onClickProp} {...props}>
-      <HiTrash />
+      🗑️
     </Chakra.Button>
   );
 }
