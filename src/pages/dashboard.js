@@ -217,13 +217,13 @@ export default function Dashboard() {
           templateColumns="repeat(2, 4fr)"
           gap={12}
         >
-          <Chakra.GridItem rowSpan={2} colSpan={1} bg="white">
+          <Chakra.GridItem rowSpan={2} colSpan={1} bg="#E6E6E6">
             <Chakra.Box w={"99%"} h={"80%"}>
               <MyChartStripe data={dataStripe} />
             </Chakra.Box>
           </Chakra.GridItem>
 
-          <Chakra.GridItem rowSpan={2} colSpan={1} bg="white">
+          <Chakra.GridItem rowSpan={2} colSpan={1} bg="#E6E6E6">
             <Chakra.Box w={"67%"} h={"30%"}>
               <MyChartSupabase data={dataSupabase} />
             </Chakra.Box>
@@ -237,13 +237,13 @@ export default function Dashboard() {
           templateColumns="repeat(2, 4fr)"
           gap={12}
         >
-          <Chakra.GridItem rowSpan={2} colSpan={1} bg="white">
+          <Chakra.GridItem rowSpan={2} colSpan={1} bg="#E6E6E6">
             <Chakra.Box w={"97%"} h={"90%"}>
               <MyChartUsersCreate data={dataUsersCreate} />
             </Chakra.Box>
           </Chakra.GridItem>
 
-          <Chakra.GridItem rowSpan={2} colSpan={1} bg="white">
+          <Chakra.GridItem rowSpan={2} colSpan={1} bg="#E6E6E6">
             <Chakra.Box w={"67%"} h={"60%"}>
               <MyChartSize data={dataSize} />
             </Chakra.Box>
@@ -257,13 +257,13 @@ export default function Dashboard() {
           templateColumns="repeat(2, 4fr)"
           gap={12}
         >
-          <Chakra.GridItem rowSpan={2} colSpan={1} bg="white">
+          <Chakra.GridItem rowSpan={2} colSpan={1} bg="#E6E6E6">
             <Chakra.Box w={"65%"} h={"50%"}>
               <MyChartBD data={dataDB} />
             </Chakra.Box>
           </Chakra.GridItem>
 
-          <Chakra.GridItem rowSpan={2} colSpan={1} bg="white">
+          <Chakra.GridItem rowSpan={2} colSpan={1} bg="#E6E6E6">
             <Chakra.Box w={"70%"}>
               <MyChartOccupactions data={dataOccupations} />
             </Chakra.Box>
