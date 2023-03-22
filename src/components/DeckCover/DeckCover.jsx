@@ -4,6 +4,7 @@ import styles from "./DeckCover.module.css";
 import Stars from "../Rating/Stars";
 
 const DeckCover = ({
+  id,
   name,
   description,
   total_cards,
@@ -13,6 +14,10 @@ const DeckCover = ({
   isOwnedDeck = false,
   ...props
 }) => {
+  async function handleOnDelete(event) {
+    event.preventDefault();
+    await onDelete({ id, status: "inactive" });
+  }
   return (
     <Chakra.Box className={styles.container} {...props}>
       <Chakra.Flex>
@@ -27,7 +32,7 @@ const DeckCover = ({
         <Chakra.Flex>
           <Components.DeleteButton
             visibility={isOwnedDeck ? "visible" : "hidden"}
-            onClick={onDelete}
+            onClick={handleOnDelete}
           />
         </Chakra.Flex>
       </Chakra.Flex>
