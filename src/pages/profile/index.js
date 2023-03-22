@@ -10,7 +10,6 @@ import * as Component from "../../components";
 import style from "./profile.module.css";
 
 const Profile = () => {
-  const [userName, setUserName] = useState("");
   const [myUuid, setMyUuid] = useState("");
   const [allData, setAllData] = useState({});
   const [path, setPath] = useState("");

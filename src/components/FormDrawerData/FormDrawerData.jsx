@@ -56,7 +56,7 @@ function FormDrawerData() {
       occupation: newData.occupation,
       alias: newData.alias,
     });
-    alert("Actualizado");
+
     event.target.reset();
   };
 
@@ -95,13 +95,6 @@ function FormDrawerData() {
 
             <Chakra.DrawerBody className={style.drawerBody}>
               <Chakra.Stack spacing="24px">
-                <Chakra.Box>
-                  <Chakra.Text color="white" fontWeight="bold">
-                    Foto de Perfil
-                  </Chakra.Text>
-
-                  <Chakra.Input variant="flushed" placeholder="URL" />
-                </Chakra.Box>
                 <Chakra.Box>
                   <Chakra.Text fontWeight="bold" color="white">
                     Alias
