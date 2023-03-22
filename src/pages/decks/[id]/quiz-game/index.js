@@ -15,18 +15,6 @@ export default function QuizPage() {
   const router = useRouter();
   const { id: deck_id } = router.query;
 
-  React.useEffect(() => {
-    const prefetchCards = async () => {
-      await queryClient.prefetchQuery([QK_DECK], async () => {
-        const response = await axios
-          .get(`http://${HOST}/api/cards/deck-id/${deck_id}`)
-          .then((res) => res.data);
-        return response;
-      });
-    };
-    prefetchCards();
-  }, [deck_id, queryClient]);
-
   const {
     isLoading,
     isError,
