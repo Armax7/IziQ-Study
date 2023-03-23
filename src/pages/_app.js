@@ -19,10 +19,10 @@ export default function App({ Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {router.pathname !== "/dashboard" && <Components.Navigation />}
       <ChakraProvider theme={appTheme}>
         <ReactQuery.QueryClientProvider client={queryClient}>
           <ReactQuery.Hydrate state={pageProps.dehydratedState}>
+            {router.pathname !== "/dashboard" && <Components.Navigation />}
             {/* <Components.Navigation /> */}
             <Component {...pageProps} />
           </ReactQuery.Hydrate>
