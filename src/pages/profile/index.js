@@ -3,33 +3,20 @@ import * as SupaHelpers from "../api/supabase_helpers";
 
 import { useEffect, useState } from "react";
 import * as Components from "../../components";
-import axios from "axios";
-
-import * as Component from "../../components";
-
-import style from "./profile.module.css";
 
 const Profile = () => {
-  const [myUuid, setMyUuid] = useState("");
-  const [allData, setAllData] = useState({});
-  const [path, setPath] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const getAllData = async () => {
-    let allUsers = (await axios.get("http://localhost:3000/api/users")).data;
-    return allUsers;
-  };
+  const [userName, setUserName] = useState("");
+  const [data, setData] = useState([]);
 
   useEffect(async () => {
-    let uuid = await SupaHelpers.get.userId();
-    setMyUuid(uuid);
+    let nameUser = await SupaHelpers.get.userNameFull();
+    setUserName(nameUser);
+    let dataSupa = await SupaHelpers.get.userData();
+    console.log("dataSupa", dataSupa);
+    setData(dataSupa);
+  }, []);
 
-    let info = await getAllData();
-    let user = (await info?.filter((u) => u.users_uuid == uuid))[0];
-
-    setAllData(user);
-  }, [allData, path]);
-
+  console.log(data);
   return (
     <Chakra.Flex w="100%" h="100vh" margin="auto" justifyContent="center">
       <Chakra.Flex
@@ -50,29 +37,13 @@ const Profile = () => {
           marginTop="15%"
         >
           <Chakra.Image
-            src={`https://mckdtyupusnhcabyhyja.supabase.co/storage/v1/object/public/images-client/${allData?.image}`}
+            src="https://bit.ly/dan-abramov"
             alt="Dan Abramov"
             borderRadius="full"
             width="230px"
             height="230px"
-            className={style.stylesImg}
-            onClick={() => setIsModalOpen(true)}
           />
-          {/** */}
-          <Chakra.Modal
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-          >
-            <Chakra.ModalOverlay />
-            <Chakra.ModalContent>
-              <Chakra.ModalHeader>Seleccionar imagen</Chakra.ModalHeader>
-              <Chakra.ModalCloseButton />
-              <Chakra.ModalBody>
-                <Component.ProfileBuckets />
-              </Chakra.ModalBody>
-            </Chakra.ModalContent>
-          </Chakra.Modal>
-          {/** */}
+
           <Chakra.Container>
             <Chakra.Text
               textAlign="center"
@@ -81,9 +52,7 @@ const Profile = () => {
               fontWeight="bold"
               textDecoration="underline"
             >
-              {`${allData?.name ? allData.name : ""} ${
-                allData?.lastname ? allData.lastname : ""
-              }`}
+              {userName}
             </Chakra.Text>
           </Chakra.Container>
         </Chakra.Container>
@@ -115,12 +84,22 @@ const Profile = () => {
             padding="25px"
             borderRadius="15px"
           >
-            <Chakra.Text>▪ Nacimiento: {allData?.birth_date}</Chakra.Text>
-            <Chakra.Text>▪ Alias: {allData?.alias}</Chakra.Text>
-            <Chakra.Text>▪ Género: {allData?.gender}</Chakra.Text>
-            <Chakra.Text>▪ Ocupación: {allData?.occupation}</Chakra.Text>
-            <Chakra.Text>▪ Estado: {allData?.status}</Chakra.Text>
+            <Chakra.Text>▪ Nacimiento</Chakra.Text>
+            <Chakra.Text>▪ Alias</Chakra.Text>
+            <Chakra.Text>▪ Género</Chakra.Text>
+            <Chakra.Text>▪ Estado</Chakra.Text>
+            <Chakra.Text>▪ Teléfono</Chakra.Text>
+            <Chakra.Text>▪ Ocupación</Chakra.Text>
           </Chakra.Flex>
+        </Chakra.Flex>
+        <Chakra.Flex
+          margin="auto"
+          width="100%"
+          height="40%"
+          background="rgb(217,217,217, 40%)"
+          borderRadius="20px"
+        >
+          Seccion 2
         </Chakra.Flex>
       </Chakra.Flex>
     </Chakra.Flex>

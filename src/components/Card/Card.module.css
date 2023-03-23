@@ -34,8 +34,6 @@
   .flipCardFront {
     background-color: #f3f3f3;
     color: black;
-    justify-content: center;
-    font-size: 30px;
 
   }
   
@@ -45,7 +43,6 @@
     height: 220px;
   }
   .flipCardBack {
-    font-size: 40px;
     display: grid;
     align-items: center;
     background-color: #5C66BB;

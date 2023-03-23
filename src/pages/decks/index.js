@@ -10,52 +10,54 @@ import * as ReactQuery from "@tanstack/react-query";
 const HOST = process.env.NEXT_PUBLIC_HOST;
 const QK_USER_ID = "user-id";
 const QK_DECKS = "decks";
+const QK_CATEGORIES = "categories";
+const QK_SUBCATEGORIES = "subcategories";
 
 const Decks = () => {
+  const queryClient = ReactQuery.useQueryClient();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [userID, setUserId] = useState("");
+
   const [decks, setDecks] = useState([]);
-
-  const [categories, setCategories] = useState([]);
-  const [allUserDecks, setAllUserDecks] = useState([]);
-
-  const [allSubCategories, setAllSubCategories] = useState([]);
 
   const [subcategories, setSubCategories] = useState([]);
 
-  const [filterDecks, setFilterDecks] = useState([]);
+  const { data: userID } = ReactQuery.useQuery([QK_USER_ID], getUserID);
 
-  const [filter, setFilter] = useState([]);
+  const {
+    isLoading: decks_isLoading,
+    isError: decks_isError,
+    data: allUserDecks,
+    error: decks_error,
+  } = ReactQuery.useQuery([QK_DECKS], () => getUserDecks(userID), {
+    onSuccess: (decks) => setDecks(decks),
+    enabled: !!userID,
+  });
 
-  useEffect(async () => {
-    const userID = await SupaHelpers.get.userId();
-    setUserId(userID);
+  const {
+    isLoading: categories_isLoading,
+    isError: categories_isError,
+    data: categories,
+    error: categories_error,
+  } = ReactQuery.useQuery([QK_CATEGORIES], getCategories);
+  
+  const {
+    isLoading: subcategories_isLoading,
+    isError: subcategories_isError,
+    data: allSubCategories,
+    error: subcategories_error,
+  } = ReactQuery.useQuery([QK_SUBCATEGORIES], getSubCategories);
 
-    const decks = await SupaHelpers.get.userDecks();
-
-    setDecks(decks);
-    setAllUserDecks(decks);
-
-    const { data: categories, error } = await supabase
-      .from("categories")
-      .select("id,name");
-    if (error) {
-      console.log(error);
-    }
-    setCategories(categories);
-
-    const { data: subcategories, err } = await supabase
-      .from("subcategories")
-      .select("id,name,category_id");
-    if (err) {
-      console.log(error);
-    }
-    setAllSubCategories(subcategories);
-  }, [userID]);
-
-  const queryClient = ReactQuery.useQueryClient();
-
-  const deckFormMutation = ReactQuery.useMutation(postDeck);
+  const deckFormMutation = ReactQuery.useMutation(postDeck, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(QK_DECKS);
+    },
+  });
+  const deckDeleteMutation = ReactQuery.useMutation(deleteDeck, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(QK_DECKS);
+    },
+  });
 
   function filterDecksByCategory(e) {
     const localSubcategories = allSubCategories.filter((sc) => {
@@ -67,20 +69,14 @@ const Decks = () => {
     setDecks(allUserDecks);
     if (e.target.value) {
       let cambios = allUserDecks.filter((c) => c.category_id == e.target.value);
-      setFilterDecks(cambios);
+
       setDecks(cambios);
     }
   }
 
   function filterDecksBySubCategory(e) {
-    if (!e.target.value) {
-      setDecks(filterDecks);
-    }
-
-    if (e.target.value !== "") {
-      setDecks(filterDecks);
-      // setear decks que muestre los decks por subcategoria
-
+    setDecks(allUserDecks);
+    if (e.target.value) {
       let cambios2 = allUserDecks.filter(
         (c) => c.subcategory_id == e.target.value
       );
@@ -89,28 +85,13 @@ const Decks = () => {
     }
   }
 
-  const handleChange = (e) => {
-   
+  function handleOnDelete(event) {
+    return deckDeleteMutation.mutate(event);
+  }
 
-    
-
-    let sortedDecks = [...decks];
-
-
-    if (e.target.value === "recent") {
-      sortedDecks = sortedDecks.sort(
-        (a, b) => new Date(b.created_at) - new Date(a.created_at)
-      );
-      setDecks(sortedDecks);
-    } else if (e.target.value === "oldest") {
-      sortedDecks = sortedDecks.sort(
-        (a, b) => new Date(a.created_at) - new Date(b.created_at)
-      );
-      setDecks(sortedDecks);
-    } else {
-      setDecks(decks);
-    }
-  };
+  if (decks_isLoading || categories_isLoading || subcategories_isLoading) {
+    return <Components.LoadingScreen />;
+  }
 
   return (
     <Chakra.Box
@@ -141,24 +122,6 @@ const Decks = () => {
       >
         ✨ Filtra tus Mazos 📁 ✨
       </Chakra.Box>
-
-      <label> Mazos Recientes:</label>
-
-      <Chakra.Select
-        onChange={handleChange}
-        color="black"
-        size="lg"
-        width="10%"
-        bgColor="white"
-        borderRadius="10px"
-        display="inline-block"
-        font="inherit"
-        lineHeight="center"
-        padding="2em 0.1em 2em 1em"
-      >
-        <option value="recent">Recent</option>
-        <option value="oldest">Oldest</option>
-      </Chakra.Select>
 
       <Chakra.Box as="strong" textShadow="2px 2px 4px rgba(0, 0, 0, 0.3)">
         Categoría:
@@ -193,8 +156,11 @@ const Decks = () => {
           padding="0.5em 0.1em 0em 0.5em"
         />
       </Chakra.Box>
-
-      <Components.DeckContainer decks={decks} />
+      <Components.DeckContainer
+        decks={decks}
+        onDeleteDeck={handleOnDelete}
+        isOwnedDecks={true}
+      />
 
       <Chakra.Drawer
         isOpen={isOpen}
@@ -225,7 +191,8 @@ export async function getStaticProps() {
   const queryClient = new ReactQuery.QueryClient();
 
   await queryClient.prefetchQuery([QK_USER_ID], getUserID);
-  await queryClient.prefetchQuery([QK_DECKS], getUserDecks);
+  await queryClient.prefetchQuery([QK_CATEGORIES], getCategories);
+  await queryClient.prefetchQuery([QK_SUBCATEGORIES], getSubCategories);
 
   return {
     props: {
@@ -239,6 +206,22 @@ async function getUserID() {
   return response;
 }
 
+async function getCategories() {
+  const response = await axios
+    .get(`http://${HOST}/api/categories`)
+    .then((res) => res.data);
+
+  return response;
+}
+
+async function getSubCategories() {
+  const response = await axios
+    .get(`http://${HOST}/api/subcategories`)
+    .then((res) => res.data);
+
+  return response;
+}
+
 async function getUserDecks(userId) {
   const response = await axios
     .get(`http://${HOST}/api/decks/user-id/${userId}`)
@@ -249,6 +232,10 @@ async function getUserDecks(userId) {
 
 async function postDeck(data) {
   return await axios.post(`http://${HOST}/api/decks`, data);
+}
+
+async function deleteDeck(deckData) {
+  return await axios.put(`http://${HOST}/api/decks`, deckData);
 }
 
 export default Decks;

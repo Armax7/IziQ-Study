@@ -5,11 +5,9 @@ import * as ReactQuery from "@tanstack/react-query";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import appTheme from "../styles/theme";
 import * as Components from "../components";
-import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps }) {
   const [queryClient] = useState(() => new ReactQuery.QueryClient());
-  const router = useRouter();
 
   return (
     <>
@@ -22,8 +20,7 @@ export default function App({ Component, pageProps }) {
       <ChakraProvider theme={appTheme}>
         <ReactQuery.QueryClientProvider client={queryClient}>
           <ReactQuery.Hydrate state={pageProps.dehydratedState}>
-            {router.pathname !== "/dashboard" && <Components.Navigation />}
-            {/* <Components.Navigation /> */}
+            <Components.Navigation />
             <Component {...pageProps} />
           </ReactQuery.Hydrate>
           {/* <ReactQueryDevtools /> */}

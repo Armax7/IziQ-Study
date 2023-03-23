@@ -5,8 +5,6 @@ import { supabase } from "../../pages/api/supabaseClient";
 import UserArea from "../UserArea/UserArea";
 import styles from "./FormLogin.module.css";
 import { useRouter } from "next/router";
-import { FaFacebook, FaGoogle } from "react-icons/fa";
-
 
 function FormLogIn() {
   const router = useRouter();
@@ -34,16 +32,12 @@ function FormLogIn() {
         email,
         password,
       });
-      
       if (error) throw error;
-      if(email === "iziq.study@gmail.com" && password ==="admin123"){
-        await router.push("./dashboard", undefined, {shallow:true})
-      }else{
+      alert("User logged.");
       console.log("hey estoy loggueado");
       setIsLoggedIn(true);
       await router.push("/home", undefined, { shallow: true });
       router.reload();
-      }      
 
       // console.log(user)
       // console.log(session)
@@ -61,29 +55,6 @@ function FormLogIn() {
   const handleClick = () => setShow(!show);
 
   const logIn = Chakra.useDisclosure();
-
-  const [redirect, setRedirect] = useState(false);
-
-
-  async function signInWithGoogle() {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: "http://localhost:3000/home",
-      },
-    });
-    setRedirect(true);
-  }
-
-  async function signInWithFacebook() {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: "facebook",
-      options: {
-        redirectTo: "http://localhost:3000/home",
-      },
-    });
-    setRedirect(true);
-  }
 
   return (
     <>
@@ -138,35 +109,6 @@ function FormLogIn() {
         >
           Log In
         </Chakra.Button>
-
-        <Chakra.HStack padding="10">
-            <Chakra.Button
-              backgroundColor="#F5E9CF"
-              color="black"
-              marginRight="auto"
-              colorScheme="facebook"
-              leftIcon={<FaFacebook color="blue" />}
-              onClick={(e) => {
-                signInWithFacebook(e);
-              }}
-            >
-              Facebook
-            </Chakra.Button>
-            <Chakra.Button
-              backgroundColor="#F5E9CF"
-              color="black"
-              marginLeft="auto"
-              marginRight="auto"
-              colorScheme="twitter"
-              leftIcon={<FaGoogle color="#E96479" />}
-              onClick={(e) => {
-                signInWithGoogle(e);
-              }}
-            >
-              Google
-            </Chakra.Button>
-          </Chakra.HStack>
-
       </Chakra.Box>
     </>
   );

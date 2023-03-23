@@ -4,12 +4,11 @@ import * as Chakra from "@chakra-ui/react";
 
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsFillBellFill, BsFillBookmarksFill } from "react-icons/bs";
+import { CgPathTrim } from "react-icons/cg";
 import React, { useEffect, useState } from "react";
-import { BsBox2HeartFill } from "react-icons/bs"
 
 import * as Components from "../../../components";
 import * as SupaHelpers from "../../../pages/api/supabase_helpers";
-import axios from "axios";
 
 const OptionsBar = ({ logged = false, avatarImage }) => {
   const SignIn = Chakra.useDisclosure();
@@ -18,36 +17,18 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
 
   //Creo un estado local en el cual se guarda datos del usuario (en este caso el nombre)
   const [userData, setUserData] = useState("");
-  const [myUuid, setMyUuid] = useState("");
-  const [allData, setAllData] = useState({});
-
   useEffect(async () => {
-    let uuid = await SupaHelpers.get.userId();
-    setMyUuid(uuid);
-    let allUsers = (await axios.get("http://localhost:3000/api/users")).data;
-    let userData = (await allUsers?.filter((u) => u.users_uuid == uuid))[0];
     //Accedemos a ese dato por medio de un metodo en supaHelpers
     let user = await SupaHelpers.get.userNameFull();
+    console.log("this is user ", user); // Console.log para ver el resutado primero por terminal
     setUserData(user); //Seteamos el valor obtenido
-    setAllData(userData);
-  }, [allData]);
+  }, []);
 
   return (
     <>
       {logged == true ? (
         <div>
           <Chakra.ButtonGroup gap="3">
-          <Link href="https://buy.stripe.com/test_cN2eWX0CC1bP3VSaEI">
-            <Chakra.IconButton
-                bgColor="#eb455f"
-                color="#f2f2f2"
-                borderRadius="50%"
-                fontSize="2px"
-                aria-label="Search database"
-                _hover={{color:"#1a202c", bgColor:"#f2f2f2"}}
-                icon={<BsBox2HeartFill size="20px" />}
-              />
-          </Link>
             <Chakra.Box>
               <Chakra.Menu>
                 <Chakra.MenuButton
@@ -113,19 +94,12 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                   w="40px"
                   h="40px"
                 >
-                  <Chakra.Avatar
-                    w="40px"
-                    h="40px"
-                    src={`https://mckdtyupusnhcabyhyja.supabase.co/storage/v1/object/public/images-client/${allData?.image}`}
-                  />
+                  <Chakra.Avatar w="40px" h="40px" src={avatarImage} />
                 </Chakra.MenuButton>
                 <Chakra.MenuList alignItems={"center"}>
                   <br />
                   <Chakra.Center>
-                    <Chakra.Avatar
-                      size={"2xl"}
-                      src={`https://mckdtyupusnhcabyhyja.supabase.co/storage/v1/object/public/images-client/${allData?.image}`}
-                    />
+                    <Chakra.Avatar size={"2xl"} src={avatarImage} />
                   </Chakra.Center>
                   <br />
                   <Chakra.Center>

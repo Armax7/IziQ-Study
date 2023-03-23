@@ -72,7 +72,7 @@ function CardForm({
               variant="filled"
             />
             <Chakra.FormLabel color="#797979" mt="5px" htmlFor="question">
-              Pregunta
+              Question
             </Chakra.FormLabel>
           </Chakra.FormControl>
           <Chakra.FormControl mr="30px" pt="25px">
@@ -85,7 +85,7 @@ function CardForm({
               variant="filled"
             />
             <Chakra.FormLabel color="#797979" mt="5px" htmlFor="answer">
-              Respuesta
+              Answer
             </Chakra.FormLabel>
           </Chakra.FormControl>
           <div className={styles.image_container}>

@@ -42,7 +42,6 @@ function CardDetails({
       margin="1rem"
       backgroundColor={"#c9ccfe"}
       borderColor={"transparent"}
-      fontFamily="Montserrat, Noto Sans Arabic, Helvetica Neue, Helvetica, Arial, sans-serif"
       {...props}
     >
       <Chakra.AccordionItem>
@@ -60,34 +59,23 @@ function CardDetails({
               borderRight="1px solid #c2c2c2"
               width="50%"
             >
-              <Chakra.Text
-                color="#360568"
-                textShadow="2px 2px 4px rgba(0, 0, 0, 0.3)"
-                paddingTop="5px"
-                paddingLeft="10px"
-                fontWeight="bold"
-              >
-                Pregunta
+              <Chakra.Text color="#6E6E6E" paddingLeft="20px">
+                Question
               </Chakra.Text>
-              <Chakra.Text paddingLeft="10px" className={styles.input}>
+              <Chakra.Text paddingLeft="20px" className={styles.input}>
                 {question}
               </Chakra.Text>
             </Chakra.Flex>
             <Chakra.Flex flexDir="column" width="50%">
-             <Chakra.Text
-                color="#360568"
-                textShadow="2px 2px 4px rgba(0, 0, 0, 0.3)"
-                paddingTop="5px"
-                paddingLeft="10px"
-                fontWeight="bold"
-              >
-                Respuesta
+              <Chakra.Text color="#6E6E6E" paddingLeft="30px">
+                Answer
               </Chakra.Text>
-              <Chakra.Text className={styles.input} paddingLeft="10px">
+              <Chakra.Text className={styles.input} paddingLeft="30px">
                 {answer}
               </Chakra.Text>
             </Chakra.Flex>
           </Chakra.Flex>
+
           <Chakra.Image
             boxSize="4rem"
             alignSelf="center"
@@ -100,7 +88,7 @@ function CardDetails({
             <Chakra.AccordionButton
               visibility={isCardOwned ? "visible" : "hidden"}
               onClick={handleOnClickEdit}
-              padding="30px 0 0 0"
+              padding="0"
               margin="0 8px"
               name="Edit button"
               _focus={{ border: "none" }}
@@ -108,15 +96,13 @@ function CardDetails({
               backgroundColor="transparent"
               size="25px"
               h="25px"
-              textShadow="2px 2px 4px rgba(0, 0, 0, 0.3)"
-              fontSize="3xl"
             >
-              ✏️
+              <RiPencilFill size="25px" cursor="pointer" />
             </Chakra.AccordionButton>
             <Chakra.Button
               visibility={isCardOwned ? "visible" : "hidden"}
-              padding="30px 0px 0 0"
-              margin="0px 20px 0px 0px"
+              padding="0"
+              margin="0px 8px"
               onClick={handleDelete}
               name="Delete button"
               _focus={{ border: "none" }}
@@ -124,10 +110,8 @@ function CardDetails({
               backgroundColor="transparent"
               size="25px"
               h="25px"
-              textShadow="2px 2px 4px rgba(0, 0, 0, 0.3)"
-              fontSize="3xl"
             >
-              🗑️
+              <HiTrash size="25px" cursor="pointer" />
             </Chakra.Button>
           </Chakra.Flex>
         </Chakra.Flex>

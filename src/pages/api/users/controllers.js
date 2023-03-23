@@ -48,7 +48,6 @@ export const updateUserDetails = async ({
   occupation,
   subscription_id,
   plan_id,
-  image,
 }) => {
   const { data: updateUser, error } = await supabase
     .from("users_details")
@@ -62,7 +61,6 @@ export const updateUserDetails = async ({
       occupation,
       subscription_id,
       plan_id,
-      image,
     })
     .eq("users_uuid", users_uuid)
     .select();
