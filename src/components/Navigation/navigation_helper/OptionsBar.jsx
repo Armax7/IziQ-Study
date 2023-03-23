@@ -62,7 +62,7 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                   <Link href="/home">
                     <Chakra.MenuItem>Pagina Principal</Chakra.MenuItem>
                   </Link>
-                  <Link href="/subscriptions">
+                  {/* <Link href="/subscriptions">
                     <Chakra.MenuItem>Suscripciones</Chakra.MenuItem>
                   </Link>
                   <Link href="/current-plan">
@@ -70,7 +70,7 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                   </Link>
                   <Link href="/about">
                     <Chakra.MenuItem>About</Chakra.MenuItem>
-                  </Link>
+                  </Link> */}
                 </Chakra.MenuList>
               </Chakra.Menu>
             </Chakra.Box>
@@ -95,11 +95,11 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                 </Chakra.MenuList>
               </Chakra.Menu>
             </Chakra.Box>
-            <Chakra.IconButton
+            {/* <Chakra.IconButton
               borderRadius="50%"
               aria-label="Search database"
               icon={<BsFillBellFill />}
-            />
+            /> */}
 
             {/* ============= Menu Profile =============*/}
             <Chakra.Box>
@@ -136,7 +136,7 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                   <Chakra.MenuItem>
                     <Link href="/profile">Profile</Link>
                   </Chakra.MenuItem>
-                  <Chakra.MenuItem>Account Settings</Chakra.MenuItem>
+                  {/* <Chakra.MenuItem>Account Settings</Chakra.MenuItem> */}
                   <Chakra.Flex align={"center"} justify={"center"}>
                     <Components.LogOutButton />
                   </Chakra.Flex>
