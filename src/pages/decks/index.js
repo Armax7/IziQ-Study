@@ -203,12 +203,12 @@ const Decks = () => {
         size="full"
       >
         <Chakra.DrawerContent>
-          <Chakra.DrawerCloseButton
+{/*           <Chakra.DrawerCloseButton
             backgroundColor="#F5E9CF"
             color="red"
             mr={960}
             mt="3"
-          />
+          /> */}
           <Chakra.DrawerBody>
             <Components.DeckForm
               onCreateFn={deckFormMutation.mutate}
