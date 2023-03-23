@@ -41,7 +41,7 @@ const dataDB = {
     "users_details",
   ],
   datasetLabel: "Tamaño de Base de Datos",
-  datasetData: [64, 32, 64, 32, 64, 40, 32, 32, 80],
+  datasetData: [64, 32, 64, 32, 64, 40, 32, 80],
 };
 
 const dataSize = {

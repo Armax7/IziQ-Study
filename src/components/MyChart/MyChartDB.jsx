@@ -22,7 +22,16 @@ export function MyChartStripe({ data }) {
           {
             label: data.datasetLabel,
             data: data.datasetData,
-            backgroundColor: data.datasetBackgroundColor,
+            backgroundColor: [
+              "#e7bd35",
+              "#847770",
+              "#1c9edf",
+              "#d9c37c",
+              "#903593",
+              "#0a2d65",
+              "#4ec977",
+              "#6a0e28",
+            ],
             borderWidth: 1,
           },
         ],
@@ -39,15 +48,15 @@ export function MyChartStripe({ data }) {
             },
           },
         },
-        animations:{
-            tension: {
-                duration: 1000,
-                easing:"easeInExpo",
-                from: 1,
-                to: 0,
-                loop: true
-              }
-        }
+        animations: {
+          tension: {
+            duration: 1000,
+            easing: "easeInExpo",
+            from: 1,
+            to: 0,
+            loop: true,
+          },
+        },
       },
     });
   }, [data]);

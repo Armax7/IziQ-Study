@@ -5,25 +5,29 @@ import Link from "next/link";
 function DeckContainer({
   decks,
   columns = [2, null, 3],
-  spacing = "2em",
-  px = "1vw",
+  spacing = "0em",
+  //px = "1vw",
   paddingBottom = "1vw",
-  backgroundColor = "white",
-  width = "80%",
-  margin = "auto",
-  borderRadius = "3rem",
+  //backgroundColor = "white",
+  //width = "80%",
+  margin = "20px auto",
+  borderRadius = "10px",
+  marginLeft = "20px",
+  marginRight = "20px",
   ...props
 }) {
   return (
     <Chakra.SimpleGrid
       columns={columns}
       spacing={spacing}
-      px={px}
+      //px={px}
       paddingBottom={paddingBottom}
-      backgroundColor={backgroundColor}
-      width={width}
+      //backgroundColor={backgroundColor}
+      //width={width}
       margin={margin}
       borderRadius={borderRadius}
+      marginLeft={marginLeft}
+      marginRight={marginRight}
       {...props}
     >
       {decks?.map((deck, index) => (

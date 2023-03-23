@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from 'react';
-import Chart from 'chart.js/auto';
+import React, { useEffect, useRef } from "react";
+import Chart from "chart.js/auto";
 
 export function MyChartOccupations({ data }) {
   const chartRef = useRef(null);
 
   useEffect(() => {
-    const myChartRef = chartRef.current.getContext('2d');
+    const myChartRef = chartRef.current.getContext("2d");
     // if (window.myChart !== undefined) {
     //     window.myChart.destroy();
     //   }
@@ -14,15 +14,21 @@ export function MyChartOccupations({ data }) {
       window[chartId].destroy();
     }
 
-   window[chartId] = new Chart(myChartRef, {
-      type: 'radar',
+    window[chartId] = new Chart(myChartRef, {
+      type: "radar",
       data: {
         labels: data.labels,
         datasets: [
           {
             label: data.datasetLabel,
             data: data.datasetData,
-            backgroundColor: data.datasetBackgroundColor,
+            backgroundColor: [
+              "#372585bb",
+              "#d03f5c",
+              "#d03f5c",
+              "#d03f5c",
+              "#d03f5c",
+            ],
           },
         ],
       },
@@ -38,15 +44,15 @@ export function MyChartOccupations({ data }) {
             },
           },
         },
-        animations:{
-            tension: {
-                duration: 1000,
-                easing:"easeInExpo",
-                from: 1,
-                to: 0,
-                loop: true
-              }
-        }
+        animations: {
+          tension: {
+            duration: 1000,
+            easing: "easeInExpo",
+            from: 1,
+            to: 0,
+            loop: true,
+          },
+        },
       },
     });
   }, [data]);
@@ -58,5 +64,4 @@ export function MyChartOccupations({ data }) {
   );
 }
 
-
-export default MyChartOccupations
+export default MyChartOccupations;
