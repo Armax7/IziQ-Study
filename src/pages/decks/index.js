@@ -12,6 +12,8 @@ const QK_USER_ID = "user-id";
 const QK_DECKS = "decks";
 const QK_CATEGORIES = "categories";
 const QK_SUBCATEGORIES = "subcategories";
+const QK_CURRENT_CATEGORY = "current-category";
+const QK_CURRENT_SUBCATEGORY = "subcurrent-category";
 
 const Decks = () => {
   const queryClient = ReactQuery.useQueryClient();
@@ -40,7 +42,7 @@ const Decks = () => {
     data: categories,
     error: categories_error,
   } = ReactQuery.useQuery([QK_CATEGORIES], getCategories);
-  
+
   const {
     isLoading: subcategories_isLoading,
     isError: subcategories_isError,
