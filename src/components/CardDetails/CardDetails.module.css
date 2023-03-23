@@ -9,8 +9,38 @@
 .card{
     min-height: 55px;
     width: 60%;
-    box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.3);
-    -webkit-box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.3);
-    -moz-box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
     border-radius: 8px;
 }
+
+.dataText {
+    height: 100%;
+    display: flex;
+    padding-top: 10px;
+    flex-direction: column;
+}
+
+.data {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; 
+    overflow-y: auto; 
+    width: 100%;
+    padding: auto 0;
+    height: 5em;   
+    padding-left: 10px; 
+    flex-grow: 1;
+    color: #303030;
+    justify-content: center;
+}
+
+.data::-webkit-scrollbar {
+    width: 10px;               /* width of the entire scrollbar */
+      background-color: rgba(107, 107, 107, 0.445);
+  border-radius: 20px;  
+  }
+  
+  .data::-webkit-scrollbar-thumb {
+    background-color: rgb(160, 160, 160);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+  }
