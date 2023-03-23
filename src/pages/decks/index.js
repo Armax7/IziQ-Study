@@ -12,6 +12,8 @@ const QK_USER_ID = "user-id";
 const QK_DECKS = "decks";
 const QK_CATEGORIES = "categories";
 const QK_SUBCATEGORIES = "subcategories";
+const QK_CURRENT_CATEGORY = "current-category";
+const QK_CURRENT_SUBCATEGORY = "subcurrent-category";
 
 const Decks = () => {
   const queryClient = ReactQuery.useQueryClient();
@@ -30,7 +32,24 @@ const Decks = () => {
     data: allUserDecks,
     error: decks_error,
   } = ReactQuery.useQuery([QK_DECKS], () => getUserDecks(userID), {
-    onSuccess: (decks) => setDecks(decks),
+    onSuccess: (data) => {
+      let categoryValue = queryClient.getQueryData([QK_CURRENT_CATEGORY]);
+      let subcategoryValue = queryClient.getQueryData([QK_CURRENT_SUBCATEGORY]);
+      let decks = data;
+
+      if (!!subcategoryValue) {
+        decks = decks.filter(
+          (deck) =>
+            deck.subcategory_id.toString() === subcategoryValue.toString()
+        );
+      } else if (!!categoryValue) {
+        decks = decks.filter(
+          (deck) => deck.category_id.toString() === categoryValue.toString()
+        );
+      }
+
+      setDecks(decks);
+    },
     enabled: !!userID,
   });
 
@@ -40,7 +59,7 @@ const Decks = () => {
     data: categories,
     error: categories_error,
   } = ReactQuery.useQuery([QK_CATEGORIES], getCategories);
-  
+
   const {
     isLoading: subcategories_isLoading,
     isError: subcategories_isError,
@@ -60,11 +79,17 @@ const Decks = () => {
   });
 
   function filterDecksByCategory(e) {
+    queryClient.setQueryData([QK_CURRENT_CATEGORY], e.target.value);
+
     const localSubcategories = allSubCategories.filter((sc) => {
       return sc.category_id == e.target.value;
     });
 
     setSubCategories(localSubcategories);
+
+    if (!e.target.value) {
+      queryClient.setQueryData([QK_CURRENT_SUBCATEGORY], e.target.value);
+    }
 
     setDecks(allUserDecks);
     if (e.target.value) {
@@ -75,6 +100,8 @@ const Decks = () => {
   }
 
   function filterDecksBySubCategory(e) {
+    queryClient.setQueryData([QK_CURRENT_SUBCATEGORY], e.target.value);
+
     setDecks(allUserDecks);
     if (e.target.value) {
       let cambios2 = allUserDecks.filter(
