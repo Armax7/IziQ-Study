@@ -17,13 +17,10 @@ const Decks = () => {
   const queryClient = ReactQuery.useQueryClient();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  
+
   const [decks, setDecks] = useState([]);
 
-  const [allSubCategories, setAllSubCategories] = useState([]);
-
   const [subcategories, setSubCategories] = useState([]);
-
 
   const { data: userID } = ReactQuery.useQuery([QK_USER_ID], getUserID);
 
@@ -43,16 +40,13 @@ const Decks = () => {
     data: categories,
     error: categories_error,
   } = ReactQuery.useQuery([QK_CATEGORIES], getCategories);
-
-  useEffect(async () => {
-    const { data: subcategories, err } = await supabase
-      .from("subcategories")
-      .select("id,name,category_id");
-    if (err) {
-      console.log(error);
-    }
-    setAllSubCategories(subcategories);
-  }, [allUserDecks]);
+  
+  const {
+    isLoading: subcategories_isLoading,
+    isError: subcategories_isError,
+    data: allSubCategories,
+    error: subcategories_error,
+  } = ReactQuery.useQuery([QK_SUBCATEGORIES], getSubCategories);
 
   const deckFormMutation = ReactQuery.useMutation(postDeck, {
     onSuccess: () => {
@@ -66,7 +60,6 @@ const Decks = () => {
   });
 
   function filterDecksByCategory(e) {
-
     const localSubcategories = allSubCategories.filter((sc) => {
       return sc.category_id == e.target.value;
     });
@@ -96,7 +89,7 @@ const Decks = () => {
     return deckDeleteMutation.mutate(event);
   }
 
-  if (decks_isLoading || categories_isLoading) {
+  if (decks_isLoading || categories_isLoading || subcategories_isLoading) {
     return <Components.LoadingScreen />;
   }
 
@@ -199,6 +192,7 @@ export async function getStaticProps() {
 
   await queryClient.prefetchQuery([QK_USER_ID], getUserID);
   await queryClient.prefetchQuery([QK_CATEGORIES], getCategories);
+  await queryClient.prefetchQuery([QK_SUBCATEGORIES], getSubCategories);
 
   return {
     props: {
@@ -215,6 +209,14 @@ async function getUserID() {
 async function getCategories() {
   const response = await axios
     .get(`http://${HOST}/api/categories`)
+    .then((res) => res.data);
+
+  return response;
+}
+
+async function getSubCategories() {
+  const response = await axios
+    .get(`http://${HOST}/api/subcategories`)
     .then((res) => res.data);
 
   return response;
