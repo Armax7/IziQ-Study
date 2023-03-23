@@ -36,9 +36,9 @@ function Navigation({ avatarImage = "https://bit.ly/dan-abramov" }) {
       <Link href={!logged ? "" : "/home"}>
         <div className={style.logoApp}></div>
       </Link>
-      <SearchBar
+      {/* <SearchBar
         onClick={() => alert("Missing search functionality on Navigation.jsx")}
-      />
+      /> */}
 
       <OptionsBar logged={logged} avatarImage={avatarImage} />
     </Chakra.Flex>
