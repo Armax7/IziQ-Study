@@ -88,7 +88,7 @@ const DeckForm = ({
   }
 
   async function handleOnSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
     setSubmitted(true);
     await onCreateFn(deckFormData);
     await onCloseFn();
@@ -108,28 +108,13 @@ const DeckForm = ({
 
   return (
     <form className={classNameProp} onSubmit={handleOnSubmit} {...props}>
-      <Chakra.Flex justifyContent="space-between">
-        <Chakra.Text fontWeight="bold" fontSize="2xl">
-          Create new Study Deck
-        </Chakra.Text>
-        <Chakra.Flex>
-          <Chakra.Button
-            type="submit"
-            colorScheme="blue"
-            marginRight="5px"
-            background="rgba(92, 102, 187, 1)"
-          >
-            Create
-          </Chakra.Button>
-          <Chakra.Button
-            colorScheme="blue"
-            onClick={handleOnCancel}
-            background="rgba(92, 102, 187, 1)"
-          >
-            Cancel
-          </Chakra.Button>
-        </Chakra.Flex>
-      </Chakra.Flex>
+      <Chakra.Text
+        fontWeight="bold"
+        fontSize="2xl"
+        textShadow="2px 2px 4px rgba(0, 0, 0, 0.3)"
+      >
+        Crear nuevo Mazo de Estudio
+      </Chakra.Text>
       <div>
         <Chakra.FormControl
           isRequired
@@ -140,14 +125,16 @@ const DeckForm = ({
             value={deckFormData.name}
             onChange={handleInputOnChange}
             variant="flushed"
-            placeholder='Enter a title, "Learn English'
+            placeholder='Ingresa un título, "Learn English'
             type="text"
             borderColor="#1E1E1E"
             borderBottom="2px solid #1E1E1E"
-            w="40%"
           />
           <Chakra.Flex>
-            <Chakra.FormLabel color="rgba(121, 121, 121, 1)">
+            <Chakra.FormLabel
+              color="rgba(121, 121, 121, 1)"
+              textShadow="2px 2px 4px rgba(0, 0, 0, 0.3)"
+            >
               Título
             </Chakra.FormLabel>
             <Chakra.FormErrorMessage>
@@ -161,25 +148,35 @@ const DeckForm = ({
             value={deckFormData.description}
             onChange={handleInputOnChange}
             variant="flushed"
-            placeholder="Add a description..."
+            placeholder="Agrega una descripción..."
             type="text"
             borderColor="#1E1E1E"
             borderBottom="2px solid #1E1E1E"
-            w="40%"
           />
-          <Chakra.FormLabel color="rgba(121, 121, 121, 1)">
-            Description
+          <Chakra.FormLabel
+            color="rgba(121, 121, 121, 1)"
+            textShadow="2px 2px 4px rgba(0, 0, 0, 0.3)"
+          >
+            Descripción
           </Chakra.FormLabel>
         </Chakra.FormControl>
       </div>
-      <Chakra.Flex width="50%" margin="auto" flexDirection="column">
+      <Chakra.Flex
+        margin="auto"
+        flexDirection="column"
+        justifyContent="flex-start"
+      >
         <Chakra.FormControl
           isRequired
           isInvalid={!deckFormData.category_id && submitted}
         >
           <Chakra.Flex>
-            <Chakra.FormLabel color="rgba(121, 121, 121, 1)">
-              Select Category:
+            <Chakra.FormLabel
+              color="rgba(121, 121, 121, 1)"
+              paddingTop="10px"
+              textShadow="2px 2px 4px rgba(0, 0, 0, 0.3)"
+            >
+              Categoría:
             </Chakra.FormLabel>
             <Chakra.FormErrorMessage>
               El mazo requiere un una categoría
@@ -189,9 +186,8 @@ const DeckForm = ({
             isRequired
             options={categories.data}
             onChange={handleCategoryOnChange}
-            placeholder={"Select Category"}
-            margin="15px auto"
-            borderColor="#A1AAF3"
+            placeholder={"Selecciona Categoría"}
+            borderColor= "black"
           />
         </Chakra.FormControl>
         <Chakra.FormControl
@@ -199,8 +195,12 @@ const DeckForm = ({
           isInvalid={!deckFormData.subcategory_id && submitted}
         >
           <Chakra.Flex>
-            <Chakra.FormLabel color="rgba(121, 121, 121, 1)">
-              Select Sub-Category:
+            <Chakra.FormLabel
+              color="rgba(121, 121, 121, 1)"
+              paddingTop="10px"
+              textShadow="2px 2px 4px rgba(0, 0, 0, 0.3)"
+            >
+              Sub-Categoría:
             </Chakra.FormLabel>
             <Chakra.FormErrorMessage>
               El mazo requiere una sub-categoría
@@ -212,10 +212,32 @@ const DeckForm = ({
             options={!deckFormData.category_id ? [] : subcategories.data}
             value={deckFormData.subcategory_id}
             onChange={handleSubcategoryOnChange}
-            placeholder={"Select Sub-Category"}
-            borderColor="#A1AAF3"
+            placeholder={"Selecciona Sub-Categoría"}
+            borderColor= "black"
           />
         </Chakra.FormControl>
+      </Chakra.Flex>
+      <Chakra.Flex justifyContent="center" paddingTop="30px">
+        <Chakra.Flex gap="15px">
+          <Chakra.Button
+            type="submit"
+            marginRight="5px"
+            boxShadow="0px 0px 5px 0px rgba(0,0,0,0.75)"
+            bg="rgb(51, 51, 51)"
+            color="white"
+          >
+            Crear
+          </Chakra.Button>
+          <Chakra.Button
+            onClick={handleOnCancel}
+            //background="rgba(92, 102, 187, 1)"
+            boxShadow="0px 0px 5px 0px rgba(0,0,0,0.75)"
+            bg="rgb(51, 51, 51)"
+            color="white"
+          >
+            Cancelar
+          </Chakra.Button>
+        </Chakra.Flex>
       </Chakra.Flex>
     </form>
   );
