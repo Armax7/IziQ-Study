@@ -14,14 +14,16 @@ const QK_CATEGORIES = "categories";
 const QK_SUBCATEGORIES = "subcategories";
 
 const Decks = () => {
+  const queryClient = ReactQuery.useQueryClient();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
+  
   const [decks, setDecks] = useState([]);
 
   const [allSubCategories, setAllSubCategories] = useState([]);
 
   const [subcategories, setSubCategories] = useState([]);
 
-  const queryClient = ReactQuery.useQueryClient();
 
   const { data: userID } = ReactQuery.useQuery([QK_USER_ID], getUserID);
 
@@ -31,6 +33,7 @@ const Decks = () => {
     data: allUserDecks,
     error: decks_error,
   } = ReactQuery.useQuery([QK_DECKS], () => getUserDecks(userID), {
+    onSuccess: (decks) => setDecks(decks),
     enabled: !!userID,
   });
 
@@ -42,17 +45,6 @@ const Decks = () => {
   } = ReactQuery.useQuery([QK_CATEGORIES], getCategories);
 
   useEffect(async () => {
-    const decks = await SupaHelpers.get.userDecks();
-
-    setDecks(decks);
-
-    const { data: categories, error } = await supabase
-      .from("categories")
-      .select("id,name");
-    if (error) {
-      console.log(error);
-    }
-
     const { data: subcategories, err } = await supabase
       .from("subcategories")
       .select("id,name,category_id");
