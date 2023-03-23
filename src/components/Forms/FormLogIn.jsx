@@ -38,9 +38,7 @@ function FormLogIn() {
       if (error) throw error;
       if(email === "iziq.study@gmail.com" && password ==="admin123"){
         await router.push("./dashboard", undefined, {shallow:true})
-        alert("Welcome Admin")
       }else{
-        alert("Welcome");
       console.log("hey estoy loggueado");
       setIsLoggedIn(true);
       await router.push("/home", undefined, { shallow: true });
