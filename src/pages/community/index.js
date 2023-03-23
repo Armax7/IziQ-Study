@@ -32,7 +32,6 @@ function Community() {
         </Chakra.Box>
         <Components.DeckContainer
           decks={topSixDecks}
-          borderRadius={"0 3rem 3rem"}
         />
       </Chakra.Box>
     </Chakra.Box>
