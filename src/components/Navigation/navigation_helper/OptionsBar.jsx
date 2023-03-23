@@ -5,7 +5,7 @@ import * as Chakra from "@chakra-ui/react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsFillBellFill, BsFillBookmarksFill } from "react-icons/bs";
 import React, { useEffect, useState } from "react";
-import { BsBox2HeartFill } from "react-icons/bs"
+import { BsBox2HeartFill } from "react-icons/bs";
 
 import * as Components from "../../../components";
 import * as SupaHelpers from "../../../pages/api/supabase_helpers";
@@ -37,17 +37,17 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
       {logged == true ? (
         <div>
           <Chakra.ButtonGroup gap="3">
-          <Link href="https://buy.stripe.com/test_cN2eWX0CC1bP3VSaEI">
-            <Chakra.IconButton
+            <Link href="https://buy.stripe.com/test_cN2eWX0CC1bP3VSaEI">
+              <Chakra.IconButton
                 bgColor="#eb455f"
                 color="#f2f2f2"
                 borderRadius="50%"
                 fontSize="2px"
                 aria-label="Search database"
-                _hover={{color:"#1a202c", bgColor:"#f2f2f2"}}
+                _hover={{ color: "#1a202c", bgColor: "#f2f2f2" }}
                 icon={<BsBox2HeartFill size="20px" />}
               />
-          </Link>
+            </Link>
             <Chakra.Box>
               <Chakra.Menu>
                 <Chakra.MenuButton
@@ -62,30 +62,6 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                   <Link href="/home">
                     <Chakra.MenuItem>Pagina Principal</Chakra.MenuItem>
                   </Link>
-                  <Link href="/subscriptions">
-                    <Chakra.MenuItem>Suscripciones</Chakra.MenuItem>
-                  </Link>
-                  <Link href="/current-plan">
-                    <Chakra.MenuItem>Mi Suscripcion Actual</Chakra.MenuItem>
-                  </Link>
-                  <Link href="/about">
-                    <Chakra.MenuItem>About</Chakra.MenuItem>
-                  </Link>
-                </Chakra.MenuList>
-              </Chakra.Menu>
-            </Chakra.Box>
-
-            <Chakra.Box>
-              <Chakra.Menu>
-                <Chakra.MenuButton
-                  as={Chakra.IconButton}
-                  aria-label="Search database"
-                  borderRadius="50%"
-                  background="#F2F2F2"
-                  icon={<BsFillBookmarksFill />}
-                  variant="outline"
-                />
-                <Chakra.MenuList>
                   <Link href="/decks">
                     <Chakra.MenuItem>Mis Mazos</Chakra.MenuItem>
                   </Link>
@@ -95,11 +71,6 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                 </Chakra.MenuList>
               </Chakra.Menu>
             </Chakra.Box>
-            <Chakra.IconButton
-              borderRadius="50%"
-              aria-label="Search database"
-              icon={<BsFillBellFill />}
-            />
 
             {/* ============= Menu Profile =============*/}
             <Chakra.Box>
@@ -133,10 +104,10 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
                   </Chakra.Center>
                   <br />
                   <Chakra.MenuDivider />
-                  <Chakra.MenuItem>
-                    <Link href="/profile">Profile</Link>
-                  </Chakra.MenuItem>
-                  <Chakra.MenuItem>Account Settings</Chakra.MenuItem>
+                  <Link href="/profile">
+                    <Chakra.MenuItem>Profile</Chakra.MenuItem>
+                  </Link>
+
                   <Chakra.Flex align={"center"} justify={"center"}>
                     <Components.LogOutButton />
                   </Chakra.Flex>
