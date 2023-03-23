@@ -175,7 +175,7 @@ function FormDrawerData() {
               >
                 Cancelar
               </Chakra.Button>
-              <Chakra.Button type="submit" colorScheme="blue">
+              <Chakra.Button onClick={onClose} type="submit" colorScheme="blue">
                 Actualizar
               </Chakra.Button>
             </Chakra.DrawerFooter>
