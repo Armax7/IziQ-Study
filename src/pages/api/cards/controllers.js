@@ -43,7 +43,7 @@ export const getCardsByDeckId = async (deckId) => {
 
   try {
     const total_cards = await SupaHelper.get.countCardsInDeck(deckId);
-    await axios.put(`http://localhost:3000/api/decks`, { id: deckId, total_cards });
+    await axios.put(`${process.env.NEXT_PUBLIC_HOST}/api/decks`, { id: deckId, total_cards });
   } catch (error) {
     throw error;
   }
