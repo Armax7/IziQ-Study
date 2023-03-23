@@ -2,23 +2,34 @@ import SearchBar from "../SearchBar/SearchBar";
 import OptionsBar from "./navigation_helper/OptionsBar";
 import style from "./Navigation.module.css";
 import Link from "next/link";
+import { useCallback } from "react";
 
 import * as Chakra from "@chakra-ui/react";
 import * as SupaHelpers from "../../pages/api/supabase_helpers";
 import { useEffect, useState } from "react";
 import { supabase } from "../../pages/api/supabaseClient";
+import { useRouter } from "next/router";
 //loreqaba@finews.biz
 //Loreqaba
 
 function Navigation({ avatarImage = "https://bit.ly/dan-abramov" }) {
   const { isOpen, onOpen, onClose } = Chakra.useDisclosure();
-
+ 
+  
+  const router = useRouter();
+  const handleSearch = useCallback((searchTerm) => { router.push( `/search?term=${searchTerm}`); }, [router]);
   const [logged, setLogged] = useState(false);
+ 
+ 
+
   useEffect(async () => {
     let status = await SupaHelpers.get.loggedStatus();
     setLogged(status);
   }, [logged]);
 
+
+
+  
   return (
     <Chakra.Flex
       background="#FFFFFF"
@@ -36,9 +47,10 @@ function Navigation({ avatarImage = "https://bit.ly/dan-abramov" }) {
       <Link href={!logged ? "" : "/home"}>
         <div className={style.logoApp}></div>
       </Link>
-      <SearchBar
-        onClick={() => alert("Missing search functionality on Navigation.jsx")}
+      <Link href={!logged ? "" : "/search"}>
+      <SearchBar onSearch={handleSearch} 
       />
+      </Link>
 
       <OptionsBar logged={logged} avatarImage={avatarImage} />
     </Chakra.Flex>
