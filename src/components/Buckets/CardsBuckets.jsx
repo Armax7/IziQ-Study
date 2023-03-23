@@ -3,10 +3,6 @@ import { useEffect, useState } from "react";
 import * as SupaHelpers from "../../pages/api/supabase_helpers";
 import styles from "./ProfileBuckets.module.css";
 
-export const PATH = {
-  path: "",
-};
-
 const ProfileBuckets = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [userID, setUserID] = useState("");
@@ -22,12 +18,10 @@ const ProfileBuckets = () => {
   const handleUpload = async () => {
     const { data, error } = await supabase.storage
       .from("images-client")
-      .upload(`${userID}/decks/` + selectedFile?.name, selectedFile);
+      .upload(`${userID}/decks/${deckID}/` + selectedFile?.name, selectedFile);
 
     if (data) {
       alert("Se subio el archivo correctamente");
-      console.log("este es dataaaaa", data);
-      PATH.path = data.path;
     } else if (error) {
       console.log(error);
       alert(error.message);
