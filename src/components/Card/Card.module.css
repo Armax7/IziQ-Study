@@ -34,8 +34,6 @@
   .flipCardFront {
     background-color: #f3f3f3;
     color: black;
-    justify-content: center;
-    font-size: 30px;
 
   }
   
@@ -45,9 +43,7 @@
     height: 220px;
   }
   .flipCardBack {
-    font-size: 40px;
-    display: flex;
-    justify-content: center;
+    display: grid;
     align-items: center;
     background-color: #5C66BB;
     color: white;
@@ -59,25 +55,4 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;  
-}
-
-.data{
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden; 
-  overflow-y: auto; 
-  width: 95%;
-  padding: 10px 0;
-  height: 5em; 
-}
-
-.data::-webkit-scrollbar {
-  width: 10px;               /* width of the entire scrollbar */
-  background-color: rgba(107, 107, 107, 0.445);
-  border-radius: 20px;  
-}
-
-.data::-webkit-scrollbar-thumb {
-  background-color: rgb(160, 160, 160);    /* color of the scroll thumb */
-  border-radius: 20px;       /* roundness of the scroll thumb */
 }
