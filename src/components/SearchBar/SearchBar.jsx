@@ -2,11 +2,11 @@ import * as Chakra from "@chakra-ui/react";
 import { useState } from "react";
 import { BiSearchAlt2 } from "react-icons/bi";
 
-function SearchBar({ onClick }) {
+function SearchBar({onSearch}) {
   const [search, setSearch] = useState("");
-  const data = (event) => {
-    setSearch([event.target.value]);
-  };
+
+  const handleSearch = () => { onSearch(search); };
+
   return (
     <div style={{ display: "flex", width: "500px" }}>
       <Chakra.Input
@@ -16,7 +16,7 @@ function SearchBar({ onClick }) {
         border="none"
         margin="auto 0"
         background="#F2F2F2"
-        onChange={(e) => data(e)}
+        onChange={(e) => setSearch(e.target.value)}
       />
       <Chakra.Button
         width="20%"
@@ -25,7 +25,7 @@ function SearchBar({ onClick }) {
         borderRadius="0 50px  50px 0"
         color="black"
         background="#F2F2F2"
-        onClick={(e) => onClick(e)}
+        onClick={handleSearch}
       >
         <BiSearchAlt2 />
       </Chakra.Button>
