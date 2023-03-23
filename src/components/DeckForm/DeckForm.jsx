@@ -267,7 +267,7 @@ async function getUserID() {
 
 async function getCategories() {
   const response = await axios
-    .get(`http://${HOST}/api/categories`)
+    .get(`${process.env.NEXT_PUBLIC_HOST}/api/categories`)
     .then((res) => res.data);
 
   return response;
@@ -276,13 +276,13 @@ async function getCategories() {
 async function getSubcategoriesByCategoryId(categoryId) {
   if (!categoryId) {
     const response = await axios
-      .get(`http://${HOST}/api/subcategories/`)
+      .get(`${process.env.NEXT_PUBLIC_HOST}/api/subcategories/`)
       .then((res) => res.data);
 
     return response;
   } else {
     const response = await axios
-            .get(`http://${HOST}/api/subcategories/category/${categoryId}`
+            .get(`${process.env.NEXT_PUBLIC_HOST}/api/subcategories/category/${categoryId}`
       )
       .then((res) => res.data);
 

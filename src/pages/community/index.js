@@ -53,7 +53,7 @@ export async function getStaticProps() {
 
 async function getTopSixDecks() {
   const response = await axios
-    .get(`http://${HOST}/api/decks`)
+    .get(`${process.env.NEXT_PUBLIC_HOST}/api/decks`)
     .then((res) => res.data)
     .then((data) =>
       data.sort((a, b) => Utils.sortDescCompareFn(a.rating, b.rating))

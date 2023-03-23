@@ -197,7 +197,7 @@ async function getUserID() {
 
 async function getCategories() {
   const response = await axios
-    .get(`http://${HOST}/api/categories`)
+    .get(`${process.env.NEXT_PUBLIC_HOST}/api/categories`)
     .then((res) => res.data);
 
   return response;
@@ -205,7 +205,7 @@ async function getCategories() {
 
 async function getSubCategories() {
   const response = await axios
-    .get(`http://${HOST}/api/subcategories`)
+    .get(`${process.env.NEXT_PUBLIC_HOST}/api/subcategories`)
     .then((res) => res.data);
 
   return response;
@@ -213,16 +213,16 @@ async function getSubCategories() {
 
 async function getUserDecks(userId) {
   const response = await axios
-    .get(`http://${HOST}/api/decks/user-id/${userId}`)
+    .get(`${process.env.NEXT_PUBLIC_HOST}/api/decks/user-id/${userId}`)
     .then((res) => res.data);
   return response;
 }
 async function postDeck(data) {
-  return await axios.post(`http://${HOST}/api/decks`, data);
+  return await axios.post(`${process.env.NEXT_PUBLIC_HOST}/api/decks`, data);
 }
 
 async function deleteDeck(deckData) {
-  return await axios.put(`http://${HOST}/api/decks`, deckData);
+  return await axios.put(`${process.env.NEXT_PUBLIC_HOST}/api/decks`, deckData);
 }
 
 export default Decks;
