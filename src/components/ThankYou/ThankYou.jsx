@@ -4,13 +4,11 @@ import Link from "next/link";
 import { Planes } from "./Mock";
 
 const ThankYou = () => {
-
   // Luego reemplazar con los datos recibidos
-  const plan = Planes[0]
+  const plan = Planes[0];
 
   return (
-    <Chakra.Container
-    >
+    <Chakra.Container>
       <Chakra.Flex
         display="flex"
         flexDirection="column"
@@ -36,7 +34,7 @@ const ThankYou = () => {
           color="#2B3467"
           mt={2}
         >
-          Ahora eres {plan.name}
+          Significa mucho para nosotros
         </Chakra.Heading>
         <Chakra.Text
           color="#1E1E1E"
@@ -48,25 +46,8 @@ const ThankYou = () => {
           textAlign="center"
           mb="35px"
         >
-          ¡Gracias por su compra!
+          ¡Gracias!
         </Chakra.Text>
-        <Link href="/current-plan" passHref>
-          <Chakra.Button
-            as="a"
-            bg="#5C66BB"
-            _hover={{ bg: "#A1AAF3" }}
-            boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-            borderRadius="50px"
-            color="#FFFFFF"
-            w="500px"
-            padding="27px"
-            fontFamily="Poppins, sans-serif"
-            fontStyle="normal"
-            fontWeight={600}
-          >
-            Ver beneficios
-          </Chakra.Button>
-        </Link>
       </Chakra.Flex>
     </Chakra.Container>
   );
