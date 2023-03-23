@@ -10,12 +10,12 @@ import * as ReactQuery from "@tanstack/react-query";
 const HOST = process.env.NEXT_PUBLIC_HOST;
 const QK_USER_ID = "user-id";
 const QK_DECKS = "decks";
+const QK_CATEGORIES = "categories";
+const QK_SUBCATEGORIES = "subcategories";
 
 const Decks = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [decks, setDecks] = useState([]);
-
-  const [categories, setCategories] = useState([]);
 
   const [allSubCategories, setAllSubCategories] = useState([]);
 
@@ -34,6 +34,13 @@ const Decks = () => {
     enabled: !!userID,
   });
 
+  const {
+    isLoading: categories_isLoading,
+    isError: categories_isError,
+    data: categories,
+    error: categories_error,
+  } = ReactQuery.useQuery([QK_CATEGORIES], getCategories);
+
   useEffect(async () => {
     const decks = await SupaHelpers.get.userDecks();
 
@@ -45,7 +52,6 @@ const Decks = () => {
     if (error) {
       console.log(error);
     }
-    setCategories(categories);
 
     const { data: subcategories, err } = await supabase
       .from("subcategories")
@@ -68,7 +74,6 @@ const Decks = () => {
   });
 
   function filterDecksByCategory(e) {
-    console.log("e.target.value", e.target.value);
 
     const localSubcategories = allSubCategories.filter((sc) => {
       return sc.category_id == e.target.value;
@@ -97,6 +102,10 @@ const Decks = () => {
 
   function handleOnDelete(event) {
     return deckDeleteMutation.mutate(event);
+  }
+
+  if (decks_isLoading || categories_isLoading) {
+    return <Components.LoadingScreen />;
   }
 
   return (
@@ -162,16 +171,11 @@ const Decks = () => {
           padding="0.5em 0.1em 0em 0.5em"
         />
       </Chakra.Box>
-
-      {decks_isLoading ? (
-        <Components.LoadingScreen />
-      ) : (
-        <Components.DeckContainer
-          decks={decks}
-          onDeleteDeck={handleOnDelete}
-          isOwnedDecks={true}
-        />
-      )}
+      <Components.DeckContainer
+        decks={decks}
+        onDeleteDeck={handleOnDelete}
+        isOwnedDecks={true}
+      />
 
       <Chakra.Drawer
         isOpen={isOpen}
@@ -202,6 +206,7 @@ export async function getStaticProps() {
   const queryClient = new ReactQuery.QueryClient();
 
   await queryClient.prefetchQuery([QK_USER_ID], getUserID);
+  await queryClient.prefetchQuery([QK_CATEGORIES], getCategories);
 
   return {
     props: {
@@ -212,6 +217,14 @@ export async function getStaticProps() {
 
 async function getUserID() {
   const response = await SupaHelpers.get.userId();
+  return response;
+}
+
+async function getCategories() {
+  const response = await axios
+    .get(`http://${HOST}/api/categories`)
+    .then((res) => res.data);
+
   return response;
 }
 
