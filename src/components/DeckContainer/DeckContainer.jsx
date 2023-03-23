@@ -4,6 +4,8 @@ import Link from "next/link";
 
 function DeckContainer({
   decks,
+  isOwnedDecks,
+  onDeleteDeck = () => {},
   columns = [2, null, 3],
   spacing = "0em",
   //px = "1vw",
@@ -30,19 +32,28 @@ function DeckContainer({
       marginRight={marginRight}
       {...props}
     >
-      {decks?.map((deck, index) => (
-        <Link key={index} href={`/decks/${deck.id}`}>
-          <a>
-            <DeckCover
-              key={deck.id}
-              name={deck.name}
-              description={deck.description}
-              total_cards={deck.total_cards}
-              rating={deck.rating}
-            />
-          </a>
-        </Link>
-      ))}
+      {decks?.map((deck, index) => {
+        if (deck.status === "active") {
+          return (
+            <Link key={index} href={`/decks/${deck.id}`}>
+              <a>
+                <DeckCover
+                  key={deck.id}
+                  id={deck.id}
+                  name={deck.name}
+                  description={deck.description}
+                  total_cards={deck.total_cards}
+                  rating={deck.rating}
+                  onDelete={onDeleteDeck}
+                  isOwnedDeck={isOwnedDecks}
+                />
+              </a>
+            </Link>
+          );
+        } else {
+          null;
+        }
+      })}
     </Chakra.SimpleGrid>
   );
 }
