@@ -7,9 +7,10 @@ import styles from "./Stars.module.css"
 
 
 
-function rating({rating,deck_id,user_id="59860525-13c8-479b-889f-46c44b3ba3fa"}) {
+function rating({rating,deck_id,user_id="59860525-13c8-479b-889f-46c44b3ba3fa",readOnly}) {
 
     const onClick=(e)=>{
+        if(readOnly===true) return
         const postRating = async ()=>{
             const { data, error } = await supabase
             .from('reviews')
