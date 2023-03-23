@@ -1,0 +1,21 @@
+.data{
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; 
+    overflow-y: auto; 
+    width: 95%;
+    padding: 10px 0;
+    height: 14em; 
+    margin: auto;
+  }
+  
+  .data::-webkit-scrollbar {
+    width: 10px;               /* width of the entire scrollbar */
+    background-color: rgba(107, 107, 107, 0.445);
+    border-radius: 20px;  
+  }
+  
+  .data::-webkit-scrollbar-thumb {
+    background-color: rgb(160, 160, 160);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+  }
