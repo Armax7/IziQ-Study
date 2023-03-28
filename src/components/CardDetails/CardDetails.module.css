@@ -1,0 +1,14 @@
+.input{
+    display: flex;
+    flex-wrap: wrap;
+    width:100%; 
+    flex-grow: 1;
+    padding: 10px 0;
+    color: #303030
+}
+.card{
+    min-height: 55px;
+    width: 60%;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    border-radius: 8px;
+}

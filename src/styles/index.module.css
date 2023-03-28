@@ -1,0 +1,54 @@
+.containerSections section{
+    height: 91.04859335vh;
+    width: 100%;
+    background-color: #f2f2f2;;
+    box-shadow: 0px -33px 12px -29px rgba(0,0,0,0.75) inset;
+    -webkit-box-shadow: 0px -33px 12px -29px rgba(0,0,0,0.75) inset;
+    -moz-box-shadow: 0px -33px 12px -29px rgba(0,0,0,0.75) inset;
+}
+/* Styles frist section*/
+.sectionOne {
+    display: flex;
+}
+.sectionOne_one{
+    content: '';
+    height: 100%;
+    width: 45%;
+    background-image: url(../../public/studentFirst.png);
+    background-repeat: no-repeat;
+    background-size:80% ;
+    background-position: center bottom;
+}
+.sectionOne_two{
+    display: flex;
+    background-image: url(../../public/bgCircle.png);
+    width: 55%;
+    background-repeat: no-repeat;
+    background-position: center left;
+}
+
+.containerOne_twoData {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 20%;
+    padding: 10px;
+    color: #FFFFFF;
+}
+
+.containerOne_twoData h1 {
+    font-size: 42px;
+}
+
+.containerOne_twoData h3 {
+    font-size: 20px;
+}
+
+.sectionOne_two button {
+    color: #FFFFFF;
+    border-radius: 4px;
+    border: none;
+    background-color: #EB455F;
+    width: 150px;
+    height: 50px;
+    margin-top: 40px;
+}
